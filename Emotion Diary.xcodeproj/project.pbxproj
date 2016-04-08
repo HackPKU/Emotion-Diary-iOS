@@ -7,6 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0193CA071CB82B5B0057E082 /* CameraSessionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193C9EE1CB82B5B0057E082 /* CameraSessionView.m */; };
+		0193CA081CB82B5B0057E082 /* CameraDismissButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193C9F21CB82B5B0057E082 /* CameraDismissButton.m */; };
+		0193CA091CB82B5B0057E082 /* CameraFlashButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193C9F41CB82B5B0057E082 /* CameraFlashButton.m */; };
+		0193CA0A1CB82B5B0057E082 /* CameraFocalReticule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193C9F61CB82B5B0057E082 /* CameraFocalReticule.m */; };
+		0193CA0B1CB82B5B0057E082 /* CameraShutterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193C9F81CB82B5B0057E082 /* CameraShutterButton.m */; };
+		0193CA0C1CB82B5B0057E082 /* CameraToggleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193C9FA1CB82B5B0057E082 /* CameraToggleButton.m */; };
+		0193CA0D1CB82B5B0057E082 /* LaunchCameraButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193C9FC1CB82B5B0057E082 /* LaunchCameraButton.m */; };
+		0193CA0E1CB82B5B0057E082 /* Cool Camera Mockup.sketch in Resources */ = {isa = PBXBuildFile; fileRef = 0193C9FD1CB82B5B0057E082 /* Cool Camera Mockup.sketch */; };
+		0193CA0F1CB82B5B0057E082 /* PaintCodeFile.pcvd in Resources */ = {isa = PBXBuildFile; fileRef = 0193C9FE1CB82B5B0057E082 /* PaintCodeFile.pcvd */; };
+		0193CA101CB82B5B0057E082 /* CameraStyleKitClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA011CB82B5B0057E082 /* CameraStyleKitClass.m */; };
+		0193CA111CB82B5B0057E082 /* CaptureSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA041CB82B5B0057E082 /* CaptureSessionManager.m */; };
+		0193CA121CB82B5B0057E082 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA061CB82B5B0057E082 /* Constants.m */; };
+		0193CA141CB82B7C0057E082 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0193CA131CB82B7C0057E082 /* AVFoundation.framework */; };
+		0193CA361CB82BC60057E082 /* CALayer+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA171CB82BC50057E082 /* CALayer+FSExtension.m */; };
+		0193CA371CB82BC60057E082 /* FSCalendar+IBExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA191CB82BC50057E082 /* FSCalendar+IBExtension.m */; };
+		0193CA381CB82BC60057E082 /* FSCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA1B1CB82BC50057E082 /* FSCalendar.m */; };
+		0193CA391CB82BC60057E082 /* FSCalendarAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA1D1CB82BC50057E082 /* FSCalendarAnimator.m */; };
+		0193CA3A1CB82BC60057E082 /* FSCalendarAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA1F1CB82BC50057E082 /* FSCalendarAppearance.m */; };
+		0193CA3B1CB82BC60057E082 /* FSCalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA211CB82BC50057E082 /* FSCalendarCell.m */; };
+		0193CA3C1CB82BC60057E082 /* FSCalendarCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA231CB82BC50057E082 /* FSCalendarCollectionView.m */; };
+		0193CA3D1CB82BC60057E082 /* FSCalendarConstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA251CB82BC50057E082 /* FSCalendarConstance.m */; };
+		0193CA3E1CB82BC60057E082 /* FSCalendarEventIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA281CB82BC60057E082 /* FSCalendarEventIndicator.m */; };
+		0193CA3F1CB82BC60057E082 /* FSCalendarFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA2A1CB82BC60057E082 /* FSCalendarFlowLayout.m */; };
+		0193CA401CB82BC60057E082 /* FSCalendarHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA2C1CB82BC60057E082 /* FSCalendarHeader.m */; };
+		0193CA411CB82BC60057E082 /* FSCalendarStickyHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA2E1CB82BC60057E082 /* FSCalendarStickyHeader.m */; };
+		0193CA421CB82BC60057E082 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0193CA2F1CB82BC60057E082 /* Info.plist */; };
+		0193CA431CB82BC60057E082 /* NSDate+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA311CB82BC60057E082 /* NSDate+FSExtension.m */; };
+		0193CA441CB82BC60057E082 /* NSString+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA331CB82BC60057E082 /* NSString+FSExtension.m */; };
+		0193CA451CB82BC60057E082 /* UIView+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA351CB82BC60057E082 /* UIView+FSExtension.m */; };
+		0193CA651CB82C650057E082 /* FSLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA621CB82C650057E082 /* FSLineChart.m */; };
+		0193CA661CB82C650057E082 /* UIColor+FSPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA641CB82C650057E082 /* UIColor+FSPalette.m */; };
 		01B406131CB7FF7500B242D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B406121CB7FF7500B242D6 /* main.m */; };
 		01B406161CB7FF7500B242D6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B406151CB7FF7500B242D6 /* AppDelegate.m */; };
 		01B406191CB7FF7500B242D6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B406181CB7FF7500B242D6 /* ViewController.m */; };
@@ -35,6 +66,65 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0193C9ED1CB82B5B0057E082 /* CameraSessionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraSessionView.h; sourceTree = "<group>"; };
+		0193C9EE1CB82B5B0057E082 /* CameraSessionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraSessionView.m; sourceTree = "<group>"; };
+		0193C9F11CB82B5B0057E082 /* CameraDismissButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraDismissButton.h; sourceTree = "<group>"; };
+		0193C9F21CB82B5B0057E082 /* CameraDismissButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraDismissButton.m; sourceTree = "<group>"; };
+		0193C9F31CB82B5B0057E082 /* CameraFlashButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraFlashButton.h; sourceTree = "<group>"; };
+		0193C9F41CB82B5B0057E082 /* CameraFlashButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraFlashButton.m; sourceTree = "<group>"; };
+		0193C9F51CB82B5B0057E082 /* CameraFocalReticule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraFocalReticule.h; sourceTree = "<group>"; };
+		0193C9F61CB82B5B0057E082 /* CameraFocalReticule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraFocalReticule.m; sourceTree = "<group>"; };
+		0193C9F71CB82B5B0057E082 /* CameraShutterButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraShutterButton.h; sourceTree = "<group>"; };
+		0193C9F81CB82B5B0057E082 /* CameraShutterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraShutterButton.m; sourceTree = "<group>"; };
+		0193C9F91CB82B5B0057E082 /* CameraToggleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraToggleButton.h; sourceTree = "<group>"; };
+		0193C9FA1CB82B5B0057E082 /* CameraToggleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraToggleButton.m; sourceTree = "<group>"; };
+		0193C9FB1CB82B5B0057E082 /* LaunchCameraButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchCameraButton.h; sourceTree = "<group>"; };
+		0193C9FC1CB82B5B0057E082 /* LaunchCameraButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchCameraButton.m; sourceTree = "<group>"; };
+		0193C9FD1CB82B5B0057E082 /* Cool Camera Mockup.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cool Camera Mockup.sketch"; sourceTree = "<group>"; };
+		0193C9FE1CB82B5B0057E082 /* PaintCodeFile.pcvd */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = PaintCodeFile.pcvd; sourceTree = "<group>"; };
+		0193CA001CB82B5B0057E082 /* CameraStyleKitClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraStyleKitClass.h; sourceTree = "<group>"; };
+		0193CA011CB82B5B0057E082 /* CameraStyleKitClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraStyleKitClass.m; sourceTree = "<group>"; };
+		0193CA031CB82B5B0057E082 /* CaptureSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureSessionManager.h; sourceTree = "<group>"; };
+		0193CA041CB82B5B0057E082 /* CaptureSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureSessionManager.m; sourceTree = "<group>"; };
+		0193CA051CB82B5B0057E082 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		0193CA061CB82B5B0057E082 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		0193CA131CB82B7C0057E082 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		0193CA161CB82BC50057E082 /* CALayer+FSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+FSExtension.h"; sourceTree = "<group>"; };
+		0193CA171CB82BC50057E082 /* CALayer+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+FSExtension.m"; sourceTree = "<group>"; };
+		0193CA181CB82BC50057E082 /* FSCalendar+IBExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FSCalendar+IBExtension.h"; sourceTree = "<group>"; };
+		0193CA191CB82BC50057E082 /* FSCalendar+IBExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FSCalendar+IBExtension.m"; sourceTree = "<group>"; };
+		0193CA1A1CB82BC50057E082 /* FSCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendar.h; sourceTree = "<group>"; };
+		0193CA1B1CB82BC50057E082 /* FSCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendar.m; sourceTree = "<group>"; };
+		0193CA1C1CB82BC50057E082 /* FSCalendarAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarAnimator.h; sourceTree = "<group>"; };
+		0193CA1D1CB82BC50057E082 /* FSCalendarAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarAnimator.m; sourceTree = "<group>"; };
+		0193CA1E1CB82BC50057E082 /* FSCalendarAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarAppearance.h; sourceTree = "<group>"; };
+		0193CA1F1CB82BC50057E082 /* FSCalendarAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarAppearance.m; sourceTree = "<group>"; };
+		0193CA201CB82BC50057E082 /* FSCalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarCell.h; sourceTree = "<group>"; };
+		0193CA211CB82BC50057E082 /* FSCalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarCell.m; sourceTree = "<group>"; };
+		0193CA221CB82BC50057E082 /* FSCalendarCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarCollectionView.h; sourceTree = "<group>"; };
+		0193CA231CB82BC50057E082 /* FSCalendarCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarCollectionView.m; sourceTree = "<group>"; };
+		0193CA241CB82BC50057E082 /* FSCalendarConstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarConstance.h; sourceTree = "<group>"; };
+		0193CA251CB82BC50057E082 /* FSCalendarConstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarConstance.m; sourceTree = "<group>"; };
+		0193CA261CB82BC50057E082 /* FSCalendarDynamicHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarDynamicHeader.h; sourceTree = "<group>"; };
+		0193CA271CB82BC60057E082 /* FSCalendarEventIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarEventIndicator.h; sourceTree = "<group>"; };
+		0193CA281CB82BC60057E082 /* FSCalendarEventIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarEventIndicator.m; sourceTree = "<group>"; };
+		0193CA291CB82BC60057E082 /* FSCalendarFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarFlowLayout.h; sourceTree = "<group>"; };
+		0193CA2A1CB82BC60057E082 /* FSCalendarFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarFlowLayout.m; sourceTree = "<group>"; };
+		0193CA2B1CB82BC60057E082 /* FSCalendarHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarHeader.h; sourceTree = "<group>"; };
+		0193CA2C1CB82BC60057E082 /* FSCalendarHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarHeader.m; sourceTree = "<group>"; };
+		0193CA2D1CB82BC60057E082 /* FSCalendarStickyHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarStickyHeader.h; sourceTree = "<group>"; };
+		0193CA2E1CB82BC60057E082 /* FSCalendarStickyHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarStickyHeader.m; sourceTree = "<group>"; };
+		0193CA2F1CB82BC60057E082 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0193CA301CB82BC60057E082 /* NSDate+FSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+FSExtension.h"; sourceTree = "<group>"; };
+		0193CA311CB82BC60057E082 /* NSDate+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+FSExtension.m"; sourceTree = "<group>"; };
+		0193CA321CB82BC60057E082 /* NSString+FSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FSExtension.h"; sourceTree = "<group>"; };
+		0193CA331CB82BC60057E082 /* NSString+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FSExtension.m"; sourceTree = "<group>"; };
+		0193CA341CB82BC60057E082 /* UIView+FSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FSExtension.h"; sourceTree = "<group>"; };
+		0193CA351CB82BC60057E082 /* UIView+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FSExtension.m"; sourceTree = "<group>"; };
+		0193CA611CB82C650057E082 /* FSLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSLineChart.h; sourceTree = "<group>"; };
+		0193CA621CB82C650057E082 /* FSLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSLineChart.m; sourceTree = "<group>"; };
+		0193CA631CB82C650057E082 /* UIColor+FSPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FSPalette.h"; sourceTree = "<group>"; };
+		0193CA641CB82C650057E082 /* UIColor+FSPalette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FSPalette.m"; sourceTree = "<group>"; };
 		01B4060E1CB7FF7500B242D6 /* Emotion Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Emotion Diary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01B406121CB7FF7500B242D6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		01B406141CB7FF7500B242D6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -58,6 +148,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0193CA141CB82B7C0057E082 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,9 +169,129 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0193C9EB1CB82B5B0057E082 /* CustomizableCamera */ = {
+			isa = PBXGroup;
+			children = (
+				0193C9EC1CB82B5B0057E082 /* Camera View */,
+				0193C9EF1CB82B5B0057E082 /* Graphical Assets */,
+				0193CA021CB82B5B0057E082 /* Model Classes */,
+			);
+			path = CustomizableCamera;
+			sourceTree = "<group>";
+		};
+		0193C9EC1CB82B5B0057E082 /* Camera View */ = {
+			isa = PBXGroup;
+			children = (
+				0193C9ED1CB82B5B0057E082 /* CameraSessionView.h */,
+				0193C9EE1CB82B5B0057E082 /* CameraSessionView.m */,
+			);
+			path = "Camera View";
+			sourceTree = "<group>";
+		};
+		0193C9EF1CB82B5B0057E082 /* Graphical Assets */ = {
+			isa = PBXGroup;
+			children = (
+				0193C9F01CB82B5B0057E082 /* CameraViewComponents */,
+				0193C9FD1CB82B5B0057E082 /* Cool Camera Mockup.sketch */,
+				0193C9FE1CB82B5B0057E082 /* PaintCodeFile.pcvd */,
+				0193C9FF1CB82B5B0057E082 /* UI Assets */,
+			);
+			path = "Graphical Assets";
+			sourceTree = "<group>";
+		};
+		0193C9F01CB82B5B0057E082 /* CameraViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				0193C9F11CB82B5B0057E082 /* CameraDismissButton.h */,
+				0193C9F21CB82B5B0057E082 /* CameraDismissButton.m */,
+				0193C9F31CB82B5B0057E082 /* CameraFlashButton.h */,
+				0193C9F41CB82B5B0057E082 /* CameraFlashButton.m */,
+				0193C9F51CB82B5B0057E082 /* CameraFocalReticule.h */,
+				0193C9F61CB82B5B0057E082 /* CameraFocalReticule.m */,
+				0193C9F71CB82B5B0057E082 /* CameraShutterButton.h */,
+				0193C9F81CB82B5B0057E082 /* CameraShutterButton.m */,
+				0193C9F91CB82B5B0057E082 /* CameraToggleButton.h */,
+				0193C9FA1CB82B5B0057E082 /* CameraToggleButton.m */,
+				0193C9FB1CB82B5B0057E082 /* LaunchCameraButton.h */,
+				0193C9FC1CB82B5B0057E082 /* LaunchCameraButton.m */,
+			);
+			path = CameraViewComponents;
+			sourceTree = "<group>";
+		};
+		0193C9FF1CB82B5B0057E082 /* UI Assets */ = {
+			isa = PBXGroup;
+			children = (
+				0193CA001CB82B5B0057E082 /* CameraStyleKitClass.h */,
+				0193CA011CB82B5B0057E082 /* CameraStyleKitClass.m */,
+			);
+			path = "UI Assets";
+			sourceTree = "<group>";
+		};
+		0193CA021CB82B5B0057E082 /* Model Classes */ = {
+			isa = PBXGroup;
+			children = (
+				0193CA031CB82B5B0057E082 /* CaptureSessionManager.h */,
+				0193CA041CB82B5B0057E082 /* CaptureSessionManager.m */,
+				0193CA051CB82B5B0057E082 /* Constants.h */,
+				0193CA061CB82B5B0057E082 /* Constants.m */,
+			);
+			path = "Model Classes";
+			sourceTree = "<group>";
+		};
+		0193CA151CB82BC50057E082 /* FSCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				0193CA161CB82BC50057E082 /* CALayer+FSExtension.h */,
+				0193CA171CB82BC50057E082 /* CALayer+FSExtension.m */,
+				0193CA181CB82BC50057E082 /* FSCalendar+IBExtension.h */,
+				0193CA191CB82BC50057E082 /* FSCalendar+IBExtension.m */,
+				0193CA1A1CB82BC50057E082 /* FSCalendar.h */,
+				0193CA1B1CB82BC50057E082 /* FSCalendar.m */,
+				0193CA1C1CB82BC50057E082 /* FSCalendarAnimator.h */,
+				0193CA1D1CB82BC50057E082 /* FSCalendarAnimator.m */,
+				0193CA1E1CB82BC50057E082 /* FSCalendarAppearance.h */,
+				0193CA1F1CB82BC50057E082 /* FSCalendarAppearance.m */,
+				0193CA201CB82BC50057E082 /* FSCalendarCell.h */,
+				0193CA211CB82BC50057E082 /* FSCalendarCell.m */,
+				0193CA221CB82BC50057E082 /* FSCalendarCollectionView.h */,
+				0193CA231CB82BC50057E082 /* FSCalendarCollectionView.m */,
+				0193CA241CB82BC50057E082 /* FSCalendarConstance.h */,
+				0193CA251CB82BC50057E082 /* FSCalendarConstance.m */,
+				0193CA261CB82BC50057E082 /* FSCalendarDynamicHeader.h */,
+				0193CA271CB82BC60057E082 /* FSCalendarEventIndicator.h */,
+				0193CA281CB82BC60057E082 /* FSCalendarEventIndicator.m */,
+				0193CA291CB82BC60057E082 /* FSCalendarFlowLayout.h */,
+				0193CA2A1CB82BC60057E082 /* FSCalendarFlowLayout.m */,
+				0193CA2B1CB82BC60057E082 /* FSCalendarHeader.h */,
+				0193CA2C1CB82BC60057E082 /* FSCalendarHeader.m */,
+				0193CA2D1CB82BC60057E082 /* FSCalendarStickyHeader.h */,
+				0193CA2E1CB82BC60057E082 /* FSCalendarStickyHeader.m */,
+				0193CA2F1CB82BC60057E082 /* Info.plist */,
+				0193CA301CB82BC60057E082 /* NSDate+FSExtension.h */,
+				0193CA311CB82BC60057E082 /* NSDate+FSExtension.m */,
+				0193CA321CB82BC60057E082 /* NSString+FSExtension.h */,
+				0193CA331CB82BC60057E082 /* NSString+FSExtension.m */,
+				0193CA341CB82BC60057E082 /* UIView+FSExtension.h */,
+				0193CA351CB82BC60057E082 /* UIView+FSExtension.m */,
+			);
+			path = FSCalendar;
+			sourceTree = "<group>";
+		};
+		0193CA601CB82C650057E082 /* FSLineChart */ = {
+			isa = PBXGroup;
+			children = (
+				0193CA611CB82C650057E082 /* FSLineChart.h */,
+				0193CA621CB82C650057E082 /* FSLineChart.m */,
+				0193CA631CB82C650057E082 /* UIColor+FSPalette.h */,
+				0193CA641CB82C650057E082 /* UIColor+FSPalette.m */,
+			);
+			path = FSLineChart;
+			sourceTree = "<group>";
+		};
 		01B406051CB7FF7500B242D6 = {
 			isa = PBXGroup;
 			children = (
+				0193CA131CB82B7C0057E082 /* AVFoundation.framework */,
 				01B406101CB7FF7500B242D6 /* Emotion Diary */,
 				01B4062A1CB7FF7500B242D6 /* Emotion DiaryTests */,
 				01B406351CB7FF7500B242D6 /* Emotion DiaryUITests */,
@@ -101,6 +312,9 @@
 		01B406101CB7FF7500B242D6 /* Emotion Diary */ = {
 			isa = PBXGroup;
 			children = (
+				0193C9EB1CB82B5B0057E082 /* CustomizableCamera */,
+				0193CA151CB82BC50057E082 /* FSCalendar */,
+				0193CA601CB82C650057E082 /* FSLineChart */,
 				01B406141CB7FF7500B242D6 /* AppDelegate.h */,
 				01B406151CB7FF7500B242D6 /* AppDelegate.m */,
 				01B406171CB7FF7500B242D6 /* ViewController.h */,
@@ -245,6 +459,9 @@
 			files = (
 				01B406211CB7FF7500B242D6 /* LaunchScreen.storyboard in Resources */,
 				01B4061E1CB7FF7500B242D6 /* Assets.xcassets in Resources */,
+				0193CA421CB82BC60057E082 /* Info.plist in Resources */,
+				0193CA0F1CB82B5B0057E082 /* PaintCodeFile.pcvd in Resources */,
+				0193CA0E1CB82B5B0057E082 /* Cool Camera Mockup.sketch in Resources */,
 				01B4061C1CB7FF7500B242D6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,9 +487,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0193CA361CB82BC60057E082 /* CALayer+FSExtension.m in Sources */,
+				0193CA401CB82BC60057E082 /* FSCalendarHeader.m in Sources */,
 				01B406191CB7FF7500B242D6 /* ViewController.m in Sources */,
 				01B406161CB7FF7500B242D6 /* AppDelegate.m in Sources */,
+				0193CA661CB82C650057E082 /* UIColor+FSPalette.m in Sources */,
+				0193CA3F1CB82BC60057E082 /* FSCalendarFlowLayout.m in Sources */,
+				0193CA071CB82B5B0057E082 /* CameraSessionView.m in Sources */,
+				0193CA0D1CB82B5B0057E082 /* LaunchCameraButton.m in Sources */,
+				0193CA3E1CB82BC60057E082 /* FSCalendarEventIndicator.m in Sources */,
+				0193CA091CB82B5B0057E082 /* CameraFlashButton.m in Sources */,
+				0193CA451CB82BC60057E082 /* UIView+FSExtension.m in Sources */,
+				0193CA3B1CB82BC60057E082 /* FSCalendarCell.m in Sources */,
+				0193CA3C1CB82BC60057E082 /* FSCalendarCollectionView.m in Sources */,
+				0193CA371CB82BC60057E082 /* FSCalendar+IBExtension.m in Sources */,
+				0193CA111CB82B5B0057E082 /* CaptureSessionManager.m in Sources */,
+				0193CA441CB82BC60057E082 /* NSString+FSExtension.m in Sources */,
+				0193CA0B1CB82B5B0057E082 /* CameraShutterButton.m in Sources */,
+				0193CA391CB82BC60057E082 /* FSCalendarAnimator.m in Sources */,
+				0193CA651CB82C650057E082 /* FSLineChart.m in Sources */,
+				0193CA121CB82B5B0057E082 /* Constants.m in Sources */,
+				0193CA3D1CB82BC60057E082 /* FSCalendarConstance.m in Sources */,
+				0193CA431CB82BC60057E082 /* NSDate+FSExtension.m in Sources */,
+				0193CA381CB82BC60057E082 /* FSCalendar.m in Sources */,
+				0193CA3A1CB82BC60057E082 /* FSCalendarAppearance.m in Sources */,
+				0193CA0A1CB82B5B0057E082 /* CameraFocalReticule.m in Sources */,
+				0193CA0C1CB82B5B0057E082 /* CameraToggleButton.m in Sources */,
+				0193CA411CB82BC60057E082 /* FSCalendarStickyHeader.m in Sources */,
+				0193CA081CB82B5B0057E082 /* CameraDismissButton.m in Sources */,
 				01B406131CB7FF7500B242D6 /* main.m in Sources */,
+				0193CA101CB82B5B0057E082 /* CameraStyleKitClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,6 +742,7 @@
 				01B4063D1CB7FF7500B242D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		01B4063E1CB7FF7500B242D6 /* Build configuration list for PBXNativeTarget "Emotion DiaryTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +751,7 @@
 				01B406401CB7FF7500B242D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		01B406411CB7FF7500B242D6 /* Build configuration list for PBXNativeTarget "Emotion DiaryUITests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +760,7 @@
 				01B406431CB7FF7500B242D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
