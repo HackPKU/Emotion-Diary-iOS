@@ -89,7 +89,7 @@
                     [self takePicture];
                 }];
             }else {
-                [verificationer verificateFaceID:faceID withPersonID:verificationer.personID andBlock:^(enum FaceConnectorRequestResult result, NSString * _Nonnull message, BOOL isOwner) {
+                [verificationer verificateFaceID:faceID andBlock:^(enum FaceConnectorRequestResult result, NSString * _Nonnull message, BOOL isOwner) {
                     if (result == FaceConnectorRequestResultError) {
                         [KVNProgress showErrorWithStatus:message];
                         shouldRetakePicture = YES;

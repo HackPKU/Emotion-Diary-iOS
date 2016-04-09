@@ -275,18 +275,26 @@
                                     <constraint firstAttribute="width" constant="320" id="vJj-hh-YPV"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="解锁" translatesAutoresizingMaskIntoConstraints="NO" id="qLt-eP-irW">
-                                <rect key="frame" x="150" y="229.5" width="300" height="141"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="解锁成功" translatesAutoresizingMaskIntoConstraints="NO" id="qLt-eP-irW">
+                                <rect key="frame" x="240" y="367" width="120" height="54"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="TJX-Rs-8Uj"/>
+                                    <constraint firstAttribute="width" constant="120" id="TJX-Rs-8Uj"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="日记本" translatesAutoresizingMaskIntoConstraints="NO" id="rjV-dl-RKq">
+                                <rect key="frame" x="250" y="213" width="100" height="174"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="qng-dP-yCL"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.98823529409999999" green="0.43529411759999997" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="qLt-eP-irW" firstAttribute="centerY" secondItem="Pqc-Ky-Qbz" secondAttribute="centerY" id="JWf-Ib-anP"/>
+                            <constraint firstItem="rjV-dl-RKq" firstAttribute="centerX" secondItem="Pqc-Ky-Qbz" secondAttribute="centerX" id="OWe-J2-6ZV"/>
                             <constraint firstItem="FDu-NC-s5l" firstAttribute="centerX" secondItem="Pqc-Ky-Qbz" secondAttribute="centerX" id="US2-Ej-cnb"/>
+                            <constraint firstItem="qLt-eP-irW" firstAttribute="top" secondItem="rjV-dl-RKq" secondAttribute="bottom" constant="-20" id="YuA-1t-sNX"/>
                             <constraint firstItem="Vvf-yh-hqS" firstAttribute="top" secondItem="FDu-NC-s5l" secondAttribute="bottom" constant="20" id="gA3-De-sVm"/>
+                            <constraint firstItem="rjV-dl-RKq" firstAttribute="centerY" secondItem="Pqc-Ky-Qbz" secondAttribute="centerY" id="lNa-30-qTG"/>
                             <constraint firstItem="qLt-eP-irW" firstAttribute="centerX" secondItem="Pqc-Ky-Qbz" secondAttribute="centerX" id="wCc-FG-4De"/>
                         </constraints>
                     </view>
@@ -448,7 +456,8 @@
     </scenes>
     <resources>
         <image name="stat" width="25" height="25"/>
-        <image name="解锁" width="141" height="141"/>
+        <image name="日记本" width="156" height="174"/>
+        <image name="解锁成功" width="179" height="54"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="e3d-0X-6Ej"/>
