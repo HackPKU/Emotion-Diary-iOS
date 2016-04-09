@@ -11,6 +11,7 @@
 #import "RecordTableViewController.h"
 #import "KVNProgress.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "AssessmentHelper.h"
 
 @interface WelcomeViewController ()
 
@@ -31,6 +32,7 @@
     _buttonProceed.layer.borderWidth = 1.0;
     _buttonProceed.layer.borderColor = [UIColor whiteColor].CGColor;
     // Do any additional setup after loading the view.
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -39,8 +41,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    // TODO 第一次使用
-    
     [self takePicture];
 }
 
@@ -71,6 +71,7 @@
     selfie = [info objectForKey:UIImagePickerControllerOriginalImage];
     selfie = [self normalizedImage:selfie];
     selfie = [self reSizeImage:selfie toSize:CGSizeMake(800, 800 / selfie.size.width * selfie.size.height)];
+//    [KVNProgress showSuccess];
     [connector postImage:selfie block:^(enum FaceConnectorRequestResult result, NSString * _Nonnull message, NSString * _Nullable faceID) {
         if (result == FaceConnectorRequestResultError) {
             [KVNProgress showErrorWithStatus:message];
@@ -107,8 +108,8 @@
             }
         }
         [self takePicture];
-        [picker dismissViewControllerAnimated:YES completion:nil];
     }];
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {

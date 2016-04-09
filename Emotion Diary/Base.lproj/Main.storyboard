@@ -67,10 +67,10 @@
                                                         <constraint firstAttribute="width" secondItem="bXY-DE-L8A" secondAttribute="height" multiplier="1:1" id="fun-pa-UPZ"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YrX-pB-hSw">
-                                                    <rect key="frame" x="68" y="18" width="50" height="50"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="大笑-白圈" translatesAutoresizingMaskIntoConstraints="NO" id="YrX-pB-hSw">
+                                                    <rect key="frame" x="80" y="16" width="40" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="50" id="pR9-eX-uPj"/>
+                                                        <constraint firstAttribute="width" constant="40" id="pR9-eX-uPj"/>
                                                         <constraint firstAttribute="width" secondItem="YrX-pB-hSw" secondAttribute="height" multiplier="1:1" id="qAU-IF-Kec"/>
                                                     </constraints>
                                                 </imageView>
@@ -110,11 +110,11 @@
                                                 <constraint firstItem="bXY-DE-L8A" firstAttribute="top" secondItem="7En-wD-ObV" secondAttribute="topMargin" constant="20" id="0PG-P5-e6z"/>
                                                 <constraint firstItem="IKh-c3-FdW" firstAttribute="top" secondItem="bXY-DE-L8A" secondAttribute="top" constant="20" id="4cM-wJ-mT0"/>
                                                 <constraint firstItem="IKh-c3-FdW" firstAttribute="top" secondItem="iGv-Hf-mIY" secondAttribute="bottom" id="GWg-N0-Ina"/>
-                                                <constraint firstItem="YrX-pB-hSw" firstAttribute="leading" secondItem="bXY-DE-L8A" secondAttribute="trailing" constant="-40" id="Ism-Rm-vdw"/>
+                                                <constraint firstItem="YrX-pB-hSw" firstAttribute="leading" secondItem="bXY-DE-L8A" secondAttribute="trailing" constant="-28" id="Ism-Rm-vdw"/>
                                                 <constraint firstItem="IKh-c3-FdW" firstAttribute="leading" secondItem="bXY-DE-L8A" secondAttribute="trailing" constant="8" id="Jyb-ew-ohQ"/>
                                                 <constraint firstItem="6KV-tA-uTk" firstAttribute="top" secondItem="IKh-c3-FdW" secondAttribute="bottom" id="KZE-mZ-XXc"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="6KV-tA-uTk" secondAttribute="bottom" id="OYV-8W-DUf"/>
-                                                <constraint firstItem="bXY-DE-L8A" firstAttribute="top" secondItem="YrX-pB-hSw" secondAttribute="bottom" constant="-40" id="OxX-8p-mOf"/>
+                                                <constraint firstItem="bXY-DE-L8A" firstAttribute="top" secondItem="YrX-pB-hSw" secondAttribute="bottom" constant="-28" id="OxX-8p-mOf"/>
                                                 <constraint firstItem="IKh-c3-FdW" firstAttribute="top" secondItem="Hwi-Kc-zFl" secondAttribute="bottom" id="Qcc-3t-wdz"/>
                                                 <constraint firstItem="6KV-tA-uTk" firstAttribute="leading" secondItem="IKh-c3-FdW" secondAttribute="leading" constant="6" id="RhF-Vm-B84"/>
                                                 <constraint firstItem="iGv-Hf-mIY" firstAttribute="leading" secondItem="IKh-c3-FdW" secondAttribute="leading" constant="5" id="W8n-sB-FTK"/>
@@ -319,15 +319,21 @@
                         <sections>
                             <tableViewSection id="dGa-Ze-wt4">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="250" id="qoh-uD-Ley">
-                                        <rect key="frame" x="0.0" y="64" width="600" height="250"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="265" id="qoh-uD-Ley">
+                                        <rect key="frame" x="0.0" y="64" width="600" height="265"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qoh-uD-Ley" id="LXC-Ln-ifo">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="250"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="265"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rHv-tF-lNq">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="250"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="265"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="圆阴影" translatesAutoresizingMaskIntoConstraints="NO" id="Apz-g0-WS2">
+                                                    <rect key="frame" x="202" y="-27.5" width="200" height="250"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="200" id="9U7-qV-SkZ"/>
+                                                    </constraints>
                                                 </imageView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="z5S-ZS-V0f">
                                                     <rect key="frame" x="225" y="23" width="150" height="150"/>
@@ -336,28 +342,39 @@
                                                         <constraint firstAttribute="width" constant="150" id="Vf4-ca-SBz"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="你的颜值吓到我了" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haR-zx-0l2">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="你的颜值吓到我了" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haR-zx-0l2">
                                                     <rect key="frame" x="232" y="188" width="136" height="21"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="大笑" translatesAutoresizingMaskIntoConstraints="NO" id="T9J-mm-e1O">
+                                                    <rect key="frame" x="375" y="138" width="35" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="35" id="Nmb-NY-tJJ"/>
+                                                        <constraint firstAttribute="width" secondItem="T9J-mm-e1O" secondAttribute="height" multiplier="1:1" id="SwS-GN-CsR"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="Apz-g0-WS2" firstAttribute="centerX" secondItem="z5S-ZS-V0f" secondAttribute="centerX" constant="2" id="4UK-Va-IJj"/>
+                                                <constraint firstItem="T9J-mm-e1O" firstAttribute="bottom" secondItem="z5S-ZS-V0f" secondAttribute="bottom" id="5pn-qZ-M1f"/>
                                                 <constraint firstItem="haR-zx-0l2" firstAttribute="top" secondItem="z5S-ZS-V0f" secondAttribute="bottom" constant="15" id="6B9-Re-9T1"/>
                                                 <constraint firstItem="rHv-tF-lNq" firstAttribute="top" secondItem="LXC-Ln-ifo" secondAttribute="top" id="OgM-V3-YJA"/>
                                                 <constraint firstItem="rHv-tF-lNq" firstAttribute="leading" secondItem="LXC-Ln-ifo" secondAttribute="leading" id="X5A-Nw-tPs"/>
+                                                <constraint firstItem="T9J-mm-e1O" firstAttribute="leading" secondItem="z5S-ZS-V0f" secondAttribute="trailing" id="XH6-9u-6Hv"/>
                                                 <constraint firstItem="haR-zx-0l2" firstAttribute="centerX" secondItem="z5S-ZS-V0f" secondAttribute="centerX" id="f35-JJ-arG"/>
                                                 <constraint firstAttribute="bottom" secondItem="rHv-tF-lNq" secondAttribute="bottom" id="iek-6x-tUC"/>
                                                 <constraint firstItem="haR-zx-0l2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rHv-tF-lNq" secondAttribute="leading" constant="50" id="k9r-qS-2FD"/>
                                                 <constraint firstItem="z5S-ZS-V0f" firstAttribute="centerX" secondItem="LXC-Ln-ifo" secondAttribute="centerX" id="mej-8E-0pe"/>
+                                                <constraint firstItem="Apz-g0-WS2" firstAttribute="centerY" secondItem="z5S-ZS-V0f" secondAttribute="centerY" id="qFv-mb-eDU"/>
                                                 <constraint firstAttribute="trailing" secondItem="rHv-tF-lNq" secondAttribute="trailing" id="vHF-rj-7Sf"/>
                                                 <constraint firstItem="z5S-ZS-V0f" firstAttribute="top" secondItem="LXC-Ln-ifo" secondAttribute="topMargin" constant="15" id="zC5-At-LTZ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="150" id="kx5-cy-ejC">
-                                        <rect key="frame" x="0.0" y="314" width="600" height="150"/>
+                                        <rect key="frame" x="0.0" y="329" width="600" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kx5-cy-ejC" id="6tn-jk-YBP">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
@@ -400,7 +417,7 @@
                                 <action selector="back:" destination="whe-79-jh3" id="fxr-jT-3Ka"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="nph-bB-pw4">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="nph-bB-pw4">
                             <connections>
                                 <segue destination="BYZ-38-t0r" kind="show" identifier="enterMain" id="Qrb-ki-hBN"/>
                             </connections>
@@ -408,6 +425,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="blurredSelfieImage" destination="rHv-tF-lNq" id="dqC-xS-l9P"/>
+                        <outlet property="faceImage" destination="T9J-mm-e1O" id="QWN-0u-8eL"/>
                         <outlet property="placeholder" destination="GKg-EY-ehp" id="gFY-nd-If6"/>
                         <outlet property="selfieImage" destination="z5S-ZS-V0f" id="gps-17-YrY"/>
                         <outlet property="textRecord" destination="jft-9Q-7mu" id="OrK-kb-fXt"/>
@@ -456,6 +474,9 @@
     </scenes>
     <resources>
         <image name="stat" width="25" height="25"/>
+        <image name="圆阴影" width="250" height="250"/>
+        <image name="大笑" width="56" height="56"/>
+        <image name="大笑-白圈" width="71" height="72"/>
         <image name="日记本" width="156" height="174"/>
         <image name="解锁成功" width="179" height="54"/>
     </resources>

@@ -1,4 +1,7 @@
 //
+//  ver 0.6 updated by 范志康
+//  ver 0.5 updated by 温凯
+//
 //  AssessmentHelper.h
 //  Emotion Diary
 //
@@ -10,6 +13,7 @@
 
 @interface AssessmentHelper : NSObject
 
-+ (NSString *)getAssessment:(int) smileDegree;
++ (NSString *)getWelcomeMsg:(int) smile withAttractive:(int)attractive;
++ (NSString *)getFaceNameBySmile:(int) smile;
 
 @end
