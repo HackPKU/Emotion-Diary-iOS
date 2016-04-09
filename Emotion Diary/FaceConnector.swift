@@ -128,7 +128,7 @@ class FaceConnector: NSObject {
                 let json = JSON(value)
                 let smile = json["attributes"]["smile"].intValue
                 let attractive = json["attributes"]["attractive"].intValue
-                var info = ["smile": smile, "attractive": attractive]
+                let info = ["smile": smile, "attractive": attractive]
                 // TODO: to add other info here
                 block(result: .Success, message: "OK", info: info)
                 
