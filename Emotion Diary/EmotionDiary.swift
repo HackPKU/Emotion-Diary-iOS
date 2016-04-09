@@ -93,7 +93,7 @@ class EmotionDiary: NSObject, NSCoding {
     
     class func getDiaryOfDay(date: NSDate) -> [EmotionDiary] {
         
-        let thisDay = Int(date.timeIntervalSince1970 / (24 * 3600)
+        let thisDay = Int(date.timeIntervalSince1970 / (24 * 3600))
         let emotionDiaries = EmotionDiary.getEmotionDiariesFromStore()
         let thatDayDiary = emotionDiaries.filter { (diary) -> Bool in
             let thatDay = Int(diary.date.timeIntervalSince1970 / (24 * 3600))
