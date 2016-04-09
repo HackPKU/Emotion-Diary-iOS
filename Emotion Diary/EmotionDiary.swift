@@ -107,10 +107,15 @@ class EmotionDiary: NSObject, NSCoding {
         }
     }
 
-    class func getWeeklySmileness() -> [Double] {
+    class func getSomeDayAgoSmileness(someday: Int) -> [Double] {
+        
         let nowDay = Int(NSDate().timeIntervalSince1970 / (24 * 3600))
         if let emotionDiaries = EmotionDiary.getEmotionDiariesFromStore() {
-            return [0, 1, 2, 3, 4, 5, 6].reverse().map { (dayBack) -> Double in
+            var seedArray = [Int]()
+            for index in 0.stride(to: someday, by: 1) {
+                seedArray.append(index)
+            }
+            return seedArray.reverse().map { (dayBack) -> Double in
                 var count = 0
                 let totalSmile = emotionDiaries.filter({ (diary) -> Bool in
                     let thatDay = Int(diary.date.timeIntervalSince1970) / (24 * 3600)
@@ -130,6 +135,7 @@ class EmotionDiary: NSObject, NSCoding {
         else {
             return []
         }
+
     }
-    
+
 }
