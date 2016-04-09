@@ -29,10 +29,7 @@ class EmotionDiary: NSObject, NSCoding {
         self.date = NSDate()
         self.content = content
         
-        let formatter = NSDateFormatter()
-        formatter.timeStyle = .FullStyle
-        formatter.dateStyle = .FullStyle
-        let path = IMAGE_PATH + "\(formatter.stringFromDate(date).hash)"
+        let path = IMAGE_PATH + Utilities.MD5(date.description)
         if !manager.fileExistsAtPath(IMAGE_PATH) {
             do {
                 try manager.createDirectoryAtPath(IMAGE_PATH, withIntermediateDirectories: false, attributes: nil)
@@ -88,7 +85,7 @@ class EmotionDiary: NSObject, NSCoding {
                 let diary = item as! EmotionDiary
                 emotionDiaries.append(diary)
             }
-            return emotionDiaries
+            return emotionDiaries.reverse()
         }
         else {
             return nil
@@ -110,16 +107,29 @@ class EmotionDiary: NSObject, NSCoding {
         }
     }
 
-//    class func getWeeklyInfoOf(infoname: String) -> [Int] {
-//        let nowDay = NSDate().timeIntervalSince1970 / (24 * 3600)
-//        let emotionDiaries = EmotionDiary.getEmotionDiariesFromStore()
-//        return [0, 1, 2, 3, 4, 5, 6].reverse().map { (dayBack) -> Int in
-//            dayBack.
-//            emotionDiaries.filter({ (diary) -> Bool in
-//                let thatDay = diary.date.timeIntervalSince1970 / (24 * 3600)
-//                return (nowDay - thatDay == dayBack)
-//            }).count
-//        }
-//    }
+    class func getWeeklySmileness() -> [Double] {
+        let nowDay = Int(NSDate().timeIntervalSince1970 / (24 * 3600))
+        if let emotionDiaries = EmotionDiary.getEmotionDiariesFromStore() {
+            return [0, 1, 2, 3, 4, 5, 6].reverse().map { (dayBack) -> Double in
+                var count = 0
+                let totalSmile = emotionDiaries.filter({ (diary) -> Bool in
+                    let thatDay = Int(diary.date.timeIntervalSince1970) / (24 * 3600)
+                    return (nowDay - thatDay == dayBack)
+                }).reduce(0, combine: { (smileness, diary) -> Int in
+                    count += 1
+                    return diary.smile + smileness
+                })
+                if count > 0 {
+                    return Double(totalSmile) / Double(count)
+                }
+                else {
+                    return 0
+                }
+            }
+        }
+        else {
+            return []
+        }
+    }
     
 }
