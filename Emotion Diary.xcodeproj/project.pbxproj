@@ -845,6 +845,7 @@
 				E97184401CB8F68A00A58920 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
