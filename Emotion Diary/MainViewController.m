@@ -17,6 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    currentDate = [NSDate date];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -32,6 +33,10 @@
     [self.view layoutIfNeeded];
 }
 
+- (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date {
+    NSLog(@"%@", date);
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -39,25 +44,15 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        return 150.0;
-    }else {
-        return 44.0;
-    }
+    return 150.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell;
-    if (indexPath.row == 0) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"cellPhoto" forIndexPath:indexPath];
-        ((MainViewTableViewCell *)cell).imageSelfie.image = _currentImage;
-    }else {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"cellDetail" forIndexPath:indexPath];
-    }
+    MainViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellDetail" forIndexPath:indexPath];
     
     // Configure the cell...
     
