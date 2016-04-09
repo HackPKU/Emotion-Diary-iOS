@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0148B0A71CB97D0A00E8FC08 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 0148B0A61CB97D0A00E8FC08 /* Utilities.m */; };
 		015334DF1CB8B2DF00E3D2F1 /* MainViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 015334DE1CB8B2DF00E3D2F1 /* MainViewTableViewCell.m */; };
 		015334EF1CB8BB3300E3D2F1 /* EmotionDiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015334EE1CB8BB3300E3D2F1 /* EmotionDiary.swift */; };
 		0193CA361CB82BC60057E082 /* CALayer+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA171CB82BC50057E082 /* CALayer+FSExtension.m */; };
@@ -135,6 +136,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0148B0A51CB97D0A00E8FC08 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
+		0148B0A61CB97D0A00E8FC08 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		015334DD1CB8B2DF00E3D2F1 /* MainViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewTableViewCell.h; sourceTree = "<group>"; };
 		015334DE1CB8B2DF00E3D2F1 /* MainViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewTableViewCell.m; sourceTree = "<group>"; };
 		015334E01CB8B79300E3D2F1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -327,6 +330,8 @@
 				015334EE1CB8BB3300E3D2F1 /* EmotionDiary.swift */,
 				01F15FDA1CB914D0006BB341 /* AssessmentHelper.h */,
 				01F15FDB1CB914D0006BB341 /* AssessmentHelper.m */,
+				0148B0A51CB97D0A00E8FC08 /* Utilities.h */,
+				0148B0A61CB97D0A00E8FC08 /* Utilities.m */,
 				01B4061A1CB7FF7500B242D6 /* Main.storyboard */,
 				01B4061D1CB7FF7500B242D6 /* Assets.xcassets */,
 				01B4061F1CB7FF7500B242D6 /* LaunchScreen.storyboard */,
@@ -626,6 +631,7 @@
 				015334EF1CB8BB3300E3D2F1 /* EmotionDiary.swift in Sources */,
 				01E29C4D1CB88F4600DA815B /* WelcomeViewController.m in Sources */,
 				0193CA381CB82BC60057E082 /* FSCalendar.m in Sources */,
+				0148B0A71CB97D0A00E8FC08 /* Utilities.m in Sources */,
 				0193CA3A1CB82BC60057E082 /* FSCalendarAppearance.m in Sources */,
 				01E29C531CB8926200DA815B /* StatTableViewCell.m in Sources */,
 				E971841D1CB8F03200A58920 /* SwiftyJSON.swift in Sources */,

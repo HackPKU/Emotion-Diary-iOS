@@ -75,8 +75,11 @@
     cell.imageSelfie.image = [UIImage imageWithContentsOfFile:diary.imageURL];
     NSString *imageName = [AssessmentHelper getFaceNameBySmile:(int)diary.smile];
     cell.imageFace.image = [UIImage imageNamed:[imageName stringByAppendingString:@"-白圈"]];
-    cell.labelTime.text = diary.date.description;
-    cell.labelDate.text = diary.date.description;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"HH:mm"];
+    cell.labelTime.text = [formatter stringFromDate:diary.date];
+    [formatter setDateFormat:@"MM-dd"];
+    cell.labelDate.text = [formatter stringFromDate:diary.date];
     cell.textDetail.text = diary.content;
     
     // Configure the cell...
