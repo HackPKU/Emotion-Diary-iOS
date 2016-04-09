@@ -19,7 +19,7 @@
     [super viewDidLoad];
     _selfieImage.image = _selfie;
     _selfieImage.layer.cornerRadius = _selfieImage.frame.size.width / 2;
-    _blurredSelfieImage.image = [UIImageEffects imageByApplyingBlurToImage:_selfie withRadius:50.0 tintColor:[UIColor colorWithWhite:0.5 alpha:0.5] saturationDeltaFactor:1.8 maskImage:nil];
+    _blurredSelfieImage.image = [UIImageEffects imageByApplyingBlurToImage:_selfie withRadius:60.0 tintColor:[UIColor colorWithWhite:0.5 alpha:0.5] saturationDeltaFactor:1.8 maskImage:nil];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -92,6 +92,9 @@
     return YES;
 }
 */
+- (IBAction)back:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 /*
 #pragma mark - Navigation

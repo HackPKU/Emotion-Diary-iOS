@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *selfieImage;
 @property (strong, nonatomic) IBOutlet UIImageView *blurredSelfieImage;
+@property (strong, nonatomic) IBOutlet UITextView *textRecord;
 
 @property UIImage *selfie;
 
