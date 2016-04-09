@@ -7,19 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0193CA071CB82B5B0057E082 /* CameraSessionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193C9EE1CB82B5B0057E082 /* CameraSessionView.m */; };
-		0193CA081CB82B5B0057E082 /* CameraDismissButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193C9F21CB82B5B0057E082 /* CameraDismissButton.m */; };
-		0193CA091CB82B5B0057E082 /* CameraFlashButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193C9F41CB82B5B0057E082 /* CameraFlashButton.m */; };
-		0193CA0A1CB82B5B0057E082 /* CameraFocalReticule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193C9F61CB82B5B0057E082 /* CameraFocalReticule.m */; };
-		0193CA0B1CB82B5B0057E082 /* CameraShutterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193C9F81CB82B5B0057E082 /* CameraShutterButton.m */; };
-		0193CA0C1CB82B5B0057E082 /* CameraToggleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193C9FA1CB82B5B0057E082 /* CameraToggleButton.m */; };
-		0193CA0D1CB82B5B0057E082 /* LaunchCameraButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193C9FC1CB82B5B0057E082 /* LaunchCameraButton.m */; };
-		0193CA0E1CB82B5B0057E082 /* Cool Camera Mockup.sketch in Resources */ = {isa = PBXBuildFile; fileRef = 0193C9FD1CB82B5B0057E082 /* Cool Camera Mockup.sketch */; };
-		0193CA0F1CB82B5B0057E082 /* PaintCodeFile.pcvd in Resources */ = {isa = PBXBuildFile; fileRef = 0193C9FE1CB82B5B0057E082 /* PaintCodeFile.pcvd */; };
-		0193CA101CB82B5B0057E082 /* CameraStyleKitClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA011CB82B5B0057E082 /* CameraStyleKitClass.m */; };
-		0193CA111CB82B5B0057E082 /* CaptureSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA041CB82B5B0057E082 /* CaptureSessionManager.m */; };
-		0193CA121CB82B5B0057E082 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA061CB82B5B0057E082 /* Constants.m */; };
-		0193CA141CB82B7C0057E082 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0193CA131CB82B7C0057E082 /* AVFoundation.framework */; };
+		015334DF1CB8B2DF00E3D2F1 /* MainViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 015334DE1CB8B2DF00E3D2F1 /* MainViewTableViewCell.m */; };
+		015334EF1CB8BB3300E3D2F1 /* EmotionDiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015334EE1CB8BB3300E3D2F1 /* EmotionDiary.swift */; };
 		0193CA361CB82BC60057E082 /* CALayer+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA171CB82BC50057E082 /* CALayer+FSExtension.m */; };
 		0193CA371CB82BC60057E082 /* FSCalendar+IBExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA191CB82BC50057E082 /* FSCalendar+IBExtension.m */; };
 		0193CA381CB82BC60057E082 /* FSCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA1B1CB82BC50057E082 /* FSCalendar.m */; };
@@ -40,12 +29,17 @@
 		0193CA661CB82C650057E082 /* UIColor+FSPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA641CB82C650057E082 /* UIColor+FSPalette.m */; };
 		01B406131CB7FF7500B242D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B406121CB7FF7500B242D6 /* main.m */; };
 		01B406161CB7FF7500B242D6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B406151CB7FF7500B242D6 /* AppDelegate.m */; };
-		01B406191CB7FF7500B242D6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B406181CB7FF7500B242D6 /* ViewController.m */; };
+		01B406191CB7FF7500B242D6 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B406181CB7FF7500B242D6 /* MainViewController.m */; };
 		01B4061C1CB7FF7500B242D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01B4061A1CB7FF7500B242D6 /* Main.storyboard */; };
 		01B4061E1CB7FF7500B242D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01B4061D1CB7FF7500B242D6 /* Assets.xcassets */; };
 		01B406211CB7FF7500B242D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01B4061F1CB7FF7500B242D6 /* LaunchScreen.storyboard */; };
 		01B4062C1CB7FF7500B242D6 /* Emotion_DiaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B4062B1CB7FF7500B242D6 /* Emotion_DiaryTests.m */; };
 		01B406371CB7FF7500B242D6 /* Emotion_DiaryUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B406361CB7FF7500B242D6 /* Emotion_DiaryUITests.m */; };
+		01CAA4551CB887FD00064D4E /* FaceConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CAA4541CB887FD00064D4E /* FaceConnector.swift */; };
+		01E29C4D1CB88F4600DA815B /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C4C1CB88F4600DA815B /* WelcomeViewController.m */; };
+		01E29C501CB891A800DA815B /* StatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C4F1CB891A800DA815B /* StatTableViewController.m */; };
+		01E29C531CB8926200DA815B /* StatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C521CB8926200DA815B /* StatTableViewCell.m */; };
+		01E29C561CB89C3400DA815B /* UIImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C551CB89C3400DA815B /* UIImageEffects.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,29 +60,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0193C9ED1CB82B5B0057E082 /* CameraSessionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraSessionView.h; sourceTree = "<group>"; };
-		0193C9EE1CB82B5B0057E082 /* CameraSessionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraSessionView.m; sourceTree = "<group>"; };
-		0193C9F11CB82B5B0057E082 /* CameraDismissButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraDismissButton.h; sourceTree = "<group>"; };
-		0193C9F21CB82B5B0057E082 /* CameraDismissButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraDismissButton.m; sourceTree = "<group>"; };
-		0193C9F31CB82B5B0057E082 /* CameraFlashButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraFlashButton.h; sourceTree = "<group>"; };
-		0193C9F41CB82B5B0057E082 /* CameraFlashButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraFlashButton.m; sourceTree = "<group>"; };
-		0193C9F51CB82B5B0057E082 /* CameraFocalReticule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraFocalReticule.h; sourceTree = "<group>"; };
-		0193C9F61CB82B5B0057E082 /* CameraFocalReticule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraFocalReticule.m; sourceTree = "<group>"; };
-		0193C9F71CB82B5B0057E082 /* CameraShutterButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraShutterButton.h; sourceTree = "<group>"; };
-		0193C9F81CB82B5B0057E082 /* CameraShutterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraShutterButton.m; sourceTree = "<group>"; };
-		0193C9F91CB82B5B0057E082 /* CameraToggleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraToggleButton.h; sourceTree = "<group>"; };
-		0193C9FA1CB82B5B0057E082 /* CameraToggleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraToggleButton.m; sourceTree = "<group>"; };
-		0193C9FB1CB82B5B0057E082 /* LaunchCameraButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchCameraButton.h; sourceTree = "<group>"; };
-		0193C9FC1CB82B5B0057E082 /* LaunchCameraButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchCameraButton.m; sourceTree = "<group>"; };
-		0193C9FD1CB82B5B0057E082 /* Cool Camera Mockup.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cool Camera Mockup.sketch"; sourceTree = "<group>"; };
-		0193C9FE1CB82B5B0057E082 /* PaintCodeFile.pcvd */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = PaintCodeFile.pcvd; sourceTree = "<group>"; };
-		0193CA001CB82B5B0057E082 /* CameraStyleKitClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraStyleKitClass.h; sourceTree = "<group>"; };
-		0193CA011CB82B5B0057E082 /* CameraStyleKitClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraStyleKitClass.m; sourceTree = "<group>"; };
-		0193CA031CB82B5B0057E082 /* CaptureSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureSessionManager.h; sourceTree = "<group>"; };
-		0193CA041CB82B5B0057E082 /* CaptureSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureSessionManager.m; sourceTree = "<group>"; };
-		0193CA051CB82B5B0057E082 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		0193CA061CB82B5B0057E082 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
-		0193CA131CB82B7C0057E082 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		015334DD1CB8B2DF00E3D2F1 /* MainViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewTableViewCell.h; sourceTree = "<group>"; };
+		015334DE1CB8B2DF00E3D2F1 /* MainViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewTableViewCell.m; sourceTree = "<group>"; };
+		015334E01CB8B79300E3D2F1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		015334E11CB8B79300E3D2F1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		015334EE1CB8BB3300E3D2F1 /* EmotionDiary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmotionDiary.swift; sourceTree = "<group>"; };
 		0193CA161CB82BC50057E082 /* CALayer+FSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+FSExtension.h"; sourceTree = "<group>"; };
 		0193CA171CB82BC50057E082 /* CALayer+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+FSExtension.m"; sourceTree = "<group>"; };
 		0193CA181CB82BC50057E082 /* FSCalendar+IBExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FSCalendar+IBExtension.h"; sourceTree = "<group>"; };
@@ -129,8 +105,8 @@
 		01B406121CB7FF7500B242D6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		01B406141CB7FF7500B242D6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		01B406151CB7FF7500B242D6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		01B406171CB7FF7500B242D6 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		01B406181CB7FF7500B242D6 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		01B406171CB7FF7500B242D6 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		01B406181CB7FF7500B242D6 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		01B4061B1CB7FF7500B242D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		01B4061D1CB7FF7500B242D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01B406201CB7FF7500B242D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -141,6 +117,16 @@
 		01B406321CB7FF7500B242D6 /* Emotion DiaryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Emotion DiaryUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01B406361CB7FF7500B242D6 /* Emotion_DiaryUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Emotion_DiaryUITests.m; sourceTree = "<group>"; };
 		01B406381CB7FF7500B242D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01CAA4531CB887FC00064D4E /* Emotion Diary-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Emotion Diary-Bridging-Header.h"; sourceTree = "<group>"; };
+		01CAA4541CB887FD00064D4E /* FaceConnector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceConnector.swift; sourceTree = "<group>"; };
+		01E29C4B1CB88F4600DA815B /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
+		01E29C4C1CB88F4600DA815B /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
+		01E29C4E1CB891A800DA815B /* StatTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatTableViewController.h; sourceTree = "<group>"; };
+		01E29C4F1CB891A800DA815B /* StatTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatTableViewController.m; sourceTree = "<group>"; };
+		01E29C511CB8926200DA815B /* StatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatTableViewCell.h; sourceTree = "<group>"; };
+		01E29C521CB8926200DA815B /* StatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatTableViewCell.m; sourceTree = "<group>"; };
+		01E29C541CB89C3400DA815B /* UIImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIImageEffects.h; path = UIImageEffects/UIImageEffects.h; sourceTree = "<group>"; };
+		01E29C551CB89C3400DA815B /* UIImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageEffects.m; path = UIImageEffects/UIImageEffects.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,7 +134,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0193CA141CB82B7C0057E082 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,75 +154,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0193C9EB1CB82B5B0057E082 /* CustomizableCamera */ = {
-			isa = PBXGroup;
-			children = (
-				0193C9EC1CB82B5B0057E082 /* Camera View */,
-				0193C9EF1CB82B5B0057E082 /* Graphical Assets */,
-				0193CA021CB82B5B0057E082 /* Model Classes */,
-			);
-			path = CustomizableCamera;
-			sourceTree = "<group>";
-		};
-		0193C9EC1CB82B5B0057E082 /* Camera View */ = {
-			isa = PBXGroup;
-			children = (
-				0193C9ED1CB82B5B0057E082 /* CameraSessionView.h */,
-				0193C9EE1CB82B5B0057E082 /* CameraSessionView.m */,
-			);
-			path = "Camera View";
-			sourceTree = "<group>";
-		};
-		0193C9EF1CB82B5B0057E082 /* Graphical Assets */ = {
-			isa = PBXGroup;
-			children = (
-				0193C9F01CB82B5B0057E082 /* CameraViewComponents */,
-				0193C9FD1CB82B5B0057E082 /* Cool Camera Mockup.sketch */,
-				0193C9FE1CB82B5B0057E082 /* PaintCodeFile.pcvd */,
-				0193C9FF1CB82B5B0057E082 /* UI Assets */,
-			);
-			path = "Graphical Assets";
-			sourceTree = "<group>";
-		};
-		0193C9F01CB82B5B0057E082 /* CameraViewComponents */ = {
-			isa = PBXGroup;
-			children = (
-				0193C9F11CB82B5B0057E082 /* CameraDismissButton.h */,
-				0193C9F21CB82B5B0057E082 /* CameraDismissButton.m */,
-				0193C9F31CB82B5B0057E082 /* CameraFlashButton.h */,
-				0193C9F41CB82B5B0057E082 /* CameraFlashButton.m */,
-				0193C9F51CB82B5B0057E082 /* CameraFocalReticule.h */,
-				0193C9F61CB82B5B0057E082 /* CameraFocalReticule.m */,
-				0193C9F71CB82B5B0057E082 /* CameraShutterButton.h */,
-				0193C9F81CB82B5B0057E082 /* CameraShutterButton.m */,
-				0193C9F91CB82B5B0057E082 /* CameraToggleButton.h */,
-				0193C9FA1CB82B5B0057E082 /* CameraToggleButton.m */,
-				0193C9FB1CB82B5B0057E082 /* LaunchCameraButton.h */,
-				0193C9FC1CB82B5B0057E082 /* LaunchCameraButton.m */,
-			);
-			path = CameraViewComponents;
-			sourceTree = "<group>";
-		};
-		0193C9FF1CB82B5B0057E082 /* UI Assets */ = {
-			isa = PBXGroup;
-			children = (
-				0193CA001CB82B5B0057E082 /* CameraStyleKitClass.h */,
-				0193CA011CB82B5B0057E082 /* CameraStyleKitClass.m */,
-			);
-			path = "UI Assets";
-			sourceTree = "<group>";
-		};
-		0193CA021CB82B5B0057E082 /* Model Classes */ = {
-			isa = PBXGroup;
-			children = (
-				0193CA031CB82B5B0057E082 /* CaptureSessionManager.h */,
-				0193CA041CB82B5B0057E082 /* CaptureSessionManager.m */,
-				0193CA051CB82B5B0057E082 /* Constants.h */,
-				0193CA061CB82B5B0057E082 /* Constants.m */,
-			);
-			path = "Model Classes";
-			sourceTree = "<group>";
-		};
 		0193CA151CB82BC50057E082 /* FSCalendar */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,7 +207,6 @@
 		01B406051CB7FF7500B242D6 = {
 			isa = PBXGroup;
 			children = (
-				0193CA131CB82B7C0057E082 /* AVFoundation.framework */,
 				01B406101CB7FF7500B242D6 /* Emotion Diary */,
 				01B4062A1CB7FF7500B242D6 /* Emotion DiaryTests */,
 				01B406351CB7FF7500B242D6 /* Emotion DiaryUITests */,
@@ -312,18 +227,27 @@
 		01B406101CB7FF7500B242D6 /* Emotion Diary */ = {
 			isa = PBXGroup;
 			children = (
-				0193C9EB1CB82B5B0057E082 /* CustomizableCamera */,
-				0193CA151CB82BC50057E082 /* FSCalendar */,
-				0193CA601CB82C650057E082 /* FSLineChart */,
+				01CAA4281CB8328B00064D4E /* 3rd Party Framework */,
 				01B406141CB7FF7500B242D6 /* AppDelegate.h */,
 				01B406151CB7FF7500B242D6 /* AppDelegate.m */,
-				01B406171CB7FF7500B242D6 /* ViewController.h */,
-				01B406181CB7FF7500B242D6 /* ViewController.m */,
+				01E29C4B1CB88F4600DA815B /* WelcomeViewController.h */,
+				01E29C4C1CB88F4600DA815B /* WelcomeViewController.m */,
+				01B406171CB7FF7500B242D6 /* MainViewController.h */,
+				01B406181CB7FF7500B242D6 /* MainViewController.m */,
+				015334DD1CB8B2DF00E3D2F1 /* MainViewTableViewCell.h */,
+				015334DE1CB8B2DF00E3D2F1 /* MainViewTableViewCell.m */,
+				01E29C4E1CB891A800DA815B /* StatTableViewController.h */,
+				01E29C4F1CB891A800DA815B /* StatTableViewController.m */,
+				01E29C511CB8926200DA815B /* StatTableViewCell.h */,
+				01E29C521CB8926200DA815B /* StatTableViewCell.m */,
+				01CAA4541CB887FD00064D4E /* FaceConnector.swift */,
+				015334EE1CB8BB3300E3D2F1 /* EmotionDiary.swift */,
 				01B4061A1CB7FF7500B242D6 /* Main.storyboard */,
 				01B4061D1CB7FF7500B242D6 /* Assets.xcassets */,
 				01B4061F1CB7FF7500B242D6 /* LaunchScreen.storyboard */,
 				01B406221CB7FF7500B242D6 /* Info.plist */,
 				01B406111CB7FF7500B242D6 /* Supporting Files */,
+				01CAA4531CB887FC00064D4E /* Emotion Diary-Bridging-Header.h */,
 			);
 			path = "Emotion Diary";
 			sourceTree = "<group>";
@@ -352,6 +276,25 @@
 				01B406381CB7FF7500B242D6 /* Info.plist */,
 			);
 			path = "Emotion DiaryUITests";
+			sourceTree = "<group>";
+		};
+		01CAA4281CB8328B00064D4E /* 3rd Party Framework */ = {
+			isa = PBXGroup;
+			children = (
+				01E29C581CB89C3F00DA815B /* UIImageEffects */,
+				0193CA151CB82BC50057E082 /* FSCalendar */,
+				0193CA601CB82C650057E082 /* FSLineChart */,
+			);
+			name = "3rd Party Framework";
+			sourceTree = "<group>";
+		};
+		01E29C581CB89C3F00DA815B /* UIImageEffects */ = {
+			isa = PBXGroup;
+			children = (
+				01E29C541CB89C3400DA815B /* UIImageEffects.h */,
+				01E29C551CB89C3400DA815B /* UIImageEffects.m */,
+			);
+			name = UIImageEffects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -421,6 +364,7 @@
 				TargetAttributes = {
 					01B4060D1CB7FF7500B242D6 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 4G7T6JUJF6;
 					};
 					01B406261CB7FF7500B242D6 = {
 						CreatedOnToolsVersion = 7.3;
@@ -460,8 +404,6 @@
 				01B406211CB7FF7500B242D6 /* LaunchScreen.storyboard in Resources */,
 				01B4061E1CB7FF7500B242D6 /* Assets.xcassets in Resources */,
 				0193CA421CB82BC60057E082 /* Info.plist in Resources */,
-				0193CA0F1CB82B5B0057E082 /* PaintCodeFile.pcvd in Resources */,
-				0193CA0E1CB82B5B0057E082 /* Cool Camera Mockup.sketch in Resources */,
 				01B4061C1CB7FF7500B242D6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -489,34 +431,31 @@
 			files = (
 				0193CA361CB82BC60057E082 /* CALayer+FSExtension.m in Sources */,
 				0193CA401CB82BC60057E082 /* FSCalendarHeader.m in Sources */,
-				01B406191CB7FF7500B242D6 /* ViewController.m in Sources */,
+				01B406191CB7FF7500B242D6 /* MainViewController.m in Sources */,
+				01E29C561CB89C3400DA815B /* UIImageEffects.m in Sources */,
 				01B406161CB7FF7500B242D6 /* AppDelegate.m in Sources */,
 				0193CA661CB82C650057E082 /* UIColor+FSPalette.m in Sources */,
 				0193CA3F1CB82BC60057E082 /* FSCalendarFlowLayout.m in Sources */,
-				0193CA071CB82B5B0057E082 /* CameraSessionView.m in Sources */,
-				0193CA0D1CB82B5B0057E082 /* LaunchCameraButton.m in Sources */,
 				0193CA3E1CB82BC60057E082 /* FSCalendarEventIndicator.m in Sources */,
-				0193CA091CB82B5B0057E082 /* CameraFlashButton.m in Sources */,
 				0193CA451CB82BC60057E082 /* UIView+FSExtension.m in Sources */,
 				0193CA3B1CB82BC60057E082 /* FSCalendarCell.m in Sources */,
 				0193CA3C1CB82BC60057E082 /* FSCalendarCollectionView.m in Sources */,
 				0193CA371CB82BC60057E082 /* FSCalendar+IBExtension.m in Sources */,
-				0193CA111CB82B5B0057E082 /* CaptureSessionManager.m in Sources */,
 				0193CA441CB82BC60057E082 /* NSString+FSExtension.m in Sources */,
-				0193CA0B1CB82B5B0057E082 /* CameraShutterButton.m in Sources */,
+				01CAA4551CB887FD00064D4E /* FaceConnector.swift in Sources */,
 				0193CA391CB82BC60057E082 /* FSCalendarAnimator.m in Sources */,
 				0193CA651CB82C650057E082 /* FSLineChart.m in Sources */,
-				0193CA121CB82B5B0057E082 /* Constants.m in Sources */,
 				0193CA3D1CB82BC60057E082 /* FSCalendarConstance.m in Sources */,
+				01E29C501CB891A800DA815B /* StatTableViewController.m in Sources */,
 				0193CA431CB82BC60057E082 /* NSDate+FSExtension.m in Sources */,
+				015334DF1CB8B2DF00E3D2F1 /* MainViewTableViewCell.m in Sources */,
+				015334EF1CB8BB3300E3D2F1 /* EmotionDiary.swift in Sources */,
+				01E29C4D1CB88F4600DA815B /* WelcomeViewController.m in Sources */,
 				0193CA381CB82BC60057E082 /* FSCalendar.m in Sources */,
 				0193CA3A1CB82BC60057E082 /* FSCalendarAppearance.m in Sources */,
-				0193CA0A1CB82B5B0057E082 /* CameraFocalReticule.m in Sources */,
-				0193CA0C1CB82B5B0057E082 /* CameraToggleButton.m in Sources */,
+				01E29C531CB8926200DA815B /* StatTableViewCell.m in Sources */,
 				0193CA411CB82BC60057E082 /* FSCalendarStickyHeader.m in Sources */,
-				0193CA081CB82B5B0057E082 /* CameraDismissButton.m in Sources */,
 				01B406131CB7FF7500B242D6 /* main.m in Sources */,
-				0193CA101CB82B5B0057E082 /* CameraStyleKitClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,6 +495,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				01B4061B1CB7FF7500B242D6 /* Base */,
+				015334E01CB8B79300E3D2F1 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -564,6 +504,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				01B406201CB7FF7500B242D6 /* Base */,
+				015334E11CB8B79300E3D2F1 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -598,6 +539,8 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -608,7 +551,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -641,13 +584,15 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -659,10 +604,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Emotion Diary/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "cn.fanzhikang.Emotion-Diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Emotion Diary/Emotion Diary-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -670,10 +619,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Emotion Diary/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "cn.fanzhikang.Emotion-Diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Emotion Diary/Emotion Diary-Bridging-Header.h";
 			};
 			name = Release;
 		};
