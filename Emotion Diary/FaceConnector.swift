@@ -14,6 +14,8 @@ class FaceConnector: NSObject {
     let detectionURL = "https://v1-api.visioncloudapi.com/face/detection"
     let createPersonURL = "https://v1-api.visioncloudapi.com/person/create"
     let verificationURL = "https://v1-api.visioncloudapi.com/face/verification"
+    let faceDetailInfoURL = "https://v1-api.visioncloudapi.com/info/face"
+    
     let api_id = "8787dcbe92344652902ab319bbbb8e80"
     let api_secret = "c11e8b064d3f481681d250439e517a8e"
     let landmarks106 = "1"
@@ -39,7 +41,6 @@ class FaceConnector: NSObject {
                 switch encodingResult {
                 case .Success(let upload, _, _):
                     upload.responseJSON { response in
-                        debugPrint(response)
                         switch response.result {
                         case .Failure( _):
                             block(result: .Error, message: "服务器错误或网络错误", faceID: nil)
@@ -50,14 +51,13 @@ class FaceConnector: NSObject {
                         }
 
                     }
-                case .Failure(let encodingError):
-                    print(encodingError)
+                case .Failure(let _):
                     block(result: .Error, message: "无法编码", faceID: nil)
                 }
         }
     }
 
-    func createPersonWithName(name: String, faceIDs: [String], andBlock block: (result: FaceConnectorRequestResult, message: String, personID: String?) -> Void) {
+    func createPersonWithName(name: String, faceIDs: [String], andBlock block: (result: FaceConnectorRequestResult, message: String) -> Void) {
         
         var parameters = ["api_id": api_id,
                           "api_secret": api_secret,
@@ -72,17 +72,17 @@ class FaceConnector: NSObject {
         Alamofire.request(.POST, createPersonURL, parameters: parameters).responseJSON { (response) in
             switch response.result {
             case .Failure( _):
-                block(result: .Error, message: "服务器错误或网络错误", personID: nil)
+                block(result: .Error, message: "服务器错误或网络错误")
             case .Success(let value):
                 let json = JSON(value)
-                let personID = json["person_ID"].stringValue
-                block(result: .Success, message: "OK", personID: personID)
+                self.personID = json["person_id"].stringValue
+                block(result: .Success, message: "OK")
             }
         }
         
     }
     
-    func verificationFaceID(faceID: String, withPersonID personID:String, andBlock block: (result: FaceConnectorRequestResult, message: String, isOwner: Bool?) -> Void) {
+    func verificateFaceID(faceID: String, withPersonID personID:String, andBlock block: (result: FaceConnectorRequestResult, message: String, isOwner: Bool) -> Void) {
         
         let parameters = ["api_id": api_id,
                           "api_secret": api_secret,
@@ -92,7 +92,7 @@ class FaceConnector: NSObject {
         Alamofire.request(.POST, verificationURL, parameters: parameters).responseJSON { (response) in
             switch response.result {
             case .Failure( _):
-                block(result: .Error, message: "服务器错误或网络错误", isOwner: nil)
+                block(result: .Error, message: "服务器错误或网络错误", isOwner: false)
             case .Success(let value):
                 let json = JSON(value)
                 let same_person = json["same_person"].boolValue
@@ -105,6 +105,47 @@ class FaceConnector: NSObject {
             }
         }
         
+    }
+    
+    func getDetailInfoOfFace(faceID: String, block: (result: FaceConnectorRequestResult, message: String, info: [String: Int]?
+        ) -> Void) {
+        
+        let parameters = ["api_id": api_id,
+                          "api_secret": api_secret,
+                          "face_id": faceID]
+        Alamofire.request(.GET, faceDetailInfoURL, parameters: parameters).responseJSON { (response) in
+            switch response.result {
+            case .Failure( _):
+                block(result: .Error, message: "服务器错误或网络错误", info: nil)
+            case .Success(let value):
+                let json = JSON(value)
+                let smile = json["attributes"]["smile"].intValue
+                let attractive = json["attributes"]["attractive"].intValue
+                var info = ["smile": smile, "attractive": attractive]
+                // TODO: to add other info here
+                block(result: .Success, message: "OK", info: info)
+                
+            }
+
+        }
+        
+    }
+    
+}
+
+extension FaceConnector {
+    
+    var personID: String? {
+        get {
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            let personID = userDefaults.objectForKey("personID") as? String
+            return personID
+        }
+        set {
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            userDefaults.removeObjectForKey("personID")
+            userDefaults.setObject(newValue!, forKey: "personID")
+        }
     }
     
 }
