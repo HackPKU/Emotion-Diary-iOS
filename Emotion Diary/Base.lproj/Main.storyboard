@@ -275,16 +275,25 @@
                                     <constraint firstAttribute="width" constant="320" id="vJj-hh-YPV"/>
                                 </constraints>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="解锁" translatesAutoresizingMaskIntoConstraints="NO" id="qLt-eP-irW">
+                                <rect key="frame" x="150" y="229.5" width="300" height="141"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="TJX-Rs-8Uj"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.98823529409999999" green="0.43529411759999997" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="qLt-eP-irW" firstAttribute="centerY" secondItem="Pqc-Ky-Qbz" secondAttribute="centerY" id="JWf-Ib-anP"/>
                             <constraint firstItem="FDu-NC-s5l" firstAttribute="centerX" secondItem="Pqc-Ky-Qbz" secondAttribute="centerX" id="US2-Ej-cnb"/>
                             <constraint firstItem="Vvf-yh-hqS" firstAttribute="top" secondItem="FDu-NC-s5l" secondAttribute="bottom" constant="20" id="gA3-De-sVm"/>
+                            <constraint firstItem="qLt-eP-irW" firstAttribute="centerX" secondItem="Pqc-Ky-Qbz" secondAttribute="centerX" id="wCc-FG-4De"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="buttonCamera" destination="RQf-CO-zls" id="3oz-kZ-xh8"/>
                         <outlet property="buttonProceed" destination="A24-PA-NnZ" id="z45-zc-TBU"/>
+                        <outlet property="imageSuccess" destination="qLt-eP-irW" id="c0G-Ga-eYM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8nQ-Gu-35H" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -439,6 +448,7 @@
     </scenes>
     <resources>
         <image name="stat" width="25" height="25"/>
+        <image name="解锁" width="141" height="141"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="e3d-0X-6Ej"/>
