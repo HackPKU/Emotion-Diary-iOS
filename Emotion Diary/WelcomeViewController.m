@@ -35,10 +35,6 @@
 
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self takePicture];
@@ -59,7 +55,7 @@
             imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         }
         imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
-        imagePicker.allowsEditing = YES;
+//        imagePicker.allowsEditing = YES;
         imagePicker.delegate = self;
         [self presentViewController:imagePicker animated:YES completion:nil];
         shouldRetakePicture = NO;
@@ -84,7 +80,7 @@
                         shouldRetakePicture = YES;
                     }else {
                         [KVNProgress showSuccessWithStatus:@"创建成功"];
-                        NSLog(@"%@", verificationer.personID);
+                        userFaceID = faceID;
                         _imageSuccess.hidden = NO;
                     }
                     [self takePicture];
@@ -100,6 +96,7 @@
                             shouldRetakePicture = YES;
                         }else {
                             [KVNProgress dismiss];
+                            userFaceID = faceID;
                             _imageSuccess.hidden = NO;
                         }
                     }
@@ -154,6 +151,7 @@
     if ([segue.identifier isEqualToString:@"recordMood"]) {
         RecordTableViewController *dest = [[[segue destinationViewController] viewControllers] firstObject];
         dest.selfie = selfie;
+        dest.faceID = userFaceID;
     }
     shouldRetakePicture = YES;
     // Get the new view controller using [segue destinationViewController].

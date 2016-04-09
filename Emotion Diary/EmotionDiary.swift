@@ -63,10 +63,11 @@ class EmotionDiary: NSObject, NSCoding {
     }
     
     func save() {
-        if var emotionDiaries = EmotionDiary.getEmotionDiariesFromStore() {
-            emotionDiaries.append(self)
+        if let emotionDiaries = EmotionDiary.getEmotionDiariesFromStore() {
+            var diaries = emotionDiaries
+            diaries.append(self)
             userDefaults.removeObjectForKey(EmotionDiary.EmotionDiariesSaveKey)
-            let data = NSKeyedArchiver.archivedDataWithRootObject(emotionDiaries)
+            let data = NSKeyedArchiver.archivedDataWithRootObject(diaries)
             userDefaults.setObject(data, forKey: EmotionDiary.EmotionDiariesSaveKey)
             userDefaults.synchronize()
         }
@@ -80,14 +81,18 @@ class EmotionDiary: NSObject, NSCoding {
     
     private class func getEmotionDiariesFromStore() -> [EmotionDiary]? {
         let userDefaults = NSUserDefaults.standardUserDefaults()
-        let data = userDefaults.objectForKey(EmotionDiary.EmotionDiariesSaveKey) as! NSData
-        let array = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSArray
-        var emotionDiaries = [EmotionDiary]()
-        for item in array {
-            let diary = item as! EmotionDiary
-            emotionDiaries.append(diary)
+        if let data = userDefaults.objectForKey(EmotionDiary.EmotionDiariesSaveKey) as? NSData {
+            let array = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSArray
+            var emotionDiaries = [EmotionDiary]()
+            for item in array {
+                let diary = item as! EmotionDiary
+                emotionDiaries.append(diary)
+            }
+            return emotionDiaries
         }
-        return emotionDiaries
+        else {
+            return nil
+        }
     }
     
     class func getDiaryOfDay(date: NSDate) -> [EmotionDiary] {

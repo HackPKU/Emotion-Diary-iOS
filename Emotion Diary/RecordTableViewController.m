@@ -8,6 +8,9 @@
 
 #import "RecordTableViewController.h"
 #import "UIImageEffects.h"
+#import "KVNProgress.h"
+#import "AssessmentHelper.h"
+#import "Emotion_Diary-Swift.h"
 
 @interface RecordTableViewController ()
 
@@ -21,6 +24,8 @@
     _selfieImage.layer.cornerRadius = _selfieImage.frame.size.width / 2;
     _blurredSelfieImage.image = [UIImageEffects imageByApplyingBlurToImage:_selfie withRadius:60.0 tintColor:[UIColor colorWithWhite:0.5 alpha:0.5] saturationDeltaFactor:1.8 maskImage:nil];
     _textRecord.delegate = self;
+    [self refreshView];
+    [self analyseFace];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -32,6 +37,29 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)analyseFace {
+    FaceConnector *connector = [[FaceConnector alloc] init];
+    [connector getDetailInfoOfFace:_faceID block:^(enum FaceConnectorRequestResult result, NSString * _Nonnull message, NSDictionary<NSString *,NSNumber *> * _Nullable info) {
+        if (result == FaceConnectorRequestResultError) {
+            [KVNProgress showErrorWithStatus:message];
+            [self dismissViewControllerAnimated:YES completion:nil];
+            return;
+        }
+        faceInfo = info;
+        [self refreshView];
+    }];
+}
+
+- (void)refreshView {
+    if (!faceInfo) {
+        _faceImage.image = nil;
+        _labelChickenSoup.text = @"正在分析您的心情";
+    }else {
+        _faceImage.image = [UIImage imageNamed:[AssessmentHelper getFaceNameBySmile:[faceInfo[@"smile"] intValue]]];
+        _labelChickenSoup.text = [AssessmentHelper getWelcomeMsg:[faceInfo[@"smile"] intValue] withAttractive:[faceInfo[@"attractive"] intValue]];
+    }
 }
 
 #pragma mark - Text View Delegate
@@ -103,14 +131,17 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"enterMain"]) {
+        EmotionDiary *diary = [[EmotionDiary alloc] initWithSmile:[faceInfo[@"smile"] intValue] attractive:[faceInfo[@"attractive"] intValue] image:_selfie content:self.textRecord.text];
+        [diary save];
+    }
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-*/
 
 @end

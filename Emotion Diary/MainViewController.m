@@ -8,6 +8,8 @@
 
 #import "MainViewController.h"
 #import "MainViewTableViewCell.h"
+#import "AssessmentHelper.h"
+#import "Emotion_Diary-Swift.h"
 
 @interface MainViewController ()
 
@@ -18,6 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     currentDate = [NSDate date];
+    diaryArray = [EmotionDiary getDiaryOfDay:currentDate];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -43,7 +46,12 @@
 
 - (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date {
     currentDate = date;
+    diaryArray = [EmotionDiary getDiaryOfDay:currentDate];
     [_detailTableView reloadData];
+}
+
+- (NSInteger)calendar:(FSCalendar *)calendar numberOfEventsForDate:(NSDate *)date {
+    return [EmotionDiary getDiaryOfDay:date].count;
 }
 
 #pragma mark - Table view data source
@@ -53,7 +61,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return [EmotionDiary getDiaryOfDay:currentDate].count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -63,6 +71,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MainViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellDetail" forIndexPath:indexPath];
     cell.labelDate.hidden = (indexPath.row != 0);
+    EmotionDiary *diary = diaryArray[indexPath.row];
+    cell.imageSelfie.image = [UIImage imageWithContentsOfFile:diary.imageURL];
+    NSString *imageName = [AssessmentHelper getFaceNameBySmile:(int)diary.smile];
+    cell.imageFace.image = [UIImage imageNamed:[imageName stringByAppendingString:@"-白圈"]];
+    cell.labelTime.text = diary.date.description;
+    cell.labelDate.text = diary.date.description;
+    cell.textDetail.text = diary.content;
     
     // Configure the cell...
     
