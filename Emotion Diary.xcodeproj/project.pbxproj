@@ -40,6 +40,7 @@
 		01E29C501CB891A800DA815B /* StatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C4F1CB891A800DA815B /* StatTableViewController.m */; };
 		01E29C531CB8926200DA815B /* StatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C521CB8926200DA815B /* StatTableViewCell.m */; };
 		01E29C561CB89C3400DA815B /* UIImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C551CB89C3400DA815B /* UIImageEffects.m */; };
+		01F15FC81CB8E6AA006BB341 /* RecordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F15FC71CB8E6AA006BB341 /* RecordTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +128,8 @@
 		01E29C521CB8926200DA815B /* StatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatTableViewCell.m; sourceTree = "<group>"; };
 		01E29C541CB89C3400DA815B /* UIImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIImageEffects.h; path = UIImageEffects/UIImageEffects.h; sourceTree = "<group>"; };
 		01E29C551CB89C3400DA815B /* UIImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageEffects.m; path = UIImageEffects/UIImageEffects.m; sourceTree = "<group>"; };
+		01F15FC61CB8E6AA006BB341 /* RecordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordTableViewController.h; sourceTree = "<group>"; };
+		01F15FC71CB8E6AA006BB341 /* RecordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +235,8 @@
 				01B406151CB7FF7500B242D6 /* AppDelegate.m */,
 				01E29C4B1CB88F4600DA815B /* WelcomeViewController.h */,
 				01E29C4C1CB88F4600DA815B /* WelcomeViewController.m */,
+				01F15FC61CB8E6AA006BB341 /* RecordTableViewController.h */,
+				01F15FC71CB8E6AA006BB341 /* RecordTableViewController.m */,
 				01B406171CB7FF7500B242D6 /* MainViewController.h */,
 				01B406181CB7FF7500B242D6 /* MainViewController.m */,
 				015334DD1CB8B2DF00E3D2F1 /* MainViewTableViewCell.h */,
@@ -437,6 +442,7 @@
 				0193CA661CB82C650057E082 /* UIColor+FSPalette.m in Sources */,
 				0193CA3F1CB82BC60057E082 /* FSCalendarFlowLayout.m in Sources */,
 				0193CA3E1CB82BC60057E082 /* FSCalendarEventIndicator.m in Sources */,
+				01F15FC81CB8E6AA006BB341 /* RecordTableViewController.m in Sources */,
 				0193CA451CB82BC60057E082 /* UIView+FSExtension.m in Sources */,
 				0193CA3B1CB82BC60057E082 /* FSCalendarCell.m in Sources */,
 				0193CA3C1CB82BC60057E082 /* FSCalendarCollectionView.m in Sources */,

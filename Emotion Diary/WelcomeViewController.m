@@ -8,7 +8,7 @@
 
 #import "WelcomeViewController.h"
 #import "MainViewController.h"
-#import "UIImageEffects.h"
+#import "RecordTableViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
 @interface WelcomeViewController ()
@@ -20,36 +20,39 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     connector = [[FaceConnector alloc] init];
-    shouldClearSelfie = YES;
+    shouldRetakePicture = YES;
     // Do any additional setup after loading the view.
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (shouldClearSelfie) {
-        _textContainerView.hidden = YES;
-        _buttonCamera.hidden = NO;
+    if (shouldRetakePicture) {
         _backgroundImage.image = nil;
-        shouldClearSelfie = NO;
     }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     // TODO 第一次使用
+    
+    [self takePicture];
 }
 
-- (IBAction)takePicture {
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        imagePicker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
-    }else {
-        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+- (void)takePicture {
+    if (shouldRetakePicture) {
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            imagePicker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+        }else {
+            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        }
+        imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
+        imagePicker.allowsEditing = YES;
+        imagePicker.delegate = self;
+        [self presentViewController:imagePicker animated:YES completion:nil];
+        shouldRetakePicture = NO;
     }
-    imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
-    imagePicker.delegate = self;
-    [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -58,14 +61,19 @@
     [connector scanAndAnalyzeFace:selfie andBlock:^(enum FaceConnectorRequestResult result, NSString * _Nonnull message, NSInteger data) {
         // TODO Add Logic
     }];
-    _textContainerView.hidden = NO;
-    _buttonCamera.hidden = YES;
-    _backgroundImage.image = [UIImageEffects imageByApplyingLightEffectToImage:selfie];
+    _backgroundImage.image = selfie;
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    [picker dismissViewControllerAnimated:YES completion:nil];
+    [picker dismissViewControllerAnimated:YES completion:^{
+        UIAlertController *action = [UIAlertController alertControllerWithTitle:@"警告" message:@"您必须通过人脸识别才能使用日记功能" preferredStyle:UIAlertControllerStyleAlert];
+        [action addAction:[UIAlertAction actionWithTitle:@"重拍" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            shouldRetakePicture = YES;
+            [self takePicture];
+        }]];
+        [self presentViewController:action animated:YES completion:nil];
+    }];
 }
 
 - (UIImage *)normalizedImage:(UIImage *)image {
@@ -91,8 +99,11 @@
     if ([segue.identifier isEqualToString:@"enterMain"]) {
         MainViewController *dest = [[[segue destinationViewController] viewControllers] firstObject];
         dest.currentImage = selfie;
-        shouldClearSelfie = YES;
+    }else if ([segue.identifier isEqualToString:@"recordMood"]) {
+        RecordTableViewController *dest = [[[segue destinationViewController] viewControllers] firstObject];
+        dest.selfie = selfie;
     }
+    shouldRetakePicture = YES;
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
