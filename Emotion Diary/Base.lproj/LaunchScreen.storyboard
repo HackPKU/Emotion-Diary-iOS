@@ -16,7 +16,19 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="启动" translatesAutoresizingMaskIntoConstraints="NO" id="Z7y-fN-YD4">
+                                <rect key="frame" x="150" y="168" width="300" height="264"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="cmj-3O-LE8"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.98823529409999999" green="0.43529411759999997" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Z7y-fN-YD4" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="UuJ-38-dAw"/>
+                            <constraint firstItem="Z7y-fN-YD4" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="qUv-st-byw"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -24,4 +36,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="启动" width="263" height="264"/>
+    </resources>
 </document>

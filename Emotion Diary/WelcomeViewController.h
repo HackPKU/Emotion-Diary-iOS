@@ -11,10 +11,12 @@
 
 @interface WelcomeViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
     FaceConnector *connector;
+    FaceConnector *verificationer;
     BOOL shouldRetakePicture;
     UIImage *selfie;
 }
 
+@property (strong, nonatomic) IBOutlet UIImageView *imageSuccess;
 @property (strong, nonatomic) IBOutlet UIButton *buttonCamera;
 @property (strong, nonatomic) IBOutlet UIButton *buttonProceed;
 

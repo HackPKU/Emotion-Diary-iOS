@@ -23,6 +23,8 @@
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTranslucent:NO];
     
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"personID":@""}];
+    
     return YES;
 }
 

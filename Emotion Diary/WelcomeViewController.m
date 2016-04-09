@@ -9,6 +9,7 @@
 #import "WelcomeViewController.h"
 #import "MainViewController.h"
 #import "RecordTableViewController.h"
+#import "KVNProgress.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
 @interface WelcomeViewController ()
@@ -20,7 +21,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     connector = [[FaceConnector alloc] init];
+    verificationer = [[FaceConnector alloc] init];
     shouldRetakePicture = YES;
+    _imageSuccess.hidden = YES;
     _buttonCamera.layer.cornerRadius = 5.0;
     _buttonCamera.layer.borderWidth = 1.0;
     _buttonCamera.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -47,6 +50,7 @@
 
 - (void)takePicture {
     if (shouldRetakePicture) {
+        _imageSuccess.hidden = YES;
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
             imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -63,13 +67,48 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [KVNProgress showWithStatus:@"分析中"];
     selfie = [info objectForKey:UIImagePickerControllerOriginalImage];
     selfie = [self normalizedImage:selfie];
     selfie = [self reSizeImage:selfie toSize:CGSizeMake(800, 800 / selfie.size.width * selfie.size.height)];
-    [connector scanAndAnalyzeFace:selfie andBlock:^(enum FaceConnectorRequestResult result, NSString * _Nonnull message, NSInteger data) {
-        // TODO Add Logic
+    [connector postImage:selfie block:^(enum FaceConnectorRequestResult result, NSString * _Nonnull message, NSString * _Nullable faceID) {
+        if (result == FaceConnectorRequestResultError) {
+            [KVNProgress showErrorWithStatus:message];
+            shouldRetakePicture = YES;
+        }else {
+            if (verificationer.personID.length == 0) {
+                [verificationer createPersonWithName:@"一个好名字" faceIDs:@[faceID] andBlock:^(enum FaceConnectorRequestResult result, NSString * _Nonnull message) {
+                    if (result == FaceConnectorRequestResultError) {
+                        [KVNProgress showErrorWithStatus:message];
+                        shouldRetakePicture = YES;
+                    }else {
+                        [KVNProgress showSuccessWithStatus:@"创建成功"];
+                        NSLog(@"%@", verificationer.personID);
+                        _imageSuccess.hidden = NO;
+                    }
+                    [self takePicture];
+                }];
+            }else {
+                [verificationer verificateFaceID:faceID withPersonID:verificationer.personID andBlock:^(enum FaceConnectorRequestResult result, NSString * _Nonnull message, BOOL isOwner) {
+                    if (result == FaceConnectorRequestResultError) {
+                        [KVNProgress showErrorWithStatus:message];
+                        shouldRetakePicture = YES;
+                    }else {
+                        if (!isOwner) {
+                            [KVNProgress showErrorWithStatus:@"验证失败"];
+                            shouldRetakePicture = YES;
+                        }else {
+                            [KVNProgress dismiss];
+                            _imageSuccess.hidden = NO;
+                        }
+                    }
+                    [self takePicture];
+                }];
+            }
+        }
+        [self takePicture];
+        [picker dismissViewControllerAnimated:YES completion:nil];
     }];
-    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
