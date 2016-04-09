@@ -24,6 +24,7 @@
     _selfieImage.layer.cornerRadius = _selfieImage.frame.size.width / 2;
     _blurredSelfieImage.image = [UIImageEffects imageByApplyingBlurToImage:_selfie withRadius:60.0 tintColor:[UIColor colorWithWhite:0.5 alpha:0.5] saturationDeltaFactor:1.8 maskImage:nil];
     _textRecord.delegate = self;
+    _textRecord.scrollsToTop = NO;
     [self refreshView];
     [self analyseFace];
     
