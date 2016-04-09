@@ -29,10 +29,7 @@ class EmotionDiary: NSObject, NSCoding {
         self.date = NSDate()
         self.content = content
         
-        let formatter = NSDateFormatter()
-        formatter.timeStyle = .FullStyle
-        formatter.dateStyle = .FullStyle
-        let path = IMAGE_PATH + "\(formatter.stringFromDate(date).hash)"
+        let path = IMAGE_PATH + Utilities.MD5(date.description)
         if !manager.fileExistsAtPath(IMAGE_PATH) {
             do {
                 try manager.createDirectoryAtPath(IMAGE_PATH, withIntermediateDirectories: false, attributes: nil)
@@ -88,7 +85,7 @@ class EmotionDiary: NSObject, NSCoding {
                 let diary = item as! EmotionDiary
                 emotionDiaries.append(diary)
             }
-            return emotionDiaries
+            return emotionDiaries.reverse()
         }
         else {
             return nil
