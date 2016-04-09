@@ -58,8 +58,12 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     selfie = [info objectForKey:UIImagePickerControllerOriginalImage];
     selfie = [self normalizedImage:selfie];
+    [connector postImage:selfie block:^(enum FaceConnectorRequestResult result, NSString * _Nonnull message) {
+        NSLog(@"%@", message);
+    }];
     [connector scanAndAnalyzeFace:selfie andBlock:^(enum FaceConnectorRequestResult result, NSString * _Nonnull message, NSInteger data) {
         // TODO Add Logic
+        
     }];
     _backgroundImage.image = selfie;
     [picker dismissViewControllerAnimated:YES completion:nil];
