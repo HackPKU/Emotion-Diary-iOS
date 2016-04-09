@@ -41,6 +41,15 @@
 		01E29C531CB8926200DA815B /* StatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C521CB8926200DA815B /* StatTableViewCell.m */; };
 		01E29C561CB89C3400DA815B /* UIImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C551CB89C3400DA815B /* UIImageEffects.m */; };
 		01F15FC81CB8E6AA006BB341 /* RecordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F15FC71CB8E6AA006BB341 /* RecordTableViewController.m */; };
+		E97184171CB8EF7500A58920 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E971840A1CB8EF2400A58920 /* Alamofire.framework */; };
+		E97184181CB8EF7500A58920 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E971840A1CB8EF2400A58920 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E971841D1CB8F03200A58920 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E971841C1CB8F03200A58920 /* SwiftyJSON.swift */; };
+		E971842D1CB8F12500A58920 /* UIColor+KVNContrast.m in Sources */ = {isa = PBXBuildFile; fileRef = E97184211CB8F12500A58920 /* UIColor+KVNContrast.m */; };
+		E971842E1CB8F12500A58920 /* UIImage+KVNEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = E97184231CB8F12500A58920 /* UIImage+KVNEmpty.m */; };
+		E971842F1CB8F12500A58920 /* UIImage+KVNImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = E97184251CB8F12500A58920 /* UIImage+KVNImageEffects.m */; };
+		E97184301CB8F12500A58920 /* KVNProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = E97184281CB8F12500A58920 /* KVNProgress.m */; };
+		E97184311CB8F12500A58920 /* KVNProgressConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = E971842A1CB8F12500A58920 /* KVNProgressConfiguration.m */; };
+		E97184321CB8F12500A58920 /* KVNProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E971842C1CB8F12500A58920 /* KVNProgressView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +67,77 @@
 			remoteGlobalIDString = 01B4060D1CB7FF7500B242D6;
 			remoteInfo = "Emotion Diary";
 		};
+		E97184091CB8EF2400A58920 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E97183FF1CB8EF2400A58920 /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F8111E3319A95C8B0040E7D1;
+			remoteInfo = "Alamofire iOS";
+		};
+		E971840B1CB8EF2400A58920 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E97183FF1CB8EF2400A58920 /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F8111E3E19A95C8B0040E7D1;
+			remoteInfo = "Alamofire iOS Tests";
+		};
+		E971840D1CB8EF2400A58920 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E97183FF1CB8EF2400A58920 /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4DD67C0B1A5C55C900ED2280;
+			remoteInfo = "Alamofire OSX";
+		};
+		E971840F1CB8EF2400A58920 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E97183FF1CB8EF2400A58920 /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F829C6B21A7A94F100A2CD59;
+			remoteInfo = "Alamofire OSX Tests";
+		};
+		E97184111CB8EF2400A58920 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E97183FF1CB8EF2400A58920 /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4CF626EF1BA7CB3E0011A099;
+			remoteInfo = "Alamofire tvOS";
+		};
+		E97184131CB8EF2400A58920 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E97183FF1CB8EF2400A58920 /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4CF626F81BA7CB3E0011A099;
+			remoteInfo = "Alamofire tvOS Tests";
+		};
+		E97184151CB8EF2400A58920 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E97183FF1CB8EF2400A58920 /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E4202FE01B667AA100C997FB;
+			remoteInfo = "Alamofire watchOS";
+		};
+		E97184191CB8EF7500A58920 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E97183FF1CB8EF2400A58920 /* Alamofire.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F8111E3219A95C8B0040E7D1;
+			remoteInfo = "Alamofire iOS";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E971841B1CB8EF7500A58920 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E97184181CB8EF7500A58920 /* Alamofire.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		015334DD1CB8B2DF00E3D2F1 /* MainViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewTableViewCell.h; sourceTree = "<group>"; };
@@ -130,6 +209,19 @@
 		01E29C551CB89C3400DA815B /* UIImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageEffects.m; path = UIImageEffects/UIImageEffects.m; sourceTree = "<group>"; };
 		01F15FC61CB8E6AA006BB341 /* RecordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordTableViewController.h; sourceTree = "<group>"; };
 		01F15FC71CB8E6AA006BB341 /* RecordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordTableViewController.m; sourceTree = "<group>"; };
+		E97183FF1CB8EF2400A58920 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
+		E971841C1CB8F03200A58920 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		E97184201CB8F12500A58920 /* UIColor+KVNContrast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+KVNContrast.h"; sourceTree = "<group>"; };
+		E97184211CB8F12500A58920 /* UIColor+KVNContrast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+KVNContrast.m"; sourceTree = "<group>"; };
+		E97184221CB8F12500A58920 /* UIImage+KVNEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+KVNEmpty.h"; sourceTree = "<group>"; };
+		E97184231CB8F12500A58920 /* UIImage+KVNEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+KVNEmpty.m"; sourceTree = "<group>"; };
+		E97184241CB8F12500A58920 /* UIImage+KVNImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+KVNImageEffects.h"; sourceTree = "<group>"; };
+		E97184251CB8F12500A58920 /* UIImage+KVNImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+KVNImageEffects.m"; sourceTree = "<group>"; };
+		E97184271CB8F12500A58920 /* KVNProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVNProgress.h; sourceTree = "<group>"; };
+		E97184281CB8F12500A58920 /* KVNProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVNProgress.m; sourceTree = "<group>"; };
+		E97184291CB8F12500A58920 /* KVNProgressConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVNProgressConfiguration.h; sourceTree = "<group>"; };
+		E971842A1CB8F12500A58920 /* KVNProgressConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVNProgressConfiguration.m; sourceTree = "<group>"; };
+		E971842C1CB8F12500A58920 /* KVNProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KVNProgressView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +229,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E97184171CB8EF7500A58920 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +379,9 @@
 		01CAA4281CB8328B00064D4E /* 3rd Party Framework */ = {
 			isa = PBXGroup;
 			children = (
+				E971841E1CB8F12500A58920 /* KVNProgress */,
+				E971841C1CB8F03200A58920 /* SwiftyJSON.swift */,
+				E97183FF1CB8EF2400A58920 /* Alamofire.xcodeproj */,
 				01E29C581CB89C3F00DA815B /* UIImageEffects */,
 				0193CA151CB82BC50057E082 /* FSCalendar */,
 				0193CA601CB82C650057E082 /* FSLineChart */,
@@ -302,6 +398,62 @@
 			name = UIImageEffects;
 			sourceTree = "<group>";
 		};
+		E97184001CB8EF2400A58920 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E971840A1CB8EF2400A58920 /* Alamofire.framework */,
+				E971840C1CB8EF2400A58920 /* Alamofire iOS Tests.xctest */,
+				E971840E1CB8EF2400A58920 /* Alamofire.framework */,
+				E97184101CB8EF2400A58920 /* Alamofire OSX Tests.xctest */,
+				E97184121CB8EF2400A58920 /* Alamofire.framework */,
+				E97184141CB8EF2400A58920 /* Alamofire tvOS Tests.xctest */,
+				E97184161CB8EF2400A58920 /* Alamofire.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E971841E1CB8F12500A58920 /* KVNProgress */ = {
+			isa = PBXGroup;
+			children = (
+				E971841F1CB8F12500A58920 /* Categories */,
+				E97184261CB8F12500A58920 /* Classes */,
+				E971842B1CB8F12500A58920 /* Resources */,
+			);
+			path = KVNProgress;
+			sourceTree = "<group>";
+		};
+		E971841F1CB8F12500A58920 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				E97184201CB8F12500A58920 /* UIColor+KVNContrast.h */,
+				E97184211CB8F12500A58920 /* UIColor+KVNContrast.m */,
+				E97184221CB8F12500A58920 /* UIImage+KVNEmpty.h */,
+				E97184231CB8F12500A58920 /* UIImage+KVNEmpty.m */,
+				E97184241CB8F12500A58920 /* UIImage+KVNImageEffects.h */,
+				E97184251CB8F12500A58920 /* UIImage+KVNImageEffects.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		E97184261CB8F12500A58920 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				E97184271CB8F12500A58920 /* KVNProgress.h */,
+				E97184281CB8F12500A58920 /* KVNProgress.m */,
+				E97184291CB8F12500A58920 /* KVNProgressConfiguration.h */,
+				E971842A1CB8F12500A58920 /* KVNProgressConfiguration.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		E971842B1CB8F12500A58920 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E971842C1CB8F12500A58920 /* KVNProgressView.xib */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -312,10 +464,12 @@
 				01B4060A1CB7FF7500B242D6 /* Sources */,
 				01B4060B1CB7FF7500B242D6 /* Frameworks */,
 				01B4060C1CB7FF7500B242D6 /* Resources */,
+				E971841B1CB8EF7500A58920 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E971841A1CB8EF7500A58920 /* PBXTargetDependency */,
 			);
 			name = "Emotion Diary";
 			productName = "Emotion Diary";
@@ -392,6 +546,12 @@
 			mainGroup = 01B406051CB7FF7500B242D6;
 			productRefGroup = 01B4060F1CB7FF7500B242D6 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = E97184001CB8EF2400A58920 /* Products */;
+					ProjectRef = E97183FF1CB8EF2400A58920 /* Alamofire.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				01B4060D1CB7FF7500B242D6 /* Emotion Diary */,
@@ -401,12 +561,65 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		E971840A1CB8EF2400A58920 /* Alamofire.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Alamofire.framework;
+			remoteRef = E97184091CB8EF2400A58920 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E971840C1CB8EF2400A58920 /* Alamofire iOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Alamofire iOS Tests.xctest";
+			remoteRef = E971840B1CB8EF2400A58920 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E971840E1CB8EF2400A58920 /* Alamofire.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Alamofire.framework;
+			remoteRef = E971840D1CB8EF2400A58920 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E97184101CB8EF2400A58920 /* Alamofire OSX Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Alamofire OSX Tests.xctest";
+			remoteRef = E971840F1CB8EF2400A58920 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E97184121CB8EF2400A58920 /* Alamofire.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Alamofire.framework;
+			remoteRef = E97184111CB8EF2400A58920 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E97184141CB8EF2400A58920 /* Alamofire tvOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Alamofire tvOS Tests.xctest";
+			remoteRef = E97184131CB8EF2400A58920 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E97184161CB8EF2400A58920 /* Alamofire.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Alamofire.framework;
+			remoteRef = E97184151CB8EF2400A58920 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		01B4060C1CB7FF7500B242D6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				01B406211CB7FF7500B242D6 /* LaunchScreen.storyboard in Resources */,
+				E97184321CB8F12500A58920 /* KVNProgressView.xib in Resources */,
 				01B4061E1CB7FF7500B242D6 /* Assets.xcassets in Resources */,
 				0193CA421CB82BC60057E082 /* Info.plist in Resources */,
 				01B4061C1CB7FF7500B242D6 /* Main.storyboard in Resources */,
@@ -434,6 +647,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E971842E1CB8F12500A58920 /* UIImage+KVNEmpty.m in Sources */,
 				0193CA361CB82BC60057E082 /* CALayer+FSExtension.m in Sources */,
 				0193CA401CB82BC60057E082 /* FSCalendarHeader.m in Sources */,
 				01B406191CB7FF7500B242D6 /* MainViewController.m in Sources */,
@@ -441,15 +655,19 @@
 				01B406161CB7FF7500B242D6 /* AppDelegate.m in Sources */,
 				0193CA661CB82C650057E082 /* UIColor+FSPalette.m in Sources */,
 				0193CA3F1CB82BC60057E082 /* FSCalendarFlowLayout.m in Sources */,
+				E97184301CB8F12500A58920 /* KVNProgress.m in Sources */,
 				0193CA3E1CB82BC60057E082 /* FSCalendarEventIndicator.m in Sources */,
 				01F15FC81CB8E6AA006BB341 /* RecordTableViewController.m in Sources */,
 				0193CA451CB82BC60057E082 /* UIView+FSExtension.m in Sources */,
 				0193CA3B1CB82BC60057E082 /* FSCalendarCell.m in Sources */,
 				0193CA3C1CB82BC60057E082 /* FSCalendarCollectionView.m in Sources */,
 				0193CA371CB82BC60057E082 /* FSCalendar+IBExtension.m in Sources */,
+				E97184311CB8F12500A58920 /* KVNProgressConfiguration.m in Sources */,
 				0193CA441CB82BC60057E082 /* NSString+FSExtension.m in Sources */,
 				01CAA4551CB887FD00064D4E /* FaceConnector.swift in Sources */,
+				E971842D1CB8F12500A58920 /* UIColor+KVNContrast.m in Sources */,
 				0193CA391CB82BC60057E082 /* FSCalendarAnimator.m in Sources */,
+				E971842F1CB8F12500A58920 /* UIImage+KVNImageEffects.m in Sources */,
 				0193CA651CB82C650057E082 /* FSLineChart.m in Sources */,
 				0193CA3D1CB82BC60057E082 /* FSCalendarConstance.m in Sources */,
 				01E29C501CB891A800DA815B /* StatTableViewController.m in Sources */,
@@ -460,6 +678,7 @@
 				0193CA381CB82BC60057E082 /* FSCalendar.m in Sources */,
 				0193CA3A1CB82BC60057E082 /* FSCalendarAppearance.m in Sources */,
 				01E29C531CB8926200DA815B /* StatTableViewCell.m in Sources */,
+				E971841D1CB8F03200A58920 /* SwiftyJSON.swift in Sources */,
 				0193CA411CB82BC60057E082 /* FSCalendarStickyHeader.m in Sources */,
 				01B406131CB7FF7500B242D6 /* main.m in Sources */,
 			);
@@ -493,6 +712,11 @@
 			isa = PBXTargetDependency;
 			target = 01B4060D1CB7FF7500B242D6 /* Emotion Diary */;
 			targetProxy = 01B406331CB7FF7500B242D6 /* PBXContainerItemProxy */;
+		};
+		E971841A1CB8EF7500A58920 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Alamofire iOS";
+			targetProxy = E97184191CB8EF7500A58920 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -612,6 +836,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Emotion Diary/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "cn.fanzhikang.Emotion-Diary";
@@ -627,6 +852,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Emotion Diary/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "cn.fanzhikang.Emotion-Diary";

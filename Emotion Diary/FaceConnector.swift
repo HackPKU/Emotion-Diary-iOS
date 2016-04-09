@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class FaceConnector: NSObject {
     func scanAndAnalyzeFace(image: UIImage, andBlock block:(result: FaceConnectorRequestResult, message: String, data: Int) -> Void) {
