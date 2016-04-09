@@ -50,6 +50,8 @@
 		E97184311CB8F12500A58920 /* KVNProgressConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = E971842A1CB8F12500A58920 /* KVNProgressConfiguration.m */; };
 		E97184321CB8F12500A58920 /* KVNProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E971842C1CB8F12500A58920 /* KVNProgressView.xib */; };
 		E971843A1CB8F68A00A58920 /* Emotion_DiaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97184391CB8F68A00A58920 /* Emotion_DiaryTests.swift */; };
+		E97184591CB920E000A58920 /* FaceConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CAA4541CB887FD00064D4E /* FaceConnector.swift */; };
+		E97184621CB9217A00A58920 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E971841C1CB8F03200A58920 /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -482,7 +484,7 @@
 				TargetAttributes = {
 					01B4060D1CB7FF7500B242D6 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 4G7T6JUJF6;
+						DevelopmentTeam = E9FBJ6HPDB;
 					};
 					E97184361CB8F68A00A58920 = {
 						CreatedOnToolsVersion = 7.3;
@@ -636,6 +638,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E97184621CB9217A00A58920 /* SwiftyJSON.swift in Sources */,
+				E97184591CB920E000A58920 /* FaceConnector.swift in Sources */,
 				E971843A1CB8F68A00A58920 /* Emotion_DiaryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -771,11 +775,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Emotion Diary/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "cn.fanzhikang.Emotion-Diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Emotion Diary/Emotion Diary-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -787,11 +793,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Emotion Diary/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "cn.fanzhikang.Emotion-Diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Emotion Diary/Emotion Diary-Bridging-Header.h";
 			};
 			name = Release;
