@@ -176,28 +176,28 @@
         <scene sceneID="6ql-i9-BSx">
             <objects>
                 <tableViewController id="4gJ-Dt-Nhu" customClass="StatTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="180" sectionHeaderHeight="18" sectionFooterHeight="18" id="mhQ-ZC-mR1">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="180" sectionHeaderHeight="18" sectionFooterHeight="18" id="mhQ-ZC-mR1">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellStat" rowHeight="180" id="xYO-UW-F5x" customClass="StatTableViewCell">
                                 <rect key="frame" x="0.0" y="113.5" width="600" height="180"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xYO-UW-F5x" id="Cot-f9-uFI">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="179.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="180"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oGx-54-dgG" customClass="FSLineChart">
-                                            <rect key="frame" x="8" y="16" width="584" height="147.5"/>
+                                            <rect key="frame" x="16" y="8" width="568" height="149"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="oGx-54-dgG" firstAttribute="leading" secondItem="Cot-f9-uFI" secondAttribute="leadingMargin" id="8lJ-Zk-dQn"/>
-                                        <constraint firstItem="oGx-54-dgG" firstAttribute="top" secondItem="Cot-f9-uFI" secondAttribute="topMargin" constant="8" id="GYH-YZ-yhv"/>
-                                        <constraint firstItem="oGx-54-dgG" firstAttribute="trailing" secondItem="Cot-f9-uFI" secondAttribute="trailingMargin" id="N8W-Sm-trd"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="oGx-54-dgG" secondAttribute="bottom" constant="8" id="q7b-Vv-dss"/>
+                                        <constraint firstItem="oGx-54-dgG" firstAttribute="leading" secondItem="Cot-f9-uFI" secondAttribute="leadingMargin" constant="8" id="8lJ-Zk-dQn"/>
+                                        <constraint firstItem="oGx-54-dgG" firstAttribute="top" secondItem="Cot-f9-uFI" secondAttribute="topMargin" id="GYH-YZ-yhv"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="oGx-54-dgG" secondAttribute="trailing" constant="8" id="N8W-Sm-trd"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="oGx-54-dgG" secondAttribute="bottom" constant="15" id="q7b-Vv-dss"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -232,12 +232,11 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A24-PA-NnZ">
                                         <rect key="frame" x="180" y="18" width="120" height="44"/>
-                                        <color key="backgroundColor" red="0.96862745100000003" green="0.54117647059999996" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="1JB-NR-fxY"/>
                                             <constraint firstAttribute="width" constant="120" id="dLp-hM-0Og"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <state key="normal" title="进入日记">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -250,12 +249,11 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQf-CO-zls">
                                         <rect key="frame" x="20" y="18" width="120" height="44"/>
-                                        <color key="backgroundColor" red="0.33725490200000002" green="0.75294117650000003" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="120" id="UTZ-9g-X21"/>
                                             <constraint firstAttribute="height" constant="44" id="Xjg-fx-vOF"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <state key="normal" title="记录心情">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -277,24 +275,14 @@
                                     <constraint firstAttribute="width" constant="320" id="vJj-hh-YPV"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Scd-YF-WHF">
-                                <rect key="frame" x="150" y="150" width="300" height="300"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="6Hh-49-PUu"/>
-                                    <constraint firstAttribute="width" secondItem="Scd-YF-WHF" secondAttribute="height" multiplier="1:1" id="fPZ-Ti-Dna"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.98823529409999999" green="0.43529411759999997" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Scd-YF-WHF" firstAttribute="centerX" secondItem="Pqc-Ky-Qbz" secondAttribute="centerX" id="Of6-Vy-6ew"/>
                             <constraint firstItem="FDu-NC-s5l" firstAttribute="centerX" secondItem="Pqc-Ky-Qbz" secondAttribute="centerX" id="US2-Ej-cnb"/>
-                            <constraint firstItem="Scd-YF-WHF" firstAttribute="centerY" secondItem="Pqc-Ky-Qbz" secondAttribute="centerY" id="YkH-ia-FF8"/>
                             <constraint firstItem="Vvf-yh-hqS" firstAttribute="top" secondItem="FDu-NC-s5l" secondAttribute="bottom" constant="20" id="gA3-De-sVm"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="backgroundImage" destination="Scd-YF-WHF" id="yqX-Rp-hcm"/>
                         <outlet property="buttonCamera" destination="RQf-CO-zls" id="3oz-kZ-xh8"/>
                         <outlet property="buttonProceed" destination="A24-PA-NnZ" id="z45-zc-TBU"/>
                     </connections>

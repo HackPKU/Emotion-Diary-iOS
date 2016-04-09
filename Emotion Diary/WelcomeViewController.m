@@ -21,14 +21,17 @@
     [super viewDidLoad];
     connector = [[FaceConnector alloc] init];
     shouldRetakePicture = YES;
+    _buttonCamera.layer.cornerRadius = 5.0;
+    _buttonCamera.layer.borderWidth = 1.0;
+    _buttonCamera.layer.borderColor = [UIColor whiteColor].CGColor;
+    _buttonProceed.layer.cornerRadius = 5.0;
+    _buttonProceed.layer.borderWidth = 1.0;
+    _buttonProceed.layer.borderColor = [UIColor whiteColor].CGColor;
     // Do any additional setup after loading the view.
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (shouldRetakePicture) {
-        _backgroundImage.image = nil;
-    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -36,6 +39,10 @@
     // TODO 第一次使用
     
     [self takePicture];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)takePicture {
@@ -58,14 +65,10 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     selfie = [info objectForKey:UIImagePickerControllerOriginalImage];
     selfie = [self normalizedImage:selfie];
-    [connector postImage:selfie block:^(enum FaceConnectorRequestResult result, NSString * _Nonnull message) {
-        NSLog(@"%@", message);
-    }];
+    selfie = [self reSizeImage:selfie toSize:CGSizeMake(800, 800 / selfie.size.width * selfie.size.height)];
     [connector scanAndAnalyzeFace:selfie andBlock:^(enum FaceConnectorRequestResult result, NSString * _Nonnull message, NSInteger data) {
         // TODO Add Logic
-        
     }];
-    _backgroundImage.image = selfie;
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -89,6 +92,14 @@
     UIImage *normalizedImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return normalizedImage;
+}
+
+- (UIImage *)reSizeImage:(UIImage *)oriImage toSize:(CGSize)reSize{
+    UIGraphicsBeginImageContext(CGSizeMake(reSize.width, reSize.height));
+    [oriImage drawInRect:CGRectMake(0, 0, reSize.width, reSize.height)];
+    UIImage *reSizeImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return reSizeImage;
 }
 
 - (void)didReceiveMemoryWarning {

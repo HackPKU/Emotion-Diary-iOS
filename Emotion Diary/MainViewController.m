@@ -26,6 +26,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    if (UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation])) {
+        [_calendar setScope:FSCalendarScopeMonth animated:YES];
+    }else {
+        [_calendar setScope:FSCalendarScopeWeek animated:YES];
+    }
+}
+
 #pragma mark - Calendar methods
 
 - (void)calendar:(FSCalendar *)calendar boundingRectWillChange:(CGRect)bounds animated:(BOOL)animated {

@@ -15,7 +15,6 @@
     UIImage *selfie;
 }
 
-@property (strong, nonatomic) IBOutlet UIImageView *backgroundImage;
 @property (strong, nonatomic) IBOutlet UIButton *buttonCamera;
 @property (strong, nonatomic) IBOutlet UIButton *buttonProceed;
 
