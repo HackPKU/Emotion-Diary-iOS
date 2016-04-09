@@ -14,6 +14,7 @@
     FaceConnector *verificationer;
     BOOL shouldRetakePicture;
     UIImage *selfie;
+    NSString *userFaceID;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *imageSuccess;

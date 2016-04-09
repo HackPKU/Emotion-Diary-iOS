@@ -150,7 +150,7 @@
                             <constraint firstItem="epF-94-RE2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="rme-Cc-ZB6"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="心情日记" id="Ie7-9M-ipk">
+                    <navigationItem key="navigationItem" title="情绪日记" id="Ie7-9M-ipk">
                         <barButtonItem key="leftBarButtonItem" systemItem="camera" id="vOQ-fU-Phh">
                             <connections>
                                 <action selector="back:" destination="BYZ-38-t0r" id="h1u-q7-Slr"/>
@@ -172,7 +172,7 @@
             </objects>
             <point key="canvasLocation" x="1057" y="335"/>
         </scene>
-        <!--Stat Table View Controller-->
+        <!--情绪统计-->
         <scene sceneID="6ql-i9-BSx">
             <objects>
                 <tableViewController id="4gJ-Dt-Nhu" customClass="StatTableViewController" sceneMemberID="viewController">
@@ -210,6 +210,7 @@
                             <outlet property="delegate" destination="4gJ-Dt-Nhu" id="DZF-XL-cDl"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="情绪统计" id="2ax-rB-ats"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W18-8p-uZC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -254,7 +255,7 @@
                                             <constraint firstAttribute="height" constant="44" id="Xjg-fx-vOF"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                        <state key="normal" title="记录心情">
+                                        <state key="normal" title="记录情绪">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -308,7 +309,7 @@
             </objects>
             <point key="canvasLocation" x="-567" y="335"/>
         </scene>
-        <!--记录心情-->
+        <!--记录情绪-->
         <scene sceneID="alR-k6-KGB">
             <objects>
                 <tableViewController id="whe-79-jh3" customClass="RecordTableViewController" sceneMemberID="viewController">
@@ -411,7 +412,7 @@
                             <outlet property="delegate" destination="whe-79-jh3" id="ZHH-Vg-toa"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="记录心情" id="eB2-yT-KF2">
+                    <navigationItem key="navigationItem" title="记录情绪" id="eB2-yT-KF2">
                         <barButtonItem key="leftBarButtonItem" systemItem="camera" id="Oau-Ws-0Uw">
                             <connections>
                                 <action selector="back:" destination="whe-79-jh3" id="fxr-jT-3Ka"/>
@@ -426,6 +427,7 @@
                     <connections>
                         <outlet property="blurredSelfieImage" destination="rHv-tF-lNq" id="dqC-xS-l9P"/>
                         <outlet property="faceImage" destination="T9J-mm-e1O" id="QWN-0u-8eL"/>
+                        <outlet property="labelChickenSoup" destination="haR-zx-0l2" id="CI2-Fw-NMd"/>
                         <outlet property="placeholder" destination="GKg-EY-ehp" id="gFY-nd-If6"/>
                         <outlet property="selfieImage" destination="z5S-ZS-V0f" id="gps-17-YrY"/>
                         <outlet property="textRecord" destination="jft-9Q-7mu" id="OrK-kb-fXt"/>
