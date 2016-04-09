@@ -20,6 +20,7 @@
     _selfieImage.image = _selfie;
     _selfieImage.layer.cornerRadius = _selfieImage.frame.size.width / 2;
     _blurredSelfieImage.image = [UIImageEffects imageByApplyingBlurToImage:_selfie withRadius:60.0 tintColor:[UIColor colorWithWhite:0.5 alpha:0.5] saturationDeltaFactor:1.8 maskImage:nil];
+    _textRecord.delegate = self;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -31,6 +32,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Text View Delegate
+
+- (void)textViewDidChange:(UITextView *)textView {
+    _placeholder.hidden = (textView.text.length > 0);
 }
 
 #pragma mark - Table view data source

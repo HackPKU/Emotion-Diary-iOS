@@ -33,13 +33,11 @@
     NSArray* months = @[@"January", @"February", @"March", @"April", @"May", @"June", @"July"];
     
     // Setting up the line chart
-    _lineChart.verticalGridStep = 6;
-    _lineChart.horizontalGridStep = 3;
-    _lineChart.displayDataPoint = YES;
-    _lineChart.dataPointColor = GIRL_COLOR;
-    _lineChart.dataPointBackgroundColor = GIRL_COLOR;
-    _lineChart.dataPointRadius = 2;
-    _lineChart.color = [_lineChart.dataPointColor colorWithAlphaComponent:0.3];
+    _lineChart.verticalGridStep = 4;
+    _lineChart.horizontalGridStep = 1;
+    _lineChart.lineWidth = 1;
+    _lineChart.color = GIRL_COLOR;
+    _lineChart.fillColor = [GIRL_COLOR colorWithAlphaComponent:0.3];
     _lineChart.valueLabelPosition = ValueLabelLeftMirrored;
     
     _lineChart.labelForIndex = ^(NSUInteger item) {
@@ -47,7 +45,7 @@
     };
     
     _lineChart.labelForValue = ^(CGFloat value) {
-        return [NSString stringWithFormat:@"%.02f €", value];
+        return [NSString stringWithFormat:@"%.2f%%", value];
     };
     
     [_lineChart setChartData:chartData];
