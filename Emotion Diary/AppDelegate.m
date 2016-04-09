@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+#define GIRL_COLOR [UIColor colorWithRed:252.0/255.0 green:111.0/255.0 blue:114.0/255.0 alpha:1.0]
+
 @interface AppDelegate ()
 
 @end
@@ -17,6 +19,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [[UINavigationBar appearance] setBarTintColor:GIRL_COLOR];
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTranslucent:NO];
+    
     return YES;
 }
 

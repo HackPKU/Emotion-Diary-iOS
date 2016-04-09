@@ -258,7 +258,7 @@
         <scene sceneID="alR-k6-KGB">
             <objects>
                 <tableViewController id="whe-79-jh3" customClass="RecordTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="gTK-mp-aV7">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="gTK-mp-aV7">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -269,7 +269,7 @@
                                         <rect key="frame" x="0.0" y="64" width="600" height="250"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qoh-uD-Ley" id="LXC-Ln-ifo">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="249.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="250"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rHv-tF-lNq">
@@ -293,12 +293,26 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="250" id="kx5-cy-ejC">
-                                        <rect key="frame" x="0.0" y="314" width="600" height="250"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="150" id="kx5-cy-ejC">
+                                        <rect key="frame" x="0.0" y="314" width="600" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kx5-cy-ejC" id="6tn-jk-YBP">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="249.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="今天没吃药感觉自己萌萌哒" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jft-9Q-7mu">
+                                                    <rect key="frame" x="8" y="8" width="584" height="133.5"/>
+                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="jft-9Q-7mu" secondAttribute="bottom" id="LrA-6X-IYw"/>
+                                                <constraint firstItem="jft-9Q-7mu" firstAttribute="top" secondItem="6tn-jk-YBP" secondAttribute="topMargin" id="RRM-BN-RTO"/>
+                                                <constraint firstItem="jft-9Q-7mu" firstAttribute="trailing" secondItem="6tn-jk-YBP" secondAttribute="trailingMargin" id="eWu-nR-ckW"/>
+                                                <constraint firstItem="jft-9Q-7mu" firstAttribute="leading" secondItem="6tn-jk-YBP" secondAttribute="leadingMargin" id="foe-yB-6NW"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -310,7 +324,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="记录心情" id="eB2-yT-KF2">
-                        <barButtonItem key="leftBarButtonItem" systemItem="camera" id="Oau-Ws-0Uw"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="camera" id="Oau-Ws-0Uw">
+                            <connections>
+                                <action selector="back:" destination="whe-79-jh3" id="fxr-jT-3Ka"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="nph-bB-pw4">
                             <connections>
                                 <segue destination="BYZ-38-t0r" kind="show" identifier="enterMain" id="Qrb-ki-hBN"/>
@@ -320,6 +338,7 @@
                     <connections>
                         <outlet property="blurredSelfieImage" destination="rHv-tF-lNq" id="dqC-xS-l9P"/>
                         <outlet property="selfieImage" destination="z5S-ZS-V0f" id="gps-17-YrY"/>
+                        <outlet property="textRecord" destination="jft-9Q-7mu" id="OrK-kb-fXt"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hBh-Py-hxC" userLabel="First Responder" sceneMemberID="firstResponder"/>
