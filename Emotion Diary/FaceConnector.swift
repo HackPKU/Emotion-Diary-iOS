@@ -21,7 +21,7 @@ class FaceConnector: NSObject {
         
     }
     
-    func postImage(image: UIImage, block: (result: FaceConnectorRequestResult, message: String) -> Void) {
+    func postImage(image: UIImage, block: (result: FaceConnectorRequestResult, message: String, faceID: String?) -> Void) {
         
         let imgPath = NSString(string: NSTemporaryDirectory()).stringByAppendingPathComponent("0.jpeg")
         let data = UIImageJPEGRepresentation(image, 0.5)!
@@ -40,17 +40,17 @@ class FaceConnector: NSObject {
                         debugPrint(response)
                         switch response.result {
                         case .Failure( _):
-                            block(result: .Error, message: "服务器错误或网络错误")
+                            block(result: .Error, message: "服务器错误或网络错误", faceID: nil)
                         case .Success(let value):
                             let json = JSON(value)
-                            print(json);
-                            block(result: .Success, message: "OK")
+                            let faceID = json["faces"][0]["face_id"].stringValue
+                            block(result: .Success, message: "OK", faceID: faceID)
                         }
 
                     }
                 case .Failure(let encodingError):
                     print(encodingError)
-                    block(result: .Error, message: "无法编码")
+                    block(result: .Error, message: "无法编码", faceID: nil)
                 }
         }
     }
