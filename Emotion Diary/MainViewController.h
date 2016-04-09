@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "FSCalendar.h"
 
-@interface MainViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface MainViewController : UIViewController <FSCalendarDelegate,  UITableViewDelegate, UITableViewDataSource> {
+    NSDate *currentDate;
+}
 
 @property (strong, nonatomic) IBOutlet FSCalendar *calendar;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *calendarHeightConstraint;

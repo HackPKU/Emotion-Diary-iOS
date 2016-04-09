@@ -13,6 +13,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+    _imageSelfie.layer.cornerRadius = _imageSelfie.frame.size.width / 2;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
