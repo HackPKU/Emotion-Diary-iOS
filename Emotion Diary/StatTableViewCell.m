@@ -24,15 +24,8 @@
 }
 
 - (void)setData:(NSArray *)data {
-    // Generating some dummy data
-    NSMutableArray* chartData = [NSMutableArray arrayWithCapacity:7];
-    for(int i=0;i<7;i++) {
-        chartData[i] = [NSNumber numberWithFloat: (float)i / 30.0f + (float)(rand() % 100) / 500.0f];
-    }
-    
-    NSArray* months = @[@"January", @"February", @"March", @"April", @"May", @"June", @"July"];
-    
     // Setting up the line chart
+    
     _lineChart.verticalGridStep = 4;
     _lineChart.horizontalGridStep = 1;
     _lineChart.lineWidth = 1;
@@ -40,16 +33,10 @@
     _lineChart.valueLabelBackgroundColor = [UIColor clearColor];
     _lineChart.fillColor = [GIRL_COLOR colorWithAlphaComponent:0.3];
     _lineChart.valueLabelPosition = ValueLabelLeftMirrored;
-    
-    _lineChart.labelForIndex = ^(NSUInteger item) {
-        return months[item];
-    };
-    
     _lineChart.labelForValue = ^(CGFloat value) {
-        return [NSString stringWithFormat:@"%.2f%%", value];
+        return [NSString stringWithFormat:@"%d", (int)value];
     };
-    
-    [_lineChart setChartData:chartData];
+    [_lineChart setChartData:data];
 }
 
 @end
