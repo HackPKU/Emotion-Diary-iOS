@@ -63,11 +63,10 @@ class EmotionDiary: NSObject, NSCoding {
     }
     
     func save() {
-        if let emotionDiaries = userDefaults.objectForKey(EmotionDiary.EmotionDiariesSaveKey) as? NSArray {
-            let diaries = emotionDiaries as! NSMutableArray
-            diaries.addObject(self)
+        if var emotionDiaries = EmotionDiary.getEmotionDiariesFromStore() {
+            emotionDiaries.append(self)
             userDefaults.removeObjectForKey(EmotionDiary.EmotionDiariesSaveKey)
-            let data = NSKeyedArchiver.archivedDataWithRootObject(diaries)
+            let data = NSKeyedArchiver.archivedDataWithRootObject(emotionDiaries)
             userDefaults.setObject(data, forKey: EmotionDiary.EmotionDiariesSaveKey)
             userDefaults.synchronize()
         }
@@ -79,7 +78,7 @@ class EmotionDiary: NSObject, NSCoding {
     
     }
     
-    private class func getEmotionDiariesFromStore() -> [EmotionDiary] {
+    private class func getEmotionDiariesFromStore() -> [EmotionDiary]? {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         let data = userDefaults.objectForKey(EmotionDiary.EmotionDiariesSaveKey) as! NSData
         let array = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSArray
@@ -94,13 +93,16 @@ class EmotionDiary: NSObject, NSCoding {
     class func getDiaryOfDay(date: NSDate) -> [EmotionDiary] {
         
         let thisDay = Int(date.timeIntervalSince1970 / (24 * 3600))
-        let emotionDiaries = EmotionDiary.getEmotionDiariesFromStore()
-        let thatDayDiary = emotionDiaries.filter { (diary) -> Bool in
-            let thatDay = Int(diary.date.timeIntervalSince1970 / (24 * 3600))
-            return (thatDay == thisDay)
+        if let emotionDiaries = EmotionDiary.getEmotionDiariesFromStore() {
+            let thatDayDiary = emotionDiaries.filter { (diary) -> Bool in
+                let thatDay = Int(diary.date.timeIntervalSince1970 / (24 * 3600))
+                return (thatDay == thisDay)
+            }
+            return thatDayDiary
         }
-        return thatDayDiary
-        
+        else {
+            return []
+        }
     }
 
 //    class func getWeeklyInfoOf(infoname: String) -> [Int] {
