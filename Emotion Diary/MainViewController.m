@@ -26,6 +26,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    if (UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation])) {
+        [_calendar setScope:FSCalendarScopeMonth animated:YES];
+    }else {
+        [_calendar setScope:FSCalendarScopeWeek animated:YES];
+    }
+}
+
 #pragma mark - Calendar methods
 
 - (void)calendar:(FSCalendar *)calendar boundingRectWillChange:(CGRect)bounds animated:(BOOL)animated {
@@ -34,7 +42,8 @@
 }
 
 - (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date {
-    NSLog(@"%@", date);
+    currentDate = date;
+    [_detailTableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -53,6 +62,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MainViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellDetail" forIndexPath:indexPath];
+    cell.labelDate.hidden = (indexPath.row != 0);
     
     // Configure the cell...
     

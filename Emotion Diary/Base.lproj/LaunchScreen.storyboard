@@ -16,7 +16,27 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="日记本" translatesAutoresizingMaskIntoConstraints="NO" id="Z7y-fN-YD4">
+                                <rect key="frame" x="250" y="213" width="100" height="174"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="cmj-3O-LE8"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="启动页" translatesAutoresizingMaskIntoConstraints="NO" id="Sth-zU-QlM">
+                                <rect key="frame" x="200" y="317" width="200" height="249"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="W90-02-oNf"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.98823529409999999" green="0.43529411759999997" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Sth-zU-QlM" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Eqa-JS-ULl"/>
+                            <constraint firstItem="Z7y-fN-YD4" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="UuJ-38-dAw"/>
+                            <constraint firstItem="Sth-zU-QlM" firstAttribute="top" secondItem="Z7y-fN-YD4" secondAttribute="bottom" constant="-70" id="q5b-ca-Klk"/>
+                            <constraint firstItem="Z7y-fN-YD4" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="qUv-st-byw"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -24,4 +44,8 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="启动页" width="382" height="249"/>
+        <image name="日记本" width="156" height="174"/>
+    </resources>
 </document>

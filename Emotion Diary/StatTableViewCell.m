@@ -37,6 +37,7 @@
     _lineChart.horizontalGridStep = 1;
     _lineChart.lineWidth = 1;
     _lineChart.color = GIRL_COLOR;
+    _lineChart.valueLabelBackgroundColor = [UIColor clearColor];
     _lineChart.fillColor = [GIRL_COLOR colorWithAlphaComponent:0.3];
     _lineChart.valueLabelPosition = ValueLabelLeftMirrored;
     
