@@ -33,8 +33,6 @@
 		01B4061C1CB7FF7500B242D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01B4061A1CB7FF7500B242D6 /* Main.storyboard */; };
 		01B4061E1CB7FF7500B242D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01B4061D1CB7FF7500B242D6 /* Assets.xcassets */; };
 		01B406211CB7FF7500B242D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01B4061F1CB7FF7500B242D6 /* LaunchScreen.storyboard */; };
-		01B4062C1CB7FF7500B242D6 /* Emotion_DiaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B4062B1CB7FF7500B242D6 /* Emotion_DiaryTests.m */; };
-		01B406371CB7FF7500B242D6 /* Emotion_DiaryUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B406361CB7FF7500B242D6 /* Emotion_DiaryUITests.m */; };
 		01CAA4551CB887FD00064D4E /* FaceConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CAA4541CB887FD00064D4E /* FaceConnector.swift */; };
 		01E29C4D1CB88F4600DA815B /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C4C1CB88F4600DA815B /* WelcomeViewController.m */; };
 		01E29C501CB891A800DA815B /* StatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C4F1CB891A800DA815B /* StatTableViewController.m */; };
@@ -50,23 +48,10 @@
 		E97184301CB8F12500A58920 /* KVNProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = E97184281CB8F12500A58920 /* KVNProgress.m */; };
 		E97184311CB8F12500A58920 /* KVNProgressConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = E971842A1CB8F12500A58920 /* KVNProgressConfiguration.m */; };
 		E97184321CB8F12500A58920 /* KVNProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E971842C1CB8F12500A58920 /* KVNProgressView.xib */; };
+		E971843A1CB8F68A00A58920 /* Emotion_DiaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97184391CB8F68A00A58920 /* Emotion_DiaryTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		01B406281CB7FF7500B242D6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 01B406061CB7FF7500B242D6 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 01B4060D1CB7FF7500B242D6;
-			remoteInfo = "Emotion Diary";
-		};
-		01B406331CB7FF7500B242D6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 01B406061CB7FF7500B242D6 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 01B4060D1CB7FF7500B242D6;
-			remoteInfo = "Emotion Diary";
-		};
 		E97184091CB8EF2400A58920 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E97183FF1CB8EF2400A58920 /* Alamofire.xcodeproj */;
@@ -122,6 +107,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = F8111E3219A95C8B0040E7D1;
 			remoteInfo = "Alamofire iOS";
+		};
+		E971843C1CB8F68A00A58920 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01B406061CB7FF7500B242D6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01B4060D1CB7FF7500B242D6;
+			remoteInfo = "Emotion Diary";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -191,12 +183,6 @@
 		01B4061D1CB7FF7500B242D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01B406201CB7FF7500B242D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01B406221CB7FF7500B242D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		01B406271CB7FF7500B242D6 /* Emotion DiaryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Emotion DiaryTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		01B4062B1CB7FF7500B242D6 /* Emotion_DiaryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Emotion_DiaryTests.m; sourceTree = "<group>"; };
-		01B4062D1CB7FF7500B242D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		01B406321CB7FF7500B242D6 /* Emotion DiaryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Emotion DiaryUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		01B406361CB7FF7500B242D6 /* Emotion_DiaryUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Emotion_DiaryUITests.m; sourceTree = "<group>"; };
-		01B406381CB7FF7500B242D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01CAA4531CB887FC00064D4E /* Emotion Diary-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Emotion Diary-Bridging-Header.h"; sourceTree = "<group>"; };
 		01CAA4541CB887FD00064D4E /* FaceConnector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceConnector.swift; sourceTree = "<group>"; };
 		01E29C4B1CB88F4600DA815B /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
@@ -222,6 +208,9 @@
 		E97184291CB8F12500A58920 /* KVNProgressConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVNProgressConfiguration.h; sourceTree = "<group>"; };
 		E971842A1CB8F12500A58920 /* KVNProgressConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVNProgressConfiguration.m; sourceTree = "<group>"; };
 		E971842C1CB8F12500A58920 /* KVNProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KVNProgressView.xib; sourceTree = "<group>"; };
+		E97184371CB8F68A00A58920 /* Emotion DiaryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Emotion DiaryTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E97184391CB8F68A00A58920 /* Emotion_DiaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emotion_DiaryTests.swift; sourceTree = "<group>"; };
+		E971843B1CB8F68A00A58920 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,14 +222,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		01B406241CB7FF7500B242D6 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		01B4062F1CB7FF7500B242D6 /* Frameworks */ = {
+		E97184341CB8F68A00A58920 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -304,8 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				01B406101CB7FF7500B242D6 /* Emotion Diary */,
-				01B4062A1CB7FF7500B242D6 /* Emotion DiaryTests */,
-				01B406351CB7FF7500B242D6 /* Emotion DiaryUITests */,
+				E97184381CB8F68A00A58920 /* Emotion DiaryTests */,
 				01B4060F1CB7FF7500B242D6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -314,8 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				01B4060E1CB7FF7500B242D6 /* Emotion Diary.app */,
-				01B406271CB7FF7500B242D6 /* Emotion DiaryTests.xctest */,
-				01B406321CB7FF7500B242D6 /* Emotion DiaryUITests.xctest */,
+				E97184371CB8F68A00A58920 /* Emotion DiaryTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -356,24 +336,6 @@
 				01B406121CB7FF7500B242D6 /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		01B4062A1CB7FF7500B242D6 /* Emotion DiaryTests */ = {
-			isa = PBXGroup;
-			children = (
-				01B4062B1CB7FF7500B242D6 /* Emotion_DiaryTests.m */,
-				01B4062D1CB7FF7500B242D6 /* Info.plist */,
-			);
-			path = "Emotion DiaryTests";
-			sourceTree = "<group>";
-		};
-		01B406351CB7FF7500B242D6 /* Emotion DiaryUITests */ = {
-			isa = PBXGroup;
-			children = (
-				01B406361CB7FF7500B242D6 /* Emotion_DiaryUITests.m */,
-				01B406381CB7FF7500B242D6 /* Info.plist */,
-			);
-			path = "Emotion DiaryUITests";
 			sourceTree = "<group>";
 		};
 		01CAA4281CB8328B00064D4E /* 3rd Party Framework */ = {
@@ -454,6 +416,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		E97184381CB8F68A00A58920 /* Emotion DiaryTests */ = {
+			isa = PBXGroup;
+			children = (
+				E97184391CB8F68A00A58920 /* Emotion_DiaryTests.swift */,
+				E971843B1CB8F68A00A58920 /* Info.plist */,
+			);
+			path = "Emotion DiaryTests";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -476,41 +447,23 @@
 			productReference = 01B4060E1CB7FF7500B242D6 /* Emotion Diary.app */;
 			productType = "com.apple.product-type.application";
 		};
-		01B406261CB7FF7500B242D6 /* Emotion DiaryTests */ = {
+		E97184361CB8F68A00A58920 /* Emotion DiaryTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 01B4063E1CB7FF7500B242D6 /* Build configuration list for PBXNativeTarget "Emotion DiaryTests" */;
+			buildConfigurationList = E971843E1CB8F68A00A58920 /* Build configuration list for PBXNativeTarget "Emotion DiaryTests" */;
 			buildPhases = (
-				01B406231CB7FF7500B242D6 /* Sources */,
-				01B406241CB7FF7500B242D6 /* Frameworks */,
-				01B406251CB7FF7500B242D6 /* Resources */,
+				E97184331CB8F68A00A58920 /* Sources */,
+				E97184341CB8F68A00A58920 /* Frameworks */,
+				E97184351CB8F68A00A58920 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				01B406291CB7FF7500B242D6 /* PBXTargetDependency */,
+				E971843D1CB8F68A00A58920 /* PBXTargetDependency */,
 			);
 			name = "Emotion DiaryTests";
 			productName = "Emotion DiaryTests";
-			productReference = 01B406271CB7FF7500B242D6 /* Emotion DiaryTests.xctest */;
+			productReference = E97184371CB8F68A00A58920 /* Emotion DiaryTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		01B406311CB7FF7500B242D6 /* Emotion DiaryUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 01B406411CB7FF7500B242D6 /* Build configuration list for PBXNativeTarget "Emotion DiaryUITests" */;
-			buildPhases = (
-				01B4062E1CB7FF7500B242D6 /* Sources */,
-				01B4062F1CB7FF7500B242D6 /* Frameworks */,
-				01B406301CB7FF7500B242D6 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				01B406341CB7FF7500B242D6 /* PBXTargetDependency */,
-			);
-			name = "Emotion DiaryUITests";
-			productName = "Emotion DiaryUITests";
-			productReference = 01B406321CB7FF7500B242D6 /* Emotion DiaryUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -518,6 +471,7 @@
 		01B406061CB7FF7500B242D6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "范志康";
 				TargetAttributes = {
@@ -525,11 +479,7 @@
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 4G7T6JUJF6;
 					};
-					01B406261CB7FF7500B242D6 = {
-						CreatedOnToolsVersion = 7.3;
-						TestTargetID = 01B4060D1CB7FF7500B242D6;
-					};
-					01B406311CB7FF7500B242D6 = {
+					E97184361CB8F68A00A58920 = {
 						CreatedOnToolsVersion = 7.3;
 						TestTargetID = 01B4060D1CB7FF7500B242D6;
 					};
@@ -555,8 +505,7 @@
 			projectRoot = "";
 			targets = (
 				01B4060D1CB7FF7500B242D6 /* Emotion Diary */,
-				01B406261CB7FF7500B242D6 /* Emotion DiaryTests */,
-				01B406311CB7FF7500B242D6 /* Emotion DiaryUITests */,
+				E97184361CB8F68A00A58920 /* Emotion DiaryTests */,
 			);
 		};
 /* End PBXProject section */
@@ -626,14 +575,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		01B406251CB7FF7500B242D6 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		01B406301CB7FF7500B242D6 /* Resources */ = {
+		E97184351CB8F68A00A58920 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -684,39 +626,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		01B406231CB7FF7500B242D6 /* Sources */ = {
+		E97184331CB8F68A00A58920 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01B4062C1CB7FF7500B242D6 /* Emotion_DiaryTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		01B4062E1CB7FF7500B242D6 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				01B406371CB7FF7500B242D6 /* Emotion_DiaryUITests.m in Sources */,
+				E971843A1CB8F68A00A58920 /* Emotion_DiaryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		01B406291CB7FF7500B242D6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 01B4060D1CB7FF7500B242D6 /* Emotion Diary */;
-			targetProxy = 01B406281CB7FF7500B242D6 /* PBXContainerItemProxy */;
-		};
-		01B406341CB7FF7500B242D6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 01B4060D1CB7FF7500B242D6 /* Emotion Diary */;
-			targetProxy = 01B406331CB7FF7500B242D6 /* PBXContainerItemProxy */;
-		};
 		E971841A1CB8EF7500A58920 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Alamofire iOS";
 			targetProxy = E97184191CB8EF7500A58920 /* PBXContainerItemProxy */;
+		};
+		E971843D1CB8F68A00A58920 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 01B4060D1CB7FF7500B242D6 /* Emotion Diary */;
+			targetProxy = E971843C1CB8F68A00A58920 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -861,49 +790,30 @@
 			};
 			name = Release;
 		};
-		01B4063F1CB7FF7500B242D6 /* Debug */ = {
+		E971843F1CB8F68A00A58920 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = "Emotion DiaryTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "cn.fanzhikang.Emotion-DiaryTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "cn.pikkacho.www.Emotion-DiaryTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Emotion Diary.app/Emotion Diary";
 			};
 			name = Debug;
 		};
-		01B406401CB7FF7500B242D6 /* Release */ = {
+		E97184401CB8F68A00A58920 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = "Emotion DiaryTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "cn.fanzhikang.Emotion-DiaryTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "cn.pikkacho.www.Emotion-DiaryTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Emotion Diary.app/Emotion Diary";
-			};
-			name = Release;
-		};
-		01B406421CB7FF7500B242D6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = "Emotion DiaryUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "cn.fanzhikang.Emotion-DiaryUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = "Emotion Diary";
-			};
-			name = Debug;
-		};
-		01B406431CB7FF7500B242D6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = "Emotion DiaryUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "cn.fanzhikang.Emotion-DiaryUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = "Emotion Diary";
 			};
 			name = Release;
 		};
@@ -928,23 +838,13 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		01B4063E1CB7FF7500B242D6 /* Build configuration list for PBXNativeTarget "Emotion DiaryTests" */ = {
+		E971843E1CB8F68A00A58920 /* Build configuration list for PBXNativeTarget "Emotion DiaryTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				01B4063F1CB7FF7500B242D6 /* Debug */,
-				01B406401CB7FF7500B242D6 /* Release */,
+				E971843F1CB8F68A00A58920 /* Debug */,
+				E97184401CB8F68A00A58920 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		01B406411CB7FF7500B242D6 /* Build configuration list for PBXNativeTarget "Emotion DiaryUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				01B406421CB7FF7500B242D6 /* Debug */,
-				01B406431CB7FF7500B242D6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
