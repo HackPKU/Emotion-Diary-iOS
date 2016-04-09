@@ -8,14 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RecordTableViewController : UITableViewController <UITextViewDelegate>
+@interface RecordTableViewController : UITableViewController <UITextViewDelegate> {
+    NSDictionary *faceInfo;
+}
 
 @property (strong, nonatomic) IBOutlet UIImageView *selfieImage;
 @property (strong, nonatomic) IBOutlet UIImageView *blurredSelfieImage;
 @property (strong, nonatomic) IBOutlet UIImageView *faceImage;
+@property (strong, nonatomic) IBOutlet UILabel *labelChickenSoup;
 @property (strong, nonatomic) IBOutlet UILabel *placeholder;
 @property (strong, nonatomic) IBOutlet UITextView *textRecord;
 
 @property UIImage *selfie;
+@property NSString *faceID;
 
 @end

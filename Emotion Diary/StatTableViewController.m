@@ -62,19 +62,19 @@
     StatTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellStat" forIndexPath:indexPath];
     // Configure the cell...
     
-    switch (indexPath.section) {
-        case 0:
-            [cell setData:[EmotionDiary getDiaryOfWeek]];
-            break;
-        case 1:
-            [cell setData:[EmotionDiary getDiaryOfMonth]];
-            break;
-        case 2:
-            [cell setData:[EmotionDiary getDiaryOfYear]];
-            break;
-        default:
-            break;
-    }
+//    switch (indexPath.section) {
+//        case 0:
+//            [cell setData:[EmotionDiary getDiaryOfWeek]];
+//            break;
+//        case 1:
+//            [cell setData:[EmotionDiary getDiaryOfMonth]];
+//            break;
+//        case 2:
+//            [cell setData:[EmotionDiary getDiaryOfYear]];
+//            break;
+//        default:
+//            break;
+//    }
     
     return cell;
 }

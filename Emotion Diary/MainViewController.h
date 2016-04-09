@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "FSCalendar.h"
 
-@interface MainViewController : UIViewController <FSCalendarDelegate,  UITableViewDelegate, UITableViewDataSource> {
+@interface MainViewController : UIViewController <FSCalendarDelegate, FSCalendarDataSource, UITableViewDelegate, UITableViewDataSource> {
     NSDate *currentDate;
+    NSArray *diaryArray;
 }
 
 @property (strong, nonatomic) IBOutlet FSCalendar *calendar;
