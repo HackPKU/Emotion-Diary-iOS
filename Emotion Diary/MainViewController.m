@@ -42,7 +42,8 @@
 }
 
 - (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date {
-    NSLog(@"%@", date);
+    currentDate = date;
+    [_detailTableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -61,6 +62,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MainViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellDetail" forIndexPath:indexPath];
+    cell.labelDate.hidden = (indexPath.row != 0);
     
     // Configure the cell...
     
