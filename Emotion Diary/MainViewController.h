@@ -12,6 +12,7 @@
 @interface MainViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet FSCalendar *calendar;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *calendarHeightConstraint;
 @property (strong, nonatomic) IBOutlet UITableView *detailTableView;
 
 @property UIImage *currentImage;

@@ -11,6 +11,7 @@
 
 @interface WelcomeViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
     FaceConnector *connector;
+    BOOL shouldClearSelfie;
     UIImage *selfie;
 }
 

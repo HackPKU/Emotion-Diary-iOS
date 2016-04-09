@@ -25,6 +25,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Calendar methods
+
+- (void)calendar:(FSCalendar *)calendar boundingRectWillChange:(CGRect)bounds animated:(BOOL)animated {
+    _calendarHeightConstraint.constant = CGRectGetHeight(bounds);
+    [self.view layoutIfNeeded];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -55,6 +62,10 @@
     // Configure the cell...
     
     return cell;
+}
+
+- (IBAction)back:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
