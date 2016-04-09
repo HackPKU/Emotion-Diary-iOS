@@ -12,6 +12,8 @@ import Alamofire
 class FaceConnector: NSObject {
     
     let detectionURL = "https://v1-api.visioncloudapi.com/face/detection"
+    let createPersonURL = "https://v1-api.visioncloudapi.com/person/create"
+    let verificationURL = "https://v1-api.visioncloudapi.com/face/verification"
     let api_id = "8787dcbe92344652902ab319bbbb8e80"
     let api_secret = "c11e8b064d3f481681d250439e517a8e"
     let landmarks106 = "1"
@@ -55,6 +57,56 @@ class FaceConnector: NSObject {
         }
     }
 
+    func createPersonWithName(name: String, faceIDs: [String], andBlock block: (result: FaceConnectorRequestResult, message: String, personID: String?) -> Void) {
+        
+        var parameters = ["api_id": api_id,
+                          "api_secret": api_secret,
+                          "name": name]
+        var faces = faceIDs[0]
+        for index in 1.stride(to: faceIDs.count, by: 1) {
+            faces += ","
+            faces += faceIDs[index]
+        }
+        parameters["face_id"] = faces
+        
+        Alamofire.request(.POST, createPersonURL, parameters: parameters).responseJSON { (response) in
+            switch response.result {
+            case .Failure( _):
+                block(result: .Error, message: "服务器错误或网络错误", personID: nil)
+            case .Success(let value):
+                let json = JSON(value)
+                let personID = json["person_ID"].stringValue
+                block(result: .Success, message: "OK", personID: personID)
+            }
+        }
+        
+    }
+    
+    func verificationFaceID(faceID: String, withPersonID personID:String, andBlock block: (result: FaceConnectorRequestResult, message: String, isOwner: Bool?) -> Void) {
+        
+        let parameters = ["api_id": api_id,
+                          "api_secret": api_secret,
+                          "face_id": faceID,
+                          "person_id": personID]
+        
+        Alamofire.request(.POST, verificationURL, parameters: parameters).responseJSON { (response) in
+            switch response.result {
+            case .Failure( _):
+                block(result: .Error, message: "服务器错误或网络错误", isOwner: nil)
+            case .Success(let value):
+                let json = JSON(value)
+                let same_person = json["same_person"].boolValue
+                if same_person {
+                    block(result: .Success, message: "OK", isOwner: true)
+                }
+                else {
+                    block(result: .Success, message: "OK", isOwner: false)
+                }
+            }
+        }
+        
+    }
+    
 }
 
 @objc enum FaceConnectorRequestResult: Int, CustomStringConvertible {
