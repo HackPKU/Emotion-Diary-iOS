@@ -20,19 +20,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="epF-94-RE2" customClass="FSCalendar">
-                                <rect key="frame" x="0.0" y="64" width="600" height="280"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="300"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="280" id="M9K-qg-4dm"/>
+                                    <constraint firstAttribute="height" constant="300" id="M9K-qg-4dm"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showsPlaceholders" value="NO"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="au7-sd-Bb8"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Qkf-YL-1XT"/>
                                 </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="LKz-fo-MUH">
-                                <rect key="frame" x="0.0" y="352" width="600" height="248"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <rect key="frame" x="0.0" y="372" width="600" height="228"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellPhoto" rowHeight="150" id="tR6-nK-LPV" customClass="MainViewTableViewCell">
                                         <rect key="frame" x="0.0" y="49.5" width="600" height="150"/>
@@ -105,6 +108,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="心情日记" id="Ie7-9M-ipk">
+                        <barButtonItem key="leftBarButtonItem" systemItem="camera" id="vOQ-fU-Phh">
+                            <connections>
+                                <action selector="back:" destination="BYZ-38-t0r" id="h1u-q7-Slr"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="stat" id="zKH-0y-tUz">
                             <connections>
                                 <segue destination="4gJ-Dt-Nhu" kind="show" identifier="showStat" id="Mbh-iA-tu8"/>
@@ -113,6 +121,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="calendar" destination="epF-94-RE2" id="uMq-qB-2e2"/>
+                        <outlet property="calendarHeightConstraint" destination="M9K-qg-4dm" id="oNy-cG-lPY"/>
                         <outlet property="detailTableView" destination="LKz-fo-MUH" id="Tcc-7W-VKH"/>
                     </connections>
                 </viewController>

@@ -20,9 +20,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     connector = [[FaceConnector alloc] init];
-    _textContainerView.hidden = YES;
-    _buttonCamera.hidden = NO;
+    shouldClearSelfie = YES;
     // Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (shouldClearSelfie) {
+        _textContainerView.hidden = YES;
+        _buttonCamera.hidden = NO;
+        _backgroundImage.image = nil;
+        shouldClearSelfie = NO;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -49,9 +58,9 @@
     [connector scanAndAnalyzeFace:selfie andBlock:^(enum FaceConnectorRequestResult result, NSString * _Nonnull message, NSInteger data) {
         // TODO Add Logic
     }];
-    _backgroundImage.image = [UIImageEffects imageByApplyingLightEffectToImage:selfie];
     _textContainerView.hidden = NO;
     _buttonCamera.hidden = YES;
+    _backgroundImage.image = [UIImageEffects imageByApplyingLightEffectToImage:selfie];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -82,6 +91,7 @@
     if ([segue.identifier isEqualToString:@"enterMain"]) {
         MainViewController *dest = [[[segue destinationViewController] viewControllers] firstObject];
         dest.currentImage = selfie;
+        shouldClearSelfie = YES;
     }
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
