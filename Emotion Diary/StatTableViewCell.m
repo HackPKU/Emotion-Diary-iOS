@@ -22,7 +22,7 @@
     // Configure the view for the selected state
 }
 
-- (void)setData {
+- (void)setData:(NSArray *)data {
     // Generating some dummy data
     NSMutableArray* chartData = [NSMutableArray arrayWithCapacity:7];
     for(int i=0;i<7;i++) {

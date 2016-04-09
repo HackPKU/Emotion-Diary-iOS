@@ -8,6 +8,7 @@
 
 #import "StatTableViewController.h"
 #import "StatTableViewCell.h"
+#import "Emotion_Diary-Swift.h"
 
 @interface StatTableViewController ()
 
@@ -59,9 +60,21 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     StatTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellStat" forIndexPath:indexPath];
-    
     // Configure the cell...
-    [cell setData];
+    
+    switch (indexPath.section) {
+        case 0:
+            [cell setData:[EmotionDiary getDiaryOfWeek]];
+            break;
+        case 1:
+            [cell setData:[EmotionDiary getDiaryOfMonth]];
+            break;
+        case 2:
+            [cell setData:[EmotionDiary getDiaryOfYear]];
+            break;
+        default:
+            break;
+    }
     
     return cell;
 }

@@ -9,8 +9,20 @@
 import UIKit
 
 class EmotionDiary: NSObject {
-    static func addDiary(image: UIImage, text: String -> Void) {
+    static func addDiary(image: UIImage, text: String) {
         
+    }
+    
+    static func getDiaryOfWeek() -> Array<Dictionary<Int, String>> {
+        return Array<Dictionary<Int, String>>();
+    }
+    
+    static func getDiaryOfMonth() -> Array<Dictionary<Int, String>> {
+        return Array<Dictionary<Int, String>>();
+    }
+    
+    static func getDiaryOfYear() -> Array<Dictionary<Int, String>> {
+        return Array<Dictionary<Int, String>>();
     }
 
 }
