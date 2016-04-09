@@ -322,7 +322,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rHv-tF-lNq">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="249.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="250"/>
                                                 </imageView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="z5S-ZS-V0f">
                                                     <rect key="frame" x="225" y="23" width="150" height="150"/>
@@ -331,11 +331,20 @@
                                                         <constraint firstAttribute="width" constant="150" id="Vf4-ca-SBz"/>
                                                     </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="你的颜值吓到我了" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haR-zx-0l2">
+                                                    <rect key="frame" x="232" y="188" width="136" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="haR-zx-0l2" firstAttribute="top" secondItem="z5S-ZS-V0f" secondAttribute="bottom" constant="15" id="6B9-Re-9T1"/>
                                                 <constraint firstItem="rHv-tF-lNq" firstAttribute="top" secondItem="LXC-Ln-ifo" secondAttribute="top" id="OgM-V3-YJA"/>
                                                 <constraint firstItem="rHv-tF-lNq" firstAttribute="leading" secondItem="LXC-Ln-ifo" secondAttribute="leading" id="X5A-Nw-tPs"/>
+                                                <constraint firstItem="haR-zx-0l2" firstAttribute="centerX" secondItem="z5S-ZS-V0f" secondAttribute="centerX" id="f35-JJ-arG"/>
                                                 <constraint firstAttribute="bottom" secondItem="rHv-tF-lNq" secondAttribute="bottom" id="iek-6x-tUC"/>
+                                                <constraint firstItem="haR-zx-0l2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rHv-tF-lNq" secondAttribute="leading" constant="50" id="k9r-qS-2FD"/>
                                                 <constraint firstItem="z5S-ZS-V0f" firstAttribute="centerX" secondItem="LXC-Ln-ifo" secondAttribute="centerX" id="mej-8E-0pe"/>
                                                 <constraint firstAttribute="trailing" secondItem="rHv-tF-lNq" secondAttribute="trailing" id="vHF-rj-7Sf"/>
                                                 <constraint firstItem="z5S-ZS-V0f" firstAttribute="top" secondItem="LXC-Ln-ifo" secondAttribute="topMargin" constant="15" id="zC5-At-LTZ"/>
@@ -349,18 +358,26 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="今天没吃药感觉自己萌萌哒" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jft-9Q-7mu">
-                                                    <rect key="frame" x="8" y="8" width="584" height="133.5"/>
-                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="现在心情怎样？" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKg-EY-ehp">
+                                                    <rect key="frame" x="13" y="16" width="105" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jft-9Q-7mu">
+                                                    <rect key="frame" x="8" y="8" width="584" height="134"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="GKg-EY-ehp" firstAttribute="leading" secondItem="6tn-jk-YBP" secondAttribute="leadingMargin" constant="5" id="5wS-Tz-SAW"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="jft-9Q-7mu" secondAttribute="bottom" id="LrA-6X-IYw"/>
                                                 <constraint firstItem="jft-9Q-7mu" firstAttribute="top" secondItem="6tn-jk-YBP" secondAttribute="topMargin" id="RRM-BN-RTO"/>
                                                 <constraint firstItem="jft-9Q-7mu" firstAttribute="trailing" secondItem="6tn-jk-YBP" secondAttribute="trailingMargin" id="eWu-nR-ckW"/>
                                                 <constraint firstItem="jft-9Q-7mu" firstAttribute="leading" secondItem="6tn-jk-YBP" secondAttribute="leadingMargin" id="foe-yB-6NW"/>
+                                                <constraint firstItem="GKg-EY-ehp" firstAttribute="top" secondItem="6tn-jk-YBP" secondAttribute="topMargin" constant="8" id="qbn-6G-oaa"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -386,6 +403,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="blurredSelfieImage" destination="rHv-tF-lNq" id="dqC-xS-l9P"/>
+                        <outlet property="placeholder" destination="GKg-EY-ehp" id="gFY-nd-If6"/>
                         <outlet property="selfieImage" destination="z5S-ZS-V0f" id="gps-17-YrY"/>
                         <outlet property="textRecord" destination="jft-9Q-7mu" id="OrK-kb-fXt"/>
                     </connections>
