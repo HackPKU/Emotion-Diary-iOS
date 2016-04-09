@@ -15,6 +15,7 @@ class FaceConnector: NSObject {
     let createPersonURL = "https://v1-api.visioncloudapi.com/person/create"
     let verificationURL = "https://v1-api.visioncloudapi.com/face/verification"
     let faceDetailInfoURL = "https://v1-api.visioncloudapi.com/info/face"
+    let addFaceURL = "https://v1-api.visioncloudapi.com/person/add_face"
     
     let api_id = "8787dcbe92344652902ab319bbbb8e80"
     let api_secret = "c11e8b064d3f481681d250439e517a8e"
@@ -51,7 +52,7 @@ class FaceConnector: NSObject {
                         }
 
                     }
-                case .Failure(let _):
+                case .Failure(_):
                     block(result: .Error, message: "无法编码", faceID: nil)
                 }
         }
@@ -82,12 +83,17 @@ class FaceConnector: NSObject {
         
     }
     
-    func verificateFaceID(faceID: String, withPersonID personID:String, andBlock block: (result: FaceConnectorRequestResult, message: String, isOwner: Bool) -> Void) {
+    func verificateFaceID(faceID: String, andBlock block: (result: FaceConnectorRequestResult, message: String, isOwner: Bool) -> Void) {
         
-        let parameters = ["api_id": api_id,
+        var parameters = ["api_id": api_id,
                           "api_secret": api_secret,
-                          "face_id": faceID,
-                          "person_id": personID]
+                          "face_id": faceID]
+        if let ID = personID {
+            parameters["person_id"] = ID
+        }
+        else {
+            block(result: .Error, message: "还没有personID", isOwner: false)
+        }
         
         Alamofire.request(.POST, verificationURL, parameters: parameters).responseJSON { (response) in
             switch response.result {
@@ -98,6 +104,7 @@ class FaceConnector: NSObject {
                 let same_person = json["same_person"].boolValue
                 if same_person {
                     block(result: .Success, message: "OK", isOwner: true)
+                    self.addFace(faceID)
                 }
                 else {
                     block(result: .Success, message: "OK", isOwner: false)
@@ -127,6 +134,27 @@ class FaceConnector: NSObject {
                 
             }
 
+        }
+        
+    }
+    
+    private func addFace(faceID: String) {
+        
+        let parameters = ["api_id": api_id,
+                          "api_secret": api_secret,
+                          "face_id": faceID,
+                          "person_id": personID!]
+        
+        Alamofire.request(.POST, addFaceURL, parameters: parameters).responseJSON { (response) in
+            switch response.result {
+            case .Failure( _):
+                print("给人添加新脸失败")
+            case .Success(let value):
+                let json = JSON(value)
+                let faceCount = json["face_count"].intValue
+                let addedCount = json["added_count"].intValue
+                print("现在已有脸数\(faceCount)，新增脸数\(addedCount)")
+            }
         }
         
     }
