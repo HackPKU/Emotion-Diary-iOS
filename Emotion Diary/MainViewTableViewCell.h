@@ -10,6 +10,8 @@
 
 @interface MainViewTableViewCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIImageView *imageSelfie;
-@property (strong, nonatomic) IBOutlet UILabel *label;
+@property (strong, nonatomic) IBOutlet UIImageView *imageFace;
+@property (strong, nonatomic) IBOutlet UITextView *textDetail;
+@property (strong, nonatomic) IBOutlet UILabel *labelTime;
 
 @end

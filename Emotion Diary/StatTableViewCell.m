@@ -7,6 +7,7 @@
 //
 
 #import "StatTableViewCell.h"
+#import "AppDelegate.h"
 
 @implementation StatTableViewCell
 
@@ -35,8 +36,8 @@
     _lineChart.verticalGridStep = 6;
     _lineChart.horizontalGridStep = 3;
     _lineChart.displayDataPoint = YES;
-    _lineChart.dataPointColor = [UIColor orangeColor];
-    _lineChart.dataPointBackgroundColor = [UIColor orangeColor];
+    _lineChart.dataPointColor = GIRL_COLOR;
+    _lineChart.dataPointBackgroundColor = GIRL_COLOR;
     _lineChart.dataPointRadius = 2;
     _lineChart.color = [_lineChart.dataPointColor colorWithAlphaComponent:0.3];
     _lineChart.valueLabelPosition = ValueLabelLeftMirrored;

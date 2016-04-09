@@ -8,8 +8,6 @@
 
 #import "AppDelegate.h"
 
-#define GIRL_COLOR [UIColor colorWithRed:252.0/255.0 green:111.0/255.0 blue:114.0/255.0 alpha:1.0]
-
 @interface AppDelegate ()
 
 @end
