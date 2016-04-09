@@ -76,21 +76,37 @@
             [KVNProgress showErrorWithStatus:message];
             shouldRetakePicture = YES;
         }else {
-            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"personID"] length] == 0) {
-                [verificationer createPersonWithName:@"一个好名字" faceIDs:@[faceID] andBlock:^(enum FaceConnectorRequestResult result, NSString * _Nonnull message, NSString * _Nullable personID) {
+            if (verificationer.personID.length == 0) {
+                [verificationer createPersonWithName:@"一个好名字" faceIDs:@[faceID] andBlock:^(enum FaceConnectorRequestResult result, NSString * _Nonnull message) {
                     if (result == FaceConnectorRequestResultError) {
                         [KVNProgress showErrorWithStatus:message];
                         shouldRetakePicture = YES;
                     }else {
-                        [KVNProgress showSuccessWithStatus:@"验证成功"];
+                        [KVNProgress showSuccessWithStatus:@"创建成功"];
+                        NSLog(@"%@", verificationer.personID);
                         _imageSuccess.hidden = NO;
-                        NSLog(@"%@", personID);
                     }
+                    [self takePicture];
                 }];
             }else {
-                
+                [verificationer verificateFaceID:faceID withPersonID:verificationer.personID andBlock:^(enum FaceConnectorRequestResult result, NSString * _Nonnull message, BOOL isOwner) {
+                    if (result == FaceConnectorRequestResultError) {
+                        [KVNProgress showErrorWithStatus:message];
+                        shouldRetakePicture = YES;
+                    }else {
+                        if (!isOwner) {
+                            [KVNProgress showErrorWithStatus:@"验证失败"];
+                            shouldRetakePicture = YES;
+                        }else {
+                            [KVNProgress dismiss];
+                            _imageSuccess.hidden = NO;
+                        }
+                    }
+                    [self takePicture];
+                }];
             }
         }
+        [self takePicture];
         [picker dismissViewControllerAnimated:YES completion:nil];
     }];
 }
