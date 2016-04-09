@@ -13,6 +13,6 @@
 
 @property (strong, nonatomic) IBOutlet FSLineChart *lineChart;
 
-- (void)setData;
+- (void)setData:(NSArray *)data;
 
 @end
