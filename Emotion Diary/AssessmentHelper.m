@@ -12,13 +12,14 @@
 #import "AssessmentHelper.h"
 
 #define validSimleLowerLimit 1
-#define lowSmileUpperLimit 33
-#define moderateSmileUpperLimit 67
+#define lowSmileUpperLimit 30
+#define moderateSmileUpperLimit 50
 #define validSimleUpperLimit 100
+
 #define validAttactiveLowerLimit 1
-#define lowAttractiveUpperLimit 33
+#define lowAttractiveUpperLimit 10
+#define moderateAttractiveUpperLimit 30
 #define validAttactiveUpperLimit 100
-#define moderateAttractiveUpperLimit 67
 
 @implementation AssessmentHelper
 

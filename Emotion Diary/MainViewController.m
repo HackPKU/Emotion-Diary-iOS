@@ -70,7 +70,7 @@
     //下句中(CELL_CONTENT_WIDTH - CELL_CONTENT_MARGIN 表示显示内容的label的长度 ，20000.0f 表示允许label的最大高度
     CGSize constraint = CGSizeMake(self.view.frame.size.width - 124 - 10, 20000.0f);
     CGSize size = [diary.content boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
-    return MAX(size.height, 74.0) + 76.0;
+    return MAX(size.height, 56.0) + 94.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
