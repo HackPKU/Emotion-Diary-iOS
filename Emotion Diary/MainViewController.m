@@ -46,13 +46,17 @@
 }
 
 - (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date {
-    currentDate = date;
+    currentDate = [self getLocalDate:date];
     diaryArray = [EmotionDiary getDiaryOfDay:currentDate];
     [_detailTableView reloadData];
 }
 
 - (NSInteger)calendar:(FSCalendar *)calendar numberOfEventsForDate:(NSDate *)date {
-    return [EmotionDiary getDiaryOfDay:date].count;
+    return [EmotionDiary getDiaryOfDay:[self getLocalDate:date]].count;
+}
+
+- (NSDate *)getLocalDate:(NSDate *)date {
+    return [[NSDate alloc] initWithTimeInterval:8 * 60 * 60 sinceDate:date];
 }
 
 #pragma mark - Table view data source
