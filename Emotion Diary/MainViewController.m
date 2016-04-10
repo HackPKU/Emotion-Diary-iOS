@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     currentDate = [NSDate date];
-    diaryArray = [EmotionDiary getDiaryOfDay:currentDate];
+    diaryArray = [[EmotionDiaryHelper sharedInstance] getDiaryOfDay:currentDate];
     
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -47,16 +47,22 @@
 
 - (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date {
     currentDate = [self getLocalDate:date];
-    diaryArray = [EmotionDiary getDiaryOfDay:currentDate];
+    diaryArray = [[EmotionDiaryHelper sharedInstance] getDiaryOfDay:currentDate];
     [_detailTableView reloadData];
 }
 
 - (NSInteger)calendar:(FSCalendar *)calendar numberOfEventsForDate:(NSDate *)date {
-    return [EmotionDiary getDiaryOfDay:[self getLocalDate:date]].count;
+    return [[EmotionDiaryHelper sharedInstance] getDiaryOfDay:[self getLocalDate:date]].count;
 }
 
-- (NSDate *)getLocalDate:(NSDate *)date {
-    return [[NSDate alloc] initWithTimeInterval:8 * 60 * 60 sinceDate:date];
+- (NSDate *)getLocalDate:(NSDate *)anyDate {
+    NSTimeZone* sourceTimeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
+    NSTimeZone* destinationTimeZone = [NSTimeZone localTimeZone];
+    NSInteger sourceGMTOffset = [sourceTimeZone secondsFromGMTForDate:anyDate];
+    NSInteger destinationGMTOffset = [destinationTimeZone secondsFromGMTForDate:anyDate];
+    NSTimeInterval interval = destinationGMTOffset - sourceGMTOffset;
+    NSDate* destinationDateNow = [[NSDate alloc] initWithTimeInterval:interval sinceDate:anyDate];
+    return destinationDateNow;
 }
 
 #pragma mark - Table view data source
@@ -66,7 +72,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [EmotionDiary getDiaryOfDay:currentDate].count;
+    return [[EmotionDiaryHelper sharedInstance] getDiaryOfDay:currentDate].count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
