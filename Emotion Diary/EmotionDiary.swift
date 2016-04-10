@@ -60,7 +60,7 @@ class EmotionDiary: NSObject, NSCoding {
     }
     
     func save() {
-        if let emotionDiaries = EmotionDiary.getEmotionDiariesFromStore() {
+        if let emotionDiaries = getEmotionDiariesFromStore() {
             var diaries = emotionDiaries
             diaries.append(self)
             userDefaults.removeObjectForKey(EmotionDiary.EmotionDiariesSaveKey)
@@ -73,10 +73,10 @@ class EmotionDiary: NSObject, NSCoding {
             userDefaults.setObject(data, forKey: EmotionDiary.EmotionDiariesSaveKey)
             userDefaults.synchronize()
         }
-    
+        EmotionDiaryHelper.sharedInstance.refreshEmotionDiariesFromStore()
     }
     
-    private class func getEmotionDiariesFromStore() -> [EmotionDiary]? {
+    private func getEmotionDiariesFromStore() -> [EmotionDiary]? {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         if let data = userDefaults.objectForKey(EmotionDiary.EmotionDiariesSaveKey) as? NSData {
             let array = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSArray
@@ -85,17 +85,73 @@ class EmotionDiary: NSObject, NSCoding {
                 let diary = item as! EmotionDiary
                 emotionDiaries.append(diary)
             }
-            return emotionDiaries.reverse()
+            return emotionDiaries.sort({ (before, after) -> Bool in
+                (before.date.timeIntervalSince1970 - after.date.timeIntervalSince1970 > 0)
+            })
         }
         else {
             return nil
         }
     }
     
-    class func getDiaryOfDay(date: NSDate) -> [EmotionDiary] {
+}
+
+private let sharedEmotionDiaryHelper = EmotionDiaryHelper()
+
+class EmotionDiaryHelper {
+    
+    class var sharedInstance: EmotionDiaryHelper {
+        return sharedEmotionDiaryHelper
+    }
+    
+    private var storedData: [EmotionDiary]?
+    
+    func refreshEmotionDiariesFromStore() {
+        
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        if let data = userDefaults.objectForKey(EmotionDiary.EmotionDiariesSaveKey) as? NSData {
+            let array = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSArray
+            var emotionDiaries = [EmotionDiary]()
+            for item in array {
+                let diary = item as! EmotionDiary
+                emotionDiaries.append(diary)
+            }
+            storedData = emotionDiaries.sort({ (before, after) -> Bool in
+                (before.date.timeIntervalSince1970 - after.date.timeIntervalSince1970 > 0)
+            })
+        }
+
+    }
+    
+    private func getEmotionDiariesFromStore() -> [EmotionDiary]? {
+        if let data = storedData {
+            return data
+        }
+        else {
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            if let data = userDefaults.objectForKey(EmotionDiary.EmotionDiariesSaveKey) as? NSData {
+                let array = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSArray
+                var emotionDiaries = [EmotionDiary]()
+                for item in array {
+                    let diary = item as! EmotionDiary
+                    emotionDiaries.append(diary)
+                }
+                let diaries = emotionDiaries.sort({ (before, after) -> Bool in
+                    (before.date.timeIntervalSince1970 - after.date.timeIntervalSince1970 > 0)
+                })
+                storedData = diaries
+                return diaries
+            }
+            else {
+                return nil
+            }
+        }
+    }
+    
+    func getDiaryOfDay(date: NSDate) -> [EmotionDiary] {
         
         let thisDay = Int(date.timeIntervalSince1970 / (24 * 3600))
-        if let emotionDiaries = EmotionDiary.getEmotionDiariesFromStore() {
+        if let emotionDiaries = getEmotionDiariesFromStore() {
             let thatDayDiary = emotionDiaries.filter { (diary) -> Bool in
                 let thatDay = Int(diary.date.timeIntervalSince1970 / (24 * 3600))
                 return (thatDay == thisDay)
@@ -106,11 +162,11 @@ class EmotionDiary: NSObject, NSCoding {
             return []
         }
     }
-
-    class func getSomeDayAgoSmileness(someday: Int) -> [Double] {
+    
+    func getSomeDayAgoSmileness(someday: Int) -> [Double] {
         
         let nowDay = Int(NSDate().timeIntervalSince1970 / (24 * 3600))
-        if let emotionDiaries = EmotionDiary.getEmotionDiariesFromStore() {
+        if let emotionDiaries = getEmotionDiariesFromStore() {
             var seedArray = [Int]()
             for index in 0.stride(to: someday, by: 1) {
                 seedArray.append(index)
@@ -135,7 +191,8 @@ class EmotionDiary: NSObject, NSCoding {
         else {
             return []
         }
-
+        
     }
 
+    
 }
