@@ -98,7 +98,7 @@ class EmotionDiary: NSObject, NSCoding {
 
 private let sharedEmotionDiaryHelper = EmotionDiaryHelper()
 
-class EmotionDiaryHelper {
+class EmotionDiaryHelper: NSObject {
     
     class var sharedInstance: EmotionDiaryHelper {
         return sharedEmotionDiaryHelper

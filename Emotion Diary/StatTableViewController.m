@@ -64,13 +64,13 @@
     
     switch (indexPath.section) {
         case 0:
-            [cell setData:[EmotionDiary getSomeDayAgoSmileness:7]];
+            [cell setData:[[EmotionDiaryHelper sharedInstance] getSomeDayAgoSmileness:7]];
             break;
         case 1:
-            [cell setData:[EmotionDiary getSomeDayAgoSmileness:30]];
+            [cell setData:[[EmotionDiaryHelper sharedInstance] getSomeDayAgoSmileness:30]];
             break;
         case 2:
-            [cell setData:[EmotionDiary getSomeDayAgoSmileness:365]];
+            [cell setData:[[EmotionDiaryHelper sharedInstance] getSomeDayAgoSmileness:365]];
             break;
         default:
             break;
