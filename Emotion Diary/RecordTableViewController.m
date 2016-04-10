@@ -25,6 +25,7 @@
     _blurredSelfieImage.image = [UIImageEffects imageByApplyingBlurToImage:_selfie withRadius:60.0 tintColor:[UIColor colorWithWhite:0.5 alpha:0.5] saturationDeltaFactor:1.8 maskImage:nil];
     _textRecord.delegate = self;
     _textRecord.scrollsToTop = NO;
+    [self textViewDidChange:_textRecord];
     [self refreshView];
     [self analyseFace];
     
@@ -67,6 +68,7 @@
 
 - (void)textViewDidChange:(UITextView *)textView {
     _placeholder.hidden = (textView.text.length > 0);
+    self.navigationItem.rightBarButtonItem.enabled = (textView.text.length > 0);
 }
 
 #pragma mark - Table view data source
