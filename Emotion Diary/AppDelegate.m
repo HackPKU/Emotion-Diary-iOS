@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "FaceppAPI.h"
+#import "APIKey+APISecret.h"
 
 @interface AppDelegate ()
 
@@ -24,6 +26,9 @@
     [[UINavigationBar appearance] setTranslucent:NO];
     
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"personID":@""}];
+    
+    // Init Face++ API
+    [FaceppAPI initWithApiKey:_API_KEY andApiSecret:_API_SECRET andRegion:APIServerRegionCN];
     
     return YES;
 }

@@ -97,7 +97,7 @@ static NSString *SERVER_ADDRESS = CN_SERVER_ADDRESS;
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
     statusCode = urlResponse.statusCode;
     
-    return [FaceppClient generateResultWithResponseData:responseData error:error httpStatusCode:statusCode];
+    return [FaceppClient generateResultWithResponseData:responseData error:error httpStatusCode:(int)statusCode];
 }
 
 +(FaceppResult*) requestWithMethod: (NSString*)method image: (NSData*) imageData params: (NSArray*)params {
@@ -145,7 +145,7 @@ static NSString *SERVER_ADDRESS = CN_SERVER_ADDRESS;
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
     statusCode = urlResponse.statusCode;
     
-    return [FaceppClient generateResultWithResponseData:responseData error:error httpStatusCode:statusCode];
+    return [FaceppClient generateResultWithResponseData:responseData error:error httpStatusCode:(int)statusCode];
 }
 
 +(FaceppResult*) generateResultWithResponseData:(NSData*) responseData error:(NSError*) error httpStatusCode:(int)httpStatusCode {
