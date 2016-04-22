@@ -1,11 +1,8 @@
 //
-//  ver 0.6 updated by 范志康
-//  ver 0.5 updated by 温凯
 //  AssessmentHelper.m
 //  Emotion Diary
 //
 //  Created by 范志康 on 16/4/9.
-//  Updated by wenkai on 16/4/9
 //  Copyright © 2016年 范志康. All rights reserved.
 //
 

@@ -1,7 +1,4 @@
 //
-//  ver 0.6 updated by 范志康
-//  ver 0.5 updated by 温凯
-//
 //  AssessmentHelper.h
 //  Emotion Diary
 //
