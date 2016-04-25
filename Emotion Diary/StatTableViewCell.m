@@ -29,9 +29,9 @@
     _lineChart.verticalGridStep = 4;
     _lineChart.horizontalGridStep = 1;
     _lineChart.lineWidth = 1;
-    _lineChart.color = GIRL_COLOR;
+    _lineChart.color = APP_COLOR;
     _lineChart.valueLabelBackgroundColor = [UIColor clearColor];
-    _lineChart.fillColor = [GIRL_COLOR colorWithAlphaComponent:0.3];
+    _lineChart.fillColor = [APP_COLOR colorWithAlphaComponent:0.3];
     _lineChart.valueLabelPosition = ValueLabelLeftMirrored;
     _lineChart.labelForValue = ^(CGFloat value) {
         return [NSString stringWithFormat:@"%d", (int)value];

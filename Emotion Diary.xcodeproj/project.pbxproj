@@ -8,29 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		0148B0A71CB97D0A00E8FC08 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 0148B0A61CB97D0A00E8FC08 /* Utilities.m */; };
-		015334DF1CB8B2DF00E3D2F1 /* MainViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 015334DE1CB8B2DF00E3D2F1 /* MainViewTableViewCell.m */; };
+		015334DF1CB8B2DF00E3D2F1 /* CalendarViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 015334DE1CB8B2DF00E3D2F1 /* CalendarViewTableViewCell.m */; };
 		015334EF1CB8BB3300E3D2F1 /* EmotionDiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015334EE1CB8BB3300E3D2F1 /* EmotionDiary.swift */; };
-		0193CA361CB82BC60057E082 /* CALayer+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA171CB82BC50057E082 /* CALayer+FSExtension.m */; };
-		0193CA371CB82BC60057E082 /* FSCalendar+IBExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA191CB82BC50057E082 /* FSCalendar+IBExtension.m */; };
-		0193CA381CB82BC60057E082 /* FSCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA1B1CB82BC50057E082 /* FSCalendar.m */; };
-		0193CA391CB82BC60057E082 /* FSCalendarAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA1D1CB82BC50057E082 /* FSCalendarAnimator.m */; };
-		0193CA3A1CB82BC60057E082 /* FSCalendarAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA1F1CB82BC50057E082 /* FSCalendarAppearance.m */; };
-		0193CA3B1CB82BC60057E082 /* FSCalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA211CB82BC50057E082 /* FSCalendarCell.m */; };
-		0193CA3C1CB82BC60057E082 /* FSCalendarCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA231CB82BC50057E082 /* FSCalendarCollectionView.m */; };
-		0193CA3D1CB82BC60057E082 /* FSCalendarConstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA251CB82BC50057E082 /* FSCalendarConstance.m */; };
-		0193CA3E1CB82BC60057E082 /* FSCalendarEventIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA281CB82BC60057E082 /* FSCalendarEventIndicator.m */; };
-		0193CA3F1CB82BC60057E082 /* FSCalendarFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA2A1CB82BC60057E082 /* FSCalendarFlowLayout.m */; };
-		0193CA401CB82BC60057E082 /* FSCalendarHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA2C1CB82BC60057E082 /* FSCalendarHeader.m */; };
-		0193CA411CB82BC60057E082 /* FSCalendarStickyHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA2E1CB82BC60057E082 /* FSCalendarStickyHeader.m */; };
-		0193CA421CB82BC60057E082 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0193CA2F1CB82BC60057E082 /* Info.plist */; };
-		0193CA431CB82BC60057E082 /* NSDate+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA311CB82BC60057E082 /* NSDate+FSExtension.m */; };
-		0193CA441CB82BC60057E082 /* NSString+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA331CB82BC60057E082 /* NSString+FSExtension.m */; };
-		0193CA451CB82BC60057E082 /* UIView+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA351CB82BC60057E082 /* UIView+FSExtension.m */; };
+		015AFD701CCC736600389C7A /* TestImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 015AFD6F1CCC736600389C7A /* TestImages.xcassets */; };
+		018EF4581CC761EE00E712BC /* FaceppAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 018EF43F1CC761EE00E712BC /* FaceppAPI.m */; };
+		018EF4591CC761EE00E712BC /* FaceppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 018EF4421CC761EE00E712BC /* FaceppClient.m */; };
+		018EF45A1CC761EE00E712BC /* FaceppDetection.m in Sources */ = {isa = PBXBuildFile; fileRef = 018EF4441CC761EE00E712BC /* FaceppDetection.m */; };
+		018EF45B1CC761EE00E712BC /* FaceppFaceset.m in Sources */ = {isa = PBXBuildFile; fileRef = 018EF4461CC761EE00E712BC /* FaceppFaceset.m */; };
+		018EF45C1CC761EE00E712BC /* FaceppGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 018EF4481CC761EE00E712BC /* FaceppGroup.m */; };
+		018EF45D1CC761EE00E712BC /* FaceppGrouping.m in Sources */ = {isa = PBXBuildFile; fileRef = 018EF44A1CC761EE00E712BC /* FaceppGrouping.m */; };
+		018EF45E1CC761EE00E712BC /* FaceppInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 018EF44C1CC761EE00E712BC /* FaceppInfo.m */; };
+		018EF45F1CC761EE00E712BC /* FaceppPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 018EF44E1CC761EE00E712BC /* FaceppPerson.m */; };
+		018EF4601CC761EE00E712BC /* FaceppRecognition.m in Sources */ = {isa = PBXBuildFile; fileRef = 018EF4501CC761EE00E712BC /* FaceppRecognition.m */; };
+		018EF4611CC761EE00E712BC /* FaceppTrainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 018EF4521CC761EE00E712BC /* FaceppTrainer.m */; };
+		018EF4621CC761EE00E712BC /* FaceppError.m in Sources */ = {isa = PBXBuildFile; fileRef = 018EF4551CC761EE00E712BC /* FaceppError.m */; };
+		018EF4631CC761EE00E712BC /* FaceppResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 018EF4571CC761EE00E712BC /* FaceppResult.m */; };
 		0193CA651CB82C650057E082 /* FSLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA621CB82C650057E082 /* FSLineChart.m */; };
 		0193CA661CB82C650057E082 /* UIColor+FSPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA641CB82C650057E082 /* UIColor+FSPalette.m */; };
 		01B406131CB7FF7500B242D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B406121CB7FF7500B242D6 /* main.m */; };
 		01B406161CB7FF7500B242D6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B406151CB7FF7500B242D6 /* AppDelegate.m */; };
-		01B406191CB7FF7500B242D6 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B406181CB7FF7500B242D6 /* MainViewController.m */; };
+		01B406191CB7FF7500B242D6 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B406181CB7FF7500B242D6 /* CalendarViewController.m */; };
 		01B4061C1CB7FF7500B242D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01B4061A1CB7FF7500B242D6 /* Main.storyboard */; };
 		01B4061E1CB7FF7500B242D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01B4061D1CB7FF7500B242D6 /* Assets.xcassets */; };
 		01B406211CB7FF7500B242D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01B4061F1CB7FF7500B242D6 /* LaunchScreen.storyboard */; };
@@ -39,18 +36,13 @@
 		01E29C501CB891A800DA815B /* StatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C4F1CB891A800DA815B /* StatTableViewController.m */; };
 		01E29C531CB8926200DA815B /* StatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C521CB8926200DA815B /* StatTableViewCell.m */; };
 		01E29C561CB89C3400DA815B /* UIImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C551CB89C3400DA815B /* UIImageEffects.m */; };
+		01E2DAAE1CCA0A74009E69DC /* Emotion DiaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E2DAAD1CCA0A74009E69DC /* Emotion DiaryTests.m */; };
 		01F15FC81CB8E6AA006BB341 /* RecordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F15FC71CB8E6AA006BB341 /* RecordTableViewController.m */; };
 		01F15FDC1CB914D0006BB341 /* AssessmentHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F15FDB1CB914D0006BB341 /* AssessmentHelper.m */; };
+		C8BAB25A48A3B7819B6D6974 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3DF3C1D9187607C200094B /* Pods.framework */; };
 		E97184171CB8EF7500A58920 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E971840A1CB8EF2400A58920 /* Alamofire.framework */; };
 		E97184181CB8EF7500A58920 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E971840A1CB8EF2400A58920 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E971841D1CB8F03200A58920 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E971841C1CB8F03200A58920 /* SwiftyJSON.swift */; };
-		E971842D1CB8F12500A58920 /* UIColor+KVNContrast.m in Sources */ = {isa = PBXBuildFile; fileRef = E97184211CB8F12500A58920 /* UIColor+KVNContrast.m */; };
-		E971842E1CB8F12500A58920 /* UIImage+KVNEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = E97184231CB8F12500A58920 /* UIImage+KVNEmpty.m */; };
-		E971842F1CB8F12500A58920 /* UIImage+KVNImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = E97184251CB8F12500A58920 /* UIImage+KVNImageEffects.m */; };
-		E97184301CB8F12500A58920 /* KVNProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = E97184281CB8F12500A58920 /* KVNProgress.m */; };
-		E97184311CB8F12500A58920 /* KVNProgressConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = E971842A1CB8F12500A58920 /* KVNProgressConfiguration.m */; };
-		E97184321CB8F12500A58920 /* KVNProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E971842C1CB8F12500A58920 /* KVNProgressView.xib */; };
-		E971843A1CB8F68A00A58920 /* Emotion_DiaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97184391CB8F68A00A58920 /* Emotion_DiaryTests.swift */; };
 		E97184591CB920E000A58920 /* FaceConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CAA4541CB887FD00064D4E /* FaceConnector.swift */; };
 		E97184621CB9217A00A58920 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E971841C1CB8F03200A58920 /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
@@ -138,43 +130,38 @@
 /* Begin PBXFileReference section */
 		0148B0A51CB97D0A00E8FC08 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		0148B0A61CB97D0A00E8FC08 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
-		015334DD1CB8B2DF00E3D2F1 /* MainViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewTableViewCell.h; sourceTree = "<group>"; };
-		015334DE1CB8B2DF00E3D2F1 /* MainViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewTableViewCell.m; sourceTree = "<group>"; };
+		015334DD1CB8B2DF00E3D2F1 /* CalendarViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewTableViewCell.h; sourceTree = "<group>"; };
+		015334DE1CB8B2DF00E3D2F1 /* CalendarViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewTableViewCell.m; sourceTree = "<group>"; };
 		015334E01CB8B79300E3D2F1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		015334E11CB8B79300E3D2F1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		015334EE1CB8BB3300E3D2F1 /* EmotionDiary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmotionDiary.swift; sourceTree = "<group>"; };
-		0193CA161CB82BC50057E082 /* CALayer+FSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+FSExtension.h"; sourceTree = "<group>"; };
-		0193CA171CB82BC50057E082 /* CALayer+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+FSExtension.m"; sourceTree = "<group>"; };
-		0193CA181CB82BC50057E082 /* FSCalendar+IBExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FSCalendar+IBExtension.h"; sourceTree = "<group>"; };
-		0193CA191CB82BC50057E082 /* FSCalendar+IBExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FSCalendar+IBExtension.m"; sourceTree = "<group>"; };
-		0193CA1A1CB82BC50057E082 /* FSCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendar.h; sourceTree = "<group>"; };
-		0193CA1B1CB82BC50057E082 /* FSCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendar.m; sourceTree = "<group>"; };
-		0193CA1C1CB82BC50057E082 /* FSCalendarAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarAnimator.h; sourceTree = "<group>"; };
-		0193CA1D1CB82BC50057E082 /* FSCalendarAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarAnimator.m; sourceTree = "<group>"; };
-		0193CA1E1CB82BC50057E082 /* FSCalendarAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarAppearance.h; sourceTree = "<group>"; };
-		0193CA1F1CB82BC50057E082 /* FSCalendarAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarAppearance.m; sourceTree = "<group>"; };
-		0193CA201CB82BC50057E082 /* FSCalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarCell.h; sourceTree = "<group>"; };
-		0193CA211CB82BC50057E082 /* FSCalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarCell.m; sourceTree = "<group>"; };
-		0193CA221CB82BC50057E082 /* FSCalendarCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarCollectionView.h; sourceTree = "<group>"; };
-		0193CA231CB82BC50057E082 /* FSCalendarCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarCollectionView.m; sourceTree = "<group>"; };
-		0193CA241CB82BC50057E082 /* FSCalendarConstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarConstance.h; sourceTree = "<group>"; };
-		0193CA251CB82BC50057E082 /* FSCalendarConstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarConstance.m; sourceTree = "<group>"; };
-		0193CA261CB82BC50057E082 /* FSCalendarDynamicHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarDynamicHeader.h; sourceTree = "<group>"; };
-		0193CA271CB82BC60057E082 /* FSCalendarEventIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarEventIndicator.h; sourceTree = "<group>"; };
-		0193CA281CB82BC60057E082 /* FSCalendarEventIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarEventIndicator.m; sourceTree = "<group>"; };
-		0193CA291CB82BC60057E082 /* FSCalendarFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarFlowLayout.h; sourceTree = "<group>"; };
-		0193CA2A1CB82BC60057E082 /* FSCalendarFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarFlowLayout.m; sourceTree = "<group>"; };
-		0193CA2B1CB82BC60057E082 /* FSCalendarHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarHeader.h; sourceTree = "<group>"; };
-		0193CA2C1CB82BC60057E082 /* FSCalendarHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarHeader.m; sourceTree = "<group>"; };
-		0193CA2D1CB82BC60057E082 /* FSCalendarStickyHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarStickyHeader.h; sourceTree = "<group>"; };
-		0193CA2E1CB82BC60057E082 /* FSCalendarStickyHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSCalendarStickyHeader.m; sourceTree = "<group>"; };
-		0193CA2F1CB82BC60057E082 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0193CA301CB82BC60057E082 /* NSDate+FSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+FSExtension.h"; sourceTree = "<group>"; };
-		0193CA311CB82BC60057E082 /* NSDate+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+FSExtension.m"; sourceTree = "<group>"; };
-		0193CA321CB82BC60057E082 /* NSString+FSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FSExtension.h"; sourceTree = "<group>"; };
-		0193CA331CB82BC60057E082 /* NSString+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FSExtension.m"; sourceTree = "<group>"; };
-		0193CA341CB82BC60057E082 /* UIView+FSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FSExtension.h"; sourceTree = "<group>"; };
-		0193CA351CB82BC60057E082 /* UIView+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FSExtension.m"; sourceTree = "<group>"; };
+		015AFD6A1CCBE09800389C7A /* Emotion Diary-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Emotion Diary-Prefix.pch"; sourceTree = "<group>"; };
+		015AFD6F1CCC736600389C7A /* TestImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TestImages.xcassets; sourceTree = "<group>"; };
+		018EF43E1CC761EE00E712BC /* FaceppAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceppAPI.h; sourceTree = "<group>"; };
+		018EF43F1CC761EE00E712BC /* FaceppAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceppAPI.m; sourceTree = "<group>"; };
+		018EF4411CC761EE00E712BC /* FaceppClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceppClient.h; sourceTree = "<group>"; };
+		018EF4421CC761EE00E712BC /* FaceppClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceppClient.m; sourceTree = "<group>"; };
+		018EF4431CC761EE00E712BC /* FaceppDetection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceppDetection.h; sourceTree = "<group>"; };
+		018EF4441CC761EE00E712BC /* FaceppDetection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceppDetection.m; sourceTree = "<group>"; };
+		018EF4451CC761EE00E712BC /* FaceppFaceset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceppFaceset.h; sourceTree = "<group>"; };
+		018EF4461CC761EE00E712BC /* FaceppFaceset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceppFaceset.m; sourceTree = "<group>"; };
+		018EF4471CC761EE00E712BC /* FaceppGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceppGroup.h; sourceTree = "<group>"; };
+		018EF4481CC761EE00E712BC /* FaceppGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceppGroup.m; sourceTree = "<group>"; };
+		018EF4491CC761EE00E712BC /* FaceppGrouping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceppGrouping.h; sourceTree = "<group>"; };
+		018EF44A1CC761EE00E712BC /* FaceppGrouping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceppGrouping.m; sourceTree = "<group>"; };
+		018EF44B1CC761EE00E712BC /* FaceppInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceppInfo.h; sourceTree = "<group>"; };
+		018EF44C1CC761EE00E712BC /* FaceppInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceppInfo.m; sourceTree = "<group>"; };
+		018EF44D1CC761EE00E712BC /* FaceppPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceppPerson.h; sourceTree = "<group>"; };
+		018EF44E1CC761EE00E712BC /* FaceppPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceppPerson.m; sourceTree = "<group>"; };
+		018EF44F1CC761EE00E712BC /* FaceppRecognition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceppRecognition.h; sourceTree = "<group>"; };
+		018EF4501CC761EE00E712BC /* FaceppRecognition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceppRecognition.m; sourceTree = "<group>"; };
+		018EF4511CC761EE00E712BC /* FaceppTrainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceppTrainer.h; sourceTree = "<group>"; };
+		018EF4521CC761EE00E712BC /* FaceppTrainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceppTrainer.m; sourceTree = "<group>"; };
+		018EF4541CC761EE00E712BC /* FaceppError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceppError.h; sourceTree = "<group>"; };
+		018EF4551CC761EE00E712BC /* FaceppError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceppError.m; sourceTree = "<group>"; };
+		018EF4561CC761EE00E712BC /* FaceppResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceppResult.h; sourceTree = "<group>"; };
+		018EF4571CC761EE00E712BC /* FaceppResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceppResult.m; sourceTree = "<group>"; };
+		018EF4641CC7623400E712BC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0193CA611CB82C650057E082 /* FSLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSLineChart.h; sourceTree = "<group>"; };
 		0193CA621CB82C650057E082 /* FSLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSLineChart.m; sourceTree = "<group>"; };
 		0193CA631CB82C650057E082 /* UIColor+FSPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FSPalette.h"; sourceTree = "<group>"; };
@@ -183,8 +170,8 @@
 		01B406121CB7FF7500B242D6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		01B406141CB7FF7500B242D6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		01B406151CB7FF7500B242D6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		01B406171CB7FF7500B242D6 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		01B406181CB7FF7500B242D6 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		01B406171CB7FF7500B242D6 /* CalendarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
+		01B406181CB7FF7500B242D6 /* CalendarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
 		01B4061B1CB7FF7500B242D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		01B4061D1CB7FF7500B242D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01B406201CB7FF7500B242D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -199,25 +186,18 @@
 		01E29C521CB8926200DA815B /* StatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatTableViewCell.m; sourceTree = "<group>"; };
 		01E29C541CB89C3400DA815B /* UIImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIImageEffects.h; path = UIImageEffects/UIImageEffects.h; sourceTree = "<group>"; };
 		01E29C551CB89C3400DA815B /* UIImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageEffects.m; path = UIImageEffects/UIImageEffects.m; sourceTree = "<group>"; };
+		01E2DA651CCA00BC009E69DC /* APIKey+APISecret.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "APIKey+APISecret.h"; sourceTree = "<group>"; };
+		01E2DAAD1CCA0A74009E69DC /* Emotion DiaryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Emotion DiaryTests.m"; sourceTree = "<group>"; };
 		01F15FC61CB8E6AA006BB341 /* RecordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordTableViewController.h; sourceTree = "<group>"; };
 		01F15FC71CB8E6AA006BB341 /* RecordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordTableViewController.m; sourceTree = "<group>"; };
 		01F15FDA1CB914D0006BB341 /* AssessmentHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssessmentHelper.h; sourceTree = "<group>"; };
 		01F15FDB1CB914D0006BB341 /* AssessmentHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssessmentHelper.m; sourceTree = "<group>"; };
+		9721AEE52E8C304D1C65C794 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		B5FEC9CE2F888EA905CF52A3 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		BA3DF3C1D9187607C200094B /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E97183FF1CB8EF2400A58920 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E971841C1CB8F03200A58920 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
-		E97184201CB8F12500A58920 /* UIColor+KVNContrast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+KVNContrast.h"; sourceTree = "<group>"; };
-		E97184211CB8F12500A58920 /* UIColor+KVNContrast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+KVNContrast.m"; sourceTree = "<group>"; };
-		E97184221CB8F12500A58920 /* UIImage+KVNEmpty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+KVNEmpty.h"; sourceTree = "<group>"; };
-		E97184231CB8F12500A58920 /* UIImage+KVNEmpty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+KVNEmpty.m"; sourceTree = "<group>"; };
-		E97184241CB8F12500A58920 /* UIImage+KVNImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+KVNImageEffects.h"; sourceTree = "<group>"; };
-		E97184251CB8F12500A58920 /* UIImage+KVNImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+KVNImageEffects.m"; sourceTree = "<group>"; };
-		E97184271CB8F12500A58920 /* KVNProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVNProgress.h; sourceTree = "<group>"; };
-		E97184281CB8F12500A58920 /* KVNProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVNProgress.m; sourceTree = "<group>"; };
-		E97184291CB8F12500A58920 /* KVNProgressConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVNProgressConfiguration.h; sourceTree = "<group>"; };
-		E971842A1CB8F12500A58920 /* KVNProgressConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVNProgressConfiguration.m; sourceTree = "<group>"; };
-		E971842C1CB8F12500A58920 /* KVNProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KVNProgressView.xib; sourceTree = "<group>"; };
 		E97184371CB8F68A00A58920 /* Emotion DiaryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Emotion DiaryTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E97184391CB8F68A00A58920 /* Emotion_DiaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emotion_DiaryTests.swift; sourceTree = "<group>"; };
 		E971843B1CB8F68A00A58920 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -227,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E97184171CB8EF7500A58920 /* Alamofire.framework in Frameworks */,
+				C8BAB25A48A3B7819B6D6974 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,43 +221,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0193CA151CB82BC50057E082 /* FSCalendar */ = {
+		018EF43D1CC761EE00E712BC /* FaceppSDK_ARC */ = {
 			isa = PBXGroup;
 			children = (
-				0193CA161CB82BC50057E082 /* CALayer+FSExtension.h */,
-				0193CA171CB82BC50057E082 /* CALayer+FSExtension.m */,
-				0193CA181CB82BC50057E082 /* FSCalendar+IBExtension.h */,
-				0193CA191CB82BC50057E082 /* FSCalendar+IBExtension.m */,
-				0193CA1A1CB82BC50057E082 /* FSCalendar.h */,
-				0193CA1B1CB82BC50057E082 /* FSCalendar.m */,
-				0193CA1C1CB82BC50057E082 /* FSCalendarAnimator.h */,
-				0193CA1D1CB82BC50057E082 /* FSCalendarAnimator.m */,
-				0193CA1E1CB82BC50057E082 /* FSCalendarAppearance.h */,
-				0193CA1F1CB82BC50057E082 /* FSCalendarAppearance.m */,
-				0193CA201CB82BC50057E082 /* FSCalendarCell.h */,
-				0193CA211CB82BC50057E082 /* FSCalendarCell.m */,
-				0193CA221CB82BC50057E082 /* FSCalendarCollectionView.h */,
-				0193CA231CB82BC50057E082 /* FSCalendarCollectionView.m */,
-				0193CA241CB82BC50057E082 /* FSCalendarConstance.h */,
-				0193CA251CB82BC50057E082 /* FSCalendarConstance.m */,
-				0193CA261CB82BC50057E082 /* FSCalendarDynamicHeader.h */,
-				0193CA271CB82BC60057E082 /* FSCalendarEventIndicator.h */,
-				0193CA281CB82BC60057E082 /* FSCalendarEventIndicator.m */,
-				0193CA291CB82BC60057E082 /* FSCalendarFlowLayout.h */,
-				0193CA2A1CB82BC60057E082 /* FSCalendarFlowLayout.m */,
-				0193CA2B1CB82BC60057E082 /* FSCalendarHeader.h */,
-				0193CA2C1CB82BC60057E082 /* FSCalendarHeader.m */,
-				0193CA2D1CB82BC60057E082 /* FSCalendarStickyHeader.h */,
-				0193CA2E1CB82BC60057E082 /* FSCalendarStickyHeader.m */,
-				0193CA2F1CB82BC60057E082 /* Info.plist */,
-				0193CA301CB82BC60057E082 /* NSDate+FSExtension.h */,
-				0193CA311CB82BC60057E082 /* NSDate+FSExtension.m */,
-				0193CA321CB82BC60057E082 /* NSString+FSExtension.h */,
-				0193CA331CB82BC60057E082 /* NSString+FSExtension.m */,
-				0193CA341CB82BC60057E082 /* UIView+FSExtension.h */,
-				0193CA351CB82BC60057E082 /* UIView+FSExtension.m */,
+				01E2DA651CCA00BC009E69DC /* APIKey+APISecret.h */,
+				018EF43E1CC761EE00E712BC /* FaceppAPI.h */,
+				018EF43F1CC761EE00E712BC /* FaceppAPI.m */,
+				018EF4401CC761EE00E712BC /* FaceppAPISource */,
+				018EF4531CC761EE00E712BC /* FaceppResult */,
 			);
-			path = FSCalendar;
+			path = FaceppSDK_ARC;
+			sourceTree = "<group>";
+		};
+		018EF4401CC761EE00E712BC /* FaceppAPISource */ = {
+			isa = PBXGroup;
+			children = (
+				018EF4411CC761EE00E712BC /* FaceppClient.h */,
+				018EF4421CC761EE00E712BC /* FaceppClient.m */,
+				018EF4431CC761EE00E712BC /* FaceppDetection.h */,
+				018EF4441CC761EE00E712BC /* FaceppDetection.m */,
+				018EF4451CC761EE00E712BC /* FaceppFaceset.h */,
+				018EF4461CC761EE00E712BC /* FaceppFaceset.m */,
+				018EF4471CC761EE00E712BC /* FaceppGroup.h */,
+				018EF4481CC761EE00E712BC /* FaceppGroup.m */,
+				018EF4491CC761EE00E712BC /* FaceppGrouping.h */,
+				018EF44A1CC761EE00E712BC /* FaceppGrouping.m */,
+				018EF44B1CC761EE00E712BC /* FaceppInfo.h */,
+				018EF44C1CC761EE00E712BC /* FaceppInfo.m */,
+				018EF44D1CC761EE00E712BC /* FaceppPerson.h */,
+				018EF44E1CC761EE00E712BC /* FaceppPerson.m */,
+				018EF44F1CC761EE00E712BC /* FaceppRecognition.h */,
+				018EF4501CC761EE00E712BC /* FaceppRecognition.m */,
+				018EF4511CC761EE00E712BC /* FaceppTrainer.h */,
+				018EF4521CC761EE00E712BC /* FaceppTrainer.m */,
+			);
+			path = FaceppAPISource;
+			sourceTree = "<group>";
+		};
+		018EF4531CC761EE00E712BC /* FaceppResult */ = {
+			isa = PBXGroup;
+			children = (
+				018EF4541CC761EE00E712BC /* FaceppError.h */,
+				018EF4551CC761EE00E712BC /* FaceppError.m */,
+				018EF4561CC761EE00E712BC /* FaceppResult.h */,
+				018EF4571CC761EE00E712BC /* FaceppResult.m */,
+			);
+			path = FaceppResult;
 			sourceTree = "<group>";
 		};
 		0193CA601CB82C650057E082 /* FSLineChart */ = {
@@ -293,9 +283,12 @@
 		01B406051CB7FF7500B242D6 = {
 			isa = PBXGroup;
 			children = (
+				018EF4641CC7623400E712BC /* README.md */,
 				01B406101CB7FF7500B242D6 /* Emotion Diary */,
 				E97184381CB8F68A00A58920 /* Emotion DiaryTests */,
 				01B4060F1CB7FF7500B242D6 /* Products */,
+				3B73EC5709F5C116C582D080 /* Pods */,
+				552E1C0E7E2FF588E790D67A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -318,10 +311,10 @@
 				01E29C4C1CB88F4600DA815B /* WelcomeViewController.m */,
 				01F15FC61CB8E6AA006BB341 /* RecordTableViewController.h */,
 				01F15FC71CB8E6AA006BB341 /* RecordTableViewController.m */,
-				01B406171CB7FF7500B242D6 /* MainViewController.h */,
-				01B406181CB7FF7500B242D6 /* MainViewController.m */,
-				015334DD1CB8B2DF00E3D2F1 /* MainViewTableViewCell.h */,
-				015334DE1CB8B2DF00E3D2F1 /* MainViewTableViewCell.m */,
+				01B406171CB7FF7500B242D6 /* CalendarViewController.h */,
+				01B406181CB7FF7500B242D6 /* CalendarViewController.m */,
+				015334DD1CB8B2DF00E3D2F1 /* CalendarViewTableViewCell.h */,
+				015334DE1CB8B2DF00E3D2F1 /* CalendarViewTableViewCell.m */,
 				01E29C4E1CB891A800DA815B /* StatTableViewController.h */,
 				01E29C4F1CB891A800DA815B /* StatTableViewController.m */,
 				01E29C511CB8926200DA815B /* StatTableViewCell.h */,
@@ -346,6 +339,7 @@
 			isa = PBXGroup;
 			children = (
 				01B406121CB7FF7500B242D6 /* main.m */,
+				015AFD6A1CCBE09800389C7A /* Emotion Diary-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -353,11 +347,10 @@
 		01CAA4281CB8328B00064D4E /* 3rd Party Framework */ = {
 			isa = PBXGroup;
 			children = (
-				E971841E1CB8F12500A58920 /* KVNProgress */,
 				E971841C1CB8F03200A58920 /* SwiftyJSON.swift */,
 				E97183FF1CB8EF2400A58920 /* Alamofire.xcodeproj */,
 				01E29C581CB89C3F00DA815B /* UIImageEffects */,
-				0193CA151CB82BC50057E082 /* FSCalendar */,
+				018EF43D1CC761EE00E712BC /* FaceppSDK_ARC */,
 				0193CA601CB82C650057E082 /* FSLineChart */,
 			);
 			name = "3rd Party Framework";
@@ -370,6 +363,23 @@
 				01E29C551CB89C3400DA815B /* UIImageEffects.m */,
 			);
 			name = UIImageEffects;
+			sourceTree = "<group>";
+		};
+		3B73EC5709F5C116C582D080 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B5FEC9CE2F888EA905CF52A3 /* Pods.debug.xcconfig */,
+				9721AEE52E8C304D1C65C794 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		552E1C0E7E2FF588E790D67A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BA3DF3C1D9187607C200094B /* Pods.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		E97184001CB8EF2400A58920 /* Products */ = {
@@ -386,53 +396,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E971841E1CB8F12500A58920 /* KVNProgress */ = {
-			isa = PBXGroup;
-			children = (
-				E971841F1CB8F12500A58920 /* Categories */,
-				E97184261CB8F12500A58920 /* Classes */,
-				E971842B1CB8F12500A58920 /* Resources */,
-			);
-			path = KVNProgress;
-			sourceTree = "<group>";
-		};
-		E971841F1CB8F12500A58920 /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				E97184201CB8F12500A58920 /* UIColor+KVNContrast.h */,
-				E97184211CB8F12500A58920 /* UIColor+KVNContrast.m */,
-				E97184221CB8F12500A58920 /* UIImage+KVNEmpty.h */,
-				E97184231CB8F12500A58920 /* UIImage+KVNEmpty.m */,
-				E97184241CB8F12500A58920 /* UIImage+KVNImageEffects.h */,
-				E97184251CB8F12500A58920 /* UIImage+KVNImageEffects.m */,
-			);
-			path = Categories;
-			sourceTree = "<group>";
-		};
-		E97184261CB8F12500A58920 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				E97184271CB8F12500A58920 /* KVNProgress.h */,
-				E97184281CB8F12500A58920 /* KVNProgress.m */,
-				E97184291CB8F12500A58920 /* KVNProgressConfiguration.h */,
-				E971842A1CB8F12500A58920 /* KVNProgressConfiguration.m */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		E971842B1CB8F12500A58920 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				E971842C1CB8F12500A58920 /* KVNProgressView.xib */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		E97184381CB8F68A00A58920 /* Emotion DiaryTests */ = {
 			isa = PBXGroup;
 			children = (
-				E97184391CB8F68A00A58920 /* Emotion_DiaryTests.swift */,
+				01E2DAAD1CCA0A74009E69DC /* Emotion DiaryTests.m */,
 				E971843B1CB8F68A00A58920 /* Info.plist */,
+				015AFD6F1CCC736600389C7A /* TestImages.xcassets */,
 			);
 			path = "Emotion DiaryTests";
 			sourceTree = "<group>";
@@ -444,10 +413,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 01B4063B1CB7FF7500B242D6 /* Build configuration list for PBXNativeTarget "Emotion Diary" */;
 			buildPhases = (
+				F7D1C950007854CF3E01B3C0 /* Check Pods Manifest.lock */,
 				01B4060A1CB7FF7500B242D6 /* Sources */,
 				01B4060B1CB7FF7500B242D6 /* Frameworks */,
 				01B4060C1CB7FF7500B242D6 /* Resources */,
 				E971841B1CB8EF7500A58920 /* Embed Frameworks */,
+				F581D45FE74D1B3B65A3093B /* Embed Pods Frameworks */,
+				7F52BF79A596009DAC2993AA /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -580,9 +552,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01B406211CB7FF7500B242D6 /* LaunchScreen.storyboard in Resources */,
-				E97184321CB8F12500A58920 /* KVNProgressView.xib in Resources */,
 				01B4061E1CB7FF7500B242D6 /* Assets.xcassets in Resources */,
-				0193CA421CB82BC60057E082 /* Info.plist in Resources */,
 				01B4061C1CB7FF7500B242D6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -591,51 +561,92 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				015AFD701CCC736600389C7A /* TestImages.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7F52BF79A596009DAC2993AA /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F581D45FE74D1B3B65A3093B /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F7D1C950007854CF3E01B3C0 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		01B4060A1CB7FF7500B242D6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E971842E1CB8F12500A58920 /* UIImage+KVNEmpty.m in Sources */,
-				0193CA361CB82BC60057E082 /* CALayer+FSExtension.m in Sources */,
-				0193CA401CB82BC60057E082 /* FSCalendarHeader.m in Sources */,
-				01B406191CB7FF7500B242D6 /* MainViewController.m in Sources */,
+				018EF45A1CC761EE00E712BC /* FaceppDetection.m in Sources */,
+				018EF45D1CC761EE00E712BC /* FaceppGrouping.m in Sources */,
+				018EF4621CC761EE00E712BC /* FaceppError.m in Sources */,
+				018EF45B1CC761EE00E712BC /* FaceppFaceset.m in Sources */,
+				01B406191CB7FF7500B242D6 /* CalendarViewController.m in Sources */,
 				01E29C561CB89C3400DA815B /* UIImageEffects.m in Sources */,
 				01B406161CB7FF7500B242D6 /* AppDelegate.m in Sources */,
 				0193CA661CB82C650057E082 /* UIColor+FSPalette.m in Sources */,
-				0193CA3F1CB82BC60057E082 /* FSCalendarFlowLayout.m in Sources */,
-				E97184301CB8F12500A58920 /* KVNProgress.m in Sources */,
-				0193CA3E1CB82BC60057E082 /* FSCalendarEventIndicator.m in Sources */,
 				01F15FC81CB8E6AA006BB341 /* RecordTableViewController.m in Sources */,
-				0193CA451CB82BC60057E082 /* UIView+FSExtension.m in Sources */,
-				0193CA3B1CB82BC60057E082 /* FSCalendarCell.m in Sources */,
-				0193CA3C1CB82BC60057E082 /* FSCalendarCollectionView.m in Sources */,
-				0193CA371CB82BC60057E082 /* FSCalendar+IBExtension.m in Sources */,
-				E97184311CB8F12500A58920 /* KVNProgressConfiguration.m in Sources */,
-				0193CA441CB82BC60057E082 /* NSString+FSExtension.m in Sources */,
+				018EF4591CC761EE00E712BC /* FaceppClient.m in Sources */,
 				01CAA4551CB887FD00064D4E /* FaceConnector.swift in Sources */,
-				E971842D1CB8F12500A58920 /* UIColor+KVNContrast.m in Sources */,
-				0193CA391CB82BC60057E082 /* FSCalendarAnimator.m in Sources */,
-				E971842F1CB8F12500A58920 /* UIImage+KVNImageEffects.m in Sources */,
+				018EF4631CC761EE00E712BC /* FaceppResult.m in Sources */,
+				018EF45F1CC761EE00E712BC /* FaceppPerson.m in Sources */,
 				01F15FDC1CB914D0006BB341 /* AssessmentHelper.m in Sources */,
 				0193CA651CB82C650057E082 /* FSLineChart.m in Sources */,
-				0193CA3D1CB82BC60057E082 /* FSCalendarConstance.m in Sources */,
+				018EF4601CC761EE00E712BC /* FaceppRecognition.m in Sources */,
 				01E29C501CB891A800DA815B /* StatTableViewController.m in Sources */,
-				0193CA431CB82BC60057E082 /* NSDate+FSExtension.m in Sources */,
-				015334DF1CB8B2DF00E3D2F1 /* MainViewTableViewCell.m in Sources */,
+				015334DF1CB8B2DF00E3D2F1 /* CalendarViewTableViewCell.m in Sources */,
+				018EF45E1CC761EE00E712BC /* FaceppInfo.m in Sources */,
 				015334EF1CB8BB3300E3D2F1 /* EmotionDiary.swift in Sources */,
 				01E29C4D1CB88F4600DA815B /* WelcomeViewController.m in Sources */,
-				0193CA381CB82BC60057E082 /* FSCalendar.m in Sources */,
+				018EF45C1CC761EE00E712BC /* FaceppGroup.m in Sources */,
+				018EF4611CC761EE00E712BC /* FaceppTrainer.m in Sources */,
 				0148B0A71CB97D0A00E8FC08 /* Utilities.m in Sources */,
-				0193CA3A1CB82BC60057E082 /* FSCalendarAppearance.m in Sources */,
+				018EF4581CC761EE00E712BC /* FaceppAPI.m in Sources */,
 				01E29C531CB8926200DA815B /* StatTableViewCell.m in Sources */,
 				E971841D1CB8F03200A58920 /* SwiftyJSON.swift in Sources */,
-				0193CA411CB82BC60057E082 /* FSCalendarStickyHeader.m in Sources */,
 				01B406131CB7FF7500B242D6 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -645,8 +656,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E97184621CB9217A00A58920 /* SwiftyJSON.swift in Sources */,
+				01E2DAAE1CCA0A74009E69DC /* Emotion DiaryTests.m in Sources */,
 				E97184591CB920E000A58920 /* FaceConnector.swift in Sources */,
-				E971843A1CB8F68A00A58920 /* Emotion_DiaryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -777,12 +788,15 @@
 		};
 		01B4063C1CB7FF7500B242D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B5FEC9CE2F888EA905CF52A3 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Emotion Diary/Emotion Diary-Prefix.pch";
 				INFOPLIST_FILE = "Emotion Diary/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "cn.fanzhikang.Emotion-Diary";
@@ -790,23 +804,28 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Emotion Diary/Emotion Diary-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		01B4063D1CB7FF7500B242D6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9721AEE52E8C304D1C65C794 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Emotion Diary/Emotion Diary-Prefix.pch";
 				INFOPLIST_FILE = "Emotion Diary/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "cn.fanzhikang.Emotion-Diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Emotion Diary/Emotion Diary-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -814,6 +833,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Emotion DiaryTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -828,6 +848,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Emotion DiaryTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

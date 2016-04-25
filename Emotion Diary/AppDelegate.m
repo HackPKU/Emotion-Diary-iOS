@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "FaceppAPI.h"
+#import "APIKey+APISecret.h"
 
 @interface AppDelegate ()
 
@@ -18,12 +20,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [[UINavigationBar appearance] setBarTintColor:GIRL_COLOR];
+    [[UINavigationBar appearance] setBarTintColor:APP_COLOR];
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTranslucent:NO];
     
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"personID":@""}];
+    
+    // Init Face++ API
+    [FaceppAPI initWithApiKey:_API_KEY andApiSecret:_API_SECRET andRegion:APIServerRegionCN];
     
     return YES;
 }

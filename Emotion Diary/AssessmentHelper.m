@@ -1,22 +1,19 @@
 //
-//  ver 0.6 updated by 范志康
-//  ver 0.5 updated by 温凯
 //  AssessmentHelper.m
 //  Emotion Diary
 //
 //  Created by 范志康 on 16/4/9.
-//  Updated by wenkai on 16/4/9
 //  Copyright © 2016年 范志康. All rights reserved.
 //
 
 #import "AssessmentHelper.h"
 
-#define validSimleLowerLimit 1
+#define validSimleLowerLimit 0
 #define lowSmileUpperLimit 30
 #define moderateSmileUpperLimit 50
 #define validSimleUpperLimit 100
 
-#define validAttactiveLowerLimit 1
+#define validAttactiveLowerLimit 0
 #define lowAttractiveUpperLimit 10
 #define moderateAttractiveUpperLimit 30
 #define validAttactiveUpperLimit 100

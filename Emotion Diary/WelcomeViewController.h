@@ -17,7 +17,7 @@
     NSString *userFaceID;
 }
 
-@property (strong, nonatomic) IBOutlet UIImageView *imageSuccess;
+@property (strong, nonatomic) IBOutlet UIView *viewSuccess;
 @property (strong, nonatomic) IBOutlet UIButton *buttonCamera;
 @property (strong, nonatomic) IBOutlet UIButton *buttonProceed;
 

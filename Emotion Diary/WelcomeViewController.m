@@ -7,7 +7,7 @@
 //
 
 #import "WelcomeViewController.h"
-#import "MainViewController.h"
+#import "CalendarViewController.h"
 #import "RecordTableViewController.h"
 #import "KVNProgress.h"
 #import <MobileCoreServices/MobileCoreServices.h>
@@ -24,7 +24,7 @@
     connector = [[FaceConnector alloc] init];
     verificationer = [[FaceConnector alloc] init];
     shouldRetakePicture = YES;
-    _imageSuccess.hidden = YES;
+    _viewSuccess.hidden = YES;
     _buttonCamera.layer.cornerRadius = 5.0;
     _buttonCamera.layer.borderWidth = 1.0;
     _buttonCamera.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -46,7 +46,7 @@
 
 - (void)takePicture {
     if (shouldRetakePicture) {
-        _imageSuccess.hidden = YES;
+        _viewSuccess.hidden = YES;
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
             imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -55,7 +55,7 @@
             imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         }
         imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
-//        imagePicker.allowsEditing = YES;
+        imagePicker.allowsEditing = YES;
         imagePicker.delegate = self;
         [self presentViewController:imagePicker animated:YES completion:nil];
         shouldRetakePicture = NO;
@@ -81,7 +81,7 @@
                     }else {
                         [KVNProgress showSuccessWithStatus:@"创建成功"];
                         userFaceID = faceID;
-                        _imageSuccess.hidden = NO;
+                        _viewSuccess.hidden = NO;
                     }
                     [self takePicture];
                 }];
@@ -97,7 +97,7 @@
                         }else {
                             [KVNProgress dismiss];
                             userFaceID = faceID;
-                            _imageSuccess.hidden = NO;
+                            _viewSuccess.hidden = NO;
                         }
                     }
                     [self takePicture];
@@ -156,6 +156,11 @@
     shouldRetakePicture = YES;
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+}
+
+
+- (IBAction)unwindToWelcomeView:(UIStoryboardSegue *)segue {
+    
 }
 
 @end
