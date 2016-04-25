@@ -1,24 +1,24 @@
 //
-//  MainViewController.m
+//  CalendarViewController.m
 //  Emotion Diary
 //
 //  Created by 范志康 on 16/4/8.
 //  Copyright © 2016年 范志康. All rights reserved.
 //
 
-#import "MainViewController.h"
-#import "MainViewTableViewCell.h"
-#import "AssessmentHelper.h"
+#import "CalendarViewController.h"
+#import "CalendarViewTableViewCell.h"
 #import "Emotion_Diary-Swift.h"
 
-@interface MainViewController ()
+@interface CalendarViewController ()
 
 @end
 
-@implementation MainViewController
+@implementation CalendarViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setCalendarScope:self.view.frame.size.height];
     currentDate = [NSDate date];
     diaryArray = [[EmotionDiaryHelper sharedInstance] getDiaryOfDay:currentDate];
     
@@ -31,7 +31,12 @@
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-    if (UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation])) {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    [self setCalendarScope:size.height];
+}
+
+- (void)setCalendarScope:(CGFloat)height {
+    if (height >= 400) {
         [_calendar setScope:FSCalendarScopeMonth animated:YES];
     }else {
         [_calendar setScope:FSCalendarScopeWeek animated:YES];
@@ -84,26 +89,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MainViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellDetail" forIndexPath:indexPath];
-    cell.labelDate.hidden = (indexPath.row != 0);
-    EmotionDiary *diary = diaryArray[indexPath.row];
-    cell.imageSelfie.image = [UIImage imageWithContentsOfFile:diary.imageURL];
-    NSString *imageName = [AssessmentHelper getFaceNameBySmile:(int)diary.smile];
-    cell.imageFace.image = [UIImage imageNamed:[imageName stringByAppendingString:@"-白圈"]];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"HH:mm"];
-    cell.labelTime.text = [formatter stringFromDate:diary.date];
-    [formatter setDateFormat:@"MM-dd"];
-    cell.labelDate.text = [formatter stringFromDate:diary.date];
-    cell.textDetail.text = diary.content;
+    CalendarViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellDetail" forIndexPath:indexPath];
     
     // Configure the cell...
     
+    cell.labelDate.hidden = (indexPath.row != 0);
+    [cell setDiary:diaryArray[indexPath.row]];
     return cell;
-}
-
-- (IBAction)back:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

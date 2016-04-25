@@ -7,7 +7,7 @@
 //
 
 #import "WelcomeViewController.h"
-#import "MainViewController.h"
+#import "CalendarViewController.h"
 #import "RecordTableViewController.h"
 #import "KVNProgress.h"
 #import <MobileCoreServices/MobileCoreServices.h>
@@ -55,7 +55,7 @@
             imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         }
         imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
-//        imagePicker.allowsEditing = YES;
+        imagePicker.allowsEditing = YES;
         imagePicker.delegate = self;
         [self presentViewController:imagePicker animated:YES completion:nil];
         shouldRetakePicture = NO;
@@ -156,6 +156,11 @@
     shouldRetakePicture = YES;
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+}
+
+
+- (IBAction)unwindToWelcomeView:(UIStoryboardSegue *)segue {
+    
 }
 
 @end

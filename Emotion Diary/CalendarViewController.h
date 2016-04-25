@@ -1,5 +1,5 @@
 //
-//  MainViewController.h
+//  CalendarViewController.h
 //  Emotion Diary
 //
 //  Created by 范志康 on 16/4/8.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FSCalendar.h"
 
-@interface MainViewController : UIViewController <FSCalendarDelegate, FSCalendarDataSource, UITableViewDelegate, UITableViewDataSource> {
+@interface CalendarViewController : UIViewController <FSCalendarDelegate, FSCalendarDataSource, UITableViewDelegate, UITableViewDataSource> {
     NSDate *currentDate;
     NSArray *diaryArray;
 }
