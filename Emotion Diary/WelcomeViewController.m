@@ -24,7 +24,7 @@
     connector = [[FaceConnector alloc] init];
     verificationer = [[FaceConnector alloc] init];
     shouldRetakePicture = YES;
-    _viewSuccess.hidden = YES;
+    _labelSuccess.hidden = YES;
     _buttonCamera.layer.cornerRadius = 5.0;
     _buttonCamera.layer.borderWidth = 1.0;
     _buttonCamera.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -46,7 +46,7 @@
 
 - (void)takePicture {
     if (shouldRetakePicture) {
-        _viewSuccess.hidden = YES;
+        _labelSuccess.hidden = YES;
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
             imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -81,7 +81,7 @@
                     }else {
                         [KVNProgress showSuccessWithStatus:@"创建成功"];
                         userFaceID = faceID;
-                        _viewSuccess.hidden = NO;
+                        _labelSuccess.hidden = NO;
                     }
                     [self takePicture];
                 }];
@@ -97,7 +97,7 @@
                         }else {
                             [KVNProgress dismiss];
                             userFaceID = faceID;
-                            _viewSuccess.hidden = NO;
+                            _labelSuccess.hidden = NO;
                         }
                     }
                     [self takePicture];

@@ -24,7 +24,8 @@
 #import <Foundation/Foundation.h>
 #import "Utilities.h"
 
-#define APP_COLOR [UIColor colorWithRed:255.0/255.0 green:205.0/255.0 blue:70.0/255.0 alpha:1.0]
+#define APP_COLOR [UIColor colorWithRed:255.0/255.0 green:190.0/255.0 blue:60.0/255.0 alpha:1.0]
+#define SERVER_URL @"www.emotiondiary.date"
 
 #endif
 
