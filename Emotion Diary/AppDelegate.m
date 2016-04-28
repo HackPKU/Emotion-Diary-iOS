@@ -25,16 +25,13 @@
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTranslucent:NO];
     
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"personID":@""}];
-    
     // Init Face++ API
     [FaceppAPI initWithApiKey:_API_KEY andApiSecret:_API_SECRET andRegion:APIServerRegionCN];
     [FaceppAPI setDebugMode:DEBUG];
     
-    
     UIImage *image = [UIImage imageNamed:@"MyFace1"];
     [ActionPerformer registerFaceWithImage:image name:@"Frank" andBlock:^(ActionPerformerResult result, NSString * _Nullable message, NSObject * _Nullable data) {
-        NSLog(@"%@", message);
+        
     }];
     
     return YES;

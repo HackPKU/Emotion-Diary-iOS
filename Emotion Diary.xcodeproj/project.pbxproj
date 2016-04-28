@@ -128,6 +128,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0115503C1CD24DC6009295F4 /* APIKey+APISecret.sample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "APIKey+APISecret.sample.h"; sourceTree = "<group>"; };
 		01360A571CD1174400BB02B0 /* ActionPerformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionPerformer.h; sourceTree = "<group>"; };
 		01360A581CD1174400BB02B0 /* ActionPerformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionPerformer.m; sourceTree = "<group>"; };
 		01360A5A1CD1180A00BB02B0 /* EmotionDiary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionDiary.h; sourceTree = "<group>"; };
@@ -226,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				01E2DA651CCA00BC009E69DC /* APIKey+APISecret.h */,
+				0115503C1CD24DC6009295F4 /* APIKey+APISecret.sample.h */,
 				018EF43E1CC761EE00E712BC /* FaceppAPI.h */,
 				018EF43F1CC761EE00E712BC /* FaceppAPI.m */,
 				018EF4401CC761EE00E712BC /* FaceppAPISource */,
