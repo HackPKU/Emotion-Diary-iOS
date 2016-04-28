@@ -36,6 +36,21 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIImage *)resizeImage:(UIImage *)image toSize:(CGSize)size;
 
 /**
+ * Compress the image to required size
+ * @param image The image to be resized
+ * @param size The required size, in KB
+ * @return Compressed image data
+ */
++ (NSData *)compressImage:(UIImage *)image toSize:(int)size;
+
+/**
+ * Get the local date from UTC date
+ * @param date UTC date
+ * @return Local date
+ */
++ (NSDate *)getLocalDate:(NSDate *)date;
+
+/**
  * Get the face name of a given smile value
  * @param smile The smile value
  * @return Face name

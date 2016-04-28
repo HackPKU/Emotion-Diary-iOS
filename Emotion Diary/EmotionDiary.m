@@ -22,6 +22,7 @@
 #define WEATHER @"weather"
 #define CREATE_TIME @"createTime"
 
+#define USER_ID @"userID"
 #define DIARY_ID @"diaryID"
 #define HAS_IMAGE @"hasImage"
 #define HAS_TAG @"hasTag"
@@ -63,6 +64,7 @@
         _weather = [aDecoder decodeObjectForKey:WEATHER];
         _createTime = [aDecoder decodeObjectForKey:CREATE_TIME];
         
+        _userID = [aDecoder decodeIntForKey:USER_ID];
         _diaryID = [aDecoder decodeIntForKey:DIARY_ID];
         _hasImage = [aDecoder decodeBoolForKey:HAS_IMAGE];
         _hasTag = [aDecoder decodeBoolForKey:HAS_TAG];
@@ -86,6 +88,7 @@
     [aCoder encodeObject:_weather forKey:WEATHER];
     [aCoder encodeObject:_createTime forKey:CREATE_TIME];
     
+    [aCoder encodeInt:_userID forKey:USER_ID];
     [aCoder encodeInt:_diaryID forKey:DIARY_ID];
     [aCoder encodeBool:_hasImage forKey:HAS_IMAGE];
     [aCoder encodeBool:_hasTag forKey:HAS_TAG];

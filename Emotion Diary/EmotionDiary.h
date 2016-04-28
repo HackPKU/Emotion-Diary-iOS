@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, EmotionDiaryImageType) {
+    EmotionDiaryImageTypeIcon,
+    EmotionDiaryImageTypeSelfie,
+    EmotionDiaryImageTypeImage
+};
+
 @interface EmotionDiary : NSObject <NSCoding>
 
 @property BOOL hasLocalVersion;
@@ -25,6 +31,7 @@
 @property NSString *weather;
 @property NSDate *createTime;
 
+@property int userID;
 @property int diaryID;
 @property BOOL hasImage;
 @property BOOL hasTag;

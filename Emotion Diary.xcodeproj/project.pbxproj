@@ -7,13 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0109DCD31CD1C8C000848C5D /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0109DCD21CD1C8C000848C5D /* ImageIO.framework */; };
 		01360A591CD1174400BB02B0 /* ActionPerformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 01360A581CD1174400BB02B0 /* ActionPerformer.m */; };
 		01360A5C1CD1180A00BB02B0 /* EmotionDiary.m in Sources */ = {isa = PBXBuildFile; fileRef = 01360A5B1CD1180A00BB02B0 /* EmotionDiary.m */; };
 		0148B0A71CB97D0A00E8FC08 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 0148B0A61CB97D0A00E8FC08 /* Utilities.m */; };
 		015334DF1CB8B2DF00E3D2F1 /* CalendarViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 015334DE1CB8B2DF00E3D2F1 /* CalendarViewTableViewCell.m */; };
 		015334EF1CB8BB3300E3D2F1 /* EmotionDiarySwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015334EE1CB8BB3300E3D2F1 /* EmotionDiarySwift.swift */; };
-		015AFD701CCC736600389C7A /* TestImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 015AFD6F1CCC736600389C7A /* TestImages.xcassets */; };
 		018EF4581CC761EE00E712BC /* FaceppAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 018EF43F1CC761EE00E712BC /* FaceppAPI.m */; };
 		018EF4591CC761EE00E712BC /* FaceppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 018EF4421CC761EE00E712BC /* FaceppClient.m */; };
 		018EF45A1CC761EE00E712BC /* FaceppDetection.m in Sources */ = {isa = PBXBuildFile; fileRef = 018EF4441CC761EE00E712BC /* FaceppDetection.m */; };
@@ -130,7 +128,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0109DCD21CD1C8C000848C5D /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		01360A571CD1174400BB02B0 /* ActionPerformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionPerformer.h; sourceTree = "<group>"; };
 		01360A581CD1174400BB02B0 /* ActionPerformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionPerformer.m; sourceTree = "<group>"; };
 		01360A5A1CD1180A00BB02B0 /* EmotionDiary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionDiary.h; sourceTree = "<group>"; };
@@ -143,7 +140,6 @@
 		015334E11CB8B79300E3D2F1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		015334EE1CB8BB3300E3D2F1 /* EmotionDiarySwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmotionDiarySwift.swift; sourceTree = "<group>"; };
 		015AFD6A1CCBE09800389C7A /* Emotion Diary-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Emotion Diary-Prefix.pch"; sourceTree = "<group>"; };
-		015AFD6F1CCC736600389C7A /* TestImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TestImages.xcassets; sourceTree = "<group>"; };
 		018EF43E1CC761EE00E712BC /* FaceppAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceppAPI.h; sourceTree = "<group>"; };
 		018EF43F1CC761EE00E712BC /* FaceppAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceppAPI.m; sourceTree = "<group>"; };
 		018EF4411CC761EE00E712BC /* FaceppClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceppClient.h; sourceTree = "<group>"; };
@@ -211,7 +207,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0109DCD31CD1C8C000848C5D /* ImageIO.framework in Frameworks */,
 				E97184171CB8EF7500A58920 /* Alamofire.framework in Frameworks */,
 				C8BAB25A48A3B7819B6D6974 /* Pods.framework in Frameworks */,
 			);
@@ -385,7 +380,6 @@
 		552E1C0E7E2FF588E790D67A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0109DCD21CD1C8C000848C5D /* ImageIO.framework */,
 				BA3DF3C1D9187607C200094B /* Pods.framework */,
 			);
 			name = Frameworks;
@@ -410,7 +404,6 @@
 			children = (
 				01E2DAAD1CCA0A74009E69DC /* Emotion DiaryTests.m */,
 				E971843B1CB8F68A00A58920 /* Info.plist */,
-				015AFD6F1CCC736600389C7A /* TestImages.xcassets */,
 			);
 			path = "Emotion DiaryTests";
 			sourceTree = "<group>";
@@ -570,7 +563,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				015AFD701CCC736600389C7A /* TestImages.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -41,6 +41,26 @@
     return resizeImage;
 }
 
++ (NSData *)compressImage:(UIImage *)image toSize:(int)size {
+    float ratio = 1.0;
+    NSData *imageData = UIImageJPEGRepresentation(image, ratio);
+    while (imageData.length >= size * 1024 && ratio >= 0.05) {
+        ratio *= 0.75;
+        imageData = UIImageJPEGRepresentation(image, ratio);
+    }
+    return imageData;
+}
+
++ (NSDate *)getLocalDate:(NSDate *)date {
+    NSTimeZone* sourceTimeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
+    NSTimeZone* destinationTimeZone = [NSTimeZone localTimeZone];
+    NSInteger sourceGMTOffset = [sourceTimeZone secondsFromGMTForDate:date];
+    NSInteger destinationGMTOffset = [destinationTimeZone secondsFromGMTForDate:date];
+    NSTimeInterval interval = destinationGMTOffset - sourceGMTOffset;
+    NSDate* destinationDateNow = [[NSDate alloc] initWithTimeInterval:interval sinceDate:date];
+    return destinationDateNow;
+}
+
 + (NSString *)getFaceNameBySmile:(int)smile {
     if (smile <= 33) {
         return @"不笑";
