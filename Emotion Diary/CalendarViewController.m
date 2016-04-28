@@ -51,23 +51,13 @@
 }
 
 - (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date {
-    currentDate = [self getLocalDate:date];
+    currentDate = [Utilities getLocalDate:date];
     diaryArray = [[EmotionDiaryHelper sharedInstance] getDiaryOfDay:currentDate];
     [_detailTableView reloadData];
 }
 
 - (NSInteger)calendar:(FSCalendar *)calendar numberOfEventsForDate:(NSDate *)date {
-    return [[EmotionDiaryHelper sharedInstance] getDiaryOfDay:[self getLocalDate:date]].count;
-}
-
-- (NSDate *)getLocalDate:(NSDate *)anyDate {
-    NSTimeZone* sourceTimeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
-    NSTimeZone* destinationTimeZone = [NSTimeZone localTimeZone];
-    NSInteger sourceGMTOffset = [sourceTimeZone secondsFromGMTForDate:anyDate];
-    NSInteger destinationGMTOffset = [destinationTimeZone secondsFromGMTForDate:anyDate];
-    NSTimeInterval interval = destinationGMTOffset - sourceGMTOffset;
-    NSDate* destinationDateNow = [[NSDate alloc] initWithTimeInterval:interval sinceDate:anyDate];
-    return destinationDateNow;
+    return [[EmotionDiaryHelper sharedInstance] getDiaryOfDay:[Utilities getLocalDate:date]].count;
 }
 
 #pragma mark - Table view data source
@@ -81,7 +71,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    EmotionDiary *diary = diaryArray[indexPath.row];
+    EmotionDiarySwift *diary = diaryArray[indexPath.row];
     //下句中(CELL_CONTENT_WIDTH - CELL_CONTENT_MARGIN 表示显示内容的label的长度 ，20000.0f 表示允许label的最大高度
     CGSize constraint = CGSizeMake(self.view.frame.size.width - 124 - 10, 20000.0f);
     CGSize size = [diary.content boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;

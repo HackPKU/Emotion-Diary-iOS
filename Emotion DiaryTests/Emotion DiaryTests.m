@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "ActionPerformer.h"
 
 @interface Emotion_DiaryTests : XCTestCase
 

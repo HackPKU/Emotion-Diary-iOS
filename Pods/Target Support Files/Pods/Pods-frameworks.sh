@@ -88,6 +88,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/FSCalendar.framework"
   install_framework "Pods/KVNProgress.framework"
   install_framework "Pods/PNChart.framework"
+  install_framework "Pods/SDWebImage.framework"
   install_framework "Pods/UICountingLabel.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -95,5 +96,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/FSCalendar.framework"
   install_framework "Pods/KVNProgress.framework"
   install_framework "Pods/PNChart.framework"
+  install_framework "Pods/SDWebImage.framework"
   install_framework "Pods/UICountingLabel.framework"
 fi

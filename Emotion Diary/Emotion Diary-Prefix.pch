@@ -22,7 +22,11 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import "EmotionDiary.h"
+#import "ActionPerformer.h"
 #import "Utilities.h"
+#import "KVNProgress.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #define APP_COLOR [UIColor colorWithRed:255.0/255.0 green:190.0/255.0 blue:60.0/255.0 alpha:1.0]
 #define SERVER_URL @"www.emotiondiary.date"

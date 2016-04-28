@@ -8,9 +8,9 @@
 
 #import "RecordTableViewController.h"
 #import "UIImageEffects.h"
-#import "KVNProgress.h"
-#import "AssessmentHelper.h"
 #import "Emotion_Diary-Swift.h"
+
+#define MAX_PICTURE_NUM 9
 
 @interface RecordTableViewController ()
 
@@ -20,10 +20,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    images = [[NSMutableArray alloc] init];
     _selfieImage.image = _selfie;
     _selfieImage.layer.cornerRadius = _selfieImage.frame.size.width / 2;
     _blurredSelfieImage.image = [UIImageEffects imageByApplyingBlurToImage:_selfie withRadius:60.0 tintColor:[UIColor colorWithWhite:0.5 alpha:0.5] saturationDeltaFactor:1.8 maskImage:nil];
-    _textRecord.delegate = self;
     _textRecord.scrollsToTop = NO;
     [self textViewDidChange:_textRecord];
     [self refreshView];
@@ -57,10 +57,8 @@
 - (void)refreshView {
     if (!faceInfo) {
         _faceImage.image = nil;
-        _labelChickenSoup.text = @"正在分析您的心情";
     }else {
-        _faceImage.image = [UIImage imageNamed:[AssessmentHelper getFaceNameBySmile:[faceInfo[@"smile"] intValue]]];
-        _labelChickenSoup.text = [AssessmentHelper getWelcomeMsg:[faceInfo[@"smile"] intValue] withAttractive:[faceInfo[@"attractive"] intValue]];
+        _faceImage.image = [UIImage imageNamed:[Utilities getFaceNameBySmile:[faceInfo[@"smile"] intValue]]];
     }
 }
 
@@ -131,13 +129,44 @@
 }
 */
 
+#pragma mark - Collection view delegate
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return MIN(MAX_PICTURE_NUM, images.count + 1);
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row < images.count) {
+        UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"image" forIndexPath:indexPath];
+        return cell;
+    }else {
+        return [collectionView dequeueReusableCellWithReuseIdentifier:@"upload" forIndexPath:indexPath];
+    }
+}
+
 #pragma mark - Navigation
+
+- (IBAction)cancel:(id)sender {
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
+- (IBAction)done:(id)sender {
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"enterMain"]) {
-        EmotionDiary *diary = [[EmotionDiary alloc] initWithSmile:[faceInfo[@"smile"] intValue] attractive:[faceInfo[@"attractive"] intValue] image:_selfie content:self.textRecord.text];
+        EmotionDiarySwift *diary = [[EmotionDiarySwift alloc] initWithSmile:[faceInfo[@"smile"] intValue] attractive:[faceInfo[@"attractive"] intValue] image:_selfie content:self.textRecord.text];
         [diary save];
     }
     // Get the new view controller using [segue destinationViewController].
