@@ -14,10 +14,13 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - FSCalendar (2.1.0)
+  - FSCalendar (2.1.1)
   - KVNProgress (2.2.4)
   - PNChart (0.8.8):
     - UICountingLabel (~> 1.2.0)
+  - SDWebImage (3.7.5):
+    - SDWebImage/Core (= 3.7.5)
+  - SDWebImage/Core (3.7.5)
   - UICountingLabel (1.2.0)
 
 DEPENDENCIES:
@@ -25,12 +28,14 @@ DEPENDENCIES:
   - FSCalendar
   - KVNProgress
   - PNChart
+  - SDWebImage
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  FSCalendar: d8b9dddaf96fff7621a33b110763d981bb01bc04
+  FSCalendar: 04dc531f06fbde8a8e5b7394e9d4edebd45a591f
   KVNProgress: 541edcea5a1fef592aceac8d791a410d38cb499d
   PNChart: 25f91e9c4688af49c3647489760624d037f5383f
+  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
 
 COCOAPODS: 0.39.0

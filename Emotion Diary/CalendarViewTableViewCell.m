@@ -7,7 +7,6 @@
 //
 
 #import "CalendarViewTableViewCell.h"
-#import "AssessmentHelper.h"
 
 @implementation CalendarViewTableViewCell
 
@@ -24,9 +23,9 @@
     // Configure the view for the selected state
 }
 
-- (void)setDiary:(EmotionDiary *)diary {
+- (void)setDiary:(EmotionDiarySwift *)diary {
     _imageSelfie.image = [UIImage imageWithContentsOfFile:diary.imageURL];
-    NSString *imageName = [AssessmentHelper getFaceNameBySmile:(int)diary.smile];
+    NSString *imageName = [Utilities getFaceNameBySmile:(int)diary.smile];
     _imageFace.image = [UIImage imageNamed:[imageName stringByAppendingString:@"-白圈"]];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"HH:mm"];

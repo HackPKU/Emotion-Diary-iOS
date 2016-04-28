@@ -16,7 +16,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *selfieImage;
 @property (strong, nonatomic) IBOutlet UIImageView *blurredSelfieImage;
 @property (strong, nonatomic) IBOutlet UIImageView *faceImage;
-@property (strong, nonatomic) IBOutlet UILabel *labelChickenSoup;
 @property (strong, nonatomic) IBOutlet UILabel *placeholder;
 @property (strong, nonatomic) IBOutlet UITextView *textRecord;
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionImages;

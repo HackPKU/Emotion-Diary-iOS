@@ -11,7 +11,7 @@
 
 @implementation Utilities
 
-+ (NSString *)MD5:(NSString *)string { // 字符串MD5值算法
++ (NSString *)MD5:(NSString *)string {
     const char* cStr = [string UTF8String];
     unsigned char digist[CC_MD5_DIGEST_LENGTH]; // CC_MD5_DIGEST_LENGTH = 16
     CC_MD5(cStr, (unsigned int)strlen(cStr), digist);
@@ -20,6 +20,35 @@
         [outPutStr appendFormat:@"%02X", digist[i]];// 小写 x 表示输出的是小写 MD5 ，大写 X 表示输出的是大写 MD5
     }
     return outPutStr;
+}
+
++ (UIImage *)normalizedImage:(UIImage *)image {
+    if (image.imageOrientation == UIImageOrientationUp) {
+        return image;
+    }
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, image.scale);
+    [image drawInRect:(CGRect){0, 0, image.size}];
+    UIImage *normalizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return normalizedImage;
+}
+
++ (UIImage *)resizeImage:(UIImage *)image toSize:(CGSize)size {
+    UIGraphicsBeginImageContext(CGSizeMake(size.width, size.height));
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *resizeImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return resizeImage;
+}
+
++ (NSString *)getFaceNameBySmile:(int)smile {
+    if (smile <= 33) {
+        return @"不笑";
+    }else if (smile <= 66) {
+        return @"中笑";
+    }else {
+        return @"大笑";
+    }
 }
 
 @end

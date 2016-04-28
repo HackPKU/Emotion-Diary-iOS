@@ -9,9 +9,7 @@
 #import "WelcomeViewController.h"
 #import "CalendarViewController.h"
 #import "RecordTableViewController.h"
-#import "KVNProgress.h"
 #import <MobileCoreServices/MobileCoreServices.h>
-#import "AssessmentHelper.h"
 
 @interface WelcomeViewController ()
 
@@ -64,9 +62,9 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [KVNProgress showWithStatus:@"分析中"];
-    selfie = [info objectForKey:UIImagePickerControllerOriginalImage];
-    selfie = [self normalizedImage:selfie];
-    selfie = [self reSizeImage:selfie toSize:CGSizeMake(800, 800 / selfie.size.width * selfie.size.height)];
+    selfie = [info objectForKey:UIImagePickerControllerEditedImage];
+    selfie = [Utilities normalizedImage:selfie];
+    selfie = [Utilities resizeImage:selfie toSize:CGSizeMake(800, 800 / selfie.size.width * selfie.size.height)];
 //    [KVNProgress showSuccess];
     [connector postImage:selfie block:^(enum FaceConnectorRequestResult result, NSString * _Nonnull message, NSString * _Nullable faceID) {
         if (result == FaceConnectorRequestResultError) {
@@ -118,25 +116,6 @@
         }]];
         [self presentViewController:action animated:YES completion:nil];
     }];
-}
-
-- (UIImage *)normalizedImage:(UIImage *)image {
-    if (image.imageOrientation == UIImageOrientationUp) {
-        return image;
-    }
-    UIGraphicsBeginImageContextWithOptions(image.size, NO, image.scale);
-    [image drawInRect:(CGRect){0, 0, image.size}];
-    UIImage *normalizedImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return normalizedImage;
-}
-
-- (UIImage *)reSizeImage:(UIImage *)oriImage toSize:(CGSize)reSize{
-    UIGraphicsBeginImageContext(CGSizeMake(reSize.width, reSize.height));
-    [oriImage drawInRect:CGRectMake(0, 0, reSize.width, reSize.height)];
-    UIImage *reSizeImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return reSizeImage;
 }
 
 - (void)didReceiveMemoryWarning {

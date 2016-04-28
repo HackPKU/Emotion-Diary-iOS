@@ -16,6 +16,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *labelDate;
 @property (strong, nonatomic) IBOutlet UILabel *labelTime;
 
-- (void)setDiary:(EmotionDiary *)diary;
+- (void)setDiary:(EmotionDiarySwift *)diary;
 
 @end

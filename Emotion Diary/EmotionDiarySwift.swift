@@ -1,5 +1,5 @@
 //
-//  EmotionDiary.swift
+//  EmotionDiarySwift.swift
 //  Emotion Diary
 //
 //  Created by 范志康 on 16/4/9.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EmotionDiary: NSObject, NSCoding {
+class EmotionDiarySwift: NSObject, NSCoding {
     
     var smile: Int
     var attractive: Int
@@ -63,26 +63,26 @@ class EmotionDiary: NSObject, NSCoding {
         if let emotionDiaries = getEmotionDiariesFromStore() {
             var diaries = emotionDiaries
             diaries.append(self)
-            userDefaults.removeObjectForKey(EmotionDiary.EmotionDiariesSaveKey)
+            userDefaults.removeObjectForKey(EmotionDiarySwift.EmotionDiariesSaveKey)
             let data = NSKeyedArchiver.archivedDataWithRootObject(diaries)
-            userDefaults.setObject(data, forKey: EmotionDiary.EmotionDiariesSaveKey)
+            userDefaults.setObject(data, forKey: EmotionDiarySwift.EmotionDiariesSaveKey)
             userDefaults.synchronize()
         }
         else {
             let data = NSKeyedArchiver.archivedDataWithRootObject([self])
-            userDefaults.setObject(data, forKey: EmotionDiary.EmotionDiariesSaveKey)
+            userDefaults.setObject(data, forKey: EmotionDiarySwift.EmotionDiariesSaveKey)
             userDefaults.synchronize()
         }
         EmotionDiaryHelper.sharedInstance.refreshEmotionDiariesFromStore()
     }
     
-    private func getEmotionDiariesFromStore() -> [EmotionDiary]? {
+    private func getEmotionDiariesFromStore() -> [EmotionDiarySwift]? {
         let userDefaults = NSUserDefaults.standardUserDefaults()
-        if let data = userDefaults.objectForKey(EmotionDiary.EmotionDiariesSaveKey) as? NSData {
+        if let data = userDefaults.objectForKey(EmotionDiarySwift.EmotionDiariesSaveKey) as? NSData {
             let array = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSArray
-            var emotionDiaries = [EmotionDiary]()
+            var emotionDiaries = [EmotionDiarySwift]()
             for item in array {
-                let diary = item as! EmotionDiary
+                let diary = item as! EmotionDiarySwift
                 emotionDiaries.append(diary)
             }
             return emotionDiaries.sort({ (before, after) -> Bool in
@@ -104,16 +104,16 @@ class EmotionDiaryHelper: NSObject {
         return sharedEmotionDiaryHelper
     }
     
-    private var storedData: [EmotionDiary]?
+    private var storedData: [EmotionDiarySwift]?
     
     func refreshEmotionDiariesFromStore() {
         
         let userDefaults = NSUserDefaults.standardUserDefaults()
-        if let data = userDefaults.objectForKey(EmotionDiary.EmotionDiariesSaveKey) as? NSData {
+        if let data = userDefaults.objectForKey(EmotionDiarySwift.EmotionDiariesSaveKey) as? NSData {
             let array = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSArray
-            var emotionDiaries = [EmotionDiary]()
+            var emotionDiaries = [EmotionDiarySwift]()
             for item in array {
-                let diary = item as! EmotionDiary
+                let diary = item as! EmotionDiarySwift
                 emotionDiaries.append(diary)
             }
             storedData = emotionDiaries.sort({ (before, after) -> Bool in
@@ -123,17 +123,17 @@ class EmotionDiaryHelper: NSObject {
 
     }
     
-    private func getEmotionDiariesFromStore() -> [EmotionDiary]? {
+    private func getEmotionDiariesFromStore() -> [EmotionDiarySwift]? {
         if let data = storedData {
             return data
         }
         else {
             let userDefaults = NSUserDefaults.standardUserDefaults()
-            if let data = userDefaults.objectForKey(EmotionDiary.EmotionDiariesSaveKey) as? NSData {
+            if let data = userDefaults.objectForKey(EmotionDiarySwift.EmotionDiariesSaveKey) as? NSData {
                 let array = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSArray
-                var emotionDiaries = [EmotionDiary]()
+                var emotionDiaries = [EmotionDiarySwift]()
                 for item in array {
-                    let diary = item as! EmotionDiary
+                    let diary = item as! EmotionDiarySwift
                     emotionDiaries.append(diary)
                 }
                 let diaries = emotionDiaries.sort({ (before, after) -> Bool in
@@ -148,7 +148,7 @@ class EmotionDiaryHelper: NSObject {
         }
     }
     
-    func getDiaryOfDay(date: NSDate) -> [EmotionDiary] {
+    func getDiaryOfDay(date: NSDate) -> [EmotionDiarySwift] {
         
         let thisDay = Int(date.timeIntervalSince1970 / (24 * 3600))
         if let emotionDiaries = getEmotionDiariesFromStore() {

@@ -8,8 +8,6 @@
 
 #import "RecordTableViewController.h"
 #import "UIImageEffects.h"
-#import "KVNProgress.h"
-#import "AssessmentHelper.h"
 #import "Emotion_Diary-Swift.h"
 
 #define MAX_PICTURE_NUM 9
@@ -59,10 +57,8 @@
 - (void)refreshView {
     if (!faceInfo) {
         _faceImage.image = nil;
-        _labelChickenSoup.text = @"正在分析您的心情";
     }else {
-        _faceImage.image = [UIImage imageNamed:[AssessmentHelper getFaceNameBySmile:[faceInfo[@"smile"] intValue]]];
-        _labelChickenSoup.text = [AssessmentHelper getWelcomeMsg:[faceInfo[@"smile"] intValue] withAttractive:[faceInfo[@"attractive"] intValue]];
+        _faceImage.image = [UIImage imageNamed:[Utilities getFaceNameBySmile:[faceInfo[@"smile"] intValue]]];
     }
 }
 
@@ -154,11 +150,23 @@
 
 #pragma mark - Navigation
 
+- (IBAction)cancel:(id)sender {
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
+- (IBAction)done:(id)sender {
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"enterMain"]) {
-        EmotionDiary *diary = [[EmotionDiary alloc] initWithSmile:[faceInfo[@"smile"] intValue] attractive:[faceInfo[@"attractive"] intValue] image:_selfie content:self.textRecord.text];
+        EmotionDiarySwift *diary = [[EmotionDiarySwift alloc] initWithSmile:[faceInfo[@"smile"] intValue] attractive:[faceInfo[@"attractive"] intValue] image:_selfie content:self.textRecord.text];
         [diary save];
     }
     // Get the new view controller using [segue destinationViewController].

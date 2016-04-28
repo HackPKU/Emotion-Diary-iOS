@@ -81,7 +81,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    EmotionDiary *diary = diaryArray[indexPath.row];
+    EmotionDiarySwift *diary = diaryArray[indexPath.row];
     //下句中(CELL_CONTENT_WIDTH - CELL_CONTENT_MARGIN 表示显示内容的label的长度 ，20000.0f 表示允许label的最大高度
     CGSize constraint = CGSizeMake(self.view.frame.size.width - 124 - 10, 20000.0f);
     CGSize size = [diary.content boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
