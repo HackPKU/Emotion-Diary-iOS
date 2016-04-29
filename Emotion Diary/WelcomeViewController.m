@@ -20,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enterMain) name:@"enterMain" object:nil];
     for (UIButton *button in @[_buttonRecord, _buttonProceed]) {
         button.layer.cornerRadius = 5.0;
         button.layer.borderWidth = 1.0;
@@ -27,7 +28,9 @@
     }
     hasShownCamera = NO;
     emotion = NO_EMOTION;
+#ifndef DEBUG
     [self setUnlocked:NO];
+#endif
     [self performSelector:@selector(animateButtonCamera) withObject:nil afterDelay:0.5];
     // Do any additional setup after loading the view.
     
@@ -108,7 +111,7 @@
     }else {
         successMessage = @"解锁成功";
     }
-    ActionPerformerResultBlock block = ^(ActionPerformerResult result, NSString * _Nullable message, NSObject * _Nullable data) {
+    ActionPerformerResultBlock block = ^(ActionPerformerResult result, NSString * _Nullable message, NSDictionary * _Nullable data) {
         if (result == ActionPerformerResultFail) {
             [KVNProgress showErrorWithStatus:message completion:^{
                 [self showWarning];
@@ -118,7 +121,7 @@
         dispatch_sync(dispatch_get_main_queue(), ^{
             [self setUnlocked:YES];
         });
-        emotion = [((NSDictionary *)data)[@"emotion"] intValue];
+        emotion = [data[@"emotion"] intValue];
         [KVNProgress showSuccessWithStatus:successMessage];
     };
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"faceID"] length] == 0) {
@@ -150,7 +153,23 @@
     }
     if ([ActionPerformer checkHasLogin]) {
         [action addAction:[UIAlertAction actionWithTitle:@"使用密码" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            // TODO: Unlock with password
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"输入密码" message:@"使用您的账号密码解锁心情日记" preferredStyle:UIAlertControllerStyleAlert];
+            [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+                textField.placeholder = @"密码";
+                textField.secureTextEntry = YES;
+            }];
+            [alert addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                if ([[Utilities MD5:alert.textFields[0].text] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"password"]]) {
+                    [self setUnlocked:YES];
+                }else {
+                    [KVNProgress showErrorWithStatus:@"密码错误"];
+                    [self setUnlocked:NO];
+                }
+            }]];
+            [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [self setUnlocked:NO];
+            }]];
+            [self presentViewController:alert animated:YES completion:nil];
         }]];
     }
     [action addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -160,6 +179,10 @@
 }
 
 #pragma mark - Navigation
+
+- (void)enterMain {
+    [self performSegueWithIdentifier:@"enterMain" sender:nil];
+}
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -176,6 +199,7 @@
 - (IBAction)unwindToWelcomeView:(UIStoryboardSegue *)segue {
     if ([segue.sourceViewController isKindOfClass:[CalendarViewController class]]) {
         [self setUnlocked:NO];
+        [self performSelector:@selector(takePicture:) withObject:nil afterDelay:0.5];
     }
 }
 

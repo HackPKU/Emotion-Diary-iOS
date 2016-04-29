@@ -17,7 +17,7 @@ typedef NS_ENUM(NSInteger, ActionPerformerResult) {
     ActionPerformerResultFail
 };
 
-typedef void (^ActionPerformerResultBlock)(ActionPerformerResult result, NSString  * _Nullable message, NSObject  * _Nullable data);
+typedef void (^ActionPerformerResultBlock)(ActionPerformerResult result, NSString * _Nullable message, NSDictionary * _Nullable data);
 
 @interface ActionPerformer : NSObject
 

@@ -7,6 +7,8 @@
 //
 
 #import "RecordTableViewController.h"
+#import "RecordCollectionViewCell.h"
+#import "WelcomeViewController.h"
 #import "UIImageEffects.h"
 #import "Emotion_Diary-Swift.h"
 
@@ -21,14 +23,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     images = [[NSMutableArray alloc] init];
-    _selfieImage.image = _selfie;
-    _selfieImage.layer.cornerRadius = _selfieImage.frame.size.width / 2;
-    _blurredSelfieImage.image = [UIImageEffects imageByApplyingBlurToImage:_selfie withRadius:60.0 tintColor:[UIColor colorWithWhite:0.5 alpha:0.5] saturationDeltaFactor:1.8 maskImage:nil];
+    UIImage *displaySelfie = _selfie;
+    if (!displaySelfie) {
+        displaySelfie = [UIImage imageNamed:@"MyFace1"]; // TODO: Add placeholder
+    }
+    _imageSelfie.image = displaySelfie;
+    _imageSelfie.layer.cornerRadius = _imageSelfie.frame.size.width / 2;
+    _imageSelfieBlurred.image = [UIImageEffects imageByApplyingBlurToImage:displaySelfie withRadius:60.0 tintColor:[UIColor colorWithWhite:0.5 alpha:0.5] saturationDeltaFactor:1.8 maskImage:nil];
     _textRecord.scrollsToTop = NO;
     if (_emotion == NO_EMOTION) {
         _emotion = 50;
     }
-    _faceImage.image = [UIImage imageNamed:[Utilities getFaceNameByEmotion:_emotion]];
+    _sliderEmotion.value = _emotion;
+    _sliderEmotion.userInteractionEnabled = NO;
+    _sliderEmotion.alpha = 0.0;
+    [self updateEmotion];
     [self textViewDidChange:_textRecord];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -124,6 +133,24 @@
 }
 */
 
+#pragma mark Emotion adjust
+
+- (IBAction)showEmotionSlider:(id)sender {
+    _sliderEmotion.userInteractionEnabled = !_sliderEmotion.userInteractionEnabled;
+    [UIView animateWithDuration:0.3 animations:^{
+        _sliderEmotion.alpha = 1 - _sliderEmotion.alpha;
+    }];
+}
+
+- (IBAction)emotionChanged:(UISlider *)sender {
+    _emotion = (int)sender.value;
+    [self updateEmotion];
+}
+
+- (void)updateEmotion {
+    [_buttonFace setImage:[UIImage imageNamed:[Utilities getFaceNameByEmotion:_emotion]] forState:UIControlStateNormal];
+}
+
 #pragma mark - Collection view delegate
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -136,11 +163,36 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < images.count) {
-        UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"image" forIndexPath:indexPath];
+        RecordCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"image" forIndexPath:indexPath];
+        cell.imagePhoto.image = images[indexPath.row];
         return cell;
     }else {
-        return [collectionView dequeueReusableCellWithReuseIdentifier:@"upload" forIndexPath:indexPath];
+        return [collectionView dequeueReusableCellWithReuseIdentifier:@"select" forIndexPath:indexPath];
     }
+}
+
+- (IBAction)deletePhoto:(id)sender {
+    RecordCollectionViewCell *cell = (RecordCollectionViewCell *)[[sender superview] superview];
+    NSInteger row = [_collectionImages indexPathForCell:cell].row;
+    [images removeObjectAtIndex:row];
+    [_collectionImages deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]]];
+}
+
+- (IBAction)addPhoto:(id)sender {
+    UzysAssetsPickerController *picker = [[UzysAssetsPickerController alloc] init];
+    picker.delegate = self;
+    picker.maximumNumberOfSelectionVideo = 0;
+    picker.maximumNumberOfSelectionPhoto = MAX_PICTURE_NUM - images.count;
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+- (void)uzysAssetsPickerController:(UzysAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets {
+    for (ALAsset *asset in assets) {
+        UIImage *image = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage scale:asset.defaultRepresentation.scale orientation:(UIImageOrientation)asset.defaultRepresentation.orientation];
+        [images addObject:image];
+    }
+    [_collectionImages reloadData];
+    [_collectionImages scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:images.count inSection:0] atScrollPosition:UICollectionViewScrollPositionRight animated:YES];
 }
 
 #pragma mark - Navigation
@@ -152,18 +204,15 @@
 }
 
 - (IBAction)done:(id)sender {
+    EmotionDiarySwift *diary = [[EmotionDiarySwift alloc] initWithSmile:_emotion attractive:0 image:_selfie content:_textRecord.text];
+    [diary save];
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
-        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"enterMain" object:nil];
     }];
 }
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    if ([segue.identifier isEqualToString:@"enterMain"]) {
-        EmotionDiarySwift *diary = [[EmotionDiarySwift alloc] initWithSmile:[faceInfo[@"smile"] intValue] attractive:[faceInfo[@"attractive"] intValue] image:_selfie content:self.textRecord.text];
-        [diary save];
-    }
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }

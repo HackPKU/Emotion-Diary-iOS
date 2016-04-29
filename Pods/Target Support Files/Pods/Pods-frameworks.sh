@@ -90,6 +90,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/PNChart.framework"
   install_framework "Pods/SDWebImage.framework"
   install_framework "Pods/UICountingLabel.framework"
+  install_framework "Pods/UzysAssetsPickerController.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/AFNetworking.framework"
@@ -98,4 +99,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/PNChart.framework"
   install_framework "Pods/SDWebImage.framework"
   install_framework "Pods/UICountingLabel.framework"
+  install_framework "Pods/UzysAssetsPickerController.framework"
 fi

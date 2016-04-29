@@ -29,15 +29,6 @@
     [FaceppAPI initWithApiKey:_API_KEY andApiSecret:_API_SECRET andRegion:APIServerRegionCN];
     [FaceppAPI setDebugMode:DEBUG];
     
-//    [ActionPerformer registerFaceWithImage:[UIImage imageNamed:@"MyFace1"] name:@"Frank" andBlock:^(ActionPerformerResult result, NSString * _Nullable message, NSObject * _Nullable data) {
-//        NSLog(@"%@\n%@", message, data);
-//    }];
-//    [ActionPerformer verifyFaceWithImage:[UIImage imageNamed:@"MyFace2"] andBlock:^(ActionPerformerResult result, NSString * _Nullable message, NSObject * _Nullable data) {
-//        NSLog(@"%@\n%@", message, data);
-//    }];
-//    [ActionPerformer deleteFaceWithBlock:^(ActionPerformerResult result, NSString * _Nullable message, NSObject * _Nullable data) {
-//        NSLog(@"%@\n%@", message, data);
-//    }];
     return YES;
 }
 

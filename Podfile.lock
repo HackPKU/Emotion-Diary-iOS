@@ -22,6 +22,7 @@ PODS:
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
   - UICountingLabel (1.2.0)
+  - UzysAssetsPickerController (0.9.9)
 
 DEPENDENCIES:
   - AFNetworking
@@ -29,6 +30,7 @@ DEPENDENCIES:
   - KVNProgress
   - PNChart
   - SDWebImage
+  - UzysAssetsPickerController
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -37,5 +39,6 @@ SPEC CHECKSUMS:
   PNChart: 25f91e9c4688af49c3647489760624d037f5383f
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
+  UzysAssetsPickerController: 47c27bd96955467925f3d4d80b1e2e8aaeff766d
 
 COCOAPODS: 0.39.0

@@ -32,6 +32,7 @@
 		01B4061C1CB7FF7500B242D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01B4061A1CB7FF7500B242D6 /* Main.storyboard */; };
 		01B4061E1CB7FF7500B242D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01B4061D1CB7FF7500B242D6 /* Assets.xcassets */; };
 		01B406211CB7FF7500B242D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01B4061F1CB7FF7500B242D6 /* LaunchScreen.storyboard */; };
+		01DF6FEF1CD3CEE100584CE9 /* RecordCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DF6FEE1CD3CEE100584CE9 /* RecordCollectionViewCell.m */; };
 		01E29C4D1CB88F4600DA815B /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C4C1CB88F4600DA815B /* WelcomeViewController.m */; };
 		01E29C501CB891A800DA815B /* StatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C4F1CB891A800DA815B /* StatTableViewController.m */; };
 		01E29C531CB8926200DA815B /* StatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C521CB8926200DA815B /* StatTableViewCell.m */; };
@@ -118,6 +119,8 @@
 		01B406201CB7FF7500B242D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01B406221CB7FF7500B242D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01CAA4531CB887FC00064D4E /* Emotion Diary-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Emotion Diary-Bridging-Header.h"; sourceTree = "<group>"; };
+		01DF6FED1CD3CEE100584CE9 /* RecordCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordCollectionViewCell.h; sourceTree = "<group>"; };
+		01DF6FEE1CD3CEE100584CE9 /* RecordCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordCollectionViewCell.m; sourceTree = "<group>"; };
 		01E29C4B1CB88F4600DA815B /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
 		01E29C4C1CB88F4600DA815B /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
 		01E29C4E1CB891A800DA815B /* StatTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatTableViewController.h; sourceTree = "<group>"; };
@@ -247,6 +250,8 @@
 				01E29C4C1CB88F4600DA815B /* WelcomeViewController.m */,
 				01F15FC61CB8E6AA006BB341 /* RecordTableViewController.h */,
 				01F15FC71CB8E6AA006BB341 /* RecordTableViewController.m */,
+				01DF6FED1CD3CEE100584CE9 /* RecordCollectionViewCell.h */,
+				01DF6FEE1CD3CEE100584CE9 /* RecordCollectionViewCell.m */,
 				01B406171CB7FF7500B242D6 /* CalendarViewController.h */,
 				01B406181CB7FF7500B242D6 /* CalendarViewController.m */,
 				015334DD1CB8B2DF00E3D2F1 /* CalendarViewTableViewCell.h */,
@@ -507,6 +512,7 @@
 				018EF4581CC761EE00E712BC /* FaceppAPI.m in Sources */,
 				01E29C531CB8926200DA815B /* StatTableViewCell.m in Sources */,
 				01B406131CB7FF7500B242D6 /* main.m in Sources */,
+				01DF6FEF1CD3CEE100584CE9 /* RecordCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
