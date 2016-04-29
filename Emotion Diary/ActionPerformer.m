@@ -219,7 +219,7 @@
                         return;
                     }
                     [[NSUserDefaults standardUserDefaults] setObject:dictCreate[@"person_id"] forKey:@"faceID"]; // Sace faceID in local storage
-                    block(ActionPerformerResultSuccess, nil, @{@"emotion": dictDetect[@"face"][0][@"attribute"][@"smiling"], @"faceid": dictCreate[@"person_id"]});
+                    block(ActionPerformerResultSuccess, nil, @{@"emotion": dictDetect[@"face"][0][@"attribute"][@"smiling"][@"value"]});
                 }];
             }];
         }];
@@ -251,15 +251,18 @@
                     return;
                 }
                 NSDictionary *dictVerify = (NSDictionary *)data;
-                if ([dictVerify[@"is_same_person"] boolValue]) { // Train the person with new face
+                if ([dictVerify[@"is_same_person"] boolValue]) {
+                    block(ActionPerformerResultSuccess, nil, @{@"emotion": dictDetect[@"face"][0][@"attribute"][@"smiling"][@"value"]});
+                    // Train the person with new face
                     FaceppResult *addResult = [[FaceppAPI person] addFaceWithPersonName:nil orPersonId:personID andFaceId:@[dictDetect[@"face"][0][@"face_id"]]];
                     [ActionPerformer processFaceppResult:addResult andBlock:^(ActionPerformerResult result, NSString * _Nullable message, NSObject * _Nullable data) {
                         if (result == ActionPerformerResultSuccess) {
                             [[FaceppAPI train] trainAsynchronouslyWithId:personID orName:nil andType:FaceppTrainVerify];
                         }
                     }];
+                }else {
+                    block(ActionPerformerResultFail, @"这似乎不是您本人", nil);
                 }
-                block(ActionPerformerResultSuccess, nil, @{@"isSamePerson": dictVerify[@"is_same_person"]});
             }];
         }];
     });

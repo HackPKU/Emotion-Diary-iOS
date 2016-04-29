@@ -61,7 +61,7 @@
     return destinationDateNow;
 }
 
-+ (NSString *)getFaceNameBySmile:(int)smile {
++ (NSString *)getFaceNameByEmotion:(int)smile {
     if (smile <= 33) {
         return @"不笑";
     }else if (smile <= 66) {

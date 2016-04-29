@@ -51,11 +51,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSDate *)getLocalDate:(NSDate *)date;
 
 /**
- * Get the face name of a given smile value
- * @param smile The smile value
+ * Get the face name of a given emotion value
+ * @param smile The emotion value
  * @return Face name
  */
-+ (NSString *)getFaceNameBySmile:(int)smile;
++ (NSString *)getFaceNameByEmotion:(int)smile;
 
 NS_ASSUME_NONNULL_END
 

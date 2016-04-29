@@ -25,9 +25,11 @@
     _selfieImage.layer.cornerRadius = _selfieImage.frame.size.width / 2;
     _blurredSelfieImage.image = [UIImageEffects imageByApplyingBlurToImage:_selfie withRadius:60.0 tintColor:[UIColor colorWithWhite:0.5 alpha:0.5] saturationDeltaFactor:1.8 maskImage:nil];
     _textRecord.scrollsToTop = NO;
+    if (_emotion == NO_EMOTION) {
+        _emotion = 50;
+    }
+    _faceImage.image = [UIImage imageNamed:[Utilities getFaceNameByEmotion:_emotion]];
     [self textViewDidChange:_textRecord];
-    [self refreshView];
-    [self analyseFace];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -41,27 +43,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)analyseFace {
-    FaceConnector *connector = [[FaceConnector alloc] init];
-    [connector getDetailInfoOfFace:_faceID block:^(enum FaceConnectorRequestResult result, NSString * _Nonnull message, NSDictionary<NSString *,NSNumber *> * _Nullable info) {
-        if (result == FaceConnectorRequestResultError) {
-            [KVNProgress showErrorWithStatus:message];
-            [self dismissViewControllerAnimated:YES completion:nil];
-            return;
-        }
-        faceInfo = info;
-        [self refreshView];
-    }];
-}
-
-- (void)refreshView {
-    if (!faceInfo) {
-        _faceImage.image = nil;
-    }else {
-        _faceImage.image = [UIImage imageNamed:[Utilities getFaceNameBySmile:[faceInfo[@"smile"] intValue]]];
-    }
-}
-
 #pragma mark - Text View Delegate
 
 - (void)textViewDidChange:(UITextView *)textView {
@@ -70,6 +51,20 @@
 }
 
 #pragma mark - Table view data source
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    switch (indexPath.row) {
+        case 3:
+            NSLog(@"Place");
+            break;
+        case 4:
+            NSLog(@"Weather");
+            break;
+        default:
+            break;
+    }
+}
 
 /*
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
