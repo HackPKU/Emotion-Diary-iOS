@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define NO_EMOTION -1
+
 @interface RecordTableViewController : UITableViewController <UITextViewDelegate> {
     NSDictionary *faceInfo;
     NSMutableArray *images;
@@ -21,6 +23,6 @@
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionImages;
 
 @property UIImage *selfie;
-@property NSString *faceID;
+@property int emotion;
 
 @end

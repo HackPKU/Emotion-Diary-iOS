@@ -7,18 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Emotion_Diary-Swift.h"
 
 @interface WelcomeViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
-    FaceConnector *connector;
-    FaceConnector *verificationer;
-    BOOL shouldRetakePicture;
     UIImage *selfie;
-    NSString *userFaceID;
+    int emotion;
+    BOOL hasShownCamera;
+    BOOL hasUnkocked;
 }
 
-@property (strong, nonatomic) IBOutlet UILabel *labelSuccess;
 @property (strong, nonatomic) IBOutlet UIButton *buttonCamera;
+@property (strong, nonatomic) IBOutlet UILabel *labelHint;
+@property (strong, nonatomic) IBOutlet UIButton *buttonRecord;
 @property (strong, nonatomic) IBOutlet UIButton *buttonProceed;
 
 @end

@@ -51,16 +51,18 @@ typedef void (^ActionPerformerResultBlock)(ActionPerformerResult result, NSStrin
 
 #pragma mark Face++ connection
 
-+ (void)registerFaceWithImage:(UIImage *)image name:(NSString *)name andBlock:(ActionPerformerResultBlock)block;
++ (void)registerFaceWithImage:(UIImage *)image andBlock:(ActionPerformerResultBlock)block;
 
 + (void)verifyFaceWithImage:(UIImage *)image andBlock:(ActionPerformerResultBlock)block;
+
++ (void)deleteFaceWithBlock:(ActionPerformerResultBlock)block;
 
 #pragma mark Local functions
 
 /**
  * Check whether the user has logged in
  */
-+ (BOOL)checkLogin;
++ (BOOL)checkHasLogin;
 
 NS_ASSUME_NONNULL_END
 
