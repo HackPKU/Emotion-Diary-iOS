@@ -225,12 +225,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="日记本" translatesAutoresizingMaskIntoConstraints="NO" id="rjV-dl-RKq">
-                                <rect key="frame" x="250" y="194.5" width="100" height="111"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="qng-dP-yCL"/>
-                                </constraints>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FDu-NC-s5l">
                                 <rect key="frame" x="140" y="500" width="320" height="80"/>
                                 <subviews>
@@ -262,9 +256,9 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="mXs-zE-2TZ" kind="presentation" identifier="recordMood" modalPresentationStyle="formSheet" id="amu-ui-ZWn">
-                                                <segue key="commit" inheritsFrom="parent" id="gdX-UV-noc"/>
-                                                <segue key="preview" inheritsFrom="commit" id="WL8-9F-e5y"/>
+                                            <segue destination="mXs-zE-2TZ" kind="presentation" identifier="record" modalPresentationStyle="formSheet" id="MEH-Jc-QhM">
+                                                <segue key="commit" inheritsFrom="parent" id="b0N-Jx-kCx"/>
+                                                <segue key="preview" inheritsFrom="commit" id="0kR-wI-Pgd"/>
                                             </segue>
                                         </connections>
                                     </button>
@@ -279,27 +273,38 @@
                                     <constraint firstAttribute="width" constant="320" id="vJj-hh-YPV"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="解锁成功" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ADN-Ao-VCy">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="自拍解锁" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ADN-Ao-VCy">
                                 <rect key="frame" x="266" y="325.5" width="68" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OWF-nn-p0Z">
+                                <rect key="frame" x="250" y="194.5" width="100" height="111"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="cC3-Go-cPW"/>
+                                </constraints>
+                                <state key="normal" image="日记本"/>
+                                <connections>
+                                    <action selector="takePicture:" destination="Dof-4y-maN" eventType="touchUpInside" id="Chd-M8-Roa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.74509803919999995" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="rjV-dl-RKq" firstAttribute="centerX" secondItem="Pqc-Ky-Qbz" secondAttribute="centerX" id="OWe-J2-6ZV"/>
                             <constraint firstItem="FDu-NC-s5l" firstAttribute="centerX" secondItem="Pqc-Ky-Qbz" secondAttribute="centerX" id="US2-Ej-cnb"/>
+                            <constraint firstItem="ADN-Ao-VCy" firstAttribute="top" secondItem="OWF-nn-p0Z" secondAttribute="bottom" constant="20" id="aNX-Od-Nb8"/>
+                            <constraint firstItem="OWF-nn-p0Z" firstAttribute="centerX" secondItem="Pqc-Ky-Qbz" secondAttribute="centerX" id="eHB-Ja-DbW"/>
                             <constraint firstItem="Vvf-yh-hqS" firstAttribute="top" secondItem="FDu-NC-s5l" secondAttribute="bottom" constant="20" id="gA3-De-sVm"/>
-                            <constraint firstItem="ADN-Ao-VCy" firstAttribute="top" secondItem="rjV-dl-RKq" secondAttribute="bottom" constant="20" id="hKm-XS-FuM"/>
-                            <constraint firstItem="rjV-dl-RKq" firstAttribute="centerY" secondItem="Pqc-Ky-Qbz" secondAttribute="centerY" constant="-50" id="lNa-30-qTG"/>
+                            <constraint firstItem="OWF-nn-p0Z" firstAttribute="centerY" secondItem="Pqc-Ky-Qbz" secondAttribute="centerY" constant="-50" id="m1b-mx-z53"/>
                             <constraint firstItem="ADN-Ao-VCy" firstAttribute="centerX" secondItem="Pqc-Ky-Qbz" secondAttribute="centerX" id="ybQ-vI-qTx"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="buttonCamera" destination="RQf-CO-zls" id="3oz-kZ-xh8"/>
+                        <outlet property="buttonCamera" destination="OWF-nn-p0Z" id="z6a-QM-oxe"/>
                         <outlet property="buttonProceed" destination="A24-PA-NnZ" id="z45-zc-TBU"/>
-                        <outlet property="labelSuccess" destination="ADN-Ao-VCy" id="JRP-a3-GDO"/>
+                        <outlet property="buttonRecord" destination="RQf-CO-zls" id="rlr-Ck-P4h"/>
+                        <outlet property="labelHint" destination="ADN-Ao-VCy" id="GND-OG-20x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8nQ-Gu-35H" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -565,7 +570,7 @@
         <image name="统计" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="amu-ui-ZWn"/>
+        <segue reference="MEH-Jc-QhM"/>
         <segue reference="e3d-0X-6Ej"/>
     </inferredMetricsTieBreakers>
 </document>

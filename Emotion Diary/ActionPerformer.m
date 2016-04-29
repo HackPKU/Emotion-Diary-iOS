@@ -23,7 +23,7 @@
     
     NSMutableDictionary *request = [dictionary mutableCopy];
     request[@"version"] = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    if ([ActionPerformer checkLogin]) {
+    if ([ActionPerformer checkHasLogin]) {
         request[@"userid"] = [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"];
         request[@"token"] = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
     }
@@ -172,66 +172,114 @@
 
 #pragma mark Face++ connection
 
-+ (void)processFaceppResult:(FaceppResult * _Nonnull)result detailed:(BOOL)detailed andBlock:(ActionPerformerResultBlock)block {
++ (void)processFaceppResult:(FaceppResult * _Nonnull)result andBlock:(ActionPerformerResultBlock)block {
     if (result.success) {
         block(ActionPerformerResultSuccess, nil, result.content);
     }else {
-        NSString *errorMessage = [NSString stringWithFormat:@"%d - %@", result.error.errorCode, result.error.message];
-        if (detailed) {
-            block(ActionPerformerResultFail, errorMessage, nil);
-        }else {
 #ifdef DEBUG
-            block(ActionPerformerResultFail, errorMessage, nil);
+        block(ActionPerformerResultFail, result.error.message, nil);
 #else
-            block(ActionPerformerResultFail, @"网络连接错误", nil);
+        block(ActionPerformerResultFail, @"网络连接错误", nil);
 #endif
-        }
     }
 }
 
-+ (void)registerFaceWithImage:(UIImage *)image name:(NSString *)name andBlock:(ActionPerformerResultBlock)block {
-    FaceppResult *detectResult = [[FaceppAPI detection] detectWithURL:nil orImageData:[Utilities compressImage:image toSize:200] mode:FaceppDetectionModeOneFace];
-    [ActionPerformer processFaceppResult:detectResult detailed:NO andBlock:^(ActionPerformerResult result, NSString * _Nullable message, NSObject * _Nullable data) {
-        if (result == ActionPerformerResultFail) {
-            [ActionPerformer processFaceppResult:detectResult detailed:NO andBlock:block];
-            return;
-        }
-        NSDictionary *dictDetect = (NSDictionary *)data;
-#ifdef DEBUG
-        NSString *groupName = @"EmotionDiaryTest";
-#else
-        NSString *groupName = @"EmotionDiary";
-#endif
-        FaceppResult *registerResult = [[FaceppAPI person] createWithPersonName:name andFaceId:@[dictDetect[@"face"][0][@"face_id"]] andTag:@"iOS" andGroupId:nil orGroupName:@[groupName]];
-        [ActionPerformer processFaceppResult:registerResult detailed:YES andBlock:^(ActionPerformerResult result, NSString * _Nullable message, NSObject * _Nullable data) {
++ (void)registerFaceWithImage:(UIImage *)image andBlock:(ActionPerformerResultBlock)block {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        FaceppResult *detectResult = [[FaceppAPI detection] detectWithURL:nil orImageData:[Utilities compressImage:image toSize:100] mode:FaceppDetectionModeOneFace];
+        [ActionPerformer processFaceppResult:detectResult andBlock:^(ActionPerformerResult result, NSString * _Nullable message, NSObject * _Nullable data) {
             if (result == ActionPerformerResultFail) {
-                if ([message intValue] == 1503) {
-                    block(ActionPerformerResultFail, @"名称已被使用", nil);
-                }else {
-                    [ActionPerformer processFaceppResult:detectResult detailed:NO andBlock:block];
-                }
+                [ActionPerformer processFaceppResult:detectResult andBlock:block];
                 return;
             }
-            NSDictionary *dictCreate = (NSDictionary *)data;
-            [[NSUserDefaults standardUserDefaults] setObject:dictCreate[@"person_id"] forKey:@"faceID"]; // Sace faceID in local storage
-            block(ActionPerformerResultSuccess, nil, @{@"emotion": dictDetect[@"face"][0][@"attribute"][@"smiling"], @"faceid": dictCreate[@"person_id"]});
+            NSDictionary *dictDetect = (NSDictionary *)data;
+            if ([dictDetect[@"face"] count] == 0) {
+                block(ActionPerformerResultFail, @"没有检测到人脸，您是否离镜头太远了？", nil);
+                return;
+            }
+    #ifdef DEBUG
+            NSString *groupName = @"EmotionDiaryTest";
+    #else
+            NSString *groupName = @"EmotionDiary";
+    #endif
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy_MM_dd_HH_mm_ss"];
+            NSString *name = [NSString stringWithFormat:@"iOS_User_%@", [dateFormatter stringFromDate:[NSDate date]]];
+            FaceppResult *registerResult = [[FaceppAPI person] createWithPersonName:name andFaceId:@[dictDetect[@"face"][0][@"face_id"]] andTag:@"iOS" andGroupId:nil orGroupName:@[groupName]];
+            [ActionPerformer processFaceppResult:registerResult andBlock:^(ActionPerformerResult result, NSString * _Nullable message, NSObject * _Nullable data) {
+                if (result == ActionPerformerResultFail) {
+                    [ActionPerformer processFaceppResult:detectResult andBlock:block];
+                    return;
+                }
+                NSDictionary *dictCreate = (NSDictionary *)data;
+                FaceppResult *trainResult = [[FaceppAPI train] trainAsynchronouslyWithId:dictCreate[@"person_id"] orName:nil andType:FaceppTrainVerify]; // Train the object
+                [ActionPerformer processFaceppResult:trainResult andBlock:^(ActionPerformerResult result, NSString * _Nullable message, NSObject * _Nullable data) {
+                    if (result == ActionPerformerResultFail) {
+                        [ActionPerformer processFaceppResult:trainResult andBlock:block];
+                        return;
+                    }
+                    [[NSUserDefaults standardUserDefaults] setObject:dictCreate[@"person_id"] forKey:@"faceID"]; // Sace faceID in local storage
+                    block(ActionPerformerResultSuccess, nil, @{@"emotion": dictDetect[@"face"][0][@"attribute"][@"smiling"], @"faceid": dictCreate[@"person_id"]});
+                }];
+            }];
         }];
-    }];
+    });
 }
 
 + (void)verifyFaceWithImage:(UIImage *)image andBlock:(ActionPerformerResultBlock)block {
-    FaceppResult *detectResult = [[FaceppAPI detection] detectWithURL:nil orImageData:[Utilities compressImage:image toSize:200] mode:FaceppDetectionModeOneFace];
-    [ActionPerformer processFaceppResult:detectResult detailed:NO andBlock:^(ActionPerformerResult result, NSString * _Nullable message, NSObject * _Nullable data) {
-        if (result == ActionPerformerResultFail) {
-            [ActionPerformer processFaceppResult:detectResult detailed:NO andBlock:block];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *personID = [[NSUserDefaults standardUserDefaults] objectForKey:@"faceID"];
+        if (personID.length == 0) {
+            block(ActionPerformerResultFail, @"您还未注册人脸", nil);
             return;
         }
-    }];
+        FaceppResult *detectResult = [[FaceppAPI detection] detectWithURL:nil orImageData:[Utilities compressImage:image toSize:100] mode:FaceppDetectionModeOneFace];
+        [ActionPerformer processFaceppResult:detectResult andBlock:^(ActionPerformerResult result, NSString * _Nullable message, NSObject * _Nullable data) {
+            if (result == ActionPerformerResultFail) {
+                [ActionPerformer processFaceppResult:detectResult andBlock:block];
+                return;
+            }
+            NSDictionary *dictDetect = (NSDictionary *)data;
+            if ([dictDetect[@"face"] count] == 0) {
+                block(ActionPerformerResultFail, @"没有检测到人脸，您是否离镜头太远了？", nil);
+                return;
+            }
+            FaceppResult *verifyResult = [[FaceppAPI recognition] verifyWithFaceId:dictDetect[@"face"][0][@"face_id"] andPersonId:personID orPersonName:nil async:NO];
+            [ActionPerformer processFaceppResult:verifyResult andBlock:^(ActionPerformerResult result, NSString * _Nullable message, NSObject * _Nullable data) {
+                if (result == ActionPerformerResultFail) {
+                    [ActionPerformer processFaceppResult:verifyResult andBlock:block];
+                    return;
+                }
+                NSDictionary *dictVerify = (NSDictionary *)data;
+                if ([dictVerify[@"is_same_person"] boolValue]) { // Train the person with new face
+                    FaceppResult *addResult = [[FaceppAPI person] addFaceWithPersonName:nil orPersonId:personID andFaceId:@[dictDetect[@"face"][0][@"face_id"]]];
+                    [ActionPerformer processFaceppResult:addResult andBlock:^(ActionPerformerResult result, NSString * _Nullable message, NSObject * _Nullable data) {
+                        if (result == ActionPerformerResultSuccess) {
+                            [[FaceppAPI train] trainAsynchronouslyWithId:personID orName:nil andType:FaceppTrainVerify];
+                        }
+                    }];
+                }
+                block(ActionPerformerResultSuccess, nil, @{@"isSamePerson": dictVerify[@"is_same_person"]});
+            }];
+        }];
+    });
+}
+
++ (void)deleteFaceWithBlock:(ActionPerformerResultBlock)block {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *personID = [[NSUserDefaults standardUserDefaults] objectForKey:@"faceID"];
+        if (personID.length == 0) {
+            block(ActionPerformerResultFail, @"您还未注册人脸", nil);
+            return;
+        }
+        FaceppResult *clearResult = [[FaceppAPI person] deleteWithPersonName:nil orPersonId:personID];
+        [ActionPerformer processFaceppResult:clearResult andBlock:block];
+    });
 }
 
 #pragma mark Local functions
 
-+ (BOOL)checkLogin {
++ (BOOL)checkHasLogin {
     return ([[[NSUserDefaults standardUserDefaults] objectForKey:@"userid"] length] > 0 && [[[NSUserDefaults standardUserDefaults] objectForKey:@"token"] length] > 0);
 }
 
