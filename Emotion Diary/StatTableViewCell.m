@@ -13,7 +13,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
+    _lineChart.delegate = self;
+    _lineChart.dataSource = self;
     // Initialization code
 }
 
@@ -24,19 +25,16 @@
 }
 
 - (void)setData:(NSArray *)data {
-    // Setting up the line chart
-    
-    _lineChart.verticalGridStep = 4;
-    _lineChart.horizontalGridStep = 1;
-    _lineChart.lineWidth = 1;
-    _lineChart.color = APP_COLOR;
-    _lineChart.valueLabelBackgroundColor = [UIColor clearColor];
-    _lineChart.fillColor = [APP_COLOR colorWithAlphaComponent:0.3];
-    _lineChart.valueLabelPosition = ValueLabelLeftMirrored;
-    _lineChart.labelForValue = ^(CGFloat value) {
-        return [NSString stringWithFormat:@"%d", (int)value];
-    };
-    [_lineChart setChartData:data];
+    _data = data;
+    [_lineChart reloadGraph];
+}
+
+- (NSInteger)numberOfPointsInLineGraph:(BEMSimpleLineGraphView *)graph {
+    return _data.count;
+}
+
+- (CGFloat)lineGraph:(BEMSimpleLineGraphView *)graph valueForPointAtIndex:(NSInteger)index {
+    return [_data[index] intValue];
 }
 
 @end

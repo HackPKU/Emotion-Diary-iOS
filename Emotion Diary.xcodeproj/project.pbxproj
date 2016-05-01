@@ -24,8 +24,6 @@
 		018EF4611CC761EE00E712BC /* FaceppTrainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 018EF4521CC761EE00E712BC /* FaceppTrainer.m */; };
 		018EF4621CC761EE00E712BC /* FaceppError.m in Sources */ = {isa = PBXBuildFile; fileRef = 018EF4551CC761EE00E712BC /* FaceppError.m */; };
 		018EF4631CC761EE00E712BC /* FaceppResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 018EF4571CC761EE00E712BC /* FaceppResult.m */; };
-		0193CA651CB82C650057E082 /* FSLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA621CB82C650057E082 /* FSLineChart.m */; };
-		0193CA661CB82C650057E082 /* UIColor+FSPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193CA641CB82C650057E082 /* UIColor+FSPalette.m */; };
 		01B406131CB7FF7500B242D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B406121CB7FF7500B242D6 /* main.m */; };
 		01B406161CB7FF7500B242D6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B406151CB7FF7500B242D6 /* AppDelegate.m */; };
 		01B406191CB7FF7500B242D6 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B406181CB7FF7500B242D6 /* CalendarViewController.m */; };
@@ -36,7 +34,6 @@
 		01E29C4D1CB88F4600DA815B /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C4C1CB88F4600DA815B /* WelcomeViewController.m */; };
 		01E29C501CB891A800DA815B /* StatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C4F1CB891A800DA815B /* StatTableViewController.m */; };
 		01E29C531CB8926200DA815B /* StatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C521CB8926200DA815B /* StatTableViewCell.m */; };
-		01E29C561CB89C3400DA815B /* UIImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C551CB89C3400DA815B /* UIImageEffects.m */; };
 		01E2DAAE1CCA0A74009E69DC /* Emotion DiaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E2DAAD1CCA0A74009E69DC /* Emotion DiaryTests.m */; };
 		01F15FC81CB8E6AA006BB341 /* RecordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F15FC71CB8E6AA006BB341 /* RecordTableViewController.m */; };
 		C8BAB25A48A3B7819B6D6974 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3DF3C1D9187607C200094B /* Pods.framework */; };
@@ -105,10 +102,6 @@
 		018EF4561CC761EE00E712BC /* FaceppResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceppResult.h; sourceTree = "<group>"; };
 		018EF4571CC761EE00E712BC /* FaceppResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceppResult.m; sourceTree = "<group>"; };
 		018EF4641CC7623400E712BC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		0193CA611CB82C650057E082 /* FSLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSLineChart.h; sourceTree = "<group>"; };
-		0193CA621CB82C650057E082 /* FSLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSLineChart.m; sourceTree = "<group>"; };
-		0193CA631CB82C650057E082 /* UIColor+FSPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FSPalette.h"; sourceTree = "<group>"; };
-		0193CA641CB82C650057E082 /* UIColor+FSPalette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FSPalette.m"; sourceTree = "<group>"; };
 		01B4060E1CB7FF7500B242D6 /* Emotion Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Emotion Diary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01B406121CB7FF7500B242D6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		01B406141CB7FF7500B242D6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -127,8 +120,6 @@
 		01E29C4F1CB891A800DA815B /* StatTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatTableViewController.m; sourceTree = "<group>"; };
 		01E29C511CB8926200DA815B /* StatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatTableViewCell.h; sourceTree = "<group>"; };
 		01E29C521CB8926200DA815B /* StatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatTableViewCell.m; sourceTree = "<group>"; };
-		01E29C541CB89C3400DA815B /* UIImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIImageEffects.h; path = UIImageEffects/UIImageEffects.h; sourceTree = "<group>"; };
-		01E29C551CB89C3400DA815B /* UIImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageEffects.m; path = UIImageEffects/UIImageEffects.m; sourceTree = "<group>"; };
 		01E2DA651CCA00BC009E69DC /* APIKey+APISecret.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "APIKey+APISecret.h"; sourceTree = "<group>"; };
 		01E2DAAD1CCA0A74009E69DC /* Emotion DiaryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Emotion DiaryTests.m"; sourceTree = "<group>"; };
 		01F15FC61CB8E6AA006BB341 /* RecordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordTableViewController.h; sourceTree = "<group>"; };
@@ -208,17 +199,6 @@
 			path = FaceppResult;
 			sourceTree = "<group>";
 		};
-		0193CA601CB82C650057E082 /* FSLineChart */ = {
-			isa = PBXGroup;
-			children = (
-				0193CA611CB82C650057E082 /* FSLineChart.h */,
-				0193CA621CB82C650057E082 /* FSLineChart.m */,
-				0193CA631CB82C650057E082 /* UIColor+FSPalette.h */,
-				0193CA641CB82C650057E082 /* UIColor+FSPalette.m */,
-			);
-			path = FSLineChart;
-			sourceTree = "<group>";
-		};
 		01B406051CB7FF7500B242D6 = {
 			isa = PBXGroup;
 			children = (
@@ -243,7 +223,6 @@
 		01B406101CB7FF7500B242D6 /* Emotion Diary */ = {
 			isa = PBXGroup;
 			children = (
-				01CAA4281CB8328B00064D4E /* 3rd Party Framework */,
 				01B406141CB7FF7500B242D6 /* AppDelegate.h */,
 				01B406151CB7FF7500B242D6 /* AppDelegate.m */,
 				01E29C4B1CB88F4600DA815B /* WelcomeViewController.h */,
@@ -272,6 +251,7 @@
 				01B4061F1CB7FF7500B242D6 /* LaunchScreen.storyboard */,
 				01B406221CB7FF7500B242D6 /* Info.plist */,
 				01B406111CB7FF7500B242D6 /* Supporting Files */,
+				018EF43D1CC761EE00E712BC /* FaceppSDK_ARC */,
 			);
 			path = "Emotion Diary";
 			sourceTree = "<group>";
@@ -284,25 +264,6 @@
 				017EAA5D1CD5EE0C004AF7FF /* Emotion Diary-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		01CAA4281CB8328B00064D4E /* 3rd Party Framework */ = {
-			isa = PBXGroup;
-			children = (
-				01E29C581CB89C3F00DA815B /* UIImageEffects */,
-				018EF43D1CC761EE00E712BC /* FaceppSDK_ARC */,
-				0193CA601CB82C650057E082 /* FSLineChart */,
-			);
-			name = "3rd Party Framework";
-			sourceTree = "<group>";
-		};
-		01E29C581CB89C3F00DA815B /* UIImageEffects */ = {
-			isa = PBXGroup;
-			children = (
-				01E29C541CB89C3400DA815B /* UIImageEffects.h */,
-				01E29C551CB89C3400DA815B /* UIImageEffects.m */,
-			);
-			name = UIImageEffects;
 			sourceTree = "<group>";
 		};
 		3B73EC5709F5C116C582D080 /* Pods */ = {
@@ -490,16 +451,13 @@
 				018EF4621CC761EE00E712BC /* FaceppError.m in Sources */,
 				018EF45B1CC761EE00E712BC /* FaceppFaceset.m in Sources */,
 				01B406191CB7FF7500B242D6 /* CalendarViewController.m in Sources */,
-				01E29C561CB89C3400DA815B /* UIImageEffects.m in Sources */,
 				01B406161CB7FF7500B242D6 /* AppDelegate.m in Sources */,
-				0193CA661CB82C650057E082 /* UIColor+FSPalette.m in Sources */,
 				01360A591CD1174400BB02B0 /* ActionPerformer.m in Sources */,
 				01F15FC81CB8E6AA006BB341 /* RecordTableViewController.m in Sources */,
 				018EF4591CC761EE00E712BC /* FaceppClient.m in Sources */,
 				01360A5C1CD1180A00BB02B0 /* EmotionDiary.m in Sources */,
 				018EF4631CC761EE00E712BC /* FaceppResult.m in Sources */,
 				018EF45F1CC761EE00E712BC /* FaceppPerson.m in Sources */,
-				0193CA651CB82C650057E082 /* FSLineChart.m in Sources */,
 				018EF4601CC761EE00E712BC /* FaceppRecognition.m in Sources */,
 				01E29C501CB891A800DA815B /* StatTableViewController.m in Sources */,
 				015334DF1CB8B2DF00E3D2F1 /* CalendarViewTableViewCell.m in Sources */,

@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FSLineChart.h"
+#import "BEMSimpleLineGraphView.h"
 
-@interface StatTableViewCell : UITableViewCell
+@interface StatTableViewCell : UITableViewCell <BEMSimpleLineGraphDelegate, BEMSimpleLineGraphDataSource>
 
-@property (strong, nonatomic) IBOutlet FSLineChart *lineChart;
+@property (strong, nonatomic) IBOutlet BEMSimpleLineGraphView *lineChart;
+@property (readonly) NSArray *data;
 
 - (void)setData:(NSArray *)data;
 

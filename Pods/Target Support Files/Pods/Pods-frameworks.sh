@@ -85,27 +85,25 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/AFNetworking.framework"
+  install_framework "Pods/BEMSimpleLineGraph.framework"
   install_framework "Pods/CTAssetsPickerController.framework"
   install_framework "Pods/DACircularProgress.framework"
   install_framework "Pods/FSCalendar.framework"
   install_framework "Pods/KVNProgress.framework"
   install_framework "Pods/MBProgressHUD.framework"
   install_framework "Pods/MWPhotoBrowser.framework"
-  install_framework "Pods/PNChart.framework"
   install_framework "Pods/PureLayout.framework"
   install_framework "Pods/SDWebImage.framework"
-  install_framework "Pods/UICountingLabel.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/AFNetworking.framework"
+  install_framework "Pods/BEMSimpleLineGraph.framework"
   install_framework "Pods/CTAssetsPickerController.framework"
   install_framework "Pods/DACircularProgress.framework"
   install_framework "Pods/FSCalendar.framework"
   install_framework "Pods/KVNProgress.framework"
   install_framework "Pods/MBProgressHUD.framework"
   install_framework "Pods/MWPhotoBrowser.framework"
-  install_framework "Pods/PNChart.framework"
   install_framework "Pods/PureLayout.framework"
   install_framework "Pods/SDWebImage.framework"
-  install_framework "Pods/UICountingLabel.framework"
 fi
