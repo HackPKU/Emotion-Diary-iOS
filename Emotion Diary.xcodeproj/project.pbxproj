@@ -11,7 +11,7 @@
 		01360A5C1CD1180A00BB02B0 /* EmotionDiary.m in Sources */ = {isa = PBXBuildFile; fileRef = 01360A5B1CD1180A00BB02B0 /* EmotionDiary.m */; };
 		0148B0A71CB97D0A00E8FC08 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 0148B0A61CB97D0A00E8FC08 /* Utilities.m */; };
 		015334DF1CB8B2DF00E3D2F1 /* CalendarViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 015334DE1CB8B2DF00E3D2F1 /* CalendarViewTableViewCell.m */; };
-		015334EF1CB8BB3300E3D2F1 /* EmotionDiarySwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015334EE1CB8BB3300E3D2F1 /* EmotionDiarySwift.swift */; };
+		017EAA601CD62CC2004AF7FF /* EmotionDiaryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 017EAA5F1CD62CC2004AF7FF /* EmotionDiaryManager.m */; };
 		018EF4581CC761EE00E712BC /* FaceppAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 018EF43F1CC761EE00E712BC /* FaceppAPI.m */; };
 		018EF4591CC761EE00E712BC /* FaceppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 018EF4421CC761EE00E712BC /* FaceppClient.m */; };
 		018EF45A1CC761EE00E712BC /* FaceppDetection.m in Sources */ = {isa = PBXBuildFile; fileRef = 018EF4441CC761EE00E712BC /* FaceppDetection.m */; };
@@ -74,9 +74,9 @@
 		015334DE1CB8B2DF00E3D2F1 /* CalendarViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewTableViewCell.m; sourceTree = "<group>"; };
 		015334E01CB8B79300E3D2F1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		015334E11CB8B79300E3D2F1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		015334EE1CB8BB3300E3D2F1 /* EmotionDiarySwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmotionDiarySwift.swift; sourceTree = "<group>"; };
 		015AFD6A1CCBE09800389C7A /* Emotion Diary-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Emotion Diary-Prefix.pch"; sourceTree = "<group>"; };
-		017EAA5D1CD5EE0C004AF7FF /* Emotion Diary-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Emotion Diary-Bridging-Header.h"; sourceTree = "<group>"; };
+		017EAA5E1CD62CC2004AF7FF /* EmotionDiaryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionDiaryManager.h; sourceTree = "<group>"; };
+		017EAA5F1CD62CC2004AF7FF /* EmotionDiaryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionDiaryManager.m; sourceTree = "<group>"; };
 		018EF43E1CC761EE00E712BC /* FaceppAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceppAPI.h; sourceTree = "<group>"; };
 		018EF43F1CC761EE00E712BC /* FaceppAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceppAPI.m; sourceTree = "<group>"; };
 		018EF4411CC761EE00E712BC /* FaceppClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceppClient.h; sourceTree = "<group>"; };
@@ -239,9 +239,10 @@
 				01E29C4F1CB891A800DA815B /* StatTableViewController.m */,
 				01E29C511CB8926200DA815B /* StatTableViewCell.h */,
 				01E29C521CB8926200DA815B /* StatTableViewCell.m */,
-				015334EE1CB8BB3300E3D2F1 /* EmotionDiarySwift.swift */,
 				01360A5A1CD1180A00BB02B0 /* EmotionDiary.h */,
 				01360A5B1CD1180A00BB02B0 /* EmotionDiary.m */,
+				017EAA5E1CD62CC2004AF7FF /* EmotionDiaryManager.h */,
+				017EAA5F1CD62CC2004AF7FF /* EmotionDiaryManager.m */,
 				01360A571CD1174400BB02B0 /* ActionPerformer.h */,
 				01360A581CD1174400BB02B0 /* ActionPerformer.m */,
 				0148B0A51CB97D0A00E8FC08 /* Utilities.h */,
@@ -261,7 +262,6 @@
 			children = (
 				01B406121CB7FF7500B242D6 /* main.m */,
 				015AFD6A1CCBE09800389C7A /* Emotion Diary-Prefix.pch */,
-				017EAA5D1CD5EE0C004AF7FF /* Emotion Diary-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -462,9 +462,9 @@
 				01E29C501CB891A800DA815B /* StatTableViewController.m in Sources */,
 				015334DF1CB8B2DF00E3D2F1 /* CalendarViewTableViewCell.m in Sources */,
 				018EF45E1CC761EE00E712BC /* FaceppInfo.m in Sources */,
-				015334EF1CB8BB3300E3D2F1 /* EmotionDiarySwift.swift in Sources */,
 				01E29C4D1CB88F4600DA815B /* WelcomeViewController.m in Sources */,
 				018EF45C1CC761EE00E712BC /* FaceppGroup.m in Sources */,
+				017EAA601CD62CC2004AF7FF /* EmotionDiaryManager.m in Sources */,
 				018EF4611CC761EE00E712BC /* FaceppTrainer.m in Sources */,
 				0148B0A71CB97D0A00E8FC08 /* Utilities.m in Sources */,
 				018EF4581CC761EE00E712BC /* FaceppAPI.m in Sources */,
@@ -610,7 +610,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Emotion Diary/Emotion Diary-Prefix.pch";
 				INFOPLIST_FILE = "Emotion Diary/Info.plist";
@@ -618,8 +618,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "cn.fanzhikang.Emotion-Diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Emotion Diary/Emotion Diary-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -633,7 +631,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Emotion Diary/Emotion Diary-Prefix.pch";
 				INFOPLIST_FILE = "Emotion Diary/Info.plist";
@@ -641,8 +639,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "cn.fanzhikang.Emotion-Diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Emotion Diary/Emotion Diary-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

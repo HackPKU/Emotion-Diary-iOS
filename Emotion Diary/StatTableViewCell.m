@@ -13,9 +13,10 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    // Initialization code
+    
     _lineChart.delegate = self;
     _lineChart.dataSource = self;
-    // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -25,16 +26,16 @@
 }
 
 - (void)setData:(NSArray *)data {
-    _data = data;
+    chartData = data;
     [_lineChart reloadGraph];
 }
 
 - (NSInteger)numberOfPointsInLineGraph:(BEMSimpleLineGraphView *)graph {
-    return _data.count;
+    return chartData.count;
 }
 
 - (CGFloat)lineGraph:(BEMSimpleLineGraphView *)graph valueForPointAtIndex:(NSInteger)index {
-    return [_data[index] intValue];
+    return [chartData[index] intValue];
 }
 
 @end

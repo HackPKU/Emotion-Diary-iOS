@@ -10,8 +10,7 @@
 #import "FSCalendar.h"
 
 @interface CalendarViewController : UIViewController <FSCalendarDelegate, FSCalendarDataSource, UITableViewDelegate, UITableViewDataSource> {
-    NSDate *currentDate;
-    NSArray *diaryArray;
+    NSArray<EmotionDiary *> *diariesOfToday;
 }
 
 @property (strong, nonatomic) IBOutlet FSCalendar *calendar;

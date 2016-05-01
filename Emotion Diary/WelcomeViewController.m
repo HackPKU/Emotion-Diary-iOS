@@ -111,8 +111,8 @@
     }else {
         successMessage = @"解锁成功";
     }
-    ActionPerformerResultBlock block = ^(ActionPerformerResult result, NSString * _Nullable message, NSDictionary * _Nullable data) {
-        if (result == ActionPerformerResultFail) {
+    ActionPerformerResultBlock block = ^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+        if (!success) {
             [KVNProgress showErrorWithStatus:message completion:^{
                 [self showWarning];
             }];

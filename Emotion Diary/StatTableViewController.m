@@ -8,7 +8,6 @@
 
 #import "StatTableViewController.h"
 #import "StatTableViewCell.h"
-#import "Emotion_Diary-Swift.h"
 
 @interface StatTableViewController ()
 
@@ -64,13 +63,13 @@
     
     switch (indexPath.section) {
         case 0:
-            [cell setData:[[EmotionDiarySwiftHelper sharedInstance] getSomeDayAgoSmileness:7]];
+            [cell setData:[[EmotionDiaryManager sharedManager] getStatOfLastDays:7]];
             break;
         case 1:
-            [cell setData:[[EmotionDiarySwiftHelper sharedInstance] getSomeDayAgoSmileness:30]];
+            [cell setData:[[EmotionDiaryManager sharedManager] getStatOfLastDays:30]];
             break;
         case 2:
-            [cell setData:[[EmotionDiarySwiftHelper sharedInstance] getSomeDayAgoSmileness:365]];
+            [cell setData:[[EmotionDiaryManager sharedManager] getStatOfLastDays:365]];
             break;
         default:
             break;

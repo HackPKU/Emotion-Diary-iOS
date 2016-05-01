@@ -33,7 +33,13 @@
     return normalizedImage;
 }
 
-+ (UIImage *)resizeImage:(UIImage *)image toSize:(CGSize)size {
++ (UIImage *)resizeImage:(UIImage *)image toMaxWidthAndHeight:(NSInteger)max {
+    CGSize size;
+    if (image.size.width > image.size.height) {
+        size = CGSizeMake(max, (NSInteger)(max * image.size.height / image.size.width));
+    }else {
+        size = CGSizeMake((NSInteger)(max * image.size.width / image.size.height), max);
+    }
     UIGraphicsBeginImageContext(CGSizeMake(size.width, size.height));
     [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
     UIImage *resizeImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -49,26 +55,6 @@
         imageData = UIImageJPEGRepresentation(image, ratio);
     }
     return imageData;
-}
-
-+ (NSDate *)getLocalDate:(NSDate *)date {
-    NSTimeZone* sourceTimeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
-    NSTimeZone* destinationTimeZone = [NSTimeZone localTimeZone];
-    NSInteger sourceGMTOffset = [sourceTimeZone secondsFromGMTForDate:date];
-    NSInteger destinationGMTOffset = [destinationTimeZone secondsFromGMTForDate:date];
-    NSTimeInterval interval = destinationGMTOffset - sourceGMTOffset;
-    NSDate* destinationDateNow = [[NSDate alloc] initWithTimeInterval:interval sinceDate:date];
-    return destinationDateNow;
-}
-
-+ (NSString *)getFaceNameByEmotion:(int)smile {
-    if (smile <= 33) {
-        return @"不笑";
-    }else if (smile <= 66) {
-        return @"中笑";
-    }else {
-        return @"大笑";
-    }
 }
 
 @end

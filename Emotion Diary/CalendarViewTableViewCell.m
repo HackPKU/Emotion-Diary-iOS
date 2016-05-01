@@ -23,15 +23,15 @@
     // Configure the view for the selected state
 }
 
-- (void)setDiary:(EmotionDiarySwift *)diary {
-    _imageSelfie.image = [UIImage imageWithContentsOfFile:diary.imageURL];
-    _imageFace.image = [UIImage imageNamed:[Utilities getFaceNameByEmotion:(int)diary.smile]];
+- (void)setDiary:(EmotionDiary *)diary {
+    _imageSelfie.image = [UIImage imageWithData:[ActionPerformer getFileAtPath:SELFIE_PATH withName:diary.selfie]];
+    _imageFace.image = [UIImage imageNamed:[ActionPerformer getFaceNameByEmotion:diary.emotion]];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"HH:mm"];
-    _labelTime.text = [formatter stringFromDate:diary.date];
+    _labelTime.text = [formatter stringFromDate:diary.createTime];
     [formatter setDateFormat:@"MM-dd"];
-    _labelDate.text = [formatter stringFromDate:diary.date];
-    _textDetail.text = diary.content;
+    _labelDate.text = [formatter stringFromDate:diary.createTime];
+    _textDetail.text = diary.shortText;
 }
 
 @end

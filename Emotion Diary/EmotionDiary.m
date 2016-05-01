@@ -7,34 +7,16 @@
 //
 
 #import "EmotionDiary.h"
-
-#define HAS_LOCAL_VERSION @"hasLocalVersion"
-#define HAS_ONLINE_VERSION @"hasOnlineVersion"
-
-#define EMOTION @"emotion"
-#define SELFIE @"selfie"
-#define IMAGES @"images"
-#define TAGS @"tags"
-#define TEXT @"text"
-#define PLACE_NAME @"placeName"
-#define PLACE_LONG @"placeLong"
-#define PLACE_LAT @"placeLat"
-#define WEATHER @"weather"
-#define CREATE_TIME @"createTime"
-
-#define USER_ID @"userID"
-#define DIARY_ID @"diaryID"
-#define HAS_IMAGE @"hasImage"
-#define HAS_TAG @"hasTag"
-#define SHORT_TEXT @"shortText"
+#import "EmotionDiaryManager.h"
 
 @implementation EmotionDiary
 
-- (instancetype)initWithEmotion:(int)emotion selfie:(UIImage *)selfie images:(NSArray *)images tags:(NSArray *)tags text:(NSString *)text placeName:(NSString *)placeName placeLong:(float)placeLong placeLat:(float)placeLat weather:(NSString *)weather {
+- (instancetype)initWithEmotion:(int)emotion selfie:(UIImage * _Nullable)selfie images:(NSArray<UIImage *> * _Nullable)images tags:(NSArray<NSString *> * _Nullable)tags text:(NSString *)text placeName:(NSString * _Nullable)placeName placeLong:(float)placeLong placeLat:(float)placeLat weather:(NSString * _Nullable)weather {
     self = [super init];
     if (self) {
         _emotion = emotion;
-        // TODO: selfie and images
+        imageSelfie = selfie;
+        imageImages = images;
         _tags = tags;
         _text = text;
         _placeName = placeName;
@@ -42,7 +24,6 @@
         _placeLat = placeLat;
         _weather = weather;
         _createTime = [NSDate date];
-        _hasLocalVersion = YES;
     }
     return self;
 }
@@ -94,5 +75,54 @@
     [aCoder encodeBool:_hasTag forKey:HAS_TAG];
     [aCoder encodeObject:_shortText forKey:SHORT_TEXT];
 }
+
+- (void)saveToDiskWithBlock:(EmotionDiaryResultBlock)block {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        if (![ActionPerformer checkAndCreatePath:SELFIE_PATH] || ![ActionPerformer checkAndCreatePath:IMAGES_PATH] || ![ActionPerformer checkAndCreatePath:DIARY_PATH]) {
+            block(NO);
+        }
+        
+        if (imageSelfie) {
+            NSString *selfieName;
+            do {
+                selfieName = [NSString stringWithFormat:@"%d", arc4random() % (int)1e8]; // Random number as file name
+            }while ([ActionPerformer fileExistsAtPath:SELFIE_PATH withName:selfieName]);
+            if (![ActionPerformer createFile:UIImageJPEGRepresentation(imageSelfie, 0.3) atPath:SELFIE_PATH withName:selfieName]) {
+                block(NO);
+            }
+            _selfie = selfieName;
+        }
+        
+        NSMutableArray *imageNames = [[NSMutableArray alloc] init];
+        for (UIImage *image in imageImages) {
+            NSString *imageName;
+            do {
+                imageName = [NSString stringWithFormat:@"%d", arc4random() % (int)1e8]; // Random number as file name
+            }while ([ActionPerformer fileExistsAtPath:SELFIE_PATH withName:imageName]);
+            if (![ActionPerformer createFile:UIImageJPEGRepresentation(image, 0.3) atPath:IMAGES_PATH withName:imageName]) {
+                block(NO);
+            }
+            [imageNames addObject:imageName];
+        }
+        _images = imageNames;
+        
+        NSMutableData *data = [[NSMutableData alloc] init];
+        NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+        [archiver encodeObject:self forKey:@"DIARY"];
+        [archiver finishEncoding];
+        NSString *diaryName = [_createTime description]; // Time as file name
+        if (![ActionPerformer createFile:data atPath:DIARY_PATH withName:diaryName]) {
+            block(NO);
+        }
+        if ([[EmotionDiaryManager sharedManager] saveLocalDiary:self]) {
+            _hasLocalVersion = YES;
+            block(YES);
+        }else {
+            block(NO);
+        }
+    });
+}
+
+
 
 @end

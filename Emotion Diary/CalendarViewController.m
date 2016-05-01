@@ -8,7 +8,6 @@
 
 #import "CalendarViewController.h"
 #import "CalendarViewTableViewCell.h"
-#import "Emotion_Diary-Swift.h"
 
 @interface CalendarViewController ()
 
@@ -19,8 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setCalendarScope:self.view.frame.size.height];
-    currentDate = [NSDate date];
-    diaryArray = [[EmotionDiarySwiftHelper sharedInstance] getDiaryOfDay:currentDate];
+    diariesOfToday = [[EmotionDiaryManager sharedManager] getDiaryOfDate:[NSDate date]];
     
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -51,13 +49,12 @@
 }
 
 - (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date {
-    currentDate = [Utilities getLocalDate:date];
-    diaryArray = [[EmotionDiarySwiftHelper sharedInstance] getDiaryOfDay:currentDate];
+    diariesOfToday = [[EmotionDiaryManager sharedManager] getDiaryOfDate:date];
     [_detailTableView reloadData];
 }
 
 - (NSInteger)calendar:(FSCalendar *)calendar numberOfEventsForDate:(NSDate *)date {
-    return [[EmotionDiarySwiftHelper sharedInstance] getDiaryOfDay:[Utilities getLocalDate:date]].count;
+    return [[EmotionDiaryManager sharedManager] getDiaryOfDate:date].count;
 }
 
 #pragma mark - Table view data source
@@ -67,7 +64,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[EmotionDiarySwiftHelper sharedInstance] getDiaryOfDay:currentDate].count;
+    return diariesOfToday.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -76,7 +73,7 @@
     // Configure the cell...
     
     cell.labelDate.hidden = (indexPath.row != 0);
-    [cell setDiary:diaryArray[indexPath.row]];
+    [cell setDiary:diariesOfToday[indexPath.row]];
     return cell;
 }
 
