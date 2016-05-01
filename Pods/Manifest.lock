@@ -14,10 +14,19 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - CTAssetsPickerController (3.3.1):
+    - PureLayout (~> 3.0.0)
+  - DACircularProgress (2.3.1)
   - FSCalendar (2.1.1)
   - KVNProgress (2.2.4)
+  - MBProgressHUD (0.9.2)
+  - MWPhotoBrowser (2.1.2):
+    - DACircularProgress (~> 2.3)
+    - MBProgressHUD (~> 0.9)
+    - SDWebImage (!= 3.7.2, ~> 3.7)
   - PNChart (0.8.8):
     - UICountingLabel (~> 1.2.0)
+  - PureLayout (3.0.1)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
@@ -25,16 +34,23 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - CTAssetsPickerController
   - FSCalendar
   - KVNProgress
+  - MWPhotoBrowser
   - PNChart
   - SDWebImage
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  CTAssetsPickerController: b1d1d50ab87cf6b8b13531de5f4530482e7e53ed
+  DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   FSCalendar: 04dc531f06fbde8a8e5b7394e9d4edebd45a591f
   KVNProgress: 541edcea5a1fef592aceac8d791a410d38cb499d
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  MWPhotoBrowser: 5836d7aa041dc05a13de380c246826578adc5ea5
   PNChart: 25f91e9c4688af49c3647489760624d037f5383f
+  PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
 

@@ -73,7 +73,7 @@ class EmotionDiarySwift: NSObject, NSCoding {
             userDefaults.setObject(data, forKey: EmotionDiarySwift.EmotionDiariesSaveKey)
             userDefaults.synchronize()
         }
-        EmotionDiaryHelper.sharedInstance.refreshEmotionDiariesFromStore()
+        EmotionDiarySwiftHelper.sharedInstance.refreshEmotionDiariesFromStore()
     }
     
     private func getEmotionDiariesFromStore() -> [EmotionDiarySwift]? {
@@ -96,12 +96,12 @@ class EmotionDiarySwift: NSObject, NSCoding {
     
 }
 
-private let sharedEmotionDiaryHelper = EmotionDiaryHelper()
+private let sharedEmotionDiarySwiftHelper = EmotionDiarySwiftHelper()
 
-class EmotionDiaryHelper: NSObject {
+class EmotionDiarySwiftHelper: NSObject {
     
-    class var sharedInstance: EmotionDiaryHelper {
-        return sharedEmotionDiaryHelper
+    class var sharedInstance: EmotionDiarySwiftHelper {
+        return sharedEmotionDiarySwiftHelper
     }
     
     private var storedData: [EmotionDiarySwift]?

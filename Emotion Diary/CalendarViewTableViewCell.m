@@ -25,8 +25,7 @@
 
 - (void)setDiary:(EmotionDiarySwift *)diary {
     _imageSelfie.image = [UIImage imageWithContentsOfFile:diary.imageURL];
-    NSString *imageName = [Utilities getFaceNameByEmotion:(int)diary.smile];
-    _imageFace.image = [UIImage imageNamed:[imageName stringByAppendingString:@"-白圈"]];
+    _imageFace.image = [UIImage imageNamed:[Utilities getFaceNameByEmotion:(int)diary.smile]];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"HH:mm"];
     _labelTime.text = [formatter stringFromDate:diary.date];

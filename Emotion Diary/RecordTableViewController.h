@@ -7,17 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CTAssetsPickerController.h"
+#import "MWPhotoBrowser.h"
 
 #define NO_EMOTION -1
 
-@interface RecordTableViewController : UITableViewController <UITextViewDelegate> {
+@interface RecordTableViewController : UITableViewController <UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CTAssetsPickerControllerDelegate, MWPhotoBrowserDelegate> {
     NSDictionary *faceInfo;
     NSMutableArray *images;
 }
 
-@property (strong, nonatomic) IBOutlet UIImageView *selfieImage;
-@property (strong, nonatomic) IBOutlet UIImageView *blurredSelfieImage;
-@property (strong, nonatomic) IBOutlet UIImageView *faceImage;
+@property (strong, nonatomic) IBOutlet UIImageView *imageSelfie;
+@property (strong, nonatomic) IBOutlet UIImageView *imageSelfieBlurred;
+@property (strong, nonatomic) IBOutlet UIButton *buttonFace;
+@property (strong, nonatomic) IBOutlet UISlider *sliderEmotion;
 @property (strong, nonatomic) IBOutlet UILabel *placeholder;
 @property (strong, nonatomic) IBOutlet UITextView *textRecord;
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionImages;
