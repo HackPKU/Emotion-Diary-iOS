@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "BEMSimpleLineGraphView.h"
 
-@interface StatTableViewCell : UITableViewCell <BEMSimpleLineGraphDelegate, BEMSimpleLineGraphDataSource>
+@interface StatTableViewCell : UITableViewCell <BEMSimpleLineGraphDelegate, BEMSimpleLineGraphDataSource> {
+    NSArray<NSNumber *> *chartData;
+}
 
 @property (strong, nonatomic) IBOutlet BEMSimpleLineGraphView *lineChart;
-@property (readonly) NSArray *data;
 
-- (void)setData:(NSArray *)data;
+- (void)setData:(NSArray<NSNumber *> *)data;
 
 @end

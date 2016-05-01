@@ -10,14 +10,15 @@
 #import <Foundation/Foundation.h>
 #import "EmotionDiary.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
-typedef NS_ENUM(NSInteger, ActionPerformerResult) {
-    ActionPerformerResultSuccess,
-    ActionPerformerResultFail
+typedef NS_ENUM(NSInteger, EmotionDiaryImageType) {
+    EmotionDiaryImageTypeIcon,
+    EmotionDiaryImageTypeSelfie,
+    EmotionDiaryImageTypeImage
 };
 
-typedef void (^ActionPerformerResultBlock)(ActionPerformerResult result, NSString * _Nullable message, NSDictionary * _Nullable data);
+NS_ASSUME_NONNULL_BEGIN
+
+typedef void (^ActionPerformerResultBlock)(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data);
 
 @interface ActionPerformer : NSObject
 
@@ -61,8 +62,56 @@ typedef void (^ActionPerformerResultBlock)(ActionPerformerResult result, NSStrin
 
 /**
  * Check whether the user has logged in
+ * @return Whether the user has logged in
  */
 + (BOOL)hasLoggedIn;
+
+/**
+ * Get the face name of a given emotion value
+ * @param smile The emotion value
+ * @return Face name
+ */
++ (NSString *)getFaceNameByEmotion:(int)smile;
+
+/**
+ * Check whether the path exists. If not, try to create one.
+ 
+ * The root directory is the document directory
+ * @param path The required path
+ * @return Whether the path exists after the function
+ */
++ (BOOL)checkAndCreatePath:(NSString *)path;
+
+/**
+ * Check whether the file exists at the given path
+ 
+ * The root directory is the document directory
+ * @param path The required path
+ * @param name The file name
+ * @return Whether the file exists
+ */
++ (BOOL)fileExistsAtPath:(NSString *)path withName:(NSString *)name;
+
+/**
+ * Create file at the given path
+ 
+ * The root directory is the document directory
+ * @param data The data to be saved as file
+ * @param path The required path
+ * @param name The file name
+ * @return Whether the file is created successfully
+ */
++ (BOOL)createFile:(NSData *)data atPath:(NSString *)path withName:(NSString *)name;
+
+/**
+ * Get the file at the given path
+ 
+ * The root directory is the document directory
+ * @param path The required path
+ * @param name The file name
+ * @return The data of the file (if exists) or nil
+ */
++ (NSData * _Nullable)getFileAtPath:(NSString *)path withName:(NSString *)name;
 
 NS_ASSUME_NONNULL_END
 

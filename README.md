@@ -16,14 +16,14 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 
 ## 重要类说明
 
-### `ActionPerformer`
+#### `ActionPerformer`
 
 * 用于执行一些网络和本地动作，所有函数均为类函数，网络动作使用 block 与其它函数通讯
 * 总体上分为服务器通讯模块，人脸识别模块，本地功能模块
 
-### `Utilities`
+#### `Utilities`
 
-* 用于实现一些常用的功能，例如图片处理，日期处理等
+* 用于实现一些常用的功能，例如加密处理，图片处理等
 * 具体功能在注释中有详细说明
 
 ## 第三方库说明

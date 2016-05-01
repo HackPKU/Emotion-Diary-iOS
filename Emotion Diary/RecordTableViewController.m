@@ -10,7 +10,6 @@
 #import "RecordCollectionViewCell.h"
 #import "WelcomeViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
-#import "Emotion_Diary-Swift.h"
 
 #define MAX_PICTURE_NUM 9
 
@@ -151,7 +150,7 @@
 }
 
 - (void)updateEmotion {
-    [_buttonFace setImage:[UIImage imageNamed:[Utilities getFaceNameByEmotion:_emotion]] forState:UIControlStateNormal];
+    [_buttonFace setImage:[UIImage imageNamed:[ActionPerformer getFaceNameByEmotion:_emotion]] forState:UIControlStateNormal];
 }
 
 #pragma mark - Image picker collection view
@@ -296,10 +295,17 @@
 }
 
 - (IBAction)done:(id)sender {
-    EmotionDiarySwift *diary = [[EmotionDiarySwift alloc] initWithSmile:_emotion attractive:0 image:_selfie content:_textRecord.text];
-    [diary save];
-    [self.navigationController dismissViewControllerAnimated:YES completion:^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"enterMain" object:nil];
+    EmotionDiary *diary = [[EmotionDiary alloc] initWithEmotion:(int)_sliderEmotion.value selfie:_selfie images:images tags:nil text:_textRecord.text placeName:nil placeLong:0.0 placeLat:0.0 weather:nil];
+    [KVNProgress showWithStatus:@"日记保存中"];
+    [diary saveToDiskWithBlock:^(BOOL success) {
+        if (success) {
+            [KVNProgress showSuccessWithStatus:@"日记保存成功"];
+        }else {
+            [KVNProgress showErrorWithStatus:@"日记保存失败"];
+        }
+        [self.navigationController dismissViewControllerAnimated:YES completion:^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"enterMain" object:nil];
+        }];
     }];
 }
 

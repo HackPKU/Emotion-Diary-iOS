@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Emotion_Diary-Swift.h"
 
 @interface CalendarViewTableViewCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIImageView *imageSelfie;
@@ -16,6 +15,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *labelDate;
 @property (strong, nonatomic) IBOutlet UILabel *labelTime;
 
-- (void)setDiary:(EmotionDiarySwift *)diary;
+- (void)setDiary:(EmotionDiary *)diary;
 
 @end

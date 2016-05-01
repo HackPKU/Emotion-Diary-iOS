@@ -28,12 +28,12 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIImage *)normalizedImage:(UIImage *)image;
 
 /**
- * Resize the image to required size
+ * Resize the image to required max width and height
  * @param image The image to be resized
- * @param size The required size
+ * @param max The max width and height
  * @return Resized image
  */
-+ (UIImage *)resizeImage:(UIImage *)image toSize:(CGSize)size;
++ (UIImage *)resizeImage:(UIImage *)image toMaxWidthAndHeight:(NSInteger)max;
 
 /**
  * Compress the image to required size
@@ -42,20 +42,6 @@ NS_ASSUME_NONNULL_BEGIN
  * @return Compressed image data
  */
 + (NSData *)compressImage:(UIImage *)image toSize:(int)size;
-
-/**
- * Get the local date from UTC date
- * @param date UTC date
- * @return Local date
- */
-+ (NSDate *)getLocalDate:(NSDate *)date;
-
-/**
- * Get the face name of a given emotion value
- * @param smile The emotion value
- * @return Face name
- */
-+ (NSString *)getFaceNameByEmotion:(int)smile;
 
 NS_ASSUME_NONNULL_END
 
