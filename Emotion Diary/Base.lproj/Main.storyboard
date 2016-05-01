@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Segues with Peek and Pop" minToolsVersion="7.1"/>
     </dependencies>
     <scenes>
@@ -50,7 +51,7 @@
                                 <rect key="frame" x="0.0" y="352" width="600" height="248"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellDetail" rowHeight="150" id="tR6-nK-LPV" customClass="CalendarViewTableViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellDetail" rowHeight="150" id="tR6-nK-LPV" customClass="CalendarTableViewCell">
                                         <rect key="frame" x="0.0" y="49.5" width="600" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tR6-nK-LPV" id="7En-wD-ObV">
@@ -127,6 +128,10 @@
                                             <outlet property="labelDate" destination="iGv-Hf-mIY" id="Fb2-SV-hvK"/>
                                             <outlet property="labelTime" destination="6KV-tA-uTk" id="UE9-j5-NYB"/>
                                             <outlet property="textDetail" destination="IKh-c3-FdW" id="Ii1-UI-J3e"/>
+                                            <segue destination="U6i-3q-QVx" kind="presentation" modalPresentationStyle="formSheet" id="ygb-bb-gXM">
+                                                <segue key="commit" inheritsFrom="parent" id="XDd-hV-ThN"/>
+                                                <segue key="preview" inheritsFrom="commit" id="WTd-hk-ePs"/>
+                                            </segue>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -232,7 +237,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W18-8p-uZC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1838" y="335"/>
+            <point key="canvasLocation" x="1867" y="335"/>
         </scene>
         <!--欢迎界面-->
         <scene sceneID="gQQ-cT-uQZ">
@@ -626,6 +631,66 @@
             </objects>
             <point key="canvasLocation" x="245" y="1155"/>
         </scene>
+        <!--我的日记-->
+        <scene sceneID="6f5-Mv-oga">
+            <objects>
+                <tableViewController id="8IW-4c-vs6" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="76N-Sj-tOl">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="QyU-V4-lfW">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="tQP-q1-Lw6">
+                                        <rect key="frame" x="0.0" y="44" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tQP-q1-Lw6" id="WBQ-l7-IL4">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="tad-ci-O29">
+                                        <rect key="frame" x="0.0" y="88" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tad-ci-O29" id="heD-5m-Jus">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="XAa-lm-oZG">
+                                        <rect key="frame" x="0.0" y="132" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XAa-lm-oZG" id="kiG-Ku-dFF">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="8IW-4c-vs6" id="9Fq-vC-6RW"/>
+                            <outlet property="delegate" destination="8IW-4c-vs6" id="gea-3x-qb0"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="我的日记" id="ZL6-D0-4PL">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="F6P-W4-Wk3">
+                            <connections>
+                                <segue destination="s1l-yA-aov" kind="unwind" unwindAction="unwindToCalendarView:" id="mdr-Rv-GQf"/>
+                            </connections>
+                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="action" id="dBI-wL-Ret"/>
+                            <barButtonItem systemItem="trash" id="6hC-jy-NlK"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TqP-yJ-am0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="s1l-yA-aov" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1867" y="1155"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="zAP-wi-GMk">
             <objects>
@@ -662,6 +727,24 @@
             </objects>
             <point key="canvasLocation" x="-567" y="1155"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Jbf-gt-jbx">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="U6i-3q-QVx" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="TTa-r8-VzB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8IW-4c-vs6" kind="relationship" relationship="rootViewController" id="xE1-KB-Ssy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SWr-IA-wfT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1055" y="1155"/>
+        </scene>
     </scenes>
     <resources>
         <image name="中笑" width="33" height="33"/>
@@ -670,7 +753,8 @@
         <image name="统计" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MEH-Jc-QhM"/>
         <segue reference="e3d-0X-6Ej"/>
+        <segue reference="MEH-Jc-QhM"/>
+        <segue reference="ygb-bb-gXM"/>
     </inferredMetricsTieBreakers>
 </document>
