@@ -21,7 +21,7 @@ typedef void (^ActionPerformerResultBlock)(ActionPerformerResult result, NSStrin
 
 @interface ActionPerformer : NSObject
 
-#pragma mark Server connection
+#pragma mark - Server connection
 
 + (void)registerWithName:(NSString *)name password:(NSString *)password sex:(NSString * _Nullable)sex email:(NSString * _Nullable)email icon:(NSString * _Nullable)icon andBlock:(ActionPerformerResultBlock)block;
 
@@ -49,7 +49,7 @@ typedef void (^ActionPerformerResultBlock)(ActionPerformerResult result, NSStrin
 
 + (void)uploadImage:(UIImage *)image type:(EmotionDiaryImageType)type andBlock:(ActionPerformerResultBlock)block;
 
-#pragma mark Face++ connection
+#pragma mark - Face++ connection
 
 + (void)registerFaceWithImage:(UIImage *)image andBlock:(ActionPerformerResultBlock)block;
 
@@ -57,12 +57,12 @@ typedef void (^ActionPerformerResultBlock)(ActionPerformerResult result, NSStrin
 
 + (void)deleteFaceWithBlock:(ActionPerformerResultBlock)block;
 
-#pragma mark Local functions
+#pragma mark - Local functions
 
 /**
  * Check whether the user has logged in
  */
-+ (BOOL)checkHasLogin;
++ (BOOL)hasLoggedIn;
 
 NS_ASSUME_NONNULL_END
 

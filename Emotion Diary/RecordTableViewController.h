@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UzysAssetsPickerController.h"
+#import "CTAssetsPickerController.h"
+#import "MWPhotoBrowser.h"
 
 #define NO_EMOTION -1
 
-@interface RecordTableViewController : UITableViewController <UITextViewDelegate, UzysAssetsPickerControllerDelegate> {
+@interface RecordTableViewController : UITableViewController <UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CTAssetsPickerControllerDelegate, MWPhotoBrowserDelegate> {
     NSDictionary *faceInfo;
     NSMutableArray *images;
 }

@@ -12,7 +12,7 @@
 
 @implementation ActionPerformer
 
-#pragma mark Server connection
+#pragma mark - Server connection
 
 + (void)postWithDictionary:(NSDictionary * _Nullable)dictionary toUrl:(NSString * _Nonnull)url andBlock:(ActionPerformerResultBlock)block {
 #ifdef DEBUG
@@ -23,17 +23,22 @@
     
     NSMutableDictionary *request = [dictionary mutableCopy];
     request[@"version"] = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    if ([ActionPerformer checkHasLogin]) {
+    request[@"platform"] = @"iOS";
+    if ([ActionPerformer hasLoggedIn]) {
         request[@"userid"] = [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"];
         request[@"token"] = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
     }
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    [manager POST:url parameters:request progress:^(NSProgress * _Nonnull uploadProgress) {} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager POST:url parameters:request progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *responseDictionary = (NSDictionary *)responseObject;
         if ([responseDictionary[@"code"] intValue] != 0) {
+#ifdef DEBUG
+            block(ActionPerformerResultFail, [NSString stringWithFormat:@"%@ - %@", responseDictionary[@"code"], responseDictionary[@"message"]], nil);
+#else
             block(ActionPerformerResultFail, responseDictionary[@"message"], nil);
+#endif
         }else {
             block(ActionPerformerResultSuccess, nil, responseDictionary[@"data"]);
         }
@@ -53,7 +58,6 @@
     request[@"sex"] = sex;
     request[@"email"] = email;
     request[@"icon"] = icon;
-    request[@"type"] = @"ios";
     [ActionPerformer postWithDictionary:request toUrl:@"/api/register.php" andBlock:block];
 }
 
@@ -61,7 +65,6 @@
     NSMutableDictionary *request = [[NSMutableDictionary alloc] init];
     request[@"name"] = name;
     request[@"password"] = [Utilities MD5:password];
-    request[@"type"] = @"ios";
     [ActionPerformer postWithDictionary:request toUrl:@"/api/login.php" andBlock:block];
 }
 
@@ -170,14 +173,14 @@
     [ActionPerformer postWithDictionary:request toUrl:@"/api/upload_image.php" andBlock:block];
 }
 
-#pragma mark Face++ connection
+#pragma mark - Face++ connection
 
 + (void)processFaceppResult:(FaceppResult * _Nonnull)result andBlock:(ActionPerformerResultBlock)block {
     if (result.success) {
         block(ActionPerformerResultSuccess, nil, result.content);
     }else {
 #ifdef DEBUG
-        block(ActionPerformerResultFail, result.error.message, nil);
+        block(ActionPerformerResultFail, [NSString stringWithFormat:@"%d - %@", result.error.errorCode, result.error.message], nil);
 #else
         block(ActionPerformerResultFail, @"网络连接错误", nil);
 #endif
@@ -280,9 +283,9 @@
     });
 }
 
-#pragma mark Local functions
+#pragma mark - Local functions
 
-+ (BOOL)checkHasLogin {
++ (BOOL)hasLoggedIn {
     return ([[[NSUserDefaults standardUserDefaults] objectForKey:@"userid"] length] > 0 && [[[NSUserDefaults standardUserDefaults] objectForKey:@"token"] length] > 0);
 }
 

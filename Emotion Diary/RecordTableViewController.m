@@ -10,6 +10,7 @@
 #import "RecordCollectionViewCell.h"
 #import "WelcomeViewController.h"
 #import "UIImageEffects.h"
+#import <MobileCoreServices/MobileCoreServices.h>
 #import "Emotion_Diary-Swift.h"
 
 #define MAX_PICTURE_NUM 9
@@ -133,7 +134,7 @@
 }
 */
 
-#pragma mark Emotion adjust
+#pragma mark - Emotion adjust
 
 - (IBAction)showEmotionSlider:(id)sender {
     _sliderEmotion.userInteractionEnabled = !_sliderEmotion.userInteractionEnabled;
@@ -151,7 +152,7 @@
     [_buttonFace setImage:[UIImage imageNamed:[Utilities getFaceNameByEmotion:_emotion]] forState:UIControlStateNormal];
 }
 
-#pragma mark - Collection view delegate
+#pragma mark - Image picker collection view
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
@@ -171,36 +172,125 @@
     }
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row < [collectionView numberOfItemsInSection:0] - 1) {
+        MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+        browser.enableGrid = YES;
+        browser.displayActionButton = NO;
+        [browser setCurrentPhotoIndex:indexPath.row];
+        [self.navigationController pushViewController:browser animated:YES];
+    }
+}
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+    return images.count;
+}
+
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    if (index < images.count) {
+        return [MWPhoto photoWithImage:images[index]];
+    }
+    return nil;
+}
+
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser thumbPhotoAtIndex:(NSUInteger)index {
+    return [self photoBrowser:photoBrowser photoAtIndex:index];
+}
+
 - (IBAction)deletePhoto:(id)sender {
     RecordCollectionViewCell *cell = (RecordCollectionViewCell *)[[sender superview] superview];
     NSInteger row = [_collectionImages indexPathForCell:cell].row;
     [images removeObjectAtIndex:row];
-    [_collectionImages deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]]];
-}
-
-- (IBAction)addPhoto:(id)sender {
-    UzysAssetsPickerController *picker = [[UzysAssetsPickerController alloc] init];
-    picker.delegate = self;
-    picker.maximumNumberOfSelectionVideo = 0;
-    picker.maximumNumberOfSelectionPhoto = MAX_PICTURE_NUM - images.count;
-    [self presentViewController:picker animated:YES completion:nil];
-}
-
-- (void)uzysAssetsPickerController:(UzysAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets {
-    for (ALAsset *asset in assets) {
-        UIImage *image = [UIImage imageWithCGImage:asset.defaultRepresentation.fullResolutionImage scale:asset.defaultRepresentation.scale orientation:(UIImageOrientation)asset.defaultRepresentation.orientation];
-        [images addObject:image];
+    if (images.count < MAX_PICTURE_NUM - 1) {
+        [_collectionImages deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]]];
+    }else { // Add button replaces the last image
+        [_collectionImages reloadData];
     }
+}
+
+- (IBAction)addPhoto:(UIButton *)sender {
+    UIAlertController *action = [UIAlertController alertControllerWithTitle:@"选择图片来源" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [action addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
+            imagePicker.delegate = self;
+            [self presentViewController:imagePicker animated:YES completion:nil];
+        }]];
+    }
+    [action addAction:[UIAlertAction actionWithTitle:@"照片图库" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self presentImagePicker:sender];
+    }]];
+    [action addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    action.popoverPresentationController.sourceView = sender;
+    action.popoverPresentationController.sourceRect = sender.bounds;
+    [self presentViewController:action animated:YES completion:nil];
+}
+
+- (void)addImage:(UIImage *)image {
+    [images addObject:image];
     [_collectionImages reloadData];
-    [_collectionImages scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:images.count inSection:0] atScrollPosition:UICollectionViewScrollPositionRight animated:YES];
+    
+    // Scroll to newly added image
+    [_collectionImages scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:[_collectionImages numberOfItemsInSection:0] - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionRight animated:YES];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [self addImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
+}
+
+- (void)presentImagePicker:(UIButton *)sender {
+    [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            CTAssetsPickerController *picker = [[CTAssetsPickerController alloc] init];
+            picker.delegate = self;
+            picker.showsEmptyAlbums = NO;
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+                picker.modalPresentationStyle = UIModalPresentationPopover;
+                picker.popoverPresentationController.sourceView = sender;
+                picker.popoverPresentationController.sourceRect = sender.bounds;
+            }
+            [self presentViewController:picker animated:YES completion:nil];
+        });
+    }];
+}
+
+- (void)assetsPickerController:(CTAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets {
+    [self dismissViewControllerAnimated:picker completion:^{
+        for (PHAsset *asset in assets) {
+            PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+            options.version = PHImageRequestOptionsVersionCurrent;
+            options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+            options.synchronous = YES;
+            [[PHImageManager defaultManager] requestImageDataForAsset:asset options:options resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
+                [self addImage:[UIImage imageWithData:imageData]];
+            }];
+        }
+    }];
+}
+
+- (BOOL)assetsPickerController:(CTAssetsPickerController *)picker shouldSelectAsset:(PHAsset *)asset {
+    NSInteger max = MAX_PICTURE_NUM - images.count;
+    if (picker.selectedAssets.count >= max) {
+        [KVNProgress showErrorWithStatus:[NSString stringWithFormat:@"您最多可以选择%d张图片", MAX_PICTURE_NUM]];
+    }
+    return (picker.selectedAssets.count < max);
 }
 
 #pragma mark - Navigation
 
 - (IBAction)cancel:(id)sender {
-    [self.navigationController dismissViewControllerAnimated:YES completion:^{
-        
-    }];
+    if (_textRecord.text.length > 0 || images.count > 0) {
+        UIAlertController *action = [UIAlertController alertControllerWithTitle:@"警告" message:@"您编辑了内容，确定要退出吗？" preferredStyle:UIAlertControllerStyleAlert];
+        [action addAction:[UIAlertAction actionWithTitle:@"退出" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        }]];
+        [action addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:action animated:YES completion:nil];
+        return;
+    }
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)done:(id)sender {

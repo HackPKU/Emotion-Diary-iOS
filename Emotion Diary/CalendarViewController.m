@@ -20,7 +20,7 @@
     [super viewDidLoad];
     [self setCalendarScope:self.view.frame.size.height];
     currentDate = [NSDate date];
-    diaryArray = [[EmotionDiaryHelper sharedInstance] getDiaryOfDay:currentDate];
+    diaryArray = [[EmotionDiarySwiftHelper sharedInstance] getDiaryOfDay:currentDate];
     
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -52,12 +52,12 @@
 
 - (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date {
     currentDate = [Utilities getLocalDate:date];
-    diaryArray = [[EmotionDiaryHelper sharedInstance] getDiaryOfDay:currentDate];
+    diaryArray = [[EmotionDiarySwiftHelper sharedInstance] getDiaryOfDay:currentDate];
     [_detailTableView reloadData];
 }
 
 - (NSInteger)calendar:(FSCalendar *)calendar numberOfEventsForDate:(NSDate *)date {
-    return [[EmotionDiaryHelper sharedInstance] getDiaryOfDay:[Utilities getLocalDate:date]].count;
+    return [[EmotionDiarySwiftHelper sharedInstance] getDiaryOfDay:[Utilities getLocalDate:date]].count;
 }
 
 #pragma mark - Table view data source
@@ -67,7 +67,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[EmotionDiaryHelper sharedInstance] getDiaryOfDay:currentDate].count;
+    return [[EmotionDiarySwiftHelper sharedInstance] getDiaryOfDay:currentDate].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

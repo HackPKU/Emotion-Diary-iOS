@@ -151,7 +151,7 @@
             }];
         }]];
     }
-    if ([ActionPerformer checkHasLogin]) {
+    if ([ActionPerformer hasLoggedIn]) {
         [action addAction:[UIAlertAction actionWithTitle:@"使用密码" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"输入密码" message:@"使用您的账号密码解锁心情日记" preferredStyle:UIAlertControllerStyleAlert];
             [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
