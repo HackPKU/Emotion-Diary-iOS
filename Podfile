@@ -3,7 +3,7 @@ use_frameworks!
 pod 'AFNetworking'
 pod 'KVNProgress'
 pod 'FSCalendar'
-pod 'PNChart'
+pod 'BEMSimpleLineGraph'
 pod 'SDWebImage'
 pod 'CTAssetsPickerController'
 pod 'MWPhotoBrowser'

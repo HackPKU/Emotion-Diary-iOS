@@ -185,9 +185,30 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="180"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oGx-54-dgG" customClass="FSLineChart">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oGx-54-dgG" customClass="BEMSimpleLineGraphView">
                                             <rect key="frame" x="16" y="8" width="568" height="149"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="enableBezierCurve" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="colorBottom">
+                                                    <color key="value" red="1" green="0.74509803919999995" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="colorTop">
+                                                    <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="alphaBottom">
+                                                    <real key="value" value="0.25"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="colorLine">
+                                                    <color key="value" red="1" green="0.74509803919999995" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="colorPoint">
+                                                    <color key="value" red="1" green="0.74509803919999995" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="sizePoint">
+                                                    <real key="value" value="5"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </view>
                                     </subviews>
                                     <constraints>
@@ -337,6 +358,14 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rHv-tF-lNq">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="220"/>
                                                 </imageView>
+                                                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="neb-re-KT0">
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="220"/>
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="qE6-Xg-ul0">
+                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="220"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    </view>
+                                                    <blurEffect style="dark"/>
+                                                </visualEffectView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="z5S-ZS-V0f">
                                                     <rect key="frame" x="225" y="25" width="150" height="150"/>
                                                     <constraints>
@@ -364,17 +393,21 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="neb-re-KT0" firstAttribute="bottom" secondItem="rHv-tF-lNq" secondAttribute="bottom" id="AgP-fz-bcN"/>
                                                 <constraint firstItem="PLS-wH-4X3" firstAttribute="leading" secondItem="z5S-ZS-V0f" secondAttribute="trailing" id="FC7-9B-u3b"/>
                                                 <constraint firstItem="AXg-oJ-mVM" firstAttribute="leading" secondItem="z5S-ZS-V0f" secondAttribute="leading" id="Hca-GM-WW2"/>
                                                 <constraint firstItem="AXg-oJ-mVM" firstAttribute="top" secondItem="z5S-ZS-V0f" secondAttribute="bottom" constant="5" id="NHk-vE-5S1"/>
                                                 <constraint firstItem="rHv-tF-lNq" firstAttribute="top" secondItem="LXC-Ln-ifo" secondAttribute="top" id="OgM-V3-YJA"/>
                                                 <constraint firstItem="rHv-tF-lNq" firstAttribute="leading" secondItem="LXC-Ln-ifo" secondAttribute="leading" id="X5A-Nw-tPs"/>
                                                 <constraint firstItem="PLS-wH-4X3" firstAttribute="bottom" secondItem="z5S-ZS-V0f" secondAttribute="bottom" id="a3z-Y1-FeP"/>
+                                                <constraint firstItem="neb-re-KT0" firstAttribute="trailing" secondItem="rHv-tF-lNq" secondAttribute="trailing" id="gnE-54-ae2"/>
+                                                <constraint firstItem="neb-re-KT0" firstAttribute="leading" secondItem="rHv-tF-lNq" secondAttribute="leading" id="hgm-xW-cyx"/>
                                                 <constraint firstAttribute="bottom" secondItem="rHv-tF-lNq" secondAttribute="bottom" id="iek-6x-tUC"/>
                                                 <constraint firstItem="AXg-oJ-mVM" firstAttribute="trailing" secondItem="z5S-ZS-V0f" secondAttribute="trailing" id="jI3-t2-gCz"/>
                                                 <constraint firstItem="z5S-ZS-V0f" firstAttribute="centerX" secondItem="LXC-Ln-ifo" secondAttribute="centerX" id="mej-8E-0pe"/>
                                                 <constraint firstAttribute="trailing" secondItem="rHv-tF-lNq" secondAttribute="trailing" id="vHF-rj-7Sf"/>
                                                 <constraint firstItem="z5S-ZS-V0f" firstAttribute="centerY" secondItem="LXC-Ln-ifo" secondAttribute="centerY" constant="-10" id="vhH-OD-kP7"/>
+                                                <constraint firstItem="neb-re-KT0" firstAttribute="top" secondItem="rHv-tF-lNq" secondAttribute="top" id="vid-oh-wks"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>

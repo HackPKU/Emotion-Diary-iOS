@@ -9,7 +9,6 @@
 #import "RecordTableViewController.h"
 #import "RecordCollectionViewCell.h"
 #import "WelcomeViewController.h"
-#import "UIImageEffects.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "Emotion_Diary-Swift.h"
 
@@ -24,14 +23,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     images = [[NSMutableArray alloc] init];
+    
     UIImage *displaySelfie = _selfie;
     if (!displaySelfie) {
         displaySelfie = [UIImage imageNamed:@"MyFace1"]; // TODO: Add placeholder
     }
     _imageSelfie.image = displaySelfie;
     _imageSelfie.layer.cornerRadius = _imageSelfie.frame.size.width / 2;
-    _imageSelfieBlurred.image = [UIImageEffects imageByApplyingBlurToImage:displaySelfie withRadius:60.0 tintColor:[UIColor colorWithWhite:0.5 alpha:0.5] saturationDeltaFactor:1.8 maskImage:nil];
-    _textRecord.scrollsToTop = NO;
+    _imageSelfieBlurred.image = displaySelfie;
+    
     if (_emotion == NO_EMOTION) {
         _emotion = 50;
     }
@@ -39,6 +39,8 @@
     _sliderEmotion.userInteractionEnabled = NO;
     _sliderEmotion.alpha = 0.0;
     [self updateEmotion];
+    
+    _textRecord.scrollsToTop = NO;
     [self textViewDidChange:_textRecord];
     
     // Uncomment the following line to preserve selection between presentations.
