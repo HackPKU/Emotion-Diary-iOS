@@ -7,7 +7,7 @@
 //
 
 #import "CalendarViewController.h"
-#import "CalendarViewTableViewCell.h"
+#import "CalendarTableViewCell.h"
 
 @interface CalendarViewController ()
 
@@ -68,7 +68,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CalendarViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellDetail" forIndexPath:indexPath];
+    CalendarTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellDetail" forIndexPath:indexPath];
     
     // Configure the cell...
     
@@ -79,6 +79,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+# pragma mark - Navigation
+
+- (IBAction)unwindToCalendarView:(UIStoryboardSegue *)segue {
+    
 }
 
 @end

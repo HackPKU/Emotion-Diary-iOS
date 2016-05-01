@@ -100,10 +100,14 @@ static EmotionDiaryManager *sharedManager;
     NSMutableArray *tempArr;
     for (NSDictionary *dict in diaries) {
         int dayToToday = [dict[CREATE_TIME] timeIntervalSinceNow] / (24 * 3600);
-        if (dayToToday >= 0 && dayToToday < dayNumber) {
-            tempArr = [stat[dayToToday] mutableCopy];
-            [tempArr addObject:dict[EMOTION]];
-            [stat setObject:tempArr atIndexedSubscript:dayToToday];
+        if (dayToToday >= 0) {
+            if (dayToToday < dayNumber) {
+                tempArr = [stat[dayToToday] mutableCopy];
+                [tempArr addObject:dict[EMOTION]];
+                [stat setObject:tempArr atIndexedSubscript:dayToToday];
+            }else {
+                break;
+            }
         }
     }
     

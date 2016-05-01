@@ -191,10 +191,10 @@
         dest.selfie = selfie;
         dest.emotion = emotion;
     }
+    hasShownCamera = YES;
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-
 
 - (IBAction)unwindToWelcomeView:(UIStoryboardSegue *)segue {
     if ([segue.sourceViewController isKindOfClass:[CalendarViewController class]]) {

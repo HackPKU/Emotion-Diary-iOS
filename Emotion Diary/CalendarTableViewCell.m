@@ -1,14 +1,14 @@
 //
-//  CalendarViewTableViewCell.m
+//  CalendarTableViewCell.m
 //  Emotion Diary
 //
 //  Created by 范志康 on 16/4/9.
 //  Copyright © 2016年 范志康. All rights reserved.
 //
 
-#import "CalendarViewTableViewCell.h"
+#import "CalendarTableViewCell.h"
 
-@implementation CalendarViewTableViewCell
+@implementation CalendarTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -24,6 +24,7 @@
 }
 
 - (void)setDiary:(EmotionDiary *)diary {
+    _savedDiary = diary;
     _imageSelfie.image = [UIImage imageWithData:[ActionPerformer getFileAtPath:SELFIE_PATH withName:diary.selfie]];
     _imageFace.image = [UIImage imageNamed:[ActionPerformer getFaceNameByEmotion:diary.emotion]];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

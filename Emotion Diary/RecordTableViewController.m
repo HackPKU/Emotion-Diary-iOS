@@ -258,7 +258,7 @@
 }
 
 - (void)assetsPickerController:(CTAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets {
-    [self dismissViewControllerAnimated:picker completion:^{
+    [picker dismissViewControllerAnimated:YES completion:^{
         for (PHAsset *asset in assets) {
             PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
             options.version = PHImageRequestOptionsVersionCurrent;
