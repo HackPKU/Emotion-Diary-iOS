@@ -24,6 +24,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSArray<NSNumber *> *)getStatOfLastDays:(int)dayNumber;
 
+- (NSInteger)totalNumber;
+
+- (EmotionDiary *)getDiaryOfIndex:(NSInteger)index;
+
 NS_ASSUME_NONNULL_END
 
 @end

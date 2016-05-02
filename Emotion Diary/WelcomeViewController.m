@@ -12,6 +12,8 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <LocalAuthentication/LocalAuthentication.h>
 
+# define DEBUG_IMAGE [UIImage imageNamed:@"MyFace1"]
+
 @interface WelcomeViewController ()
 
 @end
@@ -26,10 +28,12 @@
         button.layer.borderWidth = 1.0;
         button.layer.borderColor = [UIColor whiteColor].CGColor;
     }
-    hasShownCamera = NO;
+    shouldStopAnimate = NO;
     emotion = NO_EMOTION;
 #ifndef DEBUG
     [self setUnlocked:NO];
+#else
+    selfie = DEBUG_IMAGE;
 #endif
     [self performSelector:@selector(animateButtonCamera) withObject:nil afterDelay:0.5];
     // Do any additional setup after loading the view.
@@ -41,6 +45,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    shouldStopAnimate = YES;
+}
+
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
@@ -49,7 +58,7 @@
     [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         _buttonCamera.alpha = 1.5 - _buttonCamera.alpha;
     } completion:^(BOOL finished) {
-        if (hasShownCamera) {
+        if (shouldStopAnimate) {
             _buttonCamera.alpha = 1.0;
         }else {
             [self animateButtonCamera];
@@ -65,8 +74,8 @@
     }
     _buttonCamera.userInteractionEnabled = !unlocked;
     _labelHint.text = unlocked ? @"解锁成功" : @"自拍解锁";
-    if (!unlocked && hasShownCamera) {
-        hasShownCamera = NO;
+    if (!unlocked && shouldStopAnimate) {
+        shouldStopAnimate = NO;
         [self animateButtonCamera];
     }
 }
@@ -83,14 +92,14 @@
     imagePicker.allowsEditing = YES;
     imagePicker.delegate = self;
     [self presentViewController:imagePicker animated:YES completion:nil];
-    hasShownCamera = YES;
+    shouldStopAnimate = YES;
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     selfie = [info objectForKey:UIImagePickerControllerEditedImage];
     selfie = [Utilities normalizedImage:selfie];
 #ifdef DEBUG
-    selfie = [UIImage imageNamed:@"MyFace1"];
+    selfie = DEBUG_IMAGE;
 #endif
     [picker dismissViewControllerAnimated:YES completion:^{
         [self analyzeSelfie:selfie];
@@ -191,7 +200,6 @@
         dest.selfie = selfie;
         dest.emotion = emotion;
     }
-    hasShownCamera = YES;
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }

@@ -289,14 +289,16 @@
     return ([[[NSUserDefaults standardUserDefaults] objectForKey:@"userid"] length] > 0 && [[[NSUserDefaults standardUserDefaults] objectForKey:@"token"] length] > 0);
 }
 
-+ (NSString *)getFaceNameByEmotion:(int)smile {
++ (UIImage *)getFaceImageByEmotion:(int)smile {
+    NSString *imageName;
     if (smile <= 33) {
-        return @"不笑";
+        imageName = @"不笑";
     }else if (smile <= 66) {
-        return @"中笑";
+        imageName = @"中笑";
     }else {
-        return @"大笑";
+        imageName = @"大笑";
     }
+    return [UIImage imageNamed:imageName];
 }
 
 @end

@@ -67,11 +67,11 @@ typedef void (^ActionPerformerResultBlock)(BOOL success, NSString * _Nullable me
 + (BOOL)hasLoggedIn;
 
 /**
- * Get the face name of a given emotion value
+ * Get the face image of a given emotion value
  * @param smile The emotion value
- * @return Face name
+ * @return Face image
  */
-+ (NSString *)getFaceNameByEmotion:(int)smile;
++ (UIImage *)getFaceImageByEmotion:(int)smile;
 
 NS_ASSUME_NONNULL_END
 

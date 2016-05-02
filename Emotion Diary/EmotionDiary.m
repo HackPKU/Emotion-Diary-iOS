@@ -110,8 +110,8 @@
         NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
         [archiver encodeObject:self forKey:@"DIARY"];
         [archiver finishEncoding];
-        NSString *diaryName = [_createTime description]; // Time as file name
-        if (![Utilities createFile:data atPath:DIARY_PATH withName:diaryName]) {
+        NSString *fileName = [_createTime description]; // Time as file name
+        if (![Utilities createFile:data atPath:DIARY_PATH withName:fileName]) {
             block(NO);
         }
         // Save to NSUserDefaults
