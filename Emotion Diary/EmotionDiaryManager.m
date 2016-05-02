@@ -191,4 +191,12 @@ static EmotionDiaryManager *sharedManager;
     return result;
 }
 
+- (NSInteger)totalNumber {
+    return diaries.count;
+}
+
+- (EmotionDiary *)getDiaryOfIndex:(NSInteger)index {
+    return [self createEmotionDiaryFromDictionary:diaries[index]];
+}
+
 @end

@@ -1,24 +1,23 @@
 //
-//  DiaryTableViewController.m
+//  TimelineTableViewController.m
 //  Emotion Diary
 //
 //  Created by 范志康 on 16/5/2.
 //  Copyright © 2016年 范志康. All rights reserved.
 //
 
+#import "TimelineTableViewController.h"
+#import "CalendarTableViewCell.h"
 #import "DiaryTableViewController.h"
 
-@interface DiaryTableViewController ()
+@interface TimelineTableViewController ()
 
 @end
 
-@implementation DiaryTableViewController
+@implementation TimelineTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _imageSelfie.layer.cornerRadius = _imageSelfie.frame.size.width / 2;
-    
-    [self updateDiaryView];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -32,42 +31,32 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)updateDiaryView {
-    UIImage *image = [UIImage imageWithData:[Utilities getFileAtPath:SELFIE_PATH withName:_diary.selfie]];
-    _imageSelfie.image = image ? image : PLACEHOLDER_IMAGE;
-    _imageFace.image = [ActionPerformer getFaceImageByEmotion:_diary.emotion];
-    _labelEmotion.text = [NSString stringWithFormat:@"心情指数 %d", _diary.emotion];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"M月d日 HH:mm"];
-    _labelDateAndTime.text = [formatter stringFromDate:_diary.createTime];
-    _textDetail.text = _diary.text;
-}
-
 #pragma mark - Table view data source
 
-/*
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
-*/
 
-/*
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    return [[EmotionDiaryManager sharedManager] totalNumber];
 }
-*/
 
-/*
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 150.0;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    CalendarTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"diary" forIndexPath:indexPath];
+    [cell setDiary:[[EmotionDiaryManager sharedManager] getDiaryOfIndex:indexPath.row]];
     
     // Configure the cell...
     
     return cell;
 }
-*/
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 
 /*
 // Override to support conditional editing of the table view.
@@ -103,22 +92,17 @@
 }
 */
 
-- (IBAction)delete:(id)sender {
-}
-
-- (IBAction)share:(id)sender {
-}
-
-#pragma mark - Navigation
-
-- (IBAction)done:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+- (IBAction)search:(id)sender {
 }
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"viewDiary"]) {
+        DiaryTableViewController *dest = [[[segue destinationViewController] viewControllers] firstObject];
+        dest.diary = [((CalendarTableViewCell *)sender).savedDiary fullVersion];
+    }
 }
 
 @end

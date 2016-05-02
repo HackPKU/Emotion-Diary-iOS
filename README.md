@@ -12,7 +12,7 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 * 打开 `Emotion Diary.xcworkspace`
 * 将 `FaceppSDK_ARC` 文件夹下的 `APIKey+APISecret.sample.h` 文件复制为 `APIKey+APISecret.h` 添加进项目中
 * 向开发者索取 `API_KEY` 和 `API_SECRET` 填入 `APIKey+APISecret.h`
-* 运行程序
+* 编译并运行程序
 
 > 在 DEBUG 模式下，进入 App 无需自拍自动解锁以方便测试，任意选择照片后会被替换为 `DEBUG_IMAGE`，该图片可在 `WelcomeViewController` 中修改
 
