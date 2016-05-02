@@ -107,9 +107,9 @@
     [KVNProgress showWithStatus:@"分析中"];
     NSString *successMessage;
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"faceID"] length] == 0) {
-        successMessage = @"注册成功";
+        successMessage = @"人脸注册成功";
     }else {
-        successMessage = @"解锁成功";
+        successMessage = @"人脸解锁成功";
     }
     ActionPerformerResultBlock block = ^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
         if (!success) {

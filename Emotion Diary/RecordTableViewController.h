@@ -10,11 +10,10 @@
 #import "CTAssetsPickerController.h"
 #import "MWPhotoBrowser.h"
 
-#define NO_EMOTION -1
-
 @interface RecordTableViewController : UITableViewController <UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CTAssetsPickerControllerDelegate, MWPhotoBrowserDelegate> {
     NSDictionary *faceInfo;
     NSMutableArray *images;
+    BOOL showCamera;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *imageSelfie;

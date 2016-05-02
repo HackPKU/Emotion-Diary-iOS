@@ -16,6 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _imageSelfie.layer.cornerRadius = _imageSelfie.frame.size.width / 2;
+    
+    [self updateDiaryView];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -27,6 +30,17 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)updateDiaryView {
+    UIImage *image = [UIImage imageWithData:[Utilities getFileAtPath:SELFIE_PATH withName:_diary.selfie]];
+    _imageSelfie.image = image ? image : PLACEHOLDER_IMAGE;
+    _imageFace.image = [UIImage imageNamed:[ActionPerformer getFaceNameByEmotion:_diary.emotion]];
+    _labelEmotion.text = [NSString stringWithFormat:@"心情指数 - %d", _diary.emotion];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"M月d日 HH:mm"];
+    _labelDateAndTime.text = [formatter stringFromDate:_diary.createTime];
+    _textDetail.text = _diary.text;
 }
 
 #pragma mark - Table view data source
@@ -88,6 +102,12 @@
     return YES;
 }
 */
+
+- (IBAction)delete:(id)sender {
+}
+
+- (IBAction)share:(id)sender {
+}
 
 /*
 #pragma mark - Navigation

@@ -15,6 +15,8 @@
 @property (strong, nonatomic) IBOutlet UITextView *textDetail;
 @property (strong, nonatomic) IBOutlet UILabel *labelDate;
 @property (strong, nonatomic) IBOutlet UILabel *labelTime;
+@property (strong, nonatomic) IBOutlet UIButton *buttonHasImage;
+@property (strong, nonatomic) IBOutlet UIButton *buttonHasTag;
 @property EmotionDiary *savedDiary;
 
 - (void)setDiary:(EmotionDiary *)diary;

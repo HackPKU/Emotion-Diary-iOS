@@ -25,14 +25,17 @@
 
 - (void)setDiary:(EmotionDiary *)diary {
     _savedDiary = diary;
-    _imageSelfie.image = [UIImage imageWithData:[ActionPerformer getFileAtPath:SELFIE_PATH withName:diary.selfie]];
+    UIImage *image = [UIImage imageWithData:[Utilities getFileAtPath:SELFIE_PATH withName:diary.selfie]];
+    _imageSelfie.image = image ? image : PLACEHOLDER_IMAGE;
     _imageFace.image = [UIImage imageNamed:[ActionPerformer getFaceNameByEmotion:diary.emotion]];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"HH:mm"];
     _labelTime.text = [formatter stringFromDate:diary.createTime];
-    [formatter setDateFormat:@"MM-dd"];
+    [formatter setDateFormat:@"M月d日"];
     _labelDate.text = [formatter stringFromDate:diary.createTime];
     _textDetail.text = diary.shortText;
+    _buttonHasImage.hidden = !diary.hasImage;
+    _buttonHasTag.hidden = !diary.hasTag;
 }
 
 @end

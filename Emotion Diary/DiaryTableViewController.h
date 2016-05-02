@@ -10,4 +10,12 @@
 
 @interface DiaryTableViewController : UITableViewController
 
+@property EmotionDiary *diary;
+
+@property (strong, nonatomic) IBOutlet UIImageView *imageSelfie;
+@property (strong, nonatomic) IBOutlet UILabel *labelDateAndTime;
+@property (strong, nonatomic) IBOutlet UILabel *labelEmotion;
+@property (strong, nonatomic) IBOutlet UIImageView *imageFace;
+@property (strong, nonatomic) IBOutlet UITextView *textDetail;
+
 @end

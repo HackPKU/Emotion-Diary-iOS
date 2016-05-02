@@ -22,21 +22,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     images = [[NSMutableArray alloc] init];
-    
-    UIImage *displaySelfie = _selfie;
-    if (!displaySelfie) {
-        displaySelfie = [UIImage imageNamed:@"MyFace1"]; // TODO: Add placeholder
-    }
-    _imageSelfie.image = displaySelfie;
+    showCamera = YES;
     _imageSelfie.layer.cornerRadius = _imageSelfie.frame.size.width / 2;
-    _imageSelfieBlurred.image = displaySelfie;
+    [self setSelfieImage];
     
     if (_emotion == NO_EMOTION) {
         _emotion = 50;
     }
     _sliderEmotion.value = _emotion;
-    _sliderEmotion.userInteractionEnabled = NO;
-    _sliderEmotion.alpha = 0.0;
+    _sliderEmotion.userInteractionEnabled = _selfie ? NO : YES;
+    _sliderEmotion.alpha = _selfie ? 0.0 : 1.0;
     [self updateEmotion];
     
     _textRecord.scrollsToTop = NO;
@@ -52,6 +47,15 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setSelfieImage {
+    UIImage *displaySelfie = _selfie;
+    if (!displaySelfie) {
+        displaySelfie = PLACEHOLDER_IMAGE;
+    }
+    _imageSelfie.image = displaySelfie;
+    _imageSelfieBlurred.image = displaySelfie;
 }
 
 #pragma mark - Text View Delegate
@@ -160,7 +164,7 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return MIN(MAX_PICTURE_NUM, images.count + 1);
+    return MIN(MAX_PICTURE_NUM, images.count + showCamera);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -205,7 +209,10 @@
     if (images.count < MAX_PICTURE_NUM - 1) {
         [_collectionImages deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]]];
     }else { // Add button replaces the last image
-        [_collectionImages reloadData];
+        showCamera = NO;
+        [_collectionImages deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]]];
+        showCamera = YES;
+        [_collectionImages performSelector:@selector(reloadData) withObject:nil afterDelay:0.5];
     }
 }
 
@@ -234,7 +241,7 @@
     [_collectionImages reloadData];
     
     // Scroll to newly added image
-    [_collectionImages scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:[_collectionImages numberOfItemsInSection:0] - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionRight animated:YES];
+    [_collectionImages scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:[_collectionImages numberOfItemsInSection:0] - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {

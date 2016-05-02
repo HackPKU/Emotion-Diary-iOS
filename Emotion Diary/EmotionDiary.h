@@ -33,6 +33,8 @@
 #define IMAGES_PATH @"EmotionDiaryImages"
 #define DIARY_PATH @"EmotionDiary"
 
+#define NO_EMOTION -1
+
 typedef void (^EmotionDiaryResultBlock)(BOOL success);
 
 NS_ASSUME_NONNULL_BEGIN
@@ -65,6 +67,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithEmotion:(int)emotion selfie:(UIImage * _Nullable)selfie images:(NSArray<UIImage *> * _Nullable)images tags:(NSArray<NSString *> * _Nullable)tags text:(NSString *)text placeName:(NSString * _Nullable)placeName placeLong:(float)placeLong placeLat:(float)placeLat weather:(NSString * _Nullable)weather;
 
 - (void)saveToDiskWithBlock:(EmotionDiaryResultBlock)block;
+
+/**
+ * Get the detailed version of a diary and load the images from disk
+ * @return Full version Emotion Diary
+ */
+- (EmotionDiary * _Nullable)fullVersion;
 
 NS_ASSUME_NONNULL_END
 

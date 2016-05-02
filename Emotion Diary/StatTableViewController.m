@@ -33,7 +33,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -47,9 +47,6 @@
             break;
         case 1:
             return @"一月统计";
-            break;
-        case 2:
-            return @"一年统计";
             break;
         default:
             return nil;
@@ -67,9 +64,6 @@
             break;
         case 1:
             [cell setData:[[EmotionDiaryManager sharedManager] getStatOfLastDays:30]];
-            break;
-        case 2:
-            [cell setData:[[EmotionDiaryManager sharedManager] getStatOfLastDays:365]];
             break;
         default:
             break;
