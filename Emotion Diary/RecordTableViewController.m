@@ -154,7 +154,7 @@
 }
 
 - (void)updateEmotion {
-    [_buttonFace setImage:[UIImage imageNamed:[ActionPerformer getFaceNameByEmotion:_emotion]] forState:UIControlStateNormal];
+    [_buttonFace setImage:[ActionPerformer getFaceImageByEmotion:_emotion] forState:UIControlStateNormal];
 }
 
 #pragma mark - Image picker collection view

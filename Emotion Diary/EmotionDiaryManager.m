@@ -36,6 +36,7 @@ static EmotionDiaryManager *sharedManager;
     EmotionDiary *diary = [[EmotionDiary alloc] init];
     diary.hasLocalVersion = [dict[HAS_LOCAL_VERSION] boolValue];
     diary.hasOnlineVersion = [dict[HAS_ONLINE_VERSION] boolValue];
+    diary.diaryID = [dict[DIARY_ID] intValue];
     diary.emotion = [dict[EMOTION] intValue];
     diary.selfie = dict[SELFIE];
     diary.hasImage = [dict[HAS_IMAGE] boolValue];
@@ -91,7 +92,7 @@ static EmotionDiaryManager *sharedManager;
 }
 
 - (BOOL)save {
-    // Sort by time descending
+    // 按时间降序排列
     diaries = [NSMutableArray arrayWithArray:[diaries sortedArrayUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
         return [obj2[CREATE_TIME] compare:obj1[CREATE_TIME]];
     }]];
@@ -101,11 +102,17 @@ static EmotionDiaryManager *sharedManager;
 
 - (NSArray<EmotionDiary *> *)getDiaryOfDate:(NSDate *)date {
     NSMutableArray *result = [[NSMutableArray alloc] init];
-    for (NSDictionary *dict in diaries) {
-        NSDate *diaryDate = dict[CREATE_TIME];
+    // diaries按时间降序排列，二分查找，找到该日期的后面一天作为下一步的搜索起点
+    NSUInteger findIndex = [diaries indexOfObject:@{CREATE_TIME: date} inSortedRange:NSMakeRange(0, diaries.count) options:NSBinarySearchingInsertionIndex usingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) { // obj2 is the fixed date
+        NSTimeInterval interval = [obj1[CREATE_TIME] timeIntervalSinceDate:obj2[CREATE_TIME]];
+        return interval > 24 * 3600 ? NSOrderedAscending : NSOrderedDescending;
+    }];
+    for (NSUInteger i = findIndex; i < diaries.count; i++) {
+        NSDictionary *diary = diaries[i];
+        NSDate *diaryDate = diary[CREATE_TIME];
         if ([[NSCalendar currentCalendar] isDate:diaryDate inSameDayAsDate:date]) {
-            [result addObject:[self createEmotionDiaryFromDictionary:dict]];
-        }else if ([date compare:diaryDate] == NSOrderedDescending) {
+            [result addObject:[self createEmotionDiaryFromDictionary:diary]];
+        }else if ([date timeIntervalSinceDate:diaryDate] > 0) {
             break;
         }
     }

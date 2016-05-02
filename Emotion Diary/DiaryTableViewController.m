@@ -35,7 +35,7 @@
 - (void)updateDiaryView {
     UIImage *image = [UIImage imageWithData:[Utilities getFileAtPath:SELFIE_PATH withName:_diary.selfie]];
     _imageSelfie.image = image ? image : PLACEHOLDER_IMAGE;
-    _imageFace.image = [UIImage imageNamed:[ActionPerformer getFaceNameByEmotion:_diary.emotion]];
+    _imageFace.image = [ActionPerformer getFaceImageByEmotion:_diary.emotion];
     _labelEmotion.text = [NSString stringWithFormat:@"心情指数 - %d", _diary.emotion];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"M月d日 HH:mm"];

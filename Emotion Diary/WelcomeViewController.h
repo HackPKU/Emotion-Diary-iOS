@@ -11,7 +11,7 @@
 @interface WelcomeViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
     UIImage *selfie;
     int emotion;
-    BOOL hasShownCamera;
+    BOOL shouldStopAnimate;
     BOOL hasUnkocked;
 }
 

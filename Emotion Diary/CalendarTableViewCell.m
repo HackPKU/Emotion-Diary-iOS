@@ -27,7 +27,7 @@
     _savedDiary = diary;
     UIImage *image = [UIImage imageWithData:[Utilities getFileAtPath:SELFIE_PATH withName:diary.selfie]];
     _imageSelfie.image = image ? image : PLACEHOLDER_IMAGE;
-    _imageFace.image = [UIImage imageNamed:[ActionPerformer getFaceNameByEmotion:diary.emotion]];
+    _imageFace.image = [ActionPerformer getFaceImageByEmotion:diary.emotion];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"HH:mm"];
     _labelTime.text = [formatter stringFromDate:diary.createTime];
