@@ -35,7 +35,7 @@
 }
 
 - (CGFloat)lineGraph:(BEMSimpleLineGraphView *)graph valueForPointAtIndex:(NSInteger)index {
-    return [chartData[index] intValue];
+    return [chartData[index] doubleValue];
 }
 
 @end

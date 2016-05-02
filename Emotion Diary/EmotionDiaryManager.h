@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface EmotionDiaryManager : NSObject {
     NSMutableArray<NSDictionary *> *diaries;
 }
-
-NS_ASSUME_NONNULL_BEGIN
 
 + (EmotionDiaryManager *)sharedManager; // 单例模式
 

@@ -78,7 +78,7 @@
 
 - (void)saveToDiskWithBlock:(EmotionDiaryResultBlock)block {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        if (![ActionPerformer checkAndCreatePath:SELFIE_PATH] || ![ActionPerformer checkAndCreatePath:IMAGES_PATH] || ![ActionPerformer checkAndCreatePath:DIARY_PATH]) {
+        if (![Utilities checkAndCreatePath:SELFIE_PATH] || ![Utilities checkAndCreatePath:IMAGES_PATH] || ![Utilities checkAndCreatePath:DIARY_PATH]) {
             block(NO);
         }
         
@@ -86,8 +86,8 @@
             NSString *selfieName;
             do {
                 selfieName = [NSString stringWithFormat:@"%d", arc4random() % (int)1e8]; // Random number as file name
-            }while ([ActionPerformer fileExistsAtPath:SELFIE_PATH withName:selfieName]);
-            if (![ActionPerformer createFile:UIImageJPEGRepresentation(imageSelfie, 0.3) atPath:SELFIE_PATH withName:selfieName]) {
+            }while ([Utilities fileExistsAtPath:SELFIE_PATH withName:selfieName]);
+            if (![Utilities createFile:UIImageJPEGRepresentation(imageSelfie, 0.3) atPath:SELFIE_PATH withName:selfieName]) {
                 block(NO);
             }
             _selfie = selfieName;
@@ -98,8 +98,8 @@
             NSString *imageName;
             do {
                 imageName = [NSString stringWithFormat:@"%d", arc4random() % (int)1e8]; // Random number as file name
-            }while ([ActionPerformer fileExistsAtPath:SELFIE_PATH withName:imageName]);
-            if (![ActionPerformer createFile:UIImageJPEGRepresentation(image, 0.3) atPath:IMAGES_PATH withName:imageName]) {
+            }while ([Utilities fileExistsAtPath:SELFIE_PATH withName:imageName]);
+            if (![Utilities createFile:UIImageJPEGRepresentation(image, 0.3) atPath:IMAGES_PATH withName:imageName]) {
                 block(NO);
             }
             [imageNames addObject:imageName];
@@ -111,9 +111,10 @@
         [archiver encodeObject:self forKey:@"DIARY"];
         [archiver finishEncoding];
         NSString *diaryName = [_createTime description]; // Time as file name
-        if (![ActionPerformer createFile:data atPath:DIARY_PATH withName:diaryName]) {
+        if (![Utilities createFile:data atPath:DIARY_PATH withName:diaryName]) {
             block(NO);
         }
+        // Save to NSUserDefaults
         if ([[EmotionDiaryManager sharedManager] saveLocalDiary:self]) {
             _hasLocalVersion = YES;
             block(YES);
@@ -123,6 +124,29 @@
     });
 }
 
+- (EmotionDiary * _Nullable)fullVersion {
+    NSString *fileName = [_createTime description];
+    NSData *diaryData = [Utilities getFileAtPath:DIARY_PATH withName:fileName];
+    if (!diaryData) {
+        return nil;
+    }
+    NSKeyedUnarchiver *unArchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:diaryData];
+    EmotionDiary *fullDiary = [unArchiver decodeObjectOfClass:[self class] forKey:@"DIARY"];
+    [fullDiary readImageFiles];
+    return fullDiary;
+}
 
+- (void)readImageFiles {
+    if (_selfie.length > 0 && !imageSelfie) {
+        imageSelfie = [UIImage imageWithData:[Utilities getFileAtPath:SELFIE_PATH withName:_selfie]];
+    }
+    if (_images.count > 0 && !imageImages) {
+        NSMutableArray<UIImage *> *imagesArray = [[NSMutableArray alloc] init];
+        for (NSString *imageName in _images) {
+            [imagesArray addObject:[UIImage imageWithData:[Utilities getFileAtPath:IMAGES_PATH withName:imageName]]];
+        }
+        imageImages = imagesArray;
+    }
+}
 
 @end

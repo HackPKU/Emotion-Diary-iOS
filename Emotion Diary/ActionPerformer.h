@@ -73,46 +73,6 @@ typedef void (^ActionPerformerResultBlock)(BOOL success, NSString * _Nullable me
  */
 + (NSString *)getFaceNameByEmotion:(int)smile;
 
-/**
- * Check whether the path exists. If not, try to create one.
- 
- * The root directory is the document directory
- * @param path The required path
- * @return Whether the path exists after the function
- */
-+ (BOOL)checkAndCreatePath:(NSString *)path;
-
-/**
- * Check whether the file exists at the given path
- 
- * The root directory is the document directory
- * @param path The required path
- * @param name The file name
- * @return Whether the file exists
- */
-+ (BOOL)fileExistsAtPath:(NSString *)path withName:(NSString *)name;
-
-/**
- * Create file at the given path
- 
- * The root directory is the document directory
- * @param data The data to be saved as file
- * @param path The required path
- * @param name The file name
- * @return Whether the file is created successfully
- */
-+ (BOOL)createFile:(NSData *)data atPath:(NSString *)path withName:(NSString *)name;
-
-/**
- * Get the file at the given path
- 
- * The root directory is the document directory
- * @param path The required path
- * @param name The file name
- * @return The data of the file (if exists) or nil
- */
-+ (NSData * _Nullable)getFileAtPath:(NSString *)path withName:(NSString *)name;
-
 NS_ASSUME_NONNULL_END
 
 @end

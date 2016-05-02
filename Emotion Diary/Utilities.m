@@ -57,4 +57,41 @@
     return imageData;
 }
 
++ (BOOL)checkAndCreatePath:(NSString *)path {
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSString *fullPath = [NSString stringWithFormat:@"%@/%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0], path];
+    BOOL isDirectory;
+    if (![manager fileExistsAtPath:fullPath isDirectory:&isDirectory]) {
+        return [manager createDirectoryAtPath:fullPath withIntermediateDirectories:NO attributes:nil error:nil];
+    }else {
+        return isDirectory;
+    }
+}
+
++ (BOOL)fileExistsAtPath:(NSString *)path withName:(NSString *)name {
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSString *fullPath = [NSString stringWithFormat:@"%@/%@/%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0], path, name];
+    BOOL isDirectory;
+    if (![manager fileExistsAtPath:fullPath isDirectory:&isDirectory]) {
+        return NO;
+    }else {
+        return isDirectory;
+    }
+}
+
++ (BOOL)createFile:(NSData *)data atPath:(NSString *)path withName:(NSString *)name {
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSString *fullPath = [NSString stringWithFormat:@"%@/%@/%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0], path, name];
+    if ([manager fileExistsAtPath:fullPath]) {
+        return NO;
+    }
+    return [manager createFileAtPath:fullPath contents:data attributes:nil];
+}
+
++ (NSData * _Nullable)getFileAtPath:(NSString *)path withName:(NSString *)name {
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSString *fullPath = [NSString stringWithFormat:@"%@/%@/%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0], path, name];
+    return [manager contentsAtPath:fullPath];
+}
+
 @end

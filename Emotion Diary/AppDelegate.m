@@ -27,7 +27,9 @@
     
     // Init Face++ API
     [FaceppAPI initWithApiKey:_API_KEY andApiSecret:_API_SECRET andRegion:APIServerRegionCN];
-    [FaceppAPI setDebugMode:DEBUG];
+#ifdef DEBUG
+    [FaceppAPI setDebugMode:YES];
+#endif
     
     return YES;
 }

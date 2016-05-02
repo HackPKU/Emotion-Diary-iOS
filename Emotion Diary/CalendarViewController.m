@@ -7,7 +7,8 @@
 //
 
 #import "CalendarViewController.h"
-#import "CalendarViewTableViewCell.h"
+#import "CalendarTableViewCell.h"
+#import "DiaryTableViewController.h"
 
 @interface CalendarViewController ()
 
@@ -51,6 +52,7 @@
 - (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date {
     diariesOfToday = [[EmotionDiaryManager sharedManager] getDiaryOfDate:date];
     [_detailTableView reloadData];
+    [_detailTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
 }
 
 - (NSInteger)calendar:(FSCalendar *)calendar numberOfEventsForDate:(NSDate *)date {
@@ -64,21 +66,38 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return diariesOfToday.count;
+    return MAX(diariesOfToday.count, 1);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CalendarViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellDetail" forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    cell.labelDate.hidden = (indexPath.row != 0);
-    [cell setDiary:diariesOfToday[indexPath.row]];
-    return cell;
+    if (diariesOfToday.count > 0) {
+        CalendarTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"diary" forIndexPath:indexPath];
+        cell.labelDate.hidden = (indexPath.row != 0);
+        [cell setDiary:diariesOfToday[indexPath.row]];
+        return cell;
+    }else {
+        return [tableView dequeueReusableCellWithIdentifier:@"noDiary" forIndexPath:indexPath];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+# pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"viewDiary"]) {
+        DiaryTableViewController *dest = [[[segue destinationViewController] viewControllers] firstObject];
+        dest.diary = [((CalendarTableViewCell *)sender).savedDiary fullVersion];
+    }
+}
+
+- (IBAction)unwindToCalendarView:(UIStoryboardSegue *)segue {
+    
 }
 
 @end

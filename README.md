@@ -14,7 +14,24 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 * 向开发者索取 `API_KEY` 和 `API_SECRET`
 * 运行程序
 
+## 主要进度记录
+
+* 2016/04/25 完成功能构思和UI、图标概念设计
+* 2016/04/29 完成服务器 API 的编写
+* 2016/05/02 完成本地日记 App 的功能
+
 ## 重要类说明
+
+#### `EmotionDiary`
+
+* 日记类，遵循 `NSCoding` 协议，可实现对本地和在线日记的封装和存储
+
+#### `EmotionDiaryManager`
+
+* 考虑到用户使用后日记数量可能很多，每次都从磁盘读取日记数据会导致极低的效率，因此建立一个专门的管理类用于大量日记数据的处理
+* 使用单例模式 `sharedManager`
+* 完成获取心情的统计数据功能，单例有一个内存中的 `diaries` 变量，与 `NSUserDefaults` 保持同步，可以极大地提高查询的效率
+* 完成对本地和在线单篇日记的存储
 
 #### `ActionPerformer`
 
@@ -23,7 +40,7 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 
 #### `Utilities`
 
-* 用于实现一些常用的功能，例如加密处理，图片处理等
+* 用于实现一些常用的功能，例如加密，图片处理，文件管理等
 * 具体功能在注释中有详细说明
 
 ## 第三方库说明

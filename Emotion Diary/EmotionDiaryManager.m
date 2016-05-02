@@ -42,8 +42,8 @@ static EmotionDiaryManager *sharedManager;
     diary.hasTag = [dict[HAS_TAG] boolValue];
     diary.shortText = dict[SHORT_TEXT];
     diary.placeName = dict[PLACE_NAME];
-    diary.placeLong = [dict[PLACE_LONG] floatValue];
-    diary.placeLat = [dict[PLACE_LAT] floatValue];
+    diary.placeLong = [dict[PLACE_LONG] doubleValue];
+    diary.placeLat = [dict[PLACE_LAT] doubleValue];
     diary.weather = dict[WEATHER];
     diary.createTime = dict[CREATE_TIME];
     return diary;
@@ -51,14 +51,37 @@ static EmotionDiaryManager *sharedManager;
 
 - (BOOL)saveLocalDiary:(EmotionDiary *)diary {
     NSDictionary *diaryDictionary;
-    diaryDictionary = @{EMOTION: [NSNumber numberWithInt:diary.emotion], HAS_LOCAL_VERSION: [NSNumber numberWithBool:YES], HAS_ONLINE_VERSION: [NSNumber numberWithBool:diary.hasOnlineVersion], SELFIE: [self filter:diary.selfie], HAS_IMAGE: [NSNumber numberWithBool:(diary.images.count > 0)], HAS_TAG: [NSNumber numberWithBool:(diary.tags.count > 0)], SHORT_TEXT: diary.text.length > 140 ? [diary.text substringToIndex:140] : diary.text, PLACE_NAME: [self filter:diary.placeName], PLACE_LONG: [NSNumber numberWithFloat:diary.placeLong], PLACE_LAT: [NSNumber numberWithFloat:diary.placeLat], WEATHER: [self filter:diary.placeName], CREATE_TIME: diary.createTime};
+    diaryDictionary = @{EMOTION: [NSNumber numberWithInt:diary.emotion],
+                        HAS_LOCAL_VERSION: [NSNumber numberWithBool:YES],
+                        HAS_ONLINE_VERSION: [NSNumber numberWithBool:diary.hasOnlineVersion],
+                        SELFIE: [self filter:diary.selfie],
+                        HAS_IMAGE: [NSNumber numberWithBool:(diary.images.count > 0)],
+                        HAS_TAG: [NSNumber numberWithBool:(diary.tags.count > 0)],
+                        SHORT_TEXT: diary.text.length > 140 ? [diary.text substringToIndex:140] : diary.text,
+                        PLACE_NAME: [self filter:diary.placeName],
+                        PLACE_LONG: [NSNumber numberWithFloat:diary.placeLong],
+                        PLACE_LAT: [NSNumber numberWithFloat:diary.placeLat],
+                        WEATHER: [self filter:diary.placeName],
+                        CREATE_TIME: diary.createTime};
     [diaries addObject:diaryDictionary];
     return [self save];
 }
 
 - (BOOL)saveOnlineDiary:(EmotionDiary *)diary {
     NSDictionary *diaryDictionary;
-    diaryDictionary = @{HAS_LOCAL_VERSION: [NSNumber numberWithBool:diary.hasLocalVersion], HAS_ONLINE_VERSION: [NSNumber numberWithBool:YES], DIARY_ID:[NSNumber numberWithInt:diary.diaryID], EMOTION: [NSNumber numberWithInt:diary.emotion], SELFIE: [self filter:diary.selfie], HAS_IMAGE: [NSNumber numberWithBool:diary.hasImage], HAS_TAG: [NSNumber numberWithBool:diary.hasTag], SHORT_TEXT: diary.shortText, PLACE_NAME: [self filter:diary.placeName], PLACE_LONG: [NSNumber numberWithFloat:diary.placeLong], PLACE_LAT: [NSNumber numberWithFloat:diary.placeLat], WEATHER: [self filter:diary.weather], CREATE_TIME: diary.createTime};
+    diaryDictionary = @{HAS_LOCAL_VERSION: [NSNumber numberWithBool:diary.hasLocalVersion],
+                        HAS_ONLINE_VERSION: [NSNumber numberWithBool:YES],
+                        DIARY_ID:[NSNumber numberWithInt:diary.diaryID],
+                        EMOTION: [NSNumber numberWithInt:diary.emotion],
+                        SELFIE: [self filter:diary.selfie],
+                        HAS_IMAGE: [NSNumber numberWithBool:diary.hasImage],
+                        HAS_TAG: [NSNumber numberWithBool:diary.hasTag],
+                        SHORT_TEXT: diary.shortText,
+                        PLACE_NAME: [self filter:diary.placeName],
+                        PLACE_LONG: [NSNumber numberWithFloat:diary.placeLong],
+                        PLACE_LAT: [NSNumber numberWithFloat:diary.placeLat],
+                        WEATHER: [self filter:diary.weather],
+                        CREATE_TIME: diary.createTime};
     [diaries addObject:diaryDictionary];
     return [self save];
 }
@@ -90,35 +113,74 @@ static EmotionDiaryManager *sharedManager;
 }
 
 - (NSArray<NSNumber *> *)getStatOfLastDays:(int)dayNumber {
-    if (dayNumber <= 0) {
-        return @[];
-    }
     NSMutableArray *stat = [[NSMutableArray alloc] init];
     for (int i = 0; i < dayNumber; i++) {
-        [stat addObject:@[]];
+        [stat addObject:diaries.count > 0 ? @[] : @[@50]];
     }
+    
     NSMutableArray *tempArr;
     for (NSDictionary *dict in diaries) {
-        int dayToToday = [dict[CREATE_TIME] timeIntervalSinceNow] / (24 * 3600);
-        if (dayToToday >= 0 && dayToToday < dayNumber) {
-            tempArr = [stat[dayToToday] mutableCopy];
-            [tempArr addObject:dict[EMOTION]];
-            [stat setObject:tempArr atIndexedSubscript:dayToToday];
+        int dayToToday = -[dict[CREATE_TIME] timeIntervalSinceNow] / (24 * 3600);
+        if (dayToToday >= 0) {
+            if (dayToToday < dayNumber) {
+                tempArr = [stat[dayToToday] mutableCopy];
+                [tempArr addObject:dict[EMOTION]];
+                [stat setObject:tempArr atIndexedSubscript:dayToToday];
+            }else {
+                break;
+            }
         }
     }
     
     NSMutableArray *result = [[NSMutableArray alloc] init];
     for (int i = 0; i < dayNumber; i++) {
         NSDictionary *dict = stat[dayNumber - i - 1];
-        int emotionAverage = 0;
-        for (NSNumber *num in dict) {
-            emotionAverage += [num intValue];
-        }
+        double emotionAverage = 0;
         if (dict.count > 0) {
+            for (NSNumber *num in dict) {
+                emotionAverage += [num intValue];
+            }
             emotionAverage /= dict.count;
+        }else {
+            emotionAverage = NO_EMOTION;
         }
-        result[i] = [NSNumber numberWithInt:emotionAverage];
+        result[i] = [NSNumber numberWithFloat:emotionAverage];
     }
+    
+    if ([result[0] doubleValue] == NO_EMOTION) {
+        for (int i = 1; ; i++) {
+            if ([result[i] doubleValue] != NO_EMOTION) {
+                result[0] = result[i];
+                break;
+            }
+        }
+    }
+    if ([result[dayNumber - 1] doubleValue] == NO_EMOTION) {
+        for (int i = dayNumber - 2; ; i--) {
+            if ([result[i] doubleValue] != NO_EMOTION) {
+                result[dayNumber - 1] = result[i];
+                break;
+            }
+        }
+    }
+    for (int i = 0; i < dayNumber;) {
+        if ([result[i] doubleValue] != NO_EMOTION) {
+            i++;
+        }else {
+            int j = i + 1;
+            while ([result[j] doubleValue] == NO_EMOTION) {
+                j++;
+            }
+            double start = [result[i - 1] doubleValue];
+            double length = [result[j] doubleValue] - start;
+            for (int p = i; p < j; p++) {
+                double middle = start + length * (p - i + 1) / (j - i + 1);
+                result[p] = [NSNumber numberWithDouble:middle];
+            }
+            i = j + 1;
+        }
+    }
+    
     return result;
 }
 

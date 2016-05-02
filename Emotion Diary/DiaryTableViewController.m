@@ -1,22 +1,24 @@
 //
-//  StatTableViewController.m
+//  DiaryTableViewController.m
 //  Emotion Diary
 //
-//  Created by 范志康 on 16/4/9.
+//  Created by 范志康 on 16/5/2.
 //  Copyright © 2016年 范志康. All rights reserved.
 //
 
-#import "StatTableViewController.h"
-#import "StatTableViewCell.h"
+#import "DiaryTableViewController.h"
 
-@interface StatTableViewController ()
+@interface DiaryTableViewController ()
 
 @end
 
-@implementation StatTableViewController
+@implementation DiaryTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _imageSelfie.layer.cornerRadius = _imageSelfie.frame.size.width / 2;
+    
+    [self updateDiaryView];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -30,47 +32,42 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)updateDiaryView {
+    UIImage *image = [UIImage imageWithData:[Utilities getFileAtPath:SELFIE_PATH withName:_diary.selfie]];
+    _imageSelfie.image = image ? image : PLACEHOLDER_IMAGE;
+    _imageFace.image = [UIImage imageNamed:[ActionPerformer getFaceNameByEmotion:_diary.emotion]];
+    _labelEmotion.text = [NSString stringWithFormat:@"心情指数 - %d", _diary.emotion];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"M月d日 HH:mm"];
+    _labelDateAndTime.text = [formatter stringFromDate:_diary.createTime];
+    _textDetail.text = _diary.text;
+}
+
 #pragma mark - Table view data source
 
+/*
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+#warning Incomplete implementation, return the number of sections
+    return 0;
 }
+*/
 
+/*
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+#warning Incomplete implementation, return the number of rows
+    return 0;
 }
+*/
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    switch (section) {
-        case 0:
-            return @"一周统计";
-            break;
-        case 1:
-            return @"一月统计";
-            break;
-        default:
-            return nil;
-            break;
-    }
-}
-
+/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    StatTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellStat" forIndexPath:indexPath];
-    // Configure the cell...
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    switch (indexPath.section) {
-        case 0:
-            [cell setData:[[EmotionDiaryManager sharedManager] getStatOfLastDays:7]];
-            break;
-        case 1:
-            [cell setData:[[EmotionDiaryManager sharedManager] getStatOfLastDays:30]];
-            break;
-        default:
-            break;
-    }
+    // Configure the cell...
     
     return cell;
 }
+*/
 
 /*
 // Override to support conditional editing of the table view.
@@ -105,6 +102,12 @@
     return YES;
 }
 */
+
+- (IBAction)delete:(id)sender {
+}
+
+- (IBAction)share:(id)sender {
+}
 
 /*
 #pragma mark - Navigation
