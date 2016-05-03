@@ -67,20 +67,6 @@
 
 #pragma mark - Table view data source
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    switch (indexPath.row) {
-        case 3:
-            NSLog(@"Place");
-            break;
-        case 4:
-            NSLog(@"Weather");
-            break;
-        default:
-            break;
-    }
-}
-
 /*
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Incomplete implementation, return the number of sections
@@ -139,6 +125,22 @@
 }
 */
 
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    switch (indexPath.row) {
+        case 3:
+            NSLog(@"Place");
+            break;
+        case 4:
+            NSLog(@"Weather");
+            break;
+        default:
+            break;
+    }
+}
+
 #pragma mark - Emotion adjust
 
 - (IBAction)showEmotionSlider:(id)sender {
@@ -174,6 +176,20 @@
         return cell;
     }else {
         return [collectionView dequeueReusableCellWithReuseIdentifier:@"select" forIndexPath:indexPath];
+    }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+    if ([cell isKindOfClass:[RecordCollectionViewCell class]]) {
+        [cell setAlpha:0.6];
+    }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+    if ([cell isKindOfClass:[RecordCollectionViewCell class]]) {
+        [cell setAlpha:1.0];
     }
 }
 
@@ -304,7 +320,7 @@
 - (IBAction)done:(id)sender {
     EmotionDiary *diary = [[EmotionDiary alloc] initWithEmotion:(int)_sliderEmotion.value selfie:_selfie images:images tags:nil text:_textRecord.text placeName:nil placeLong:0.0 placeLat:0.0 weather:nil];
     [KVNProgress showWithStatus:@"日记保存中"];
-    [diary saveToDiskWithBlock:^(BOOL success) {
+    [diary writeToDiskWithBlock:^(BOOL success) {
         if (success) {
             [KVNProgress showSuccessWithStatus:@"日记保存成功"];
         }else {

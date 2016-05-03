@@ -76,7 +76,7 @@
     [aCoder encodeObject:_shortText forKey:SHORT_TEXT];
 }
 
-- (void)saveToDiskWithBlock:(EmotionDiaryResultBlock)block {
+- (void)writeToDiskWithBlock:(EmotionDiaryResultBlock)block {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if (![Utilities checkAndCreatePath:SELFIE_PATH] || ![Utilities checkAndCreatePath:IMAGES_PATH] || ![Utilities checkAndCreatePath:DIARY_PATH]) {
             block(NO);
@@ -110,7 +110,7 @@
         NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
         [archiver encodeObject:self forKey:@"DIARY"];
         [archiver finishEncoding];
-        NSString *fileName = [_createTime description]; // Time as file name
+        NSString *fileName = [NSString stringWithFormat:@"%f", [_createTime timeIntervalSince1970]]; // Time as file name
         if (![Utilities createFile:data atPath:DIARY_PATH withName:fileName]) {
             block(NO);
         }
@@ -125,28 +125,25 @@
 }
 
 - (EmotionDiary * _Nullable)fullVersion {
-    NSString *fileName = [_createTime description];
+    NSString *fileName = [NSString stringWithFormat:@"%f", [_createTime timeIntervalSince1970]];
     NSData *diaryData = [Utilities getFileAtPath:DIARY_PATH withName:fileName];
     if (!diaryData) {
         return nil;
     }
     NSKeyedUnarchiver *unArchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:diaryData];
     EmotionDiary *fullDiary = [unArchiver decodeObjectOfClass:[self class] forKey:@"DIARY"];
-    [fullDiary readImageFiles];
-    return fullDiary;
-}
-
-- (void)readImageFiles {
-    if (_selfie.length > 0 && !imageSelfie) {
+    
+    if (!_hasOnlineVersion && _selfie.length > 0 && !imageSelfie) {
         imageSelfie = [UIImage imageWithData:[Utilities getFileAtPath:SELFIE_PATH withName:_selfie]];
     }
-    if (_images.count > 0 && !imageImages) {
+    if (!_hasOnlineVersion && _images.count > 0 && !imageImages) {
         NSMutableArray<UIImage *> *imagesArray = [[NSMutableArray alloc] init];
         for (NSString *imageName in _images) {
             [imagesArray addObject:[UIImage imageWithData:[Utilities getFileAtPath:IMAGES_PATH withName:imageName]]];
         }
         imageImages = imagesArray;
     }
+    return fullDiary;
 }
 
 @end

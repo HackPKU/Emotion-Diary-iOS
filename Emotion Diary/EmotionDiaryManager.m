@@ -52,9 +52,9 @@ static EmotionDiaryManager *sharedManager;
 
 - (BOOL)saveLocalDiary:(EmotionDiary *)diary {
     NSDictionary *diaryDictionary;
-    diaryDictionary = @{EMOTION: [NSNumber numberWithInt:diary.emotion],
-                        HAS_LOCAL_VERSION: [NSNumber numberWithBool:YES],
+    diaryDictionary = @{HAS_LOCAL_VERSION: [NSNumber numberWithBool:YES],
                         HAS_ONLINE_VERSION: [NSNumber numberWithBool:diary.hasOnlineVersion],
+                        EMOTION: [NSNumber numberWithInt:diary.emotion],
                         SELFIE: [self filter:diary.selfie],
                         HAS_IMAGE: [NSNumber numberWithBool:(diary.images.count > 0)],
                         HAS_TAG: [NSNumber numberWithBool:(diary.tags.count > 0)],
@@ -101,12 +101,13 @@ static EmotionDiaryManager *sharedManager;
 }
 
 - (NSArray<EmotionDiary *> *)getDiaryOfDate:(NSDate *)date {
-    NSMutableArray *result = [[NSMutableArray alloc] init];
     // diaries按时间降序排列，二分查找，找到该日期的后面一天作为下一步的搜索起点
     NSUInteger findIndex = [diaries indexOfObject:@{CREATE_TIME: date} inSortedRange:NSMakeRange(0, diaries.count) options:NSBinarySearchingInsertionIndex usingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) { // obj2 is the fixed date
         NSTimeInterval interval = [obj1[CREATE_TIME] timeIntervalSinceDate:obj2[CREATE_TIME]];
         return interval > 24 * 3600 ? NSOrderedAscending : NSOrderedDescending;
     }];
+    
+    NSMutableArray *result = [[NSMutableArray alloc] init];
     for (NSUInteger i = findIndex; i < diaries.count; i++) {
         NSDictionary *diary = diaries[i];
         NSDate *diaryDate = diary[CREATE_TIME];

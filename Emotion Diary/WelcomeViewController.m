@@ -141,7 +141,7 @@
 }
 
 - (void)showWarning {
-    UIAlertController *action = [UIAlertController alertControllerWithTitle:@"警告" message:@"您必须通过认证才能使用日记功能" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *action = [UIAlertController alertControllerWithTitle:@"警告" message:@"您必须通过认证才能解锁日记" preferredStyle:UIAlertControllerStyleAlert];
     [action addAction:[UIAlertAction actionWithTitle:@"自拍解锁" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self takePicture:nil];
     }]];

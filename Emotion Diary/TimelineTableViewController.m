@@ -18,6 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    totalNumber = [[EmotionDiaryManager sharedManager] totalNumber];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -38,21 +39,28 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[EmotionDiaryManager sharedManager] totalNumber];
+    return MAX(totalNumber, 1);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 150.0;
+    if (totalNumber > 0) {
+        return 155.0;
+    }else {
+        return 60.0;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CalendarTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"diary" forIndexPath:indexPath];
-    [cell setDiary:[[EmotionDiaryManager sharedManager] getDiaryOfIndex:indexPath.row]];
-    
-    // Configure the cell...
-    
-    return cell;
+    if (totalNumber > 0) {
+        CalendarTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"diary" forIndexPath:indexPath];
+        [cell setDiary:[[EmotionDiaryManager sharedManager] getDiaryOfIndex:indexPath.row]];
+        return cell;
+    }else {
+        return [tableView dequeueReusableCellWithIdentifier:@"noDiary" forIndexPath:indexPath];
+    }
 }
+
+#pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

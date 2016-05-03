@@ -66,7 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithEmotion:(int)emotion selfie:(UIImage * _Nullable)selfie images:(NSArray<UIImage *> * _Nullable)images tags:(NSArray<NSString *> * _Nullable)tags text:(NSString *)text placeName:(NSString * _Nullable)placeName placeLong:(float)placeLong placeLat:(float)placeLat weather:(NSString * _Nullable)weather;
 
-- (void)saveToDiskWithBlock:(EmotionDiaryResultBlock)block;
+- (void)writeToDiskWithBlock:(EmotionDiaryResultBlock)block;
 
 /**
  * Get the detailed version of a diary and load the images from disk

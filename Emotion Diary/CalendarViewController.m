@@ -69,6 +69,14 @@
     return MAX(diariesOfToday.count, 1);
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (diariesOfToday.count > 0) {
+        return 160.0;
+    }else {
+        return 60.0;
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (diariesOfToday.count > 0) {
         CalendarTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"diary" forIndexPath:indexPath];
@@ -79,6 +87,8 @@
         return [tableView dequeueReusableCellWithIdentifier:@"noDiary" forIndexPath:indexPath];
     }
 }
+
+#pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -94,6 +104,10 @@
         DiaryTableViewController *dest = [[[segue destinationViewController] viewControllers] firstObject];
         dest.diary = [((CalendarTableViewCell *)sender).savedDiary fullVersion];
     }
+}
+
+- (IBAction)unwindToCalendarView:(UIStoryboardSegue *)segue {
+
 }
 
 @end

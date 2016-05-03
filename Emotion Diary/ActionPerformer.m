@@ -10,15 +10,18 @@
 #import "AFNetworking.h"
 #import "FaceppAPI.h"
 
+#define LOCALHOST YES
+
 @implementation ActionPerformer
 
 #pragma mark - Server connection
 
 + (void)postWithDictionary:(NSDictionary * _Nullable)dictionary toUrl:(NSString * _Nonnull)url andBlock:(ActionPerformerResultBlock)block {
+    NSString *fullUrl = [NSString stringWithFormat:@"http://%@%@", SERVER_URL, url];
 #ifdef DEBUG
-    url = [NSString stringWithFormat:@"http://localhost/~Frank/Emotion-Diary-Web%@", url];
-#else
-    url = [NSString stringWithFormat:@"http://%@%@", SERVER_URL, url];
+    if (LOCALHOST) {
+        fullUrl = [NSString stringWithFormat:@"http://localhost/~Frank/Emotion-Diary-Web%@", url];
+    }
 #endif
     
     NSMutableDictionary *request = [dictionary mutableCopy];
@@ -31,7 +34,7 @@
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    [manager POST:url parameters:request progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager POST:fullUrl parameters:request progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *responseDictionary = (NSDictionary *)responseObject;
         if ([responseDictionary[@"code"] intValue] != 0) {
 #ifdef DEBUG
@@ -112,6 +115,10 @@
     request[@"place_long"] = [NSString stringWithFormat:@"%f", diary.placeLong];
     request[@"place_lat"] = [NSString stringWithFormat:@"%f", diary.placeLat];
     request[@"weather"] = diary.weather;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"PRC"]];
+    request[@"create_time"] = [formatter stringFromDate:diary.createTime];
     [ActionPerformer postWithDictionary:request toUrl:@"/api/post_diary.php" andBlock:block];
 }
 

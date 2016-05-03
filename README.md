@@ -14,13 +14,15 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 * 向开发者索取 `API_KEY` 和 `API_SECRET` 填入 `APIKey+APISecret.h`
 * 编译并运行程序
 
-> 在 DEBUG 模式下，进入 App 无需自拍自动解锁以方便测试，任意选择照片后会被替换为 `DEBUG_IMAGE`，该图片可在 `WelcomeViewController` 中修改
+> 在 `DEBUG` 模式下，进入 App 无需自拍自动解锁以方便测试，任意选择照片后会被替换为 `DEBUG_IMAGE`，该图片可在 `WelcomeViewController.m` 中修改
+
+> 在 `DEBUG` 模式以及 `LOCALHOST` 宏定义为 `YES` 的情况下，使用 localhost 调试程序，如果需要使用在线的服务器，请在 `ActionPerformer.m` 中修改 `LOCALHOST` 的定义为 `NO`
 
 ## 主要进度记录
 
 * 2016/04/25 完成功能构思和UI、图标概念设计
 * 2016/04/29 完成服务器 API 的编写
-* 2016/05/02 完成本地日记 App 的功能
+* 2016/05/03 完成本地日记 App 的功能
 
 ## 重要类说明
 
