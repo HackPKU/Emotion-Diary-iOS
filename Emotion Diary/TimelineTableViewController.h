@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TimelineTableViewController : UITableViewController
+@interface TimelineTableViewController : UITableViewController {
+    NSInteger totalNumber;
+}
 
 @end

@@ -12,64 +12,63 @@
         <!--时间线-->
         <scene sceneID="L5d-9z-5CC">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="a4F-AY-dlZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController storyboardIdentifier="EmotionDiaryTimeline" useStoryboardIdentifierAsRestorationIdentifier="YES" id="O3f-1x-12c" customClass="TimelineTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Timeline" useStoryboardIdentifierAsRestorationIdentifier="YES" id="O3f-1x-12c" customClass="TimelineTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ae8-bh-vbT">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="diary" rowHeight="150" id="5fx-YY-H2R" customClass="CalendarTableViewCell">
-                                <rect key="frame" x="0.0" y="92" width="600" height="150"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="diary" rowHeight="155" id="5fx-YY-H2R" customClass="CalendarTableViewCell">
+                                <rect key="frame" x="0.0" y="92" width="600" height="155"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5fx-YY-H2R" id="EWT-ZH-sRk">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="155"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qFb-hY-yCB" userLabel="Timeline">
-                                            <rect key="frame" x="51.5" y="0.0" width="3" height="150"/>
+                                            <rect key="frame" x="54" y="0.0" width="3" height="155"/>
                                             <color key="backgroundColor" red="1" green="0.74509803919999995" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="3" id="MCe-C6-2bM"/>
                                             </constraints>
                                         </view>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="ejN-Pk-vnl">
-                                            <rect key="frame" x="28" y="28" width="50" height="50"/>
+                                            <rect key="frame" x="28" y="33" width="55" height="55"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="50" id="Hrs-sM-Y8B"/>
+                                                <constraint firstAttribute="width" constant="55" id="Hrs-sM-Y8B"/>
                                                 <constraint firstAttribute="width" secondItem="ejN-Pk-vnl" secondAttribute="height" multiplier="1:1" id="ioD-jZ-9Tl"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5月1日" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lqz-vL-FhH">
-                                            <rect key="frame" x="91" y="13" width="69" height="30"/>
+                                            <rect key="frame" x="96" y="26.5" width="62.5" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="bvu-lj-TR7"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                             <color key="textColor" red="1" green="0.74509803919999995" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pA1-wr-RjT" userLabel="Separator">
-                                            <rect key="frame" x="91" y="47" width="501" height="1"/>
+                                            <rect key="frame" x="96" y="60" width="496" height="1"/>
                                             <color key="backgroundColor" red="1" green="0.74509803919999995" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="Abn-OX-Nej"/>
                                             </constraints>
                                         </view>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="今天没吃药感觉自己萌萌哒" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="p1S-d0-Ed7">
-                                            <rect key="frame" x="86" y="48" width="506" height="74"/>
+                                            <rect key="frame" x="91" y="61" width="501" height="76"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCp-U7-iWB">
-                                            <rect key="frame" x="168" y="19" width="39" height="18"/>
+                                            <rect key="frame" x="166.5" y="33" width="39" height="18"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" red="1" green="0.74509803919999995" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N6j-ag-jUO">
-                                            <rect key="frame" x="564" y="23" width="20" height="20"/>
+                                            <rect key="frame" x="564" y="36" width="20" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="N6j-ag-jUO" secondAttribute="height" multiplier="1:1" id="7CU-vu-kpd"/>
                                                 <constraint firstAttribute="height" constant="20" id="ZNX-wl-caV"/>
@@ -78,7 +77,7 @@
                                             <state key="normal" image="DiaryImage"/>
                                         </button>
                                         <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cwm-1B-8iv">
-                                            <rect key="frame" x="531" y="23" width="13" height="20"/>
+                                            <rect key="frame" x="531" y="36" width="13" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="2my-d9-iOi"/>
                                                 <constraint firstAttribute="width" secondItem="cwm-1B-8iv" secondAttribute="height" multiplier="13:20" id="VKZ-7p-xZc"/>
@@ -87,7 +86,7 @@
                                             <state key="normal" image="DiaryTag"/>
                                         </button>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="中笑" translatesAutoresizingMaskIntoConstraints="NO" id="PyK-9b-LtZ">
-                                            <rect key="frame" x="38" y="86" width="30" height="30"/>
+                                            <rect key="frame" x="40" y="98" width="30" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="30" id="9p8-W5-Iie"/>
                                                 <constraint firstAttribute="width" secondItem="PyK-9b-LtZ" secondAttribute="height" multiplier="1:1" id="Ztz-75-maf"/>
@@ -100,15 +99,15 @@
                                         <constraint firstItem="N6j-ag-jUO" firstAttribute="leading" secondItem="cwm-1B-8iv" secondAttribute="trailing" constant="20" id="ElU-uS-889"/>
                                         <constraint firstItem="p1S-d0-Ed7" firstAttribute="top" secondItem="lqz-vL-FhH" secondAttribute="bottom" constant="5" id="JSk-Jo-13B"/>
                                         <constraint firstItem="p1S-d0-Ed7" firstAttribute="top" secondItem="N6j-ag-jUO" secondAttribute="bottom" constant="5" id="Krf-Uk-vtT"/>
-                                        <constraint firstItem="PyK-9b-LtZ" firstAttribute="top" secondItem="ejN-Pk-vnl" secondAttribute="bottom" constant="8" id="N6G-5J-jME"/>
+                                        <constraint firstItem="PyK-9b-LtZ" firstAttribute="top" secondItem="ejN-Pk-vnl" secondAttribute="bottom" constant="10" id="N6G-5J-jME"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="N6j-ag-jUO" secondAttribute="trailing" constant="8" id="NWq-UG-wZ5"/>
                                         <constraint firstItem="qFb-hY-yCB" firstAttribute="top" secondItem="EWT-ZH-sRk" secondAttribute="top" id="Opw-U2-frN"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="p1S-d0-Ed7" secondAttribute="bottom" constant="20" id="QWR-eh-204"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="p1S-d0-Ed7" secondAttribute="bottom" constant="10" id="QWR-eh-204"/>
                                         <constraint firstItem="pA1-wr-RjT" firstAttribute="trailing" secondItem="p1S-d0-Ed7" secondAttribute="trailing" id="VCD-ji-uLn"/>
                                         <constraint firstItem="lqz-vL-FhH" firstAttribute="leading" secondItem="p1S-d0-Ed7" secondAttribute="leading" constant="5" id="Wo4-DK-gBd"/>
-                                        <constraint firstItem="ejN-Pk-vnl" firstAttribute="top" secondItem="EWT-ZH-sRk" secondAttribute="topMargin" constant="20" id="ZKI-Y1-3kl"/>
+                                        <constraint firstItem="pA1-wr-RjT" firstAttribute="centerY" secondItem="ejN-Pk-vnl" secondAttribute="centerY" id="XYD-Fc-C4a"/>
+                                        <constraint firstItem="ejN-Pk-vnl" firstAttribute="top" secondItem="EWT-ZH-sRk" secondAttribute="topMargin" constant="25" id="ZKI-Y1-3kl"/>
                                         <constraint firstItem="PyK-9b-LtZ" firstAttribute="centerX" secondItem="ejN-Pk-vnl" secondAttribute="centerX" id="Zg1-6T-OiT"/>
-                                        <constraint firstItem="p1S-d0-Ed7" firstAttribute="top" secondItem="ejN-Pk-vnl" secondAttribute="top" constant="20" id="a20-Wa-b17"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="p1S-d0-Ed7" secondAttribute="trailing" id="dm5-zu-Nxn"/>
                                         <constraint firstItem="p1S-d0-Ed7" firstAttribute="leading" secondItem="ejN-Pk-vnl" secondAttribute="trailing" constant="8" id="f9l-Dk-n08"/>
                                         <constraint firstItem="pA1-wr-RjT" firstAttribute="leading" secondItem="p1S-d0-Ed7" secondAttribute="leading" constant="5" id="gxP-5b-od4"/>
@@ -133,6 +132,39 @@
                                     </segue>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="noDiary" rowHeight="60" id="mXs-GZ-YHO">
+                                <rect key="frame" x="0.0" y="247" width="600" height="60"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mXs-GZ-YHO" id="Tx9-au-3Jb">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您还没有日记" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="imT-l7-fNF">
+                                            <rect key="frame" x="234" y="13" width="132" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="26D-al-FYP"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                            <color key="textColor" red="1" green="0.74509803919999995" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Mu-ZB-bQ1" userLabel="Separator">
+                                            <rect key="frame" x="8" y="51" width="584" height="1"/>
+                                            <color key="backgroundColor" red="1" green="0.74509803919999995" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" id="yJt-S6-SsN"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="0Mu-ZB-bQ1" firstAttribute="leading" secondItem="Tx9-au-3Jb" secondAttribute="leadingMargin" id="Ib3-Oj-sEP"/>
+                                        <constraint firstItem="0Mu-ZB-bQ1" firstAttribute="top" secondItem="imT-l7-fNF" secondAttribute="bottom" constant="8" symbolic="YES" id="MAC-An-438"/>
+                                        <constraint firstItem="imT-l7-fNF" firstAttribute="top" secondItem="Tx9-au-3Jb" secondAttribute="topMargin" constant="5" id="dSL-1g-RnU"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="0Mu-ZB-bQ1" secondAttribute="trailing" id="vO8-XA-51m"/>
+                                        <constraint firstItem="imT-l7-fNF" firstAttribute="centerX" secondItem="Tx9-au-3Jb" secondAttribute="centerX" id="wmK-8b-vWV"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="O3f-1x-12c" id="QA2-2g-l9N"/>
@@ -148,13 +180,14 @@
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a4F-AY-dlZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1867" y="332"/>
         </scene>
         <!--主界面-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="EmotionDiaryCalendar" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" userLabel="主界面" customClass="CalendarViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Calendar" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" userLabel="主界面" customClass="CalendarViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -164,10 +197,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="epF-94-RE2" customClass="FSCalendar">
-                                <rect key="frame" x="0.0" y="64" width="600" height="260"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="275"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="260" id="M9K-qg-4dm"/>
+                                    <constraint firstAttribute="height" constant="275" id="M9K-qg-4dm"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="headerTitleColor">
@@ -190,7 +223,7 @@
                                 </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="150" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="LKz-fo-MUH">
-                                <rect key="frame" x="0.0" y="332" width="600" height="268"/>
+                                <rect key="frame" x="0.0" y="347" width="600" height="253"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="diary" rowHeight="160" id="tR6-nK-LPV" customClass="CalendarTableViewCell">
@@ -300,7 +333,7 @@
                                             </segue>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="noDiary" rowHeight="60" id="RPu-cC-m0i">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="noDiary" rowHeight="60" id="RPu-cC-m0i">
                                         <rect key="frame" x="0.0" y="209.5" width="600" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RPu-cC-m0i" id="vjb-cH-p0U">
@@ -358,9 +391,11 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem image="统计" id="zKH-0y-tUz">
+                            <barButtonItem image="用户" id="zKH-0y-tUz">
                                 <connections>
-                                    <segue destination="4gJ-Dt-Nhu" kind="show" identifier="showStat" id="Mbh-iA-tu8"/>
+                                    <segue destination="XyJ-QZ-daG" kind="popoverPresentation" identifier="userCenter" popoverAnchorBarButtonItem="zKH-0y-tUz" id="6e0-4y-kqV">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem image="时间线" id="yoD-Dk-UKE">
@@ -380,78 +415,10 @@
             </objects>
             <point key="canvasLocation" x="1055" y="332"/>
         </scene>
-        <!--情绪统计-->
-        <scene sceneID="6ql-i9-BSx">
-            <objects>
-                <tableViewController storyboardIdentifier="EmotionDiaryStat" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4gJ-Dt-Nhu" customClass="StatTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="180" sectionHeaderHeight="18" sectionFooterHeight="18" id="mhQ-ZC-mR1">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellStat" rowHeight="180" id="xYO-UW-F5x" customClass="StatTableViewCell">
-                                <rect key="frame" x="0.0" y="113.5" width="600" height="180"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xYO-UW-F5x" id="Cot-f9-uFI">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="180"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oGx-54-dgG" customClass="BEMSimpleLineGraphView">
-                                            <rect key="frame" x="16" y="8" width="568" height="149"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="boolean" keyPath="enableBezierCurve" value="YES"/>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="colorBottom">
-                                                    <color key="value" red="1" green="0.74509803919999995" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="colorTop">
-                                                    <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="alphaBottom">
-                                                    <real key="value" value="0.25"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="colorLine">
-                                                    <color key="value" red="1" green="0.74509803919999995" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="colorPoint">
-                                                    <color key="value" red="1" green="0.74509803919999995" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="sizePoint">
-                                                    <real key="value" value="6"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="widthLine">
-                                                    <real key="value" value="1"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </view>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="oGx-54-dgG" firstAttribute="leading" secondItem="Cot-f9-uFI" secondAttribute="leadingMargin" constant="8" id="8lJ-Zk-dQn"/>
-                                        <constraint firstItem="oGx-54-dgG" firstAttribute="top" secondItem="Cot-f9-uFI" secondAttribute="topMargin" id="GYH-YZ-yhv"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="oGx-54-dgG" secondAttribute="trailing" constant="8" id="N8W-Sm-trd"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="oGx-54-dgG" secondAttribute="bottom" constant="15" id="q7b-Vv-dss"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="lineChart" destination="oGx-54-dgG" id="3b7-GD-yVK"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="4gJ-Dt-Nhu" id="S30-Eq-Ej8"/>
-                            <outlet property="delegate" destination="4gJ-Dt-Nhu" id="DZF-XL-cDl"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="情绪统计" id="2ax-rB-ats"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W18-8p-uZC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1867" y="-525"/>
-        </scene>
         <!--欢迎界面-->
         <scene sceneID="gQQ-cT-uQZ">
             <objects>
-                <viewController storyboardIdentifier="EmotionDiaryWelcome" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Dof-4y-maN" userLabel="欢迎界面" customClass="WelcomeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Welcome" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Dof-4y-maN" userLabel="欢迎界面" customClass="WelcomeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6kc-cI-TN8"/>
                         <viewControllerLayoutGuide type="bottom" id="Vvf-yh-hqS"/>
@@ -554,7 +521,7 @@
         <!--记录情绪-->
         <scene sceneID="alR-k6-KGB">
             <objects>
-                <tableViewController storyboardIdentifier="EmotionDiaryRecord" useStoryboardIdentifierAsRestorationIdentifier="YES" id="whe-79-jh3" customClass="RecordTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Record" useStoryboardIdentifierAsRestorationIdentifier="YES" id="whe-79-jh3" customClass="RecordTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="gTK-mp-aV7">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -717,7 +684,7 @@
                                                                 <outlet property="imagePhoto" destination="oRu-sU-vMA" id="4ru-fw-a6t"/>
                                                             </connections>
                                                         </collectionViewCell>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="select" id="U7e-0e-9Uh" customClass="RecordCollectionViewCell">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="select" id="U7e-0e-9Uh">
                                                             <rect key="frame" x="110" y="7" width="90" height="90"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -844,7 +811,7 @@
         <!--我的日记-->
         <scene sceneID="6f5-Mv-oga">
             <objects>
-                <tableViewController storyboardIdentifier="EmotionDiaryDiary" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8IW-4c-vs6" customClass="DiaryTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Diary" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8IW-4c-vs6" customClass="DiaryTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="76N-Sj-tOl">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -969,7 +936,7 @@
         <!--Navigation Controller-->
         <scene sceneID="zAP-wi-GMk">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qi8-Zh-WT1" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="CalendarNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Qi8-Zh-WT1" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ydh-XY-FBj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -987,7 +954,7 @@
         <!--Navigation Controller-->
         <scene sceneID="ub1-NG-Hhu">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mXs-zE-2TZ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="RecordNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mXs-zE-2TZ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TWu-m6-a8g">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1005,7 +972,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Jbf-gt-jbx">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="U6i-3q-QVx" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="DiaryNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="U6i-3q-QVx" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TTa-r8-VzB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1020,6 +987,14 @@
             </objects>
             <point key="canvasLocation" x="1055" y="1155"/>
         </scene>
+        <!--UserNavigationController-->
+        <scene sceneID="UyY-FA-iZn">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="NavigationController" storyboardName="UserCenter" referencedIdentifier="UserNavigationController" id="XyJ-QZ-daG" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pBE-V8-ipO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1660" y="-215"/>
+        </scene>
     </scenes>
     <resources>
         <image name="DiaryImage" width="20" height="20"/>
@@ -1029,11 +1004,11 @@
         <image name="日记本" width="100" height="111"/>
         <image name="时间线" width="25" height="22"/>
         <image name="照相机" width="90" height="90"/>
-        <image name="统计" width="25" height="25"/>
+        <image name="用户" width="25" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="e3d-0X-6Ej"/>
         <segue reference="MEH-Jc-QhM"/>
-        <segue reference="Ohc-dH-U4H"/>
+        <segue reference="e3d-0X-6Ej"/>
+        <segue reference="ygb-bb-gXM"/>
     </inferredMetricsTieBreakers>
 </document>

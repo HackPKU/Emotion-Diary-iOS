@@ -10,6 +10,9 @@
 		01360A591CD1174400BB02B0 /* ActionPerformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 01360A581CD1174400BB02B0 /* ActionPerformer.m */; };
 		01360A5C1CD1180A00BB02B0 /* EmotionDiary.m in Sources */ = {isa = PBXBuildFile; fileRef = 01360A5B1CD1180A00BB02B0 /* EmotionDiary.m */; };
 		0148B0A71CB97D0A00E8FC08 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 0148B0A61CB97D0A00E8FC08 /* Utilities.m */; };
+		015324E81CD8BD7700272D03 /* StatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 015324E71CD8BD7700272D03 /* StatTableViewCell.m */; };
+		015324EB1CD8BE0100272D03 /* UserTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 015324EA1CD8BE0100272D03 /* UserTableViewController.m */; };
+		015324F01CD8CF4D00272D03 /* UserCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 015324EE1CD8CF4D00272D03 /* UserCenter.storyboard */; };
 		015334DF1CB8B2DF00E3D2F1 /* CalendarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 015334DE1CB8B2DF00E3D2F1 /* CalendarTableViewCell.m */; };
 		017EAA601CD62CC2004AF7FF /* EmotionDiaryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 017EAA5F1CD62CC2004AF7FF /* EmotionDiaryManager.m */; };
 		018EF4581CC761EE00E712BC /* FaceppAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 018EF43F1CC761EE00E712BC /* FaceppAPI.m */; };
@@ -34,8 +37,6 @@
 		01BF4B441CD7826A00FEDFCE /* TimelineTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF4B431CD7826A00FEDFCE /* TimelineTableViewController.m */; };
 		01DF6FEF1CD3CEE100584CE9 /* RecordCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DF6FEE1CD3CEE100584CE9 /* RecordCollectionViewCell.m */; };
 		01E29C4D1CB88F4600DA815B /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C4C1CB88F4600DA815B /* WelcomeViewController.m */; };
-		01E29C501CB891A800DA815B /* StatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C4F1CB891A800DA815B /* StatTableViewController.m */; };
-		01E29C531CB8926200DA815B /* StatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C521CB8926200DA815B /* StatTableViewCell.m */; };
 		01E2DAAE1CCA0A74009E69DC /* Emotion DiaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E2DAAD1CCA0A74009E69DC /* Emotion DiaryTests.m */; };
 		01F15FC81CB8E6AA006BB341 /* RecordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F15FC71CB8E6AA006BB341 /* RecordTableViewController.m */; };
 		C8BAB25A48A3B7819B6D6974 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3DF3C1D9187607C200094B /* Pods.framework */; };
@@ -72,6 +73,11 @@
 		01360A5B1CD1180A00BB02B0 /* EmotionDiary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionDiary.m; sourceTree = "<group>"; };
 		0148B0A51CB97D0A00E8FC08 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		0148B0A61CB97D0A00E8FC08 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
+		015324E61CD8BD7700272D03 /* StatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatTableViewCell.h; sourceTree = "<group>"; };
+		015324E71CD8BD7700272D03 /* StatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatTableViewCell.m; sourceTree = "<group>"; };
+		015324E91CD8BE0100272D03 /* UserTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTableViewController.h; sourceTree = "<group>"; };
+		015324EA1CD8BE0100272D03 /* UserTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTableViewController.m; sourceTree = "<group>"; };
+		015324EF1CD8CF4D00272D03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/UserCenter.storyboard; sourceTree = "<group>"; };
 		015334DD1CB8B2DF00E3D2F1 /* CalendarTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarTableViewCell.h; sourceTree = "<group>"; };
 		015334DE1CB8B2DF00E3D2F1 /* CalendarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarTableViewCell.m; sourceTree = "<group>"; };
 		015334E01CB8B79300E3D2F1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -122,10 +128,6 @@
 		01DF6FEE1CD3CEE100584CE9 /* RecordCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordCollectionViewCell.m; sourceTree = "<group>"; };
 		01E29C4B1CB88F4600DA815B /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
 		01E29C4C1CB88F4600DA815B /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
-		01E29C4E1CB891A800DA815B /* StatTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatTableViewController.h; sourceTree = "<group>"; };
-		01E29C4F1CB891A800DA815B /* StatTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatTableViewController.m; sourceTree = "<group>"; };
-		01E29C511CB8926200DA815B /* StatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatTableViewCell.h; sourceTree = "<group>"; };
-		01E29C521CB8926200DA815B /* StatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatTableViewCell.m; sourceTree = "<group>"; };
 		01E2DA651CCA00BC009E69DC /* APIKey+APISecret.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "APIKey+APISecret.h"; sourceTree = "<group>"; };
 		01E2DAAD1CCA0A74009E69DC /* Emotion DiaryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Emotion DiaryTests.m"; sourceTree = "<group>"; };
 		01F15FC61CB8E6AA006BB341 /* RecordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordTableViewController.h; sourceTree = "<group>"; };
@@ -245,10 +247,10 @@
 				01A5FF601CD65FFA00361A01 /* DiaryTableViewController.m */,
 				01BF4B421CD7826A00FEDFCE /* TimelineTableViewController.h */,
 				01BF4B431CD7826A00FEDFCE /* TimelineTableViewController.m */,
-				01E29C4E1CB891A800DA815B /* StatTableViewController.h */,
-				01E29C4F1CB891A800DA815B /* StatTableViewController.m */,
-				01E29C511CB8926200DA815B /* StatTableViewCell.h */,
-				01E29C521CB8926200DA815B /* StatTableViewCell.m */,
+				015324E91CD8BE0100272D03 /* UserTableViewController.h */,
+				015324EA1CD8BE0100272D03 /* UserTableViewController.m */,
+				015324E61CD8BD7700272D03 /* StatTableViewCell.h */,
+				015324E71CD8BD7700272D03 /* StatTableViewCell.m */,
 				01360A5A1CD1180A00BB02B0 /* EmotionDiary.h */,
 				01360A5B1CD1180A00BB02B0 /* EmotionDiary.m */,
 				017EAA5E1CD62CC2004AF7FF /* EmotionDiaryManager.h */,
@@ -258,6 +260,7 @@
 				0148B0A51CB97D0A00E8FC08 /* Utilities.h */,
 				0148B0A61CB97D0A00E8FC08 /* Utilities.m */,
 				01B4061A1CB7FF7500B242D6 /* Main.storyboard */,
+				015324EE1CD8CF4D00272D03 /* UserCenter.storyboard */,
 				01B4061D1CB7FF7500B242D6 /* Assets.xcassets */,
 				01B4061F1CB7FF7500B242D6 /* LaunchScreen.storyboard */,
 				01B406221CB7FF7500B242D6 /* Info.plist */,
@@ -388,6 +391,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				015324F01CD8CF4D00272D03 /* UserCenter.storyboard in Resources */,
 				01B406211CB7FF7500B242D6 /* LaunchScreen.storyboard in Resources */,
 				01B4061E1CB7FF7500B242D6 /* Assets.xcassets in Resources */,
 				01B4061C1CB7FF7500B242D6 /* Main.storyboard in Resources */,
@@ -459,6 +463,7 @@
 				018EF45A1CC761EE00E712BC /* FaceppDetection.m in Sources */,
 				018EF45D1CC761EE00E712BC /* FaceppGrouping.m in Sources */,
 				018EF4621CC761EE00E712BC /* FaceppError.m in Sources */,
+				015324E81CD8BD7700272D03 /* StatTableViewCell.m in Sources */,
 				018EF45B1CC761EE00E712BC /* FaceppFaceset.m in Sources */,
 				01B406191CB7FF7500B242D6 /* CalendarViewController.m in Sources */,
 				01B406161CB7FF7500B242D6 /* AppDelegate.m in Sources */,
@@ -469,18 +474,17 @@
 				018EF4631CC761EE00E712BC /* FaceppResult.m in Sources */,
 				018EF45F1CC761EE00E712BC /* FaceppPerson.m in Sources */,
 				018EF4601CC761EE00E712BC /* FaceppRecognition.m in Sources */,
-				01E29C501CB891A800DA815B /* StatTableViewController.m in Sources */,
 				015334DF1CB8B2DF00E3D2F1 /* CalendarTableViewCell.m in Sources */,
 				018EF45E1CC761EE00E712BC /* FaceppInfo.m in Sources */,
 				01BF4B441CD7826A00FEDFCE /* TimelineTableViewController.m in Sources */,
 				01E29C4D1CB88F4600DA815B /* WelcomeViewController.m in Sources */,
+				015324EB1CD8BE0100272D03 /* UserTableViewController.m in Sources */,
 				018EF45C1CC761EE00E712BC /* FaceppGroup.m in Sources */,
 				017EAA601CD62CC2004AF7FF /* EmotionDiaryManager.m in Sources */,
 				01A5FF611CD65FFA00361A01 /* DiaryTableViewController.m in Sources */,
 				018EF4611CC761EE00E712BC /* FaceppTrainer.m in Sources */,
 				0148B0A71CB97D0A00E8FC08 /* Utilities.m in Sources */,
 				018EF4581CC761EE00E712BC /* FaceppAPI.m in Sources */,
-				01E29C531CB8926200DA815B /* StatTableViewCell.m in Sources */,
 				01B406131CB7FF7500B242D6 /* main.m in Sources */,
 				01DF6FEF1CD3CEE100584CE9 /* RecordCollectionViewCell.m in Sources */,
 			);
@@ -505,6 +509,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		015324EE1CD8CF4D00272D03 /* UserCenter.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				015324EF1CD8CF4D00272D03 /* Base */,
+			);
+			name = UserCenter.storyboard;
+			sourceTree = "<group>";
+		};
 		01B4061A1CB7FF7500B242D6 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

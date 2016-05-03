@@ -25,8 +25,11 @@
 
 - (void)setDiary:(EmotionDiary *)diary {
     _savedDiary = diary;
-    UIImage *image = [UIImage imageWithData:[Utilities getFileAtPath:SELFIE_PATH withName:diary.selfie]];
-    _imageSelfie.image = image ? image : PLACEHOLDER_IMAGE;
+    if (diary.selfie.length > 0) {
+        _imageSelfie.image = [UIImage imageWithData:[Utilities getFileAtPath:SELFIE_PATH withName:diary.selfie]];
+    }else {
+        _imageSelfie.image = PLACEHOLDER_IMAGE;
+    }
     _imageFace.image = [ActionPerformer getFaceImageByEmotion:diary.emotion];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"HH:mm"];

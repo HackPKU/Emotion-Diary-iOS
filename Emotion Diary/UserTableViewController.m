@@ -1,22 +1,22 @@
 //
-//  StatTableViewController.m
+//  UserTableViewController.m
 //  Emotion Diary
 //
-//  Created by 范志康 on 16/4/9.
+//  Created by 范志康 on 16/5/3.
 //  Copyright © 2016年 范志康. All rights reserved.
 //
 
-#import "StatTableViewController.h"
-#import "StatTableViewCell.h"
+#import "UserTableViewController.h"
 
-@interface StatTableViewController ()
+@interface UserTableViewController ()
 
 @end
 
-@implementation StatTableViewController
+@implementation UserTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // self.preferredContentSize = CGSizeMake(360, 0); // Set width to 360
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -33,20 +33,36 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    switch (section) {
+        case 0:
+            return 1;
+            break;
+        case 1:
+            return [ActionPerformer hasLoggedIn] ? 0 : 1;
+            break;
+        case 2:
+            return 1;
+            break;
+        default:
+            return 0;
+            break;
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     switch (section) {
         case 0:
-            return @"一周统计";
+            return @"心情统计";
             break;
         case 1:
-            return @"一月统计";
+            return @"用户账户";
+            break;
+        case 2:
+            return @"软件设置";
             break;
         default:
             return nil;
@@ -54,22 +70,32 @@
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    StatTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellStat" forIndexPath:indexPath];
-    // Configure the cell...
-    
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case 0:
-            [cell setData:[[EmotionDiaryManager sharedManager] getStatOfLastDays:7]];
-            break;
-        case 1:
-            [cell setData:[[EmotionDiaryManager sharedManager] getStatOfLastDays:30]];
+            return 200.0;
             break;
         default:
+            return 44.0;
             break;
     }
-    
-    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        return [tableView dequeueReusableCellWithIdentifier:@"stat"];
+    }else if (indexPath.section == 1) {
+        if ([ActionPerformer hasLoggedIn]) {
+            return nil;
+        }else {
+            return [tableView dequeueReusableCellWithIdentifier:@"noUser"];
+        }
+    }else if (indexPath.section == 2){
+        if (indexPath.row == 0) {
+            return [tableView dequeueReusableCellWithIdentifier:@"about"];
+        }
+    }
+    return nil;
 }
 
 /*
@@ -105,6 +131,21 @@
     return YES;
 }
 */
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 1) {
+        
+    }else if (indexPath.section == 2) {
+        if (indexPath.row == 0) {
+            UIAlertController *action = [UIAlertController alertControllerWithTitle:@"情绪日记" message:[NSString stringWithFormat:@"版本：%@\n开发者：范志康\n%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"], SERVER_URL] preferredStyle:UIAlertControllerStyleAlert];
+            [action addAction:[UIAlertAction actionWithTitle:@"好" style:UIAlertActionStyleCancel handler:nil]];
+            [self presentViewController:action animated:YES completion:nil];
+        }
+    }
+}
 
 /*
 #pragma mark - Navigation
