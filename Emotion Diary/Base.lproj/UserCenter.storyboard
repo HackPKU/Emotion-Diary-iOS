@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--用户中心-->
+        <scene sceneID="7rt-9I-PyF">
+            <objects>
+                <tableViewController storyboardIdentifier="User" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fJv-6v-a0Y" customClass="UserTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="EVW-oS-ibH">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="stat" rowHeight="200" id="9PW-M6-LLi" customClass="StatTableViewCell">
+                                <rect key="frame" x="0.0" y="113.5" width="600" height="200"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9PW-M6-LLi" id="8oi-Qc-7b4">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="199.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="cJe-2M-fn1">
+                                            <rect key="frame" x="234" y="14" width="133" height="29"/>
+                                            <segments>
+                                                <segment title="一周心情"/>
+                                                <segment title="一月心情"/>
+                                            </segments>
+                                            <color key="tintColor" red="1" green="0.74509803919999995" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="changeScope:" destination="9PW-M6-LLi" eventType="valueChanged" id="xDl-o9-AIF"/>
+                                            </connections>
+                                        </segmentedControl>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KWS-sK-1cj" customClass="BEMSimpleLineGraphView">
+                                            <rect key="frame" x="16" y="54" width="568" height="137.5"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="enableBezierCurve" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="colorBottom">
+                                                    <color key="value" red="1" green="0.74509803919999995" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="colorTop">
+                                                    <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="alphaBottom">
+                                                    <real key="value" value="0.25"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="colorLine">
+                                                    <color key="value" red="1" green="0.74509803919999995" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="colorPoint">
+                                                    <color key="value" red="1" green="0.74509803919999995" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="sizePoint">
+                                                    <real key="value" value="6"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="widthLine">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="KWS-sK-1cj" secondAttribute="bottom" id="5CX-AR-SID"/>
+                                        <constraint firstItem="KWS-sK-1cj" firstAttribute="centerX" secondItem="8oi-Qc-7b4" secondAttribute="centerX" id="8lg-e9-oea"/>
+                                        <constraint firstItem="KWS-sK-1cj" firstAttribute="top" secondItem="cJe-2M-fn1" secondAttribute="bottom" constant="12" id="CbC-fg-DGD"/>
+                                        <constraint firstItem="cJe-2M-fn1" firstAttribute="centerX" secondItem="8oi-Qc-7b4" secondAttribute="centerX" id="Jam-l7-87M"/>
+                                        <constraint firstItem="KWS-sK-1cj" firstAttribute="leading" secondItem="8oi-Qc-7b4" secondAttribute="leadingMargin" constant="8" id="Sxj-4X-f9f"/>
+                                        <constraint firstItem="cJe-2M-fn1" firstAttribute="top" secondItem="8oi-Qc-7b4" secondAttribute="topMargin" constant="6" id="TSX-26-vzz"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="KWS-sK-1cj" secondAttribute="trailing" constant="8" id="XaV-sb-c28"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="lineChart" destination="KWS-sK-1cj" id="ExX-2o-R01"/>
+                                    <outlet property="segmentScope" destination="cJe-2M-fn1" id="feC-FM-VIc"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="noUser" textLabel="xD6-Ag-W2q" detailTextLabel="7pV-2P-C5c" style="IBUITableViewCellStyleValue1" id="n3e-CD-d1e">
+                                <rect key="frame" x="0.0" y="313.5" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n3e-CD-d1e" id="u3t-5t-MFe">
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="您还没有登录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xD6-Ag-W2q">
+                                            <rect key="frame" x="15" y="12" width="96" height="19.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="点击登录" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7pV-2P-C5c">
+                                            <rect key="frame" x="501" y="12" width="64" height="19.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="about" textLabel="Iwz-78-KiQ" style="IBUITableViewCellStyleDefault" id="npa-3J-4Ha">
+                                <rect key="frame" x="0.0" y="357.5" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="npa-3J-4Ha" id="eUZ-uK-IXA">
+                                    <rect key="frame" x="0.0" y="0.0" width="553" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="关于" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Iwz-78-KiQ">
+                                            <rect key="frame" x="15" y="0.0" width="538" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="fJv-6v-a0Y" id="pig-FY-8ep"/>
+                            <outlet property="delegate" destination="fJv-6v-a0Y" id="kQ5-gb-MgK"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="用户中心" id="Fbg-Gu-n6n">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="Gj2-VZ-GYU">
+                            <connections>
+                                <segue destination="Atk-WE-spT" kind="unwind" unwindAction="unwindToCalendarView:" id="5Qx-eh-vT6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <fixedSimulatedSizeMetrics key="simulatedDestinationMetrics">
+                        <size key="portraitSize" width="600" height="600"/>
+                        <size key="landscapeSize" width="600" height="600"/>
+                    </fixedSimulatedSizeMetrics>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JzA-uA-HVY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Atk-WE-spT" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2679" y="-525"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cfy-Fd-3ku">
+            <objects>
+                <navigationController storyboardIdentifier="UserNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RJK-Bl-Wjd" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="600"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yY5-fW-rM7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fJv-6v-a0Y" kind="relationship" relationship="rootViewController" id="xDO-xE-wXN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f66-et-VTi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1867" y="-525"/>
+        </scene>
+    </scenes>
+</document>
