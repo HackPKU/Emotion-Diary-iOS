@@ -45,6 +45,8 @@
 	</dict>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
+	<key>LSHasLocalizedDisplayName</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
