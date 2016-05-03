@@ -35,7 +35,7 @@
 }
 
 - (void)setCalendarScope:(CGFloat)height {
-    if (height >= 400) {
+    if (height >= 500) {
         [_calendar setScope:FSCalendarScopeMonth animated:YES];
     }else {
         [_calendar setScope:FSCalendarScopeWeek animated:YES];
