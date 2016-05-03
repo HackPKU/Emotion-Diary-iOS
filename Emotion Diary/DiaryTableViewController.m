@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _imageSelfie.layer.cornerRadius = _imageSelfie.frame.size.width / 2;
-    
+    _diary = [_diary fullVersion];
     [self updateDiaryView];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -32,15 +32,25 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [_cycleImageView startTimer];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [_cycleImageView stopTimer];
+}
+
 - (void)updateDiaryView {
-    UIImage *image = [UIImage imageWithData:[Utilities getFileAtPath:SELFIE_PATH withName:_diary.selfie]];
-    _imageSelfie.image = image ? image : PLACEHOLDER_IMAGE;
+    _imageSelfie.image = _diary.imageSelfie ? _diary.imageSelfie : PLACEHOLDER_IMAGE;
     _imageFace.image = [ActionPerformer getFaceImageByEmotion:_diary.emotion];
     _labelEmotion.text = [NSString stringWithFormat:@"心情指数 %d", _diary.emotion];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"M月d日 HH:mm"];
     _labelDateAndTime.text = [formatter stringFromDate:_diary.createTime];
     _textDetail.text = _diary.text;
+    [_cycleImageView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -102,6 +112,45 @@
     return YES;
 }
 */
+
+#pragma mark - ZYBannerView data source
+
+- (NSInteger)numberOfItemsInBanner:(ZYBannerView *)banner {
+    return _diary.imageImages.count;
+}
+
+- (UIView *)banner:(ZYBannerView *)banner viewForItemAtIndex:(NSInteger)index {
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:_diary.imageImages[index]];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    return imageView;
+}
+
+#pragma mark - ZYBannerView delegate
+
+- (void)banner:(ZYBannerView *)banner didSelectItemAtIndex:(NSInteger)index {
+    MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+    browser.enableGrid = YES;
+    browser.displayActionButton = NO;
+    [browser setCurrentPhotoIndex:index];
+    [self.navigationController pushViewController:browser animated:YES];
+}
+
+#pragma mark - MWPhotoBrowser delegate
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+    return _diary.imageImages.count;
+}
+
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    if (index < _diary.imageImages.count) {
+        return [MWPhoto photoWithImage:_diary.imageImages[index]];
+    }
+    return nil;
+}
+
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser thumbPhotoAtIndex:(NSUInteger)index {
+    return [self photoBrowser:photoBrowser photoAtIndex:index];
+}
 
 - (IBAction)delete:(id)sender {
 }

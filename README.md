@@ -56,3 +56,4 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 * `SDWebImage` 网络图片库，用于日记的头像和图片的加载和显示
 * `CTAssetsPickerController` 照片选择库，用于记录日记界面选择图片
 * `MWPhotoBrowser` 照片浏览库，用于记录日记和查看日记界面的图片浏览
+* `ZYBannerView` 照片轮播器，用于查看日记界面的图片轮播

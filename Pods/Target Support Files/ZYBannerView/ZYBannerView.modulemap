@@ -1,0 +1,6 @@
+framework module ZYBannerView {
+  umbrella header "ZYBannerView-umbrella.h"
+
+  export *
+  module * { export * }
+}

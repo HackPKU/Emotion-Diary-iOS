@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZYBannerView.h"
+#import "MWPhotoBrowser.h"
 
-@interface DiaryTableViewController : UITableViewController
+@interface DiaryTableViewController : UITableViewController <ZYBannerViewDelegate, ZYBannerViewDataSource, MWPhotoBrowserDelegate>
 
 @property EmotionDiary *diary;
 
@@ -17,5 +19,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *labelEmotion;
 @property (strong, nonatomic) IBOutlet UIImageView *imageFace;
 @property (strong, nonatomic) IBOutlet UITextView *textDetail;
+@property (strong, nonatomic) IBOutlet ZYBannerView *cycleImageView;
 
 @end
