@@ -17,6 +17,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _imageSelfie.layer.cornerRadius = _imageSelfie.frame.size.width / 2;
+    _cycleImageView.layer.shadowColor = [UIColor blackColor].CGColor;
+    _cycleImageView.layer.shadowOffset = CGSizeZero;
+    _cycleImageView.layer.shadowOpacity = 0.75;
+    _cycleImageView.layer.shadowRadius = 6.0;
     _diary = [_diary fullVersion];
     [self updateDiaryView];
     
@@ -50,6 +54,7 @@
     [formatter setDateFormat:@"M月d日 HH:mm"];
     _labelDateAndTime.text = [formatter stringFromDate:_diary.createTime];
     _textDetail.text = _diary.text;
+    _cycleImageView.pageControl.hidden = (_diary.imageImages.count <= 1);
     [_cycleImageView reloadData];
 }
 

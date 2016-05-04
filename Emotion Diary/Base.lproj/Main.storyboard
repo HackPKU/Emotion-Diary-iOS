@@ -902,7 +902,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rdl-f1-8pr" customClass="ZYBannerView">
-                                                    <rect key="frame" x="0.0" y="8" width="600" height="234"/>
+                                                    <rect key="frame" x="30" y="28" width="540" height="194"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="shouldLoop" value="YES"/>
@@ -916,10 +916,10 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Rdl-f1-8pr" firstAttribute="top" secondItem="4Dm-k1-2e5" secondAttribute="topMargin" id="AX6-yQ-KCE"/>
-                                                <constraint firstAttribute="trailing" secondItem="Rdl-f1-8pr" secondAttribute="trailing" id="AZp-CJ-fxq"/>
-                                                <constraint firstItem="Rdl-f1-8pr" firstAttribute="leading" secondItem="4Dm-k1-2e5" secondAttribute="leading" id="ja6-LB-vRC"/>
-                                                <constraint firstItem="Rdl-f1-8pr" firstAttribute="bottom" secondItem="4Dm-k1-2e5" secondAttribute="bottomMargin" id="klZ-3V-gw1"/>
+                                                <constraint firstItem="Rdl-f1-8pr" firstAttribute="top" secondItem="4Dm-k1-2e5" secondAttribute="topMargin" constant="20" id="AX6-yQ-KCE"/>
+                                                <constraint firstAttribute="trailing" secondItem="Rdl-f1-8pr" secondAttribute="trailing" constant="30" id="AZp-CJ-fxq"/>
+                                                <constraint firstItem="Rdl-f1-8pr" firstAttribute="leading" secondItem="4Dm-k1-2e5" secondAttribute="leading" constant="30" id="ja6-LB-vRC"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Rdl-f1-8pr" secondAttribute="bottom" constant="20" id="klZ-3V-gw1"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
