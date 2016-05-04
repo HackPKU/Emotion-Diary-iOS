@@ -21,6 +21,21 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)MD5:(NSString *)string;
 
 /**
+ * Get the view controller that the application is presenting
+ * @return Current view controller
+ */
++ (UIViewController *)getCurrentViewController;
+
+/**
+ * Get the view controller that the application is presenting with constraints
+ * @param class The designated class
+ * @param appearTime The time that the class can appear
+ * @param canBeTop Whether the view controller can be the top view controller
+ * @return Current view controller, nil if the view controller does not satisfy the contraints
+ */
++ (UIViewController * _Nullable)getCurrentViewControllerWhileClass:(Class _Nullable)class appearsWithTime:(int)appearTime andCanBeTop:(BOOL)canBeTop;
+
+/**
  * Normalize the image to the correct position
  * @param image The image to be normalized
  * @return Normalized image

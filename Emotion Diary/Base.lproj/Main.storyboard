@@ -808,7 +808,7 @@
             </objects>
             <point key="canvasLocation" x="245" y="1155"/>
         </scene>
-        <!--我的日记-->
+        <!--Data Source-->
         <scene sceneID="6f5-Mv-oga">
             <objects>
                 <tableViewController storyboardIdentifier="Diary" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8IW-4c-vs6" customClass="DiaryTableViewController" sceneMemberID="viewController">
@@ -894,6 +894,35 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="250" id="i3R-jI-KYg">
+                                        <rect key="frame" x="0.0" y="254" width="600" height="250"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i3R-jI-KYg" id="4Dm-k1-2e5">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="250"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rdl-f1-8pr" customClass="ZYBannerView">
+                                                    <rect key="frame" x="0.0" y="8" width="600" height="234"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="shouldLoop" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="autoScroll" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="showFooter" value="NO"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="8IW-4c-vs6" id="VcO-vM-NyP"/>
+                                                        <outlet property="delegate" destination="8IW-4c-vs6" id="wd9-c1-WgX"/>
+                                                    </connections>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Rdl-f1-8pr" firstAttribute="top" secondItem="4Dm-k1-2e5" secondAttribute="topMargin" id="AX6-yQ-KCE"/>
+                                                <constraint firstAttribute="trailing" secondItem="Rdl-f1-8pr" secondAttribute="trailing" id="AZp-CJ-fxq"/>
+                                                <constraint firstItem="Rdl-f1-8pr" firstAttribute="leading" secondItem="4Dm-k1-2e5" secondAttribute="leading" id="ja6-LB-vRC"/>
+                                                <constraint firstItem="Rdl-f1-8pr" firstAttribute="bottom" secondItem="4Dm-k1-2e5" secondAttribute="bottomMargin" id="klZ-3V-gw1"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -922,6 +951,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="cycleImageView" destination="Rdl-f1-8pr" id="6rS-2J-XTt"/>
                         <outlet property="imageFace" destination="gzl-T5-hrb" id="J4c-LD-zUD"/>
                         <outlet property="imageSelfie" destination="J88-Id-6Xb" id="Hmg-Ut-p5x"/>
                         <outlet property="labelDateAndTime" destination="2Pi-aB-7vc" id="oEf-b3-q3d"/>

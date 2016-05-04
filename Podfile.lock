@@ -29,6 +29,7 @@ PODS:
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
+  - ZYBannerView (0.1.1)
 
 DEPENDENCIES:
   - AFNetworking
@@ -38,6 +39,7 @@ DEPENDENCIES:
   - KVNProgress
   - MWPhotoBrowser
   - SDWebImage
+  - ZYBannerView
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -50,5 +52,6 @@ SPEC CHECKSUMS:
   MWPhotoBrowser: 5836d7aa041dc05a13de380c246826578adc5ea5
   PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+  ZYBannerView: b4648794591c648f70b02b6ce16ad811c0653a7d
 
 COCOAPODS: 0.39.0

@@ -35,7 +35,7 @@
 }
 
 - (void)setCalendarScope:(CGFloat)height {
-    if (height >= 400) {
+    if (height >= 500) {
         [_calendar setScope:FSCalendarScopeMonth animated:YES];
     }else {
         [_calendar setScope:FSCalendarScopeWeek animated:YES];
@@ -102,7 +102,7 @@
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"viewDiary"]) {
         DiaryTableViewController *dest = [[[segue destinationViewController] viewControllers] firstObject];
-        dest.diary = [((CalendarTableViewCell *)sender).savedDiary fullVersion];
+        dest.diary = ((CalendarTableViewCell *)sender).savedDiary;
     }
 }
 

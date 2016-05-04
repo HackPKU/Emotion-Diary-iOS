@@ -39,17 +39,16 @@ typedef void (^EmotionDiaryResultBlock)(BOOL success);
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface EmotionDiary : NSObject <NSCoding> {
-    UIImage * _Nullable imageSelfie;
-    NSArray<UIImage *> * _Nullable imageImages;
-}
+@interface EmotionDiary : NSObject <NSCoding>
 
 @property BOOL hasLocalVersion;
 @property BOOL hasOnlineVersion;
 
 @property int emotion;
 @property NSString * _Nullable selfie;
+@property UIImage * _Nullable imageSelfie;
 @property NSArray<NSString *> * _Nullable images;
+@property NSArray<UIImage *> * _Nullable imageImages;
 @property NSArray<NSString *> * _Nullable tags;
 @property NSString * _Nullable text;
 @property NSString * _Nullable placeName;

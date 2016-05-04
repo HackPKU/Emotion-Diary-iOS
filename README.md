@@ -2,6 +2,10 @@
 
 Emotion Diary is a lightweight personal diary APP focused on privacy and convenience. Based on the technology of face identification, users can use their face as the key to open the APP. At the same time the smile on your face can also be detected and used as the realtime emotional information, which will be part of their diary notes. After days of recording, you can review your statistics of your emotions, as well as your meaningful life.
 
+## 功能与特点
+
+* 自拍解锁，App 进入后台后自动锁定
+
 ## 开发者
 
 * 范志康
@@ -14,7 +18,7 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 * 向开发者索取 `API_KEY` 和 `API_SECRET` 填入 `APIKey+APISecret.h`
 * 编译并运行程序
 
-> 在 `DEBUG` 模式下，进入 App 无需自拍自动解锁以方便测试，任意选择照片后会被替换为 `DEBUG_IMAGE`，该图片可在 `WelcomeViewController.m` 中修改
+> 在 `DEBUG` 模式下，进入 App 无需自拍自动解锁以方便测试，进入后台恢复后会自动退出验证界面，任意选择照片后会被替换为 `DEBUG_IMAGE`，该图片可在 `WelcomeViewController.m` 中修改
 
 > 在 `DEBUG` 模式以及 `LOCALHOST` 宏定义为 `YES` 的情况下，使用 localhost 调试程序，如果需要使用在线的服务器，请在 `ActionPerformer.m` 中修改 `LOCALHOST` 的定义为 `NO`
 
@@ -56,3 +60,4 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 * `SDWebImage` 网络图片库，用于日记的头像和图片的加载和显示
 * `CTAssetsPickerController` 照片选择库，用于记录日记界面选择图片
 * `MWPhotoBrowser` 照片浏览库，用于记录日记和查看日记界面的图片浏览
+* `ZYBannerView` 照片轮播器，用于查看日记界面的图片轮播

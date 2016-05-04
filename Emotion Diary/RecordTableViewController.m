@@ -203,6 +203,8 @@
     }
 }
 
+#pragma mark - MWPhotoBrowser delegate
+
 - (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
     return images.count;
 }

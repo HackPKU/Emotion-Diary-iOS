@@ -15,9 +15,11 @@
     self = [super init];
     if (self) {
         _emotion = emotion;
-        imageSelfie = selfie;
-        imageImages = images;
+        _imageSelfie = selfie;
+        _imageImages = images;
+        _hasImage = (_images.count > 0);
         _tags = tags;
+        _hasTag = (_tags.count > 0);
         _text = text;
         _placeName = placeName;
         _placeLong = placeLong;
@@ -82,23 +84,23 @@
             block(NO);
         }
         
-        if (imageSelfie) {
+        if (_imageSelfie) {
             NSString *selfieName;
             do {
                 selfieName = [NSString stringWithFormat:@"%d", arc4random() % (int)1e8]; // Random number as file name
             }while ([Utilities fileExistsAtPath:SELFIE_PATH withName:selfieName]);
-            if (![Utilities createFile:UIImageJPEGRepresentation(imageSelfie, 0.3) atPath:SELFIE_PATH withName:selfieName]) {
+            if (![Utilities createFile:UIImageJPEGRepresentation(_imageSelfie, 0.3) atPath:SELFIE_PATH withName:selfieName]) {
                 block(NO);
             }
             _selfie = selfieName;
         }
         
         NSMutableArray *imageNames = [[NSMutableArray alloc] init];
-        for (UIImage *image in imageImages) {
+        for (UIImage *image in _imageImages) {
             NSString *imageName;
             do {
                 imageName = [NSString stringWithFormat:@"%d", arc4random() % (int)1e8]; // Random number as file name
-            }while ([Utilities fileExistsAtPath:SELFIE_PATH withName:imageName]);
+            }while ([Utilities fileExistsAtPath:IMAGES_PATH withName:imageName]);
             if (![Utilities createFile:UIImageJPEGRepresentation(image, 0.3) atPath:IMAGES_PATH withName:imageName]) {
                 block(NO);
             }
@@ -133,15 +135,15 @@
     NSKeyedUnarchiver *unArchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:diaryData];
     EmotionDiary *fullDiary = [unArchiver decodeObjectOfClass:[self class] forKey:@"DIARY"];
     
-    if (!_hasOnlineVersion && _selfie.length > 0 && !imageSelfie) {
-        imageSelfie = [UIImage imageWithData:[Utilities getFileAtPath:SELFIE_PATH withName:_selfie]];
+    if (!_hasOnlineVersion && fullDiary.selfie.length > 0) {
+        fullDiary.imageSelfie = [UIImage imageWithData:[Utilities getFileAtPath:SELFIE_PATH withName:fullDiary.selfie]];
     }
-    if (!_hasOnlineVersion && _images.count > 0 && !imageImages) {
+    if (!_hasOnlineVersion && fullDiary.images.count > 0) {
         NSMutableArray<UIImage *> *imagesArray = [[NSMutableArray alloc] init];
-        for (NSString *imageName in _images) {
+        for (NSString *imageName in fullDiary.images) {
             [imagesArray addObject:[UIImage imageWithData:[Utilities getFileAtPath:IMAGES_PATH withName:imageName]]];
         }
-        imageImages = imagesArray;
+        fullDiary.imageImages = imagesArray;
     }
     return fullDiary;
 }

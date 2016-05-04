@@ -13,6 +13,7 @@
 		015324E81CD8BD7700272D03 /* StatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 015324E71CD8BD7700272D03 /* StatTableViewCell.m */; };
 		015324EB1CD8BE0100272D03 /* UserTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 015324EA1CD8BE0100272D03 /* UserTableViewController.m */; };
 		015324F01CD8CF4D00272D03 /* UserCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 015324EE1CD8CF4D00272D03 /* UserCenter.storyboard */; };
+		015324FE1CD9066E00272D03 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 015325001CD9066E00272D03 /* InfoPlist.strings */; };
 		015334DF1CB8B2DF00E3D2F1 /* CalendarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 015334DE1CB8B2DF00E3D2F1 /* CalendarTableViewCell.m */; };
 		017EAA601CD62CC2004AF7FF /* EmotionDiaryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 017EAA5F1CD62CC2004AF7FF /* EmotionDiaryManager.m */; };
 		018EF4581CC761EE00E712BC /* FaceppAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 018EF43F1CC761EE00E712BC /* FaceppAPI.m */; };
@@ -78,10 +79,9 @@
 		015324E91CD8BE0100272D03 /* UserTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTableViewController.h; sourceTree = "<group>"; };
 		015324EA1CD8BE0100272D03 /* UserTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTableViewController.m; sourceTree = "<group>"; };
 		015324EF1CD8CF4D00272D03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/UserCenter.storyboard; sourceTree = "<group>"; };
+		015324FF1CD9066E00272D03 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		015334DD1CB8B2DF00E3D2F1 /* CalendarTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarTableViewCell.h; sourceTree = "<group>"; };
 		015334DE1CB8B2DF00E3D2F1 /* CalendarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarTableViewCell.m; sourceTree = "<group>"; };
-		015334E01CB8B79300E3D2F1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		015334E11CB8B79300E3D2F1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		015AFD6A1CCBE09800389C7A /* Emotion Diary-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Emotion Diary-Prefix.pch"; sourceTree = "<group>"; };
 		017EAA5E1CD62CC2004AF7FF /* EmotionDiaryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionDiaryManager.h; sourceTree = "<group>"; };
 		017EAA5F1CD62CC2004AF7FF /* EmotionDiaryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionDiaryManager.m; sourceTree = "<group>"; };
@@ -261,9 +261,8 @@
 				0148B0A61CB97D0A00E8FC08 /* Utilities.m */,
 				01B4061A1CB7FF7500B242D6 /* Main.storyboard */,
 				015324EE1CD8CF4D00272D03 /* UserCenter.storyboard */,
-				01B4061D1CB7FF7500B242D6 /* Assets.xcassets */,
 				01B4061F1CB7FF7500B242D6 /* LaunchScreen.storyboard */,
-				01B406221CB7FF7500B242D6 /* Info.plist */,
+				01B4061D1CB7FF7500B242D6 /* Assets.xcassets */,
 				01B406111CB7FF7500B242D6 /* Supporting Files */,
 				018EF43D1CC761EE00E712BC /* FaceppSDK_ARC */,
 			);
@@ -275,6 +274,8 @@
 			children = (
 				01B406121CB7FF7500B242D6 /* main.m */,
 				015AFD6A1CCBE09800389C7A /* Emotion Diary-Prefix.pch */,
+				01B406221CB7FF7500B242D6 /* Info.plist */,
+				015325001CD9066E00272D03 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -374,6 +375,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 01B406051CB7FF7500B242D6;
 			productRefGroup = 01B4060F1CB7FF7500B242D6 /* Products */;
@@ -395,6 +397,7 @@
 				01B406211CB7FF7500B242D6 /* LaunchScreen.storyboard in Resources */,
 				01B4061E1CB7FF7500B242D6 /* Assets.xcassets in Resources */,
 				01B4061C1CB7FF7500B242D6 /* Main.storyboard in Resources */,
+				015324FE1CD9066E00272D03 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,11 +520,18 @@
 			name = UserCenter.storyboard;
 			sourceTree = "<group>";
 		};
+		015325001CD9066E00272D03 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				015324FF1CD9066E00272D03 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		01B4061A1CB7FF7500B242D6 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				01B4061B1CB7FF7500B242D6 /* Base */,
-				015334E01CB8B79300E3D2F1 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -530,7 +540,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				01B406201CB7FF7500B242D6 /* Base */,
-				015334E11CB8B79300E3D2F1 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
