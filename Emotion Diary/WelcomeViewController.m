@@ -58,10 +58,6 @@
     shouldStopAnimate = YES;
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
-
 - (void)animateButtonCamera {
     [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         _buttonCamera.alpha = 1.5 - _buttonCamera.alpha;

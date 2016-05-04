@@ -7,6 +7,7 @@
 //
 
 #import "UserTableViewController.h"
+#import "sys/utsname.h"
 
 @interface UserTableViewController ()
 
@@ -45,7 +46,7 @@
             return [ActionPerformer hasLoggedIn] ? 0 : 1;
             break;
         case 2:
-            return 1;
+            return 4;
             break;
         default:
             return 0;
@@ -59,10 +60,10 @@
             return @"心情统计";
             break;
         case 1:
-            return @"用户账户";
+            return @"用户设置";
             break;
         case 2:
-            return @"软件设置";
+            return @"软件信息";
             break;
         default:
             return nil;
@@ -92,6 +93,12 @@
         }
     }else if (indexPath.section == 2){
         if (indexPath.row == 0) {
+            return [tableView dequeueReusableCellWithIdentifier:@"rate"];
+        }else if (indexPath.row == 1) {
+            return [tableView dequeueReusableCellWithIdentifier:@"feedback"];
+        }else if (indexPath.row == 2) {
+            return [tableView dequeueReusableCellWithIdentifier:@"coffee"];
+        }else if (indexPath.row == 3) {
             return [tableView dequeueReusableCellWithIdentifier:@"about"];
         }
     }
@@ -139,12 +146,36 @@
     if (indexPath.section == 1) {
         
     }else if (indexPath.section == 2) {
+        NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
         if (indexPath.row == 0) {
-            UIAlertController *action = [UIAlertController alertControllerWithTitle:@"情绪日记" message:[NSString stringWithFormat:@"版本：%@\n开发者：范志康\n%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"], SERVER_URL] preferredStyle:UIAlertControllerStyleAlert];
+            NSString *urlString = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@", APP_ID];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+        }else if (indexPath.row == 1) {
+            struct utsname systemInfo;
+            uname(&systemInfo);
+            NSString *platform = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+            MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
+            mail.mailComposeDelegate = self;
+            [mail.navigationBar setBarStyle:[UINavigationBar appearance].barStyle];
+            [mail.navigationBar setTintColor:[UINavigationBar appearance].tintColor];
+            [mail setSubject:@"情绪日记 iOS客户端反馈"];
+            [mail setToRecipients:FEEDBACK_EMAIL];
+            [mail setMessageBody:[NSString stringWithFormat:@"设备：%@\n系统：iOS %@\n客户端版本：%@", platform, [[UIDevice currentDevice] systemVersion], appVersion] isHTML:NO];
+            [self presentViewController:mail animated:YES completion:^{
+                [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+            }];
+        }else if (indexPath.row == 2) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PAY_URL]];
+        }else if (indexPath.row == 3) {
+            UIAlertController *action = [UIAlertController alertControllerWithTitle:@"情绪日记" message:[NSString stringWithFormat:@"版本：%@\n开发者：范志康\n%@", appVersion, SERVER_URL] preferredStyle:UIAlertControllerStyleAlert];
             [action addAction:[UIAlertAction actionWithTitle:@"好" style:UIAlertActionStyleCancel handler:nil]];
             [self presentViewController:action animated:YES completion:nil];
         }
     }
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*
