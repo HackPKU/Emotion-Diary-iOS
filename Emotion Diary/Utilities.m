@@ -7,6 +7,7 @@
 //
 
 #import "Utilities.h"
+#import "AppDelegate.h"
 #import <CommonCrypto/CommonCrypto.h>
 
 @implementation Utilities
@@ -20,6 +21,30 @@
         [outPutStr appendFormat:@"%02X", digist[i]];// 小写 x 表示输出的是小写 MD5 ，大写 X 表示输出的是大写 MD5
     }
     return outPutStr;
+}
+
++ (UIViewController *)getCurrentViewController {
+    return [Utilities getCurrentViewControllerWhileClass:nil appearsWithTime:0 andCanBeTop:YES];
+}
+
++ (UIViewController * _Nullable)getCurrentViewControllerWhileClass:(Class _Nullable)class appearsWithTime:(int)appearTime andCanBeTop:(BOOL)canBeTop {
+    UIViewController *view = ((AppDelegate *)[UIApplication sharedApplication].delegate).window.rootViewController;
+    int time = [view isKindOfClass:class];
+    while (view.childViewControllers.count > 0 || view.presentedViewController) {
+        if (view.childViewControllers.count > 0) {
+            for (UIViewController *childView in view.childViewControllers) {
+                time += [childView isKindOfClass:class];
+            }
+            view = [view.childViewControllers lastObject];
+        }else {
+            view = view.presentedViewController;
+            time += [view isKindOfClass:class];
+        }
+    }
+    if (!class || (time == appearTime && (!canBeTop && ![view isKindOfClass:class]))) {
+        return view;
+    }
+    return nil;
 }
 
 + (UIImage *)normalizedImage:(UIImage *)image {

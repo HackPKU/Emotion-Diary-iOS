@@ -19,5 +19,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *labelHint;
 @property (strong, nonatomic) IBOutlet UIButton *buttonRecord;
 @property (strong, nonatomic) IBOutlet UIButton *buttonProceed;
+@property BOOL shouldDismissAfterUnlock;
 
 @end

@@ -12,7 +12,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <LocalAuthentication/LocalAuthentication.h>
 
-# define DEBUG_IMAGE [UIImage imageNamed:@"MyFace1"]
+#define DEBUG_IMAGE [UIImage imageNamed:@"MyFace1"]
 
 @interface WelcomeViewController ()
 
@@ -27,15 +27,23 @@
         button.layer.cornerRadius = 5.0;
         button.layer.borderWidth = 1.0;
         button.layer.borderColor = [UIColor whiteColor].CGColor;
+        button.hidden = _shouldDismissAfterUnlock;
     }
     shouldStopAnimate = NO;
     emotion = NO_EMOTION;
-#ifndef DEBUG
-    [self setUnlocked:NO];
-#else
+    
+#ifdef DEBUG
+    [self setUnlocked:YES];
     selfie = DEBUG_IMAGE;
+#else
+    [self setUnlocked:NO];
+    if (_shouldDismissAfterUnlock) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(takePicture:) name:UIApplicationDidBecomeActiveNotification object:nil];
+    }
 #endif
+    
     [self performSelector:@selector(animateButtonCamera) withObject:nil afterDelay:0.5];
+    
     // Do any additional setup after loading the view.
     
 }
@@ -78,9 +86,15 @@
         shouldStopAnimate = NO;
         [self animateButtonCamera];
     }
+    if (unlocked && _shouldDismissAfterUnlock) {
+        [self performSelector:@selector(dismiss) withObject:nil afterDelay:0.5];
+    }
 }
 
 - (IBAction)takePicture:(id)sender {
+    if (![[Utilities getCurrentViewController] isKindOfClass:self.class] || hasUnkocked) {
+        return;
+    }
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -188,6 +202,10 @@
 }
 
 #pragma mark - Navigation
+
+- (void)dismiss {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (void)enterMain {
     [self performSegueWithIdentifier:@"enterMain" sender:nil];
