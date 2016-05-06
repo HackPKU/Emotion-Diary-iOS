@@ -14,6 +14,7 @@
 #define USER_NAME @"userName"
 #define USER_INFO @"userInfo"
 #define TOKEN @"token"
+#define FACE_ID @"faceID"
 
 #define USER_CHANGED_NOTIFICATION @"UserChangedNotification"
 

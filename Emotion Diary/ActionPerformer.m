@@ -224,7 +224,7 @@
                         [ActionPerformer processFaceppResult:trainResult andBlock:block];
                         return;
                     }
-                    [[NSUserDefaults standardUserDefaults] setObject:dictCreate[@"person_id"] forKey:@"faceID"]; // Sace faceID in local storage
+                    [[NSUserDefaults standardUserDefaults] setObject:dictCreate[@"person_id"] forKey:FACE_ID]; // Sace faceID in local storage
                     block(YES, nil, @{@"emotion": dictDetect[@"face"][0][@"attribute"][@"smiling"][@"value"]});
                 }];
             }];
@@ -234,7 +234,7 @@
 
 + (void)verifyFaceWithImage:(UIImage *)image andBlock:(ActionPerformerResultBlock)block {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *personID = [[NSUserDefaults standardUserDefaults] objectForKey:@"faceID"];
+        NSString *personID = [[NSUserDefaults standardUserDefaults] objectForKey:FACE_ID];
         if (personID.length == 0) {
             block(NO, @"您还未注册人脸", nil);
             return;
@@ -276,7 +276,7 @@
 
 + (void)deleteFaceWithBlock:(ActionPerformerResultBlock)block {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *personID = [[NSUserDefaults standardUserDefaults] objectForKey:@"faceID"];
+        NSString *personID = [[NSUserDefaults standardUserDefaults] objectForKey:FACE_ID];
         if (personID.length == 0) {
             block(NO, @"您还未注册人脸", nil);
             return;

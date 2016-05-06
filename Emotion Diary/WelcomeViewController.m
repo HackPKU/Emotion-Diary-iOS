@@ -138,7 +138,7 @@
 - (void)analyzeSelfie:(UIImage *)image {
     [KVNProgress showWithStatus:@"分析中"];
     NSString *successMessage;
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"faceID"] length] == 0) {
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:FACE_ID] length] == 0) {
         successMessage = @"人脸注册成功";
     }else {
         successMessage = @"人脸解锁成功";
@@ -156,7 +156,7 @@
         emotion = [data[@"emotion"] intValue];
         [KVNProgress showSuccessWithStatus:successMessage];
     };
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"faceID"] length] == 0) {
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:FACE_ID] length] == 0) {
         [ActionPerformer registerFaceWithImage:image andBlock:block];
     }else {
         [ActionPerformer verifyFaceWithImage:image andBlock:block];
@@ -188,7 +188,6 @@
     [[LAContext new] evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:@"使用 Touch ID 解锁心情日记" reply:^(BOOL success, NSError * _Nullable error) {
         dispatch_sync(dispatch_get_main_queue(), ^{
             if (success) {
-                [KVNProgress showSuccessWithStatus:@"验证通过"];
                 [self setUnlocked:YES];
             }else {
                 [KVNProgress showErrorWithStatus:@"Touch ID 认证失败"];
@@ -208,7 +207,7 @@
         [KVNProgress showWithStatus:@"验证中"];
         [ActionPerformer loginWithName:[[NSUserDefaults standardUserDefaults] objectForKey:USER_NAME] password:alert.textFields[0].text andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
             if (success) {
-                [KVNProgress showSuccessWithStatus:@"验证通过"];
+                [KVNProgress dismiss];
                 [self setUnlocked:YES];
             }else {
                 [KVNProgress showErrorWithStatus:message];

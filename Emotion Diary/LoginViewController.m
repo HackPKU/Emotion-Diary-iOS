@@ -16,10 +16,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationController setNavigationBarHidden:YES];
-    // Translucent navigation bar
-    [self.navigationController.navigationBar setTranslucent:YES];
-    [self.navigationController.navigationBar setBackgroundImage:[Utilities createImageWithColor:[UIColor clearColor]] forBarMetrics:UIBarMetricsDefault];
     
     for (UIView *view in @[_textUsername, _textPassword, _buttonLogin]) {
         view.layer.cornerRadius = 5.0;
@@ -51,15 +47,6 @@
     }];
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.view endEditing:YES];
-    [self.navigationController setNavigationBarHidden:!self.navigationController.navigationBar.isHidden animated:YES];
-}
-
-- (void)textFieldDidBeginEditing:(UITextView *)textView {
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
-
 - (IBAction)didEndOnExit:(id)sender {
     if (sender == _textUsername) {
         [_textPassword becomeFirstResponder];
@@ -78,18 +65,17 @@
         return;
     }
     [KVNProgress showWithStatus:@"登录中"];
-    [ActionPerformer loginWithName:username password:password andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+    [ActionPerformer loginWithName:username password:password andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable dataLogin) {
         if (!success) {
             [KVNProgress showErrorWithStatus:message];
             return;
         }
-        [[NSUserDefaults standardUserDefaults] setValuesForKeysWithDictionary:@{USER_ID : data[@"userid"], TOKEN: data[@"token"], USER_NAME: data[@"name"]}];
-        [ActionPerformer viewUserWithName:[[NSUserDefaults standardUserDefaults] objectForKey:USER_NAME] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+        [ActionPerformer viewUserWithName:[[NSUserDefaults standardUserDefaults] objectForKey:dataLogin[@"name"]] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable dataUserInfo) {
             if (!success) {
                 [KVNProgress showErrorWithStatus:message];
                 return;
             }
-            [[NSUserDefaults standardUserDefaults] setValue:data forKey:USER_INFO];
+            [[NSUserDefaults standardUserDefaults] setValuesForKeysWithDictionary:@{USER_ID : dataLogin[@"userid"], TOKEN: dataLogin[@"token"], USER_NAME: dataLogin[@"name"], USER_INFO: dataUserInfo}];
             [[NSNotificationCenter defaultCenter] postNotificationName:USER_CHANGED_NOTIFICATION object:nil];
             [KVNProgress showSuccessWithStatus:@"登陆成功" completion:^{
                 [self dismissViewControllerAnimated:YES completion:nil];
@@ -111,5 +97,9 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)unwindToLoginView:(UIStoryboardSegue *)segue {
+    
+}
 
 @end

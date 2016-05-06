@@ -97,7 +97,7 @@
         }else if (indexPath.row == 1) {
             return [tableView dequeueReusableCellWithIdentifier:@"feedback"];
         }else if (indexPath.row == 2) {
-            return [tableView dequeueReusableCellWithIdentifier:@"coffee"];
+            return [tableView dequeueReusableCellWithIdentifier:@"donate"];
         }else if (indexPath.row == 3) {
             return [tableView dequeueReusableCellWithIdentifier:@"about"];
         }
@@ -150,9 +150,8 @@
     if (indexPath.section == 1) {
         
     }else if (indexPath.section == 2) {
-        NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
         if (indexPath.row == 0) {
-            NSString *urlString = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@", APP_ID];
+            NSString *urlString = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@", APPSTORE_ID];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
         }else if (indexPath.row == 1) {
             struct utsname systemInfo;
@@ -164,16 +163,10 @@
             [mail.navigationBar setTintColor:[UINavigationBar appearance].tintColor];
             [mail setSubject:@"情绪日记 iOS客户端反馈"];
             [mail setToRecipients:FEEDBACK_EMAIL];
-            [mail setMessageBody:[NSString stringWithFormat:@"设备：%@\n系统：iOS %@\n客户端版本：%@", platform, [[UIDevice currentDevice] systemVersion], appVersion] isHTML:NO];
+            [mail setMessageBody:[NSString stringWithFormat:@"设备：%@\n系统：iOS %@\n客户端版本：%@", platform, [[UIDevice currentDevice] systemVersion], [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]] isHTML:NO];
             [self presentViewController:mail animated:YES completion:^{
                 [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
             }];
-        }else if (indexPath.row == 2) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PAY_URL]];
-        }else if (indexPath.row == 3) {
-            UIAlertController *action = [UIAlertController alertControllerWithTitle:@"情绪日记" message:[NSString stringWithFormat:@"版本：%@\n开发者：范志康\n%@", appVersion, SERVER_URL] preferredStyle:UIAlertControllerStyleAlert];
-            [action addAction:[UIAlertAction actionWithTitle:@"好" style:UIAlertActionStyleCancel handler:nil]];
-            [self presentViewController:action animated:YES completion:nil];
         }
     }
 }

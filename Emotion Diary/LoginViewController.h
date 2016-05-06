@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TranslucentViewController.h"
 
-@interface LoginViewController : UIViewController <UITextFieldDelegate>
+@interface LoginViewController : TranslucentViewController
 
 @property (strong, nonatomic) IBOutlet UITextField *textUsername;
 @property (strong, nonatomic) IBOutlet UITextField *textPassword;

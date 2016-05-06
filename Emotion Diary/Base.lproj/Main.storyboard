@@ -511,7 +511,7 @@
                         <outlet property="buttonProceed" destination="A24-PA-NnZ" id="z45-zc-TBU"/>
                         <outlet property="buttonRecord" destination="RQf-CO-zls" id="rlr-Ck-P4h"/>
                         <outlet property="labelHint" destination="ADN-Ao-VCy" id="GND-OG-20x"/>
-                        <segue destination="zlc-U2-H0P" kind="presentation" identifier="login" modalPresentationStyle="overCurrentContext" id="KF2-Gz-Elh"/>
+                        <segue destination="zlc-U2-H0P" kind="presentation" identifier="login" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="KF2-Gz-Elh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8nQ-Gu-35H" userLabel="First Responder" sceneMemberID="firstResponder"/>

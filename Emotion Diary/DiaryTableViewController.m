@@ -21,8 +21,20 @@
     _cycleImageView.layer.shadowOffset = CGSizeZero;
     _cycleImageView.layer.shadowOpacity = 0.75;
     _cycleImageView.layer.shadowRadius = 6.0;
-    diary = [_simpleDiary fullVersion];
-    [self updateDiaryView];
+    
+    if (!_simpleDiary.hasLocalVersion) {
+        [KVNProgress showWithStatus:@"加载中"];
+    }
+    [_simpleDiary getFullVersionWithBlock:^(BOOL success, NSObject * _Nullable data) {
+        if (!success) {
+            [KVNProgress showErrorWithStatus:@"日记加载错误"];
+            return;
+        }
+        [KVNProgress dismiss];
+        diary = (EmotionDiary *)data;
+        [self updateDiaryView];
+    }];
+    
     // TODO: Image count to 0 after 3D Touch
     
     // Uncomment the following line to preserve selection between presentations.

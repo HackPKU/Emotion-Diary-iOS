@@ -102,7 +102,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="JPw-yx-7vt" kind="presentation" identifier="login" modalPresentationStyle="overCurrentContext" id="qPa-4Z-Neu">
+                                    <segue destination="JPw-yx-7vt" kind="presentation" identifier="login" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="qPa-4Z-Neu">
                                         <segue key="commit" inheritsFrom="parent" id="uRs-Hm-2OR"/>
                                         <segue key="preview" inheritsFrom="commit" id="EL2-Rj-lxc"/>
                                     </segue>
@@ -142,7 +142,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="coffee" textLabel="TKo-im-mwL" style="IBUITableViewCellStyleDefault" id="W7i-3K-hJu">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="donate" textLabel="TKo-im-mwL" style="IBUITableViewCellStyleDefault" id="W7i-3K-hJu">
                                 <rect key="frame" x="0.0" y="445.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W7i-3K-hJu" id="hBu-Wf-k1e">
@@ -158,6 +158,12 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="wps-u1-nbf" kind="show" identifier="donate" id="9Ud-nh-1Hy">
+                                        <segue key="commit" inheritsFrom="parent" id="Rs9-vL-8gI"/>
+                                        <segue key="preview" inheritsFrom="commit" id="NeC-vM-QfH"/>
+                                    </segue>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="about" textLabel="2Yd-6A-8lV" style="IBUITableViewCellStyleDefault" id="96n-Kd-oDs">
                                 <rect key="frame" x="0.0" y="489.5" width="600" height="44"/>
@@ -175,6 +181,12 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="ubc-be-32e" kind="show" identifier="about" id="HJi-Bx-tL0">
+                                        <segue key="commit" inheritsFrom="parent" id="lUg-bl-DPr"/>
+                                        <segue key="preview" inheritsFrom="commit" id="psh-4D-KX4"/>
+                                    </segue>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -251,6 +263,12 @@
                                                     <state key="normal" title="注册账号">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <segue destination="m7g-ss-XhX" kind="presentation" identifier="register" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="Sm7-Ng-W7U">
+                                                            <segue key="commit" inheritsFrom="parent" id="opN-Bt-aal"/>
+                                                            <segue key="preview" inheritsFrom="commit" id="OdB-Mm-UYd"/>
+                                                        </segue>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VjT-Tj-2C9">
                                                     <rect key="frame" x="15.5" y="125" width="250" height="40"/>
@@ -318,7 +336,7 @@
                                 <blurEffect style="dark"/>
                             </visualEffectView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="y39-C5-7Zh" firstAttribute="top" relation="greaterThanOrEqual" secondItem="if9-wk-cxE" secondAttribute="bottom" priority="750" constant="20" id="Dgp-Za-HYJ"/>
                             <constraint firstItem="bwT-Z3-JvV" firstAttribute="top" secondItem="cHV-bi-R7Q" secondAttribute="top" id="JCy-EX-EMx"/>
@@ -384,8 +402,249 @@
             </objects>
             <point key="canvasLocation" x="3491" y="-525"/>
         </scene>
+        <!--请开发者喝一杯咖啡-->
+        <scene sceneID="BtQ-ZO-t6s">
+            <objects>
+                <viewController storyboardIdentifier="Donate" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wps-u1-nbf" customClass="DonateViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FtG-gi-dCw"/>
+                        <viewControllerLayoutGuide type="bottom" id="CeL-Bg-7mq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2iO-eu-x99">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mHB-2u-12l">
+                                <rect key="frame" x="175" y="380" width="250" height="40"/>
+                                <color key="backgroundColor" red="0.19215686269999999" green="0.67843137249999996" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="PRh-Q5-7Sg"/>
+                                    <constraint firstAttribute="width" constant="250" id="mpb-WI-KfM"/>
+                                </constraints>
+                                <state key="normal" title="捐助">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="donate:" destination="wps-u1-nbf" eventType="touchUpInside" id="qQc-zS-ryh"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PQt-Ur-Of7">
+                                <rect key="frame" x="150" y="260" width="300" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="wXe-Fs-4yU"/>
+                                    <constraint firstAttribute="width" constant="300" id="zd6-Fa-Ov3"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="情绪日记本身是免费的，如果您觉得好用并想鼓励开发者做得更好，不妨通过支付宝捐赠来支持开发者。无论多少，都非常感谢！">
+                                        <attributes>
+                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <font key="NSFont" size="15" name="PingFangSC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czQ-Yq-a4U">
+                                <rect key="frame" x="250" y="109" width="100" height="111"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="0hN-1l-GUw"/>
+                                    <constraint firstAttribute="height" constant="111" id="EYq-aS-lXa"/>
+                                </constraints>
+                                <color key="tintColor" red="1" green="0.74509803919999995" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="日记本"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mHB-2u-12l" firstAttribute="centerX" secondItem="2iO-eu-x99" secondAttribute="centerX" id="4at-Dr-xGM"/>
+                            <constraint firstItem="CeL-Bg-7mq" firstAttribute="top" relation="greaterThanOrEqual" secondItem="mHB-2u-12l" secondAttribute="bottom" constant="8" id="54c-8e-LGk"/>
+                            <constraint firstItem="mHB-2u-12l" firstAttribute="top" secondItem="PQt-Ur-Of7" secondAttribute="bottom" priority="750" constant="40" id="JZo-wO-fi9"/>
+                            <constraint firstItem="czQ-Yq-a4U" firstAttribute="top" relation="greaterThanOrEqual" secondItem="FtG-gi-dCw" secondAttribute="bottom" constant="8" id="NaK-Ln-xgP"/>
+                            <constraint firstItem="PQt-Ur-Of7" firstAttribute="top" secondItem="czQ-Yq-a4U" secondAttribute="bottom" priority="750" constant="40" id="RCb-vm-2I1"/>
+                            <constraint firstItem="czQ-Yq-a4U" firstAttribute="centerX" secondItem="2iO-eu-x99" secondAttribute="centerX" id="T2V-Ia-S7E"/>
+                            <constraint firstItem="PQt-Ur-Of7" firstAttribute="centerX" secondItem="2iO-eu-x99" secondAttribute="centerX" id="aCU-PL-fjT"/>
+                            <constraint firstItem="PQt-Ur-Of7" firstAttribute="centerY" secondItem="2iO-eu-x99" secondAttribute="centerY" id="wgu-qQ-EkB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="请开发者喝一杯咖啡" id="btK-aX-geS"/>
+                    <connections>
+                        <outlet property="buttonDonate" destination="mHB-2u-12l" id="C5Z-zh-7rY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1hl-cp-LuD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3491" y="308"/>
+        </scene>
+        <!--注册-->
+        <scene sceneID="GQB-Yq-Xqa">
+            <objects>
+                <viewController storyboardIdentifier="Register" useStoryboardIdentifierAsRestorationIdentifier="YES" id="X5L-kl-Ocw" userLabel="注册" customClass="RegisterViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ccM-FH-YEX"/>
+                        <viewControllerLayoutGuide type="bottom" id="R8l-rp-Mmm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nTu-C1-Aff">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="abe-lP-Ipw">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="8S2-fS-WyU">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="dark"/>
+                            </visualEffectView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="R8l-rp-Mmm" firstAttribute="top" secondItem="abe-lP-Ipw" secondAttribute="bottom" id="3Wd-bK-VKy"/>
+                            <constraint firstAttribute="trailing" secondItem="abe-lP-Ipw" secondAttribute="trailing" id="HhW-BK-qiP"/>
+                            <constraint firstItem="abe-lP-Ipw" firstAttribute="top" secondItem="nTu-C1-Aff" secondAttribute="top" id="Tov-a8-ooP"/>
+                            <constraint firstItem="abe-lP-Ipw" firstAttribute="leading" secondItem="nTu-C1-Aff" secondAttribute="leading" id="sih-A0-TmD"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="注册" id="evm-ob-pfE">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="JqA-Oo-PPl">
+                            <connections>
+                                <segue destination="jcB-VL-tXT" kind="unwind" unwindAction="unwindToLoginView:" id="Blc-Zv-7FB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bWV-Ca-hM4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="jcB-VL-tXT" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="5934" y="-525"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="yUG-JR-D5X">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jg1-q7-VoB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController storyboardIdentifier="RegisterNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="m7g-ss-XhX" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Pit-xx-A1x">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="X5L-kl-Ocw" kind="relationship" relationship="rootViewController" id="zIK-6e-5Pq"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="5122" y="-525"/>
+        </scene>
+        <!--关于-->
+        <scene sceneID="uPn-t7-DVs">
+            <objects>
+                <viewController storyboardIdentifier="About" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ubc-be-32e" userLabel="关于" customClass="AboutViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Lwq-Yy-Dvy"/>
+                        <viewControllerLayoutGuide type="bottom" id="v9p-oU-0xa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZuK-8T-Ih7">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grj-rB-FH8">
+                                <rect key="frame" x="150" y="260" width="300" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="8yS-bd-TaC"/>
+                                    <constraint firstAttribute="height" constant="80" id="KPh-NR-jFa"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="情绪日记">
+                                        <attributes>
+                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <font key="NSFont" size="15" name="PingFangSC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                        <attributes>
+                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <font key="NSFont" size="15" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="版本">
+                                        <attributes>
+                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <font key="NSFont" size="15" name="PingFangSC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content"> 1.0
+</string>
+                                        <attributes>
+                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <font key="NSFont" size="15" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="开发者：范志康">
+                                        <attributes>
+                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <font key="NSFont" size="15" name="PingFangSC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P7F-Kx-SRb">
+                                <rect key="frame" x="250" y="109" width="100" height="111"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="Uli-xd-MhE"/>
+                                    <constraint firstAttribute="height" constant="111" id="gbg-ko-r9N"/>
+                                </constraints>
+                                <color key="tintColor" red="1" green="0.74509803919999995" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="日记本"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sXp-so-DD7">
+                                <rect key="frame" x="220" y="380" width="160" height="30"/>
+                                <state key="normal" title="www.emotiondiary.date"/>
+                                <connections>
+                                    <action selector="openWebsite:" destination="ubc-be-32e" eventType="touchUpInside" id="7a7-g2-pxF"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="grj-rB-FH8" firstAttribute="centerY" secondItem="ZuK-8T-Ih7" secondAttribute="centerY" id="Ckr-ci-I29"/>
+                            <constraint firstItem="sXp-so-DD7" firstAttribute="top" secondItem="grj-rB-FH8" secondAttribute="bottom" priority="750" constant="40" id="FBY-OQ-PTj"/>
+                            <constraint firstItem="grj-rB-FH8" firstAttribute="centerX" secondItem="ZuK-8T-Ih7" secondAttribute="centerX" id="Nrz-vZ-rgM"/>
+                            <constraint firstItem="sXp-so-DD7" firstAttribute="centerX" secondItem="ZuK-8T-Ih7" secondAttribute="centerX" id="VNM-0C-wrh"/>
+                            <constraint firstItem="grj-rB-FH8" firstAttribute="top" secondItem="P7F-Kx-SRb" secondAttribute="bottom" priority="750" constant="40" id="bvC-V3-utI"/>
+                            <constraint firstItem="P7F-Kx-SRb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Lwq-Yy-Dvy" secondAttribute="bottom" constant="8" id="con-bO-Kca"/>
+                            <constraint firstItem="P7F-Kx-SRb" firstAttribute="centerX" secondItem="ZuK-8T-Ih7" secondAttribute="centerX" id="oKG-bD-Lwz"/>
+                            <constraint firstItem="v9p-oU-0xa" firstAttribute="top" relation="greaterThanOrEqual" secondItem="sXp-so-DD7" secondAttribute="bottom" id="qby-9Y-vAb"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="关于" id="V2w-JB-sA8"/>
+                    <connections>
+                        <outlet property="buttonWebsite" destination="sXp-so-DD7" id="Hd1-eD-QUm"/>
+                        <outlet property="labelInfo" destination="grj-rB-FH8" id="5PI-Qg-63o"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QpA-HD-3QP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3491" y="1150"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="日记本" width="100" height="111"/>
+    </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="HJi-Bx-tL0"/>
+        <segue reference="9Ud-nh-1Hy"/>
         <segue reference="qPa-4Z-Neu"/>
+        <segue reference="Sm7-Ng-W7U"/>
     </inferredMetricsTieBreakers>
 </document>
