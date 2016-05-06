@@ -132,15 +132,15 @@
                                     </segue>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="noDiary" rowHeight="60" id="mXs-GZ-YHO">
-                                <rect key="frame" x="0.0" y="247" width="600" height="60"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="noDiary" rowHeight="100" id="mXs-GZ-YHO">
+                                <rect key="frame" x="0.0" y="247" width="600" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mXs-GZ-YHO" id="Tx9-au-3Jb">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您还没有日记" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="imT-l7-fNF">
-                                            <rect key="frame" x="234" y="13" width="132" height="30"/>
+                                            <rect key="frame" x="234" y="35" width="132" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="26D-al-FYP"/>
                                             </constraints>
@@ -149,7 +149,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Mu-ZB-bQ1" userLabel="Separator">
-                                            <rect key="frame" x="8" y="51" width="584" height="1"/>
+                                            <rect key="frame" x="8" y="73" width="584" height="1"/>
                                             <color key="backgroundColor" red="1" green="0.74509803919999995" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="yJt-S6-SsN"/>
@@ -157,9 +157,9 @@
                                         </view>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="imT-l7-fNF" firstAttribute="centerY" secondItem="Tx9-au-3Jb" secondAttribute="centerY" id="1Sk-u9-y7K"/>
                                         <constraint firstItem="0Mu-ZB-bQ1" firstAttribute="leading" secondItem="Tx9-au-3Jb" secondAttribute="leadingMargin" id="Ib3-Oj-sEP"/>
                                         <constraint firstItem="0Mu-ZB-bQ1" firstAttribute="top" secondItem="imT-l7-fNF" secondAttribute="bottom" constant="8" symbolic="YES" id="MAC-An-438"/>
-                                        <constraint firstItem="imT-l7-fNF" firstAttribute="top" secondItem="Tx9-au-3Jb" secondAttribute="topMargin" constant="5" id="dSL-1g-RnU"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="0Mu-ZB-bQ1" secondAttribute="trailing" id="vO8-XA-51m"/>
                                         <constraint firstItem="imT-l7-fNF" firstAttribute="centerX" secondItem="Tx9-au-3Jb" secondAttribute="centerX" id="wmK-8b-vWV"/>
                                     </constraints>
@@ -341,7 +341,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今天没有日记" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SQ7-Sr-Ih0">
-                                                    <rect key="frame" x="234" y="13" width="132" height="30"/>
+                                                    <rect key="frame" x="234" y="15" width="132" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="iv7-pT-V4R"/>
                                                     </constraints>
@@ -350,7 +350,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rEa-zt-24r" userLabel="Separator">
-                                                    <rect key="frame" x="8" y="51" width="584" height="1"/>
+                                                    <rect key="frame" x="8" y="53" width="584" height="1"/>
                                                     <color key="backgroundColor" red="1" green="0.74509803919999995" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="p2b-sg-7Yb"/>
@@ -359,7 +359,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="rEa-zt-24r" firstAttribute="top" secondItem="SQ7-Sr-Ih0" secondAttribute="bottom" constant="8" symbolic="YES" id="0QN-hD-zGI"/>
-                                                <constraint firstItem="SQ7-Sr-Ih0" firstAttribute="top" secondItem="vjb-cH-p0U" secondAttribute="topMargin" constant="5" id="PgG-Xu-HSA"/>
+                                                <constraint firstItem="SQ7-Sr-Ih0" firstAttribute="centerY" secondItem="vjb-cH-p0U" secondAttribute="centerY" id="RAI-gY-lyP"/>
                                                 <constraint firstItem="rEa-zt-24r" firstAttribute="leading" secondItem="vjb-cH-p0U" secondAttribute="leadingMargin" id="ZMG-W8-TLg"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="rEa-zt-24r" secondAttribute="trailing" id="gMj-Fv-BXS"/>
                                                 <constraint firstItem="SQ7-Sr-Ih0" firstAttribute="centerX" secondItem="vjb-cH-p0U" secondAttribute="centerX" id="hnH-Gs-tsy"/>
@@ -907,8 +907,8 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="shouldLoop" value="YES"/>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="autoScroll" value="YES"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="showFooter" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="autoScroll" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <outlet property="dataSource" destination="8IW-4c-vs6" id="VcO-vM-NyP"/>
@@ -1046,8 +1046,8 @@
         <image name="用户" width="25" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MEH-Jc-QhM"/>
         <segue reference="e3d-0X-6Ej"/>
+        <segue reference="MEH-Jc-QhM"/>
         <segue reference="ygb-bb-gXM"/>
     </inferredMetricsTieBreakers>
 </document>

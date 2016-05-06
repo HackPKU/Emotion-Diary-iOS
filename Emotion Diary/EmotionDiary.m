@@ -15,7 +15,7 @@
     self = [super init];
     if (self) {
         _emotion = emotion;
-        _imageSelfie = selfie;
+        _imageSelfie = [Utilities resizedImage:selfie];
         _imageImages = images;
         _hasImage = (_images.count > 0);
         _tags = tags;

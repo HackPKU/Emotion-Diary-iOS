@@ -75,7 +75,14 @@
     return normalizedImage;
 }
 
++ (UIImage *)resizedImage:(UIImage *)image {
+    return [Utilities resizeImage:image toMaxWidthAndHeight:1024];
+}
+
 + (UIImage *)resizeImage:(UIImage *)image toMaxWidthAndHeight:(NSInteger)max {
+    if (image.size.width < max && image.size.height < max) {
+        return image;
+    }
     CGSize size;
     if (image.size.width > image.size.height) {
         size = CGSizeMake(max, (NSInteger)(max * image.size.height / image.size.width));

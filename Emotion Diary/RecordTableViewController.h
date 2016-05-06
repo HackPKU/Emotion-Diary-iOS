@@ -13,6 +13,7 @@
 @interface RecordTableViewController : UITableViewController <UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CTAssetsPickerControllerDelegate, MWPhotoBrowserDelegate> {
     NSDictionary *faceInfo;
     NSMutableArray *images;
+    NSMutableArray *thumbnailImages;
     BOOL showCamera;
 }
 

@@ -57,6 +57,13 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIImage *)normalizedImage:(UIImage *)image;
 
 /**
+ * Resize the image to max width 1024 and max height 1024 to ensure memory performance
+ * @param image The image to be resized
+ * @return Resized image
+ */
++ (UIImage *)resizedImage:(UIImage *)image;
+
+/**
  * Resize the image to required max width and height
  * @param image The image to be resized
  * @param max The max width and height

@@ -46,7 +46,7 @@
     if (totalNumber > 0) {
         return 155.0;
     }else {
-        return 60.0;
+        return 100.0;
     }
 }
 

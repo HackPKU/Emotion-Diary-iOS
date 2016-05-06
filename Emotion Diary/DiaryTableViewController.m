@@ -138,7 +138,8 @@
 }
 
 - (UIView *)banner:(ZYBannerView *)banner viewForItemAtIndex:(NSInteger)index {
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:diary.imageImages[index]];
+    UIImage *image = [Utilities resizedImage:diary.imageImages[index]];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     imageView.contentMode = UIViewContentModeScaleAspectFill;
     return imageView;
 }
