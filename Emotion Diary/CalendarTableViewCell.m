@@ -26,7 +26,7 @@
 - (void)setDiary:(EmotionDiary *)diary {
     _savedDiary = diary;
     if (diary.selfie.length > 0) {
-        _imageSelfie.image = [UIImage imageWithData:[Utilities getFileAtPath:SELFIE_PATH withName:diary.selfie]];
+        _imageSelfie.image = [Utilities resizeImage:[UIImage imageWithData:[Utilities getFileAtPath:SELFIE_PATH withName:diary.selfie]] toMaxWidthAndHeight:300];
     }else {
         _imageSelfie.image = PLACEHOLDER_IMAGE;
     }

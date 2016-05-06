@@ -258,7 +258,7 @@
 
 - (void)addImage:(UIImage *)image {
     [images addObject:image];
-    [thumbnailImages addObject:[Utilities resizedImage:image]];
+    [thumbnailImages addObject:[Utilities resizeImage:image toMaxWidthAndHeight:300]];
     [_collectionImages reloadData];
     
     // Scroll to newly added image

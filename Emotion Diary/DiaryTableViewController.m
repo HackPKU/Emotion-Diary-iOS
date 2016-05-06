@@ -138,7 +138,7 @@
 }
 
 - (UIView *)banner:(ZYBannerView *)banner viewForItemAtIndex:(NSInteger)index {
-    UIImage *image = [Utilities resizedImage:diary.imageImages[index]];
+    UIImage *image = [Utilities resizeImage:diary.imageImages[index] toMaxWidthAndHeight:2000];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     imageView.contentMode = UIViewContentModeScaleAspectFill;
     return imageView;
