@@ -23,7 +23,6 @@
 #define WEATHER @"weather"
 #define CREATE_TIME @"createTime"
 
-#define USER_ID @"userID"
 #define DIARY_ID @"diaryID"
 #define HAS_IMAGE @"hasImage"
 #define HAS_TAG @"hasTag"

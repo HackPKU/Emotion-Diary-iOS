@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // self.preferredContentSize = CGSizeMake(360, 0); // Set width to 360
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUser) name:USER_CHANGED_NOTIFICATION object:nil];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -138,6 +138,10 @@
     return YES;
 }
 */
+
+- (void)refreshUser {
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
 
 #pragma mark - Table view delegate
 

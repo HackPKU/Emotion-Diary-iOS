@@ -38,7 +38,7 @@
 #else
     [self setUnlocked:NO];
     if (_shouldDismissAfterUnlock) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(takePicture:) name:UIApplicationDidBecomeActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(directUnlock) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
 #endif
     
@@ -51,6 +51,15 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"hasShownWelcome"] boolValue] == NO) {
+        // TODO: Welcome logic
+        
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"hasShownWelcome"];
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -87,10 +96,14 @@
     }
 }
 
-- (IBAction)takePicture:(id)sender {
+- (void)directUnlock {
     if (![[Utilities getCurrentViewController] isKindOfClass:self.class] || hasUnkocked) {
         return;
     }
+    [self takePicture:nil];
+}
+
+- (IBAction)takePicture:(id)sender {
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -155,46 +168,58 @@
     [action addAction:[UIAlertAction actionWithTitle:@"自拍解锁" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self takePicture:nil];
     }]];
-    LAContext *context = [LAContext new];
-    if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil]) {
+    if ([[LAContext new] canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil]) {
         [action addAction:[UIAlertAction actionWithTitle:@"Touch ID" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:@"使用 Touch ID 解锁心情日记" reply:^(BOOL success, NSError * _Nullable error) {
-                dispatch_sync(dispatch_get_main_queue(), ^{
-                    if (success) {
-                        [self setUnlocked:YES];
-                    }else {
-                        [KVNProgress showErrorWithStatus:@"Touch ID 认证失败"];
-                        [self setUnlocked:NO];
-                    }
-                });
-            }];
+            [self unlockWithTouchID];
         }]];
     }
     if ([ActionPerformer hasLoggedIn]) {
         [action addAction:[UIAlertAction actionWithTitle:@"使用密码" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"输入密码" message:@"使用您的账号密码解锁心情日记" preferredStyle:UIAlertControllerStyleAlert];
-            [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-                textField.placeholder = @"密码";
-                textField.secureTextEntry = YES;
-            }];
-            [alert addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                if ([[Utilities MD5:alert.textFields[0].text] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"password"]]) {
-                    [self setUnlocked:YES];
-                }else {
-                    [KVNProgress showErrorWithStatus:@"密码错误"];
-                    [self setUnlocked:NO];
-                }
-            }]];
-            [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                [self setUnlocked:NO];
-            }]];
-            [self presentViewController:alert animated:YES completion:nil];
+            [self unlockWithPassword];
         }]];
     }
     [action addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [self setUnlocked:NO];
     }]];
     [self presentViewController:action animated:YES completion:nil];
+}
+
+- (void)unlockWithTouchID {
+    [[LAContext new] evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:@"使用 Touch ID 解锁心情日记" reply:^(BOOL success, NSError * _Nullable error) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            if (success) {
+                [KVNProgress showSuccessWithStatus:@"验证通过"];
+                [self setUnlocked:YES];
+            }else {
+                [KVNProgress showErrorWithStatus:@"Touch ID 认证失败"];
+                [self setUnlocked:NO];
+            }
+        });
+    }];
+}
+
+- (void)unlockWithPassword {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"输入密码" message:@"使用您的账号密码解锁心情日记" preferredStyle:UIAlertControllerStyleAlert];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"密码";
+        textField.secureTextEntry = YES;
+    }];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [KVNProgress showWithStatus:@"验证中"];
+        [ActionPerformer loginWithName:[[NSUserDefaults standardUserDefaults] objectForKey:USER_NAME] password:alert.textFields[0].text andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+            if (success) {
+                [KVNProgress showSuccessWithStatus:@"验证通过"];
+                [self setUnlocked:YES];
+            }else {
+                [KVNProgress showErrorWithStatus:message];
+                [self setUnlocked:NO];
+            }
+        }];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [self setUnlocked:NO];
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - Navigation

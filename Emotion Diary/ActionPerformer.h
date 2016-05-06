@@ -10,6 +10,13 @@
 #import <Foundation/Foundation.h>
 #import "EmotionDiary.h"
 
+#define USER_ID @"userID"
+#define USER_NAME @"userName"
+#define USER_INFO @"userInfo"
+#define TOKEN @"token"
+
+#define USER_CHANGED_NOTIFICATION @"UserChangedNotification"
+
 typedef NS_ENUM(NSInteger, EmotionDiaryImageType) {
     EmotionDiaryImageTypeIcon,
     EmotionDiaryImageTypeSelfie,
@@ -27,8 +34,6 @@ typedef void (^ActionPerformerResultBlock)(BOOL success, NSString * _Nullable me
 + (void)registerWithName:(NSString *)name password:(NSString *)password sex:(NSString * _Nullable)sex email:(NSString * _Nullable)email icon:(NSString * _Nullable)icon andBlock:(ActionPerformerResultBlock)block;
 
 + (void)loginWithName:(NSString *)name password:(NSString *)password andBlock:(ActionPerformerResultBlock)block;
-
-+ (void)loginWithEmail:(NSString *)email password:(NSString *)password andBlock:(ActionPerformerResultBlock)block;
 
 + (void)logoutWithBlock:(ActionPerformerResultBlock)block;
 

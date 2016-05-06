@@ -28,8 +28,8 @@
     request[@"version"] = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     request[@"platform"] = @"iOS";
     if ([ActionPerformer hasLoggedIn]) {
-        request[@"userid"] = [[NSUserDefaults standardUserDefaults] objectForKey:@"userid"];
-        request[@"token"] = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
+        request[@"userid"] = [[NSUserDefaults standardUserDefaults] objectForKey:USER_ID];
+        request[@"token"] = [[NSUserDefaults standardUserDefaults] objectForKey:TOKEN];
     }
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -66,16 +66,12 @@
 
 + (void)loginWithName:(NSString *)name password:(NSString *)password andBlock:(ActionPerformerResultBlock)block {
     NSMutableDictionary *request = [[NSMutableDictionary alloc] init];
-    request[@"name"] = name;
+    if ([Utilities isValidateEmail:name]) {
+        request[@"email"] = name;
+    }else {
+        request[@"name"] = name;
+    }
     request[@"password"] = [Utilities MD5:password];
-    [ActionPerformer postWithDictionary:request toUrl:@"/api/login.php" andBlock:block];
-}
-
-+ (void)loginWithEmail:(NSString *)email password:(NSString *)password andBlock:(ActionPerformerResultBlock)block {
-    NSMutableDictionary *request = [[NSMutableDictionary alloc] init];
-    request[@"email"] = email;
-    request[@"password"] = [Utilities MD5:password];
-    request[@"type"] = @"ios";
     [ActionPerformer postWithDictionary:request toUrl:@"/api/login.php" andBlock:block];
 }
 
@@ -293,7 +289,7 @@
 #pragma mark - Local functions
 
 + (BOOL)hasLoggedIn {
-    return ([[[NSUserDefaults standardUserDefaults] objectForKey:@"userid"] length] > 0 && [[[NSUserDefaults standardUserDefaults] objectForKey:@"token"] length] > 0);
+    return ([[[NSUserDefaults standardUserDefaults] objectForKey:USER_ID] length] > 0 && [[[NSUserDefaults standardUserDefaults] objectForKey:TOKEN] length] > 0);
 }
 
 + (UIImage *)getFaceImageByEmotion:(int)smile {

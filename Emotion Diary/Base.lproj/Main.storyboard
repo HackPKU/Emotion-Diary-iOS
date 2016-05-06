@@ -511,6 +511,7 @@
                         <outlet property="buttonProceed" destination="A24-PA-NnZ" id="z45-zc-TBU"/>
                         <outlet property="buttonRecord" destination="RQf-CO-zls" id="rlr-Ck-P4h"/>
                         <outlet property="labelHint" destination="ADN-Ao-VCy" id="GND-OG-20x"/>
+                        <segue destination="zlc-U2-H0P" kind="presentation" identifier="login" modalPresentationStyle="overCurrentContext" id="KF2-Gz-Elh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8nQ-Gu-35H" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -962,6 +963,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TqP-yJ-am0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1867" y="1155"/>
+        </scene>
+        <!--LoginNavigationController-->
+        <scene sceneID="39e-gW-865">
+            <objects>
+                <viewControllerPlaceholder storyboardName="UserCenter" referencedIdentifier="LoginNavigationController" id="zlc-U2-H0P" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5vD-0r-T2b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="40.5" y="-215"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zAP-wi-GMk">
