@@ -435,7 +435,7 @@
                                     <constraint firstAttribute="width" constant="300" id="zd6-Fa-Ov3"/>
                                 </constraints>
                                 <attributedString key="attributedText">
-                                    <fragment content="情绪日记本身是免费的，如果您觉得好用并想鼓励开发者做得更好，不妨通过支付宝捐赠来支持开发者。无论多少，都非常感谢！">
+                                    <fragment content="情绪日记本身是免费的。如果您觉得好用并想鼓励开发者做得更好，不妨通过支付宝捐赠来支持开发者。无论多少，都非常感谢！">
                                         <attributes>
                                             <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="15" name="PingFangSC-Regular"/>

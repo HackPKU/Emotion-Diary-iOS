@@ -151,7 +151,7 @@
         
     }else if (indexPath.section == 2) {
         if (indexPath.row == 0) {
-            NSString *urlString = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@", APPSTORE_ID];
+            NSString *urlString = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@", APP_STORE_ID];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
         }else if (indexPath.row == 1) {
             struct utsname systemInfo;

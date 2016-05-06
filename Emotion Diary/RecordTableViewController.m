@@ -22,7 +22,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     images = [[NSMutableArray alloc] init];
-    thumbnailImages = [[NSMutableArray alloc] init];
     showCamera = YES;
     _imageSelfie.layer.cornerRadius = _imageSelfie.frame.size.width / 2;
     [self setSelfieImage];
@@ -173,7 +172,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < images.count) {
         RecordCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"image" forIndexPath:indexPath];
-        cell.imagePhoto.image = thumbnailImages[indexPath.row];
+        cell.imagePhoto.image = images[indexPath.row];
         return cell;
     }else {
         return [collectionView dequeueReusableCellWithReuseIdentifier:@"select" forIndexPath:indexPath];
@@ -225,7 +224,6 @@
     RecordCollectionViewCell *cell = (RecordCollectionViewCell *)[[sender superview] superview];
     NSInteger row = [_collectionImages indexPathForCell:cell].row;
     [images removeObjectAtIndex:row];
-    [thumbnailImages removeObjectAtIndex:row];
     if (images.count < MAX_PICTURE_NUM - 1) {
         [_collectionImages deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]]];
     }else { // Add button replaces the last image
@@ -258,7 +256,6 @@
 
 - (void)addImage:(UIImage *)image {
     [images addObject:image];
-    [thumbnailImages addObject:[Utilities resizeImage:image toMaxWidthAndHeight:300]];
     [_collectionImages reloadData];
     
     // Scroll to newly added image

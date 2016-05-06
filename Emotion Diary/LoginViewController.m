@@ -59,9 +59,19 @@
     NSString *username = _textUsername.text;
     NSString *password = _textPassword.text;
     if (username.length == 0) {
+        UIAlertController *action = [UIAlertController alertControllerWithTitle:@"错误" message:@"没有填写用户名" preferredStyle:UIAlertControllerStyleAlert];
+        [action addAction:[UIAlertAction actionWithTitle:@"好" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [_textUsername becomeFirstResponder];
+        }]];
+        [self presentViewController:action animated:YES completion:nil];
         return;
     }
     if (password.length == 0) {
+        UIAlertController *action = [UIAlertController alertControllerWithTitle:@"错误" message:@"没有填写密码" preferredStyle:UIAlertControllerStyleAlert];
+        [action addAction:[UIAlertAction actionWithTitle:@"好" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [_textPassword becomeFirstResponder];
+        }]];
+        [self presentViewController:action animated:YES completion:nil];
         return;
     }
     [KVNProgress showWithStatus:@"登录中"];

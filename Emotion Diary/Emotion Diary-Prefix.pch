@@ -29,7 +29,7 @@
 #import "KVNProgress.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-#define APPSTORE_ID @""
+#define APP_STORE_ID @""
 #define SERVER_URL @"www.emotiondiary.date"
 #define FEEDBACK_EMAIL @[@"frank@fanzhikang.cn"]
 #define PAY_URL @"https://qr.alipay.com/aphqru9a8eqglsvk4c"
