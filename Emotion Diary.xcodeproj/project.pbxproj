@@ -15,6 +15,7 @@
 		015324F01CD8CF4D00272D03 /* UserCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 015324EE1CD8CF4D00272D03 /* UserCenter.storyboard */; };
 		015324FE1CD9066E00272D03 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 015325001CD9066E00272D03 /* InfoPlist.strings */; };
 		015334DF1CB8B2DF00E3D2F1 /* CalendarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 015334DE1CB8B2DF00E3D2F1 /* CalendarTableViewCell.m */; };
+		0169FDFB1CDE4D4C00201130 /* RegisterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169FDFA1CDE4D4C00201130 /* RegisterTableViewCell.m */; };
 		017DB3AB1CDB80D4005AB1D3 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017DB3AA1CDB80D4005AB1D3 /* LoginViewController.m */; };
 		017DB3B61CDC6208005AB1D3 /* TranslucentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017DB3B51CDC6208005AB1D3 /* TranslucentViewController.m */; };
 		017DB3B91CDC653B005AB1D3 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017DB3B81CDC653B005AB1D3 /* RegisterViewController.m */; };
@@ -88,6 +89,8 @@
 		015334DD1CB8B2DF00E3D2F1 /* CalendarTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarTableViewCell.h; sourceTree = "<group>"; };
 		015334DE1CB8B2DF00E3D2F1 /* CalendarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarTableViewCell.m; sourceTree = "<group>"; };
 		015AFD6A1CCBE09800389C7A /* Emotion Diary-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Emotion Diary-Prefix.pch"; sourceTree = "<group>"; };
+		0169FDF91CDE4D4C00201130 /* RegisterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterTableViewCell.h; sourceTree = "<group>"; };
+		0169FDFA1CDE4D4C00201130 /* RegisterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterTableViewCell.m; sourceTree = "<group>"; };
 		017DB3A91CDB80D4005AB1D3 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		017DB3AA1CDB80D4005AB1D3 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		017DB3B41CDC6208005AB1D3 /* TranslucentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TranslucentViewController.h; sourceTree = "<group>"; };
@@ -209,6 +212,8 @@
 				017DB3AA1CDB80D4005AB1D3 /* LoginViewController.m */,
 				017DB3B71CDC653B005AB1D3 /* RegisterViewController.h */,
 				017DB3B81CDC653B005AB1D3 /* RegisterViewController.m */,
+				0169FDF91CDE4D4C00201130 /* RegisterTableViewCell.h */,
+				0169FDFA1CDE4D4C00201130 /* RegisterTableViewCell.m */,
 				01CB83D11CDC6C59003BC716 /* DonateViewController.h */,
 				01CB83D21CDC6C59003BC716 /* DonateViewController.m */,
 				01CB83D41CDC6EC8003BC716 /* AboutViewController.h */,
@@ -523,6 +528,7 @@
 				015334DF1CB8B2DF00E3D2F1 /* CalendarTableViewCell.m in Sources */,
 				018EF45E1CC761EE00E712BC /* FaceppInfo.m in Sources */,
 				017DB3B61CDC6208005AB1D3 /* TranslucentViewController.m in Sources */,
+				0169FDFB1CDE4D4C00201130 /* RegisterTableViewCell.m in Sources */,
 				01BF4B441CD7826A00FEDFCE /* TimelineTableViewController.m in Sources */,
 				01E29C4D1CB88F4600DA815B /* WelcomeViewController.m in Sources */,
 				015324EB1CD8BE0100272D03 /* UserTableViewController.m in Sources */,

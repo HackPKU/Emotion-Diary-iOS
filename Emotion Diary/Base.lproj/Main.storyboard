@@ -393,9 +393,7 @@
                         <rightBarButtonItems>
                             <barButtonItem image="用户" id="zKH-0y-tUz">
                                 <connections>
-                                    <segue destination="XyJ-QZ-daG" kind="popoverPresentation" identifier="userCenter" popoverAnchorBarButtonItem="zKH-0y-tUz" id="6e0-4y-kqV">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
+                                    <segue destination="XyJ-QZ-daG" kind="presentation" identifier="userCenter" modalPresentationStyle="formSheet" id="6e0-4y-kqV"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem image="时间线" id="yoD-Dk-UKE">
@@ -904,7 +902,7 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rdl-f1-8pr" customClass="ZYBannerView">
                                                     <rect key="frame" x="30" y="28" width="540" height="194"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="shouldLoop" value="YES"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="showFooter" value="NO"/>
@@ -1046,8 +1044,8 @@
         <image name="用户" width="25" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="e3d-0X-6Ej"/>
         <segue reference="MEH-Jc-QhM"/>
-        <segue reference="yXh-yJ-FIl"/>
+        <segue reference="e3d-0X-6Ej"/>
+        <segue reference="ygb-bb-gXM"/>
     </inferredMetricsTieBreakers>
 </document>

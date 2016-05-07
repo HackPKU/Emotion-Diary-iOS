@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TranslucentViewController : UIViewController <UITextViewDelegate>
+@interface TranslucentViewController : UIViewController <UITextFieldDelegate>
 
 @end

@@ -16,10 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    for (UIView *view in @[_textUsername, _textPassword, _buttonLogin]) {
-        view.layer.cornerRadius = 5.0;
-    }
+    _buttonLogin.layer.cornerRadius = 5.0;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChange:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChange:) name:UIKeyboardDidChangeFrameNotification object:nil];

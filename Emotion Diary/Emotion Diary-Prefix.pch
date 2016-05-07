@@ -18,6 +18,8 @@
 #warning "This project uses features only available in iOS SDK 8.0 and later."
 #endif
 
+// #undef DEBUG // 取消此行注释以禁止 Debug 模式
+
 #ifdef __OBJC__
 
 #import <UIKit/UIKit.h>

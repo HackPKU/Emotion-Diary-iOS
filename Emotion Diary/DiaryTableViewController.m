@@ -34,9 +34,7 @@
         diary = (EmotionDiary *)data;
         [self updateDiaryView];
     }];
-    
-    // TODO: Image count to 0 after 3D Touch
-    
+        
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     

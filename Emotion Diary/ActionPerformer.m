@@ -10,7 +10,7 @@
 #import "AFNetworking.h"
 #import "FaceppAPI.h"
 
-#define LOCALHOST YES
+#define LOCALHOST
 
 @implementation ActionPerformer
 
@@ -19,9 +19,9 @@
 + (void)postWithDictionary:(NSDictionary * _Nullable)dictionary toUrl:(NSString * _Nonnull)url andBlock:(ActionPerformerResultBlock)block {
     NSString *fullUrl = [NSString stringWithFormat:@"http://%@%@", SERVER_URL, url];
 #ifdef DEBUG
-    if (LOCALHOST) {
-        fullUrl = [NSString stringWithFormat:@"http://localhost/~Frank/Emotion-Diary-Web%@", url];
-    }
+#ifdef LOCALHOST
+    fullUrl = [NSString stringWithFormat:@"http://localhost/~Frank/Emotion-Diary-Web%@", url];
+#endif
 #endif
     
     NSMutableDictionary *request = [dictionary mutableCopy];
@@ -200,7 +200,7 @@
             }
             NSDictionary *dictDetect = data;
             if ([dictDetect[@"face"] count] == 0) {
-                block(NO, @"没有检测到人脸，您是否离镜头太远了？", nil);
+                block(NO, @"没有检测到人脸\n您是否离镜头太近或太远了？", nil);
                 return;
             }
     #ifdef DEBUG
@@ -247,7 +247,7 @@
             }
             NSDictionary *dictDetect = data;
             if ([dictDetect[@"face"] count] == 0) {
-                block(NO, @"没有检测到人脸，您是否离镜头太远了？", nil);
+                block(NO, @"没有检测到人脸\n您是否离镜头太近或太远了？", nil);
                 return;
             }
             FaceppResult *verifyResult = [[FaceppAPI recognition] verifyWithFaceId:dictDetect[@"face"][0][@"face_id"] andPersonId:personID orPersonName:nil async:NO];
@@ -257,7 +257,9 @@
                     return;
                 }
                 NSDictionary *dictVerify = data;
-                if ([dictVerify[@"is_same_person"] boolValue]) {
+                // Face++验证比较严格，结果不是一个人时取 75% 的置信度阈值
+                // TODO: 找到更精确的阈值
+                if ([dictVerify[@"is_same_person"] boolValue] || (![dictVerify[@"is_same_person"] boolValue] && [dictVerify[@"confidence"] floatValue] < 75.0)) {
                     block(YES, nil, @{@"emotion": dictDetect[@"face"][0][@"attribute"][@"smiling"][@"value"]});
                     // Train the person with new face
                     FaceppResult *addResult = [[FaceppAPI person] addFaceWithPersonName:nil orPersonId:personID andFaceId:@[dictDetect[@"face"][0][@"face_id"]]];

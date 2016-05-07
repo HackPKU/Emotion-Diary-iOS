@@ -28,6 +28,7 @@
 }
 
 - (IBAction)openWebsite:(id)sender {
+    // TODO: Use SFSafariViewController
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@", SERVER_URL]]];
 }
 

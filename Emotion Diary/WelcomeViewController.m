@@ -12,7 +12,9 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <LocalAuthentication/LocalAuthentication.h>
 
+#ifdef DEBUG
 #define DEBUG_IMAGE [UIImage imageNamed:@"MyFace1"]
+#endif
 
 @interface WelcomeViewController ()
 
@@ -31,8 +33,8 @@
     }
     shouldStopAnimate = NO;
     emotion = NO_EMOTION;
-    
-#ifdef DEBUG
+        
+#ifdef DEBUG_IMAGE
     [self setUnlocked:YES];
     selfie = DEBUG_IMAGE;
 #else
@@ -97,10 +99,9 @@
 }
 
 - (void)directUnlock {
-    if (![[Utilities getCurrentViewController] isKindOfClass:self.class] || hasUnkocked) {
-        return;
+    if ([[Utilities getCurrentViewController] isKindOfClass:self.class] && !hasUnkocked) {
+        [self takePicture:nil];
     }
-    [self takePicture:nil];
 }
 
 - (IBAction)takePicture:(id)sender {
@@ -121,7 +122,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     selfie = [info objectForKey:UIImagePickerControllerEditedImage];
     selfie = [Utilities normalizedImage:selfie];
-#ifdef DEBUG
+#ifdef DEBUG_IMAGE
     selfie = DEBUG_IMAGE;
 #endif
     [picker dismissViewControllerAnimated:YES completion:^{
@@ -185,20 +186,21 @@
 }
 
 - (void)unlockWithTouchID {
-    [[LAContext new] evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:@"使用 Touch ID 解锁心情日记" reply:^(BOOL success, NSError * _Nullable error) {
+    [[LAContext new] evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:@"使用 Touch ID 解锁情绪日记" reply:^(BOOL success, NSError * _Nullable error) {
         dispatch_sync(dispatch_get_main_queue(), ^{
             if (success) {
                 [self setUnlocked:YES];
             }else {
                 [KVNProgress showErrorWithStatus:@"Touch ID 认证失败"];
                 [self setUnlocked:NO];
+                hasUnkocked = YES; // 暂时设置此变量以防止自动自拍
             }
         });
     }];
 }
 
 - (void)unlockWithPassword {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"输入密码" message:@"使用您的账号密码解锁心情日记" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"输入密码" message:@"使用您的账号密码解锁情绪日记" preferredStyle:UIAlertControllerStyleAlert];
     [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = @"密码";
         textField.secureTextEntry = YES;

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "TranslucentViewController.h"
 
-@interface RegisterViewController : TranslucentViewController
+@interface RegisterViewController : TranslucentViewController <UITableViewDelegate, UITableViewDataSource>
+
+@property (strong, nonatomic) IBOutlet UITableView *tableRegister;
 
 @end
