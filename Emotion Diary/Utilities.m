@@ -23,6 +23,12 @@
     return outPutStr;
 }
 
++ (BOOL)isValidateEmail:(NSString *)email {
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSRange range = [email rangeOfString:emailRegex options:NSRegularExpressionSearch];
+    return (range.location != NSNotFound);
+}
+
 + (UIViewController *)getCurrentViewController {
     return [Utilities getCurrentViewControllerWhileClass:nil appearsWithTime:0 andCanBeTop:YES];
 }
@@ -47,6 +53,17 @@
     return nil;
 }
 
++ (UIImage *)createImageWithColor:(UIColor *)color {
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return theImage;
+}
+
 + (UIImage *)normalizedImage:(UIImage *)image {
     if (image.imageOrientation == UIImageOrientationUp) {
         return image;
@@ -59,6 +76,9 @@
 }
 
 + (UIImage *)resizeImage:(UIImage *)image toMaxWidthAndHeight:(NSInteger)max {
+    if (image.size.width < max && image.size.height < max) {
+        return image;
+    }
     CGSize size;
     if (image.size.width > image.size.height) {
         size = CGSizeMake(max, (NSInteger)(max * image.size.height / image.size.width));

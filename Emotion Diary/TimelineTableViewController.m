@@ -46,7 +46,7 @@
     if (totalNumber > 0) {
         return 155.0;
     }else {
-        return 60.0;
+        return 100.0;
     }
 }
 
@@ -109,7 +109,7 @@
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"viewDiary"]) {
         DiaryTableViewController *dest = [[[segue destinationViewController] viewControllers] firstObject];
-        dest.diary = ((CalendarTableViewCell *)sender).savedDiary;
+        dest.simpleDiary = ((CalendarTableViewCell *)sender).savedDiary;
     }
 }
 

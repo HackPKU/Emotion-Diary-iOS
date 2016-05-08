@@ -322,14 +322,14 @@
 - (IBAction)done:(id)sender {
     EmotionDiary *diary = [[EmotionDiary alloc] initWithEmotion:(int)_sliderEmotion.value selfie:_selfie images:images tags:nil text:_textRecord.text placeName:nil placeLong:0.0 placeLat:0.0 weather:nil];
     [KVNProgress showWithStatus:@"日记保存中"];
-    [diary writeToDiskWithBlock:^(BOOL success) {
+    [diary writeToDiskWithBlock:^(BOOL success, NSObject * _Nullable data) {
         if (success) {
             [KVNProgress showSuccessWithStatus:@"日记保存成功"];
         }else {
             [KVNProgress showErrorWithStatus:@"日记保存失败"];
         }
         [self.navigationController dismissViewControllerAnimated:YES completion:^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"enterMain" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:ENTER_MAIN_VIEW_NOTIFICATION object:nil];
         }];
     }];
 }

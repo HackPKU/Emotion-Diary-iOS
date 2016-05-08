@@ -17,9 +17,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _imageSelfie.layer.cornerRadius = _imageSelfie.frame.size.width / 2;
-    _diary = [_diary fullVersion];
-    [self updateDiaryView];
+    _cycleImageView.layer.shadowColor = [UIColor blackColor].CGColor;
+    _cycleImageView.layer.shadowOffset = CGSizeZero;
+    _cycleImageView.layer.shadowOpacity = 0.75;
+    _cycleImageView.layer.shadowRadius = 6.0;
     
+    if (!_simpleDiary.hasLocalVersion) {
+        [KVNProgress showWithStatus:@"加载中"];
+    }
+    [_simpleDiary getFullVersionWithBlock:^(BOOL success, NSObject * _Nullable data) {
+        if (!success) {
+            [KVNProgress showErrorWithStatus:@"日记加载错误"];
+            return;
+        }
+        [KVNProgress dismiss];
+        diary = (EmotionDiary *)data;
+        [self updateDiaryView];
+    }];
+        
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -43,13 +58,14 @@
 }
 
 - (void)updateDiaryView {
-    _imageSelfie.image = _diary.imageSelfie ? _diary.imageSelfie : PLACEHOLDER_IMAGE;
-    _imageFace.image = [ActionPerformer getFaceImageByEmotion:_diary.emotion];
-    _labelEmotion.text = [NSString stringWithFormat:@"心情指数 %d", _diary.emotion];
+    _imageSelfie.image = diary.imageSelfie ? diary.imageSelfie : PLACEHOLDER_IMAGE;
+    _imageFace.image = [ActionPerformer getFaceImageByEmotion:diary.emotion];
+    _labelEmotion.text = [NSString stringWithFormat:@"心情指数 %d", diary.emotion];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"M月d日 HH:mm"];
-    _labelDateAndTime.text = [formatter stringFromDate:_diary.createTime];
-    _textDetail.text = _diary.text;
+    _labelDateAndTime.text = [formatter stringFromDate:diary.createTime];
+    _textDetail.text = diary.text;
+    _cycleImageView.pageControl.hidden = (diary.imageImages.count <= 1);
     [_cycleImageView reloadData];
 }
 
@@ -116,11 +132,12 @@
 #pragma mark - ZYBannerView data source
 
 - (NSInteger)numberOfItemsInBanner:(ZYBannerView *)banner {
-    return _diary.imageImages.count;
+    return diary.imageImages.count;
 }
 
 - (UIView *)banner:(ZYBannerView *)banner viewForItemAtIndex:(NSInteger)index {
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:_diary.imageImages[index]];
+    UIImage *image = diary.imageImages[index];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     imageView.contentMode = UIViewContentModeScaleAspectFill;
     return imageView;
 }
@@ -138,12 +155,12 @@
 #pragma mark - MWPhotoBrowser delegate
 
 - (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
-    return _diary.imageImages.count;
+    return diary.imageImages.count;
 }
 
 - (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
-    if (index < _diary.imageImages.count) {
-        return [MWPhoto photoWithImage:_diary.imageImages[index]];
+    if (index < diary.imageImages.count) {
+        return [MWPhoto photoWithImage:diary.imageImages[index]];
     }
     return nil;
 }

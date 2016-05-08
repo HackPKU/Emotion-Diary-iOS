@@ -81,7 +81,7 @@
 - (void)writeToDiskWithBlock:(EmotionDiaryResultBlock)block {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if (![Utilities checkAndCreatePath:SELFIE_PATH] || ![Utilities checkAndCreatePath:IMAGES_PATH] || ![Utilities checkAndCreatePath:DIARY_PATH]) {
-            block(NO);
+            block(NO, nil);
         }
         
         if (_imageSelfie) {
@@ -90,7 +90,7 @@
                 selfieName = [NSString stringWithFormat:@"%d", arc4random() % (int)1e8]; // Random number as file name
             }while ([Utilities fileExistsAtPath:SELFIE_PATH withName:selfieName]);
             if (![Utilities createFile:UIImageJPEGRepresentation(_imageSelfie, 0.3) atPath:SELFIE_PATH withName:selfieName]) {
-                block(NO);
+                block(NO, nil);
             }
             _selfie = selfieName;
         }
@@ -102,7 +102,7 @@
                 imageName = [NSString stringWithFormat:@"%d", arc4random() % (int)1e8]; // Random number as file name
             }while ([Utilities fileExistsAtPath:IMAGES_PATH withName:imageName]);
             if (![Utilities createFile:UIImageJPEGRepresentation(image, 0.3) atPath:IMAGES_PATH withName:imageName]) {
-                block(NO);
+                block(NO, nil);
             }
             [imageNames addObject:imageName];
         }
@@ -114,23 +114,23 @@
         [archiver finishEncoding];
         NSString *fileName = [NSString stringWithFormat:@"%f", [_createTime timeIntervalSince1970]]; // Time as file name
         if (![Utilities createFile:data atPath:DIARY_PATH withName:fileName]) {
-            block(NO);
+            block(NO, nil);
         }
         // Save to NSUserDefaults
         if ([[EmotionDiaryManager sharedManager] saveLocalDiary:self]) {
             _hasLocalVersion = YES;
-            block(YES);
+            block(YES, nil);
         }else {
-            block(NO);
+            block(NO, nil);
         }
     });
 }
 
-- (EmotionDiary * _Nullable)fullVersion {
+- (void)getFullVersionWithBlock:(EmotionDiaryResultBlock)block {
     NSString *fileName = [NSString stringWithFormat:@"%f", [_createTime timeIntervalSince1970]];
     NSData *diaryData = [Utilities getFileAtPath:DIARY_PATH withName:fileName];
     if (!diaryData) {
-        return nil;
+        block(NO, nil);
     }
     NSKeyedUnarchiver *unArchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:diaryData];
     EmotionDiary *fullDiary = [unArchiver decodeObjectOfClass:[self class] forKey:@"DIARY"];
@@ -145,7 +145,7 @@
         }
         fullDiary.imageImages = imagesArray;
     }
-    return fullDiary;
+    block(YES, fullDiary);
 }
 
 @end

@@ -21,6 +21,13 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)MD5:(NSString *)string;
 
 /**
+ * Check whether the string is a valid Email
+ * @param email The string to be checked
+ * @return Verification result
+ */
++ (BOOL)isValidateEmail:(NSString *)email;
+
+/**
  * Get the view controller that the application is presenting
  * @return Current view controller
  */
@@ -34,6 +41,13 @@ NS_ASSUME_NONNULL_BEGIN
  * @return Current view controller, nil if the view controller does not satisfy the contraints
  */
 + (UIViewController * _Nullable)getCurrentViewControllerWhileClass:(Class _Nullable)class appearsWithTime:(int)appearTime andCanBeTop:(BOOL)canBeTop;
+
+/**
+ * Create an UIImage with the given color
+ * @param color The color to create the image
+ * @return UIImage with a 1.0f × 1.0f size
+ */
++ (UIImage *)createImageWithColor:(UIColor *)color;
 
 /**
  * Normalize the image to the correct position

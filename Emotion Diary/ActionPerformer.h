@@ -10,6 +10,16 @@
 #import <Foundation/Foundation.h>
 #import "EmotionDiary.h"
 
+#define USER_ID @"userID"
+#define USER_NAME @"userName"
+#define USER_INFO @"userInfo"
+#define TOKEN @"token"
+#define PERSON_ID @"personID"
+
+#define ENTER_MAIN_VIEW_NOTIFICATION @"EnterMainViewNotification"
+#define LOGIN_COMPLETED_NOTIFICATION @"LoginCompletedNotification"
+#define REGISTER_COMPLETED_NOTIFOCATION @"RegisterCompletedNotification"
+
 typedef NS_ENUM(NSInteger, EmotionDiaryImageType) {
     EmotionDiaryImageTypeIcon,
     EmotionDiaryImageTypeSelfie,
@@ -28,13 +38,13 @@ typedef void (^ActionPerformerResultBlock)(BOOL success, NSString * _Nullable me
 
 + (void)loginWithName:(NSString *)name password:(NSString *)password andBlock:(ActionPerformerResultBlock)block;
 
-+ (void)loginWithEmail:(NSString *)email password:(NSString *)password andBlock:(ActionPerformerResultBlock)block;
-
 + (void)logoutWithBlock:(ActionPerformerResultBlock)block;
 
 + (void)viewUserWithName:(NSString *)name andBlock:(ActionPerformerResultBlock)block;
 
 + (void)editUserWithName:(NSString *)name password:(NSString *)password newPassword:(NSString * _Nullable)newPassword sex:(NSString * _Nullable)sex email:(NSString * _Nullable)email icon:(NSString * _Nullable)icon andBlock:(ActionPerformerResultBlock)block;
+
++ (void)editPersonIDWithPassword:(NSString *)password personID:(NSString *)personID andBlock:(ActionPerformerResultBlock)block;
 
 + (void)postDiary:(EmotionDiary *)diary andBlock:(ActionPerformerResultBlock)block;
 
@@ -56,7 +66,7 @@ typedef void (^ActionPerformerResultBlock)(BOOL success, NSString * _Nullable me
 
 + (void)verifyFaceWithImage:(UIImage *)image andBlock:(ActionPerformerResultBlock)block;
 
-+ (void)deleteFaceWithBlock:(ActionPerformerResultBlock)block;
++ (void)deletePersonWithBlock:(ActionPerformerResultBlock)block;
 
 #pragma mark - Local functions
 

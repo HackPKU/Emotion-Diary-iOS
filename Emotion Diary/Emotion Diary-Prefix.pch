@@ -18,6 +18,8 @@
 #warning "This project uses features only available in iOS SDK 8.0 and later."
 #endif
 
+// #undef DEBUG // 取消此行注释以禁止 Debug 模式
+
 #ifdef __OBJC__
 
 #import <UIKit/UIKit.h>
@@ -29,9 +31,12 @@
 #import "KVNProgress.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
+#define APP_STORE_ID @""
+#define SERVER_URL @"www.emotiondiary.date"
+#define FEEDBACK_EMAIL @[@"frank@fanzhikang.cn"]
+#define PAY_URL @"https://qr.alipay.com/aphqru9a8eqglsvk4c"
 #define APP_COLOR [UIColor colorWithRed:255.0/255.0 green:190.0/255.0 blue:60.0/255.0 alpha:1.0]
 #define PLACEHOLDER_IMAGE [UIImage imageNamed:@"placeholder"]
-#define SERVER_URL @"www.emotiondiary.date"
 
 #endif
 

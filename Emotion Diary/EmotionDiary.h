@@ -23,7 +23,6 @@
 #define WEATHER @"weather"
 #define CREATE_TIME @"createTime"
 
-#define USER_ID @"userID"
 #define DIARY_ID @"diaryID"
 #define HAS_IMAGE @"hasImage"
 #define HAS_TAG @"hasTag"
@@ -35,7 +34,7 @@
 
 #define NO_EMOTION -1
 
-typedef void (^EmotionDiaryResultBlock)(BOOL success);
+typedef void (^EmotionDiaryResultBlock)(BOOL success, NSObject * _Nullable data);
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -67,11 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)writeToDiskWithBlock:(EmotionDiaryResultBlock)block;
 
-/**
- * Get the detailed version of a diary and load the images from disk
- * @return Full version Emotion Diary
- */
-- (EmotionDiary * _Nullable)fullVersion;
+- (void)getFullVersionWithBlock:(EmotionDiaryResultBlock)block;
 
 NS_ASSUME_NONNULL_END
 
