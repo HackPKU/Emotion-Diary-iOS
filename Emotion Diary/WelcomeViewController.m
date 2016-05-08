@@ -24,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enterMain) name:@"enterMain" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enterMain) name:ENTER_MAIN_VIEW_NOTIFICATION object:nil];
     for (UIButton *button in @[_buttonRecord, _buttonProceed]) {
         button.layer.cornerRadius = 5.0;
         button.layer.borderWidth = 1.0;
@@ -113,14 +113,13 @@
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
     imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
-    imagePicker.allowsEditing = YES;
     imagePicker.delegate = self;
     [self presentViewController:imagePicker animated:YES completion:nil];
     shouldStopAnimate = YES;
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    selfie = [info objectForKey:UIImagePickerControllerEditedImage];
+    selfie = [info objectForKey:UIImagePickerControllerOriginalImage];
     selfie = [Utilities normalizedImage:selfie];
 #ifdef DEBUG_IMAGE
     selfie = DEBUG_IMAGE;

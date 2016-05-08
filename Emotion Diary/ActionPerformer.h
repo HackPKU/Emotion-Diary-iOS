@@ -16,7 +16,9 @@
 #define TOKEN @"token"
 #define PERSON_ID @"personID"
 
-#define USER_CHANGED_NOTIFICATION @"UserChangedNotification"
+#define ENTER_MAIN_VIEW_NOTIFICATION @"EnterMainViewNotification"
+#define LOGIN_COMPLETED_NOTIFICATION @"LoginCompletedNotification"
+#define REGISTER_COMPLETED_NOTIFOCATION @"RegisterCompletedNotification"
 
 typedef NS_ENUM(NSInteger, EmotionDiaryImageType) {
     EmotionDiaryImageTypeIcon,

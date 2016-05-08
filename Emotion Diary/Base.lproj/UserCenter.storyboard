@@ -291,7 +291,7 @@
                                                         <constraint firstAttribute="width" constant="250" id="7z6-qb-gaT"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="alphabet" secureTextEntry="YES"/>
                                                     <connections>
                                                         <action selector="didEndOnExit:" destination="WGS-lW-y9x" eventType="editingDidEndOnExit" id="g0O-yb-dbe"/>
                                                         <outlet property="delegate" destination="WGS-lW-y9x" id="0A5-Md-mkN"/>

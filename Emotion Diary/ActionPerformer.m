@@ -255,7 +255,7 @@
             block(NO, @"您还未注册人脸", nil);
             return;
         }
-        FaceppResult *detectResult = [[FaceppAPI detection] detectWithURL:nil orImageData:[Utilities compressImage:image toSize:100] mode:FaceppDetectionModeOneFace];
+        FaceppResult *detectResult = [[FaceppAPI detection] detectWithURL:nil orImageData:[Utilities compressImage:image toSize:50] mode:FaceppDetectionModeOneFace];
         [ActionPerformer processFaceppResult:detectResult andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
             if (!success) {
                 [ActionPerformer processFaceppResult:detectResult andBlock:block];

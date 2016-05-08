@@ -329,7 +329,7 @@
             [KVNProgress showErrorWithStatus:@"日记保存失败"];
         }
         [self.navigationController dismissViewControllerAnimated:YES completion:^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"enterMain" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:ENTER_MAIN_VIEW_NOTIFICATION object:nil];
         }];
     }];
 }
