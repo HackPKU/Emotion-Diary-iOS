@@ -12,5 +12,6 @@
 @interface RegisterViewController : TranslucentViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableRegister;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *constraintBottom;
 
 @end

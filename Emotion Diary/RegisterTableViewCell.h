@@ -11,6 +11,7 @@
 @interface RegisterTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UITextField *textContent;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *segmentSex;
 @property (strong, nonatomic) IBOutlet UIButton *buttonRegister;
 
 @end

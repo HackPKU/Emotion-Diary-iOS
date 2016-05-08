@@ -139,7 +139,7 @@
 - (void)analyzeSelfie:(UIImage *)image {
     [KVNProgress showWithStatus:@"分析中"];
     NSString *successMessage;
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:FACE_ID] length] == 0) {
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID] length] == 0) {
         successMessage = @"人脸注册成功";
     }else {
         successMessage = @"人脸解锁成功";
@@ -157,7 +157,7 @@
         emotion = [data[@"emotion"] intValue];
         [KVNProgress showSuccessWithStatus:successMessage];
     };
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:FACE_ID] length] == 0) {
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID] length] == 0) {
         [ActionPerformer registerFaceWithImage:image andBlock:block];
     }else {
         [ActionPerformer verifyFaceWithImage:image andBlock:block];

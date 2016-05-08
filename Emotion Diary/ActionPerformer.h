@@ -14,7 +14,7 @@
 #define USER_NAME @"userName"
 #define USER_INFO @"userInfo"
 #define TOKEN @"token"
-#define FACE_ID @"faceID"
+#define PERSON_ID @"personID"
 
 #define USER_CHANGED_NOTIFICATION @"UserChangedNotification"
 
@@ -42,6 +42,8 @@ typedef void (^ActionPerformerResultBlock)(BOOL success, NSString * _Nullable me
 
 + (void)editUserWithName:(NSString *)name password:(NSString *)password newPassword:(NSString * _Nullable)newPassword sex:(NSString * _Nullable)sex email:(NSString * _Nullable)email icon:(NSString * _Nullable)icon andBlock:(ActionPerformerResultBlock)block;
 
++ (void)editPersonIDWithPassword:(NSString *)password personID:(NSString *)personID andBlock:(ActionPerformerResultBlock)block;
+
 + (void)postDiary:(EmotionDiary *)diary andBlock:(ActionPerformerResultBlock)block;
 
 + (void)viewDiaryWithDiaryID:(int)diaryID shareKey:(NSString * _Nullable)shareKey andBlock:(ActionPerformerResultBlock)block;
@@ -62,7 +64,7 @@ typedef void (^ActionPerformerResultBlock)(BOOL success, NSString * _Nullable me
 
 + (void)verifyFaceWithImage:(UIImage *)image andBlock:(ActionPerformerResultBlock)block;
 
-+ (void)deleteFaceWithBlock:(ActionPerformerResultBlock)block;
++ (void)deletePersonWithBlock:(ActionPerformerResultBlock)block;
 
 #pragma mark - Local functions
 
