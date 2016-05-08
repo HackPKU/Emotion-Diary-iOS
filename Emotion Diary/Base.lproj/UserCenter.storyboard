@@ -511,6 +511,9 @@
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <connections>
+                                                                    <action selector="didEndOnExit:" destination="X5L-kl-Ocw" eventType="editingDidEndOnExit" id="EIY-ka-NlJ"/>
+                                                                </connections>
                                                             </textField>
                                                         </subviews>
                                                         <constraints>

@@ -15,7 +15,7 @@
     BOOL hasUnkocked;
 }
 
-@property (strong, nonatomic) IBOutlet UIButton *buttonCamera;
+@property (strong, nonatomic) IBOutlet UIButton *buttonUnlock;
 @property (strong, nonatomic) IBOutlet UILabel *labelHint;
 @property (strong, nonatomic) IBOutlet UIButton *buttonRecord;
 @property (strong, nonatomic) IBOutlet UIButton *buttonProceed;

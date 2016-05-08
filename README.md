@@ -27,6 +27,7 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 * 2016/04/25 完成功能构思和UI、图标概念设计
 * 2016/04/29 完成服务器 API 的编写
 * 2016/05/03 完成本地日记 App 的功能
+* 2016/05/09 完成注册和登录功能
 
 ## 重要类说明
 

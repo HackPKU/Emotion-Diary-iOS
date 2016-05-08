@@ -93,7 +93,7 @@
             cell.textContent.secureTextEntry = YES;
             cell.textContent.keyboardType = UIKeyboardTypeASCIICapable;
         }else if (indexPath.row == EMAIL_INDEX) {
-            cell.textContent.placeholder = @"邮箱，选填";
+            cell.textContent.placeholder = @"邮箱，选填，找回密码时使用";
             cell.textContent.secureTextEntry = NO;
             cell.textContent.keyboardType = UIKeyboardTypeEmailAddress;
         }
@@ -114,6 +114,16 @@
         return cell.segmentSex;
     }
     return nil;
+}
+
+- (IBAction)didEndOnExit:(id)sender {
+    if (sender == [self getContentAtIndex:USER_NAME_INDEX]) {
+        [[self getContentAtIndex:PASSWORD_INDEX] becomeFirstResponder];
+    }else if (sender == [self getContentAtIndex:PASSWORD_INDEX]) {
+        [[self getContentAtIndex:PASSWORD_SURE_INDEX] becomeFirstResponder];
+    }else if (sender == [self getContentAtIndex:PASSWORD_SURE_INDEX]) {
+        [[self getContentAtIndex:EMAIL_INDEX] becomeFirstResponder];
+    }
 }
 
 - (IBAction)register:(id)sender {

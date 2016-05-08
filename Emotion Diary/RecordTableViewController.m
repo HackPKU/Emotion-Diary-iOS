@@ -30,8 +30,6 @@
         _emotion = 50;
     }
     _sliderEmotion.value = _emotion;
-    _sliderEmotion.userInteractionEnabled = _selfie ? NO : YES;
-    _sliderEmotion.alpha = _selfie ? 0.0 : 1.0;
     [self updateEmotion];
     
     _textRecord.scrollsToTop = NO;
@@ -53,6 +51,10 @@
     UIImage *displaySelfie = _selfie;
     if (!displaySelfie) {
         displaySelfie = PLACEHOLDER_IMAGE;
+    }else {
+#ifndef DEBUG
+        _buttonCamera.hidden = YES;
+#endif
     }
     _imageSelfie.image = displaySelfie;
     _imageSelfieBlurred.image = displaySelfie;
@@ -143,20 +145,29 @@
 
 #pragma mark - Emotion adjust
 
-- (IBAction)showEmotionSlider:(id)sender {
-    _sliderEmotion.userInteractionEnabled = !_sliderEmotion.userInteractionEnabled;
-    [UIView animateWithDuration:0.3 animations:^{
-        _sliderEmotion.alpha = 1 - _sliderEmotion.alpha;
-    }];
-}
-
 - (IBAction)emotionChanged:(UISlider *)sender {
     _emotion = (int)sender.value;
     [self updateEmotion];
 }
 
 - (void)updateEmotion {
-    [_buttonFace setImage:[ActionPerformer getFaceImageByEmotion:_emotion] forState:UIControlStateNormal];
+    _imageFace.image = [ActionPerformer getFaceImageByEmotion:_emotion];
+}
+
+#pragma mark - Retake photo
+
+- (IBAction)retakePhoto:(id)sender {
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        imagePicker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+    }else {
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
+    imagePicker.delegate = self;
+    isTakingSelfie = YES;
+    [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
 #pragma mark - Image picker collection view
@@ -263,7 +274,19 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    [self addImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
+    if (isTakingSelfie) {
+        _selfie = [Utilities normalizedImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
+        [self setSelfieImage];
+    }else {
+        [self addImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
+    }
+    isTakingSelfie = NO;
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    isTakingSelfie = NO;
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)presentImagePicker:(UIButton *)sender {

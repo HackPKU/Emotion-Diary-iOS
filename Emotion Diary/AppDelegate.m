@@ -39,8 +39,10 @@
     UIViewController *view = [Utilities getCurrentViewControllerWhileClass:[WelcomeViewController class] appearsWithTime:1 andCanBeTop:NO];
     if (view) {
         WelcomeViewController *dest = [view.storyboard instantiateViewControllerWithIdentifier:@"Welcome"];
-        dest.shouldDismissAfterUnlock = YES;
-        [view presentViewController:dest animated:YES completion:nil];
+        if (dest) {
+            dest.shouldDismissAfterUnlock = YES;
+            [view presentViewController:dest animated:YES completion:nil];
+        }
     }
     
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
