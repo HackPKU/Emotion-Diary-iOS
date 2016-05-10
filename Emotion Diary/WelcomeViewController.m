@@ -9,6 +9,7 @@
 #import "WelcomeViewController.h"
 #import "CalendarViewController.h"
 #import "RecordTableViewController.h"
+#import "UserTableViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <LocalAuthentication/LocalAuthentication.h>
 
@@ -105,12 +106,22 @@
 }
 
 - (IBAction)unlock:(id)sender {
-    [self unlockWithSelfie];
+    switch ([[[NSUserDefaults standardUserDefaults] objectForKey:UNLOCK_TYPE] integerValue]) {
+        case EmotionDiaryUnlockTypeSelfie:
+            [self unlockWithSelfie];
+            break;
+        case EmotionDiaryUnlockTypeTouchID:
+            [self unlockWithTouchID];
+            break;
+        default:
+            [self unlockWithSelfie];
+            break;
+    }
     shouldStopAnimate = YES;
 }
 
 - (void)showWarning {
-    UIAlertController *action = [UIAlertController alertControllerWithTitle:@"警告" message:@"您必须通过认证才能解锁日记" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *action = [UIAlertController alertControllerWithTitle:@"抱歉" message:@"您必须通过认证才能解锁日记" preferredStyle:UIAlertControllerStyleAlert];
     [action addAction:[UIAlertAction actionWithTitle:@"自拍解锁" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self unlockWithSelfie];
     }]];
@@ -161,7 +172,7 @@
 }
 
 - (void)analyzeSelfie:(UIImage *)image {
-    [KVNProgress showWithStatus:@"分析中"];
+    [KVNProgress showWithStatus:@"面部识别中"];
     NSString *successMessage;
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID] length] == 0) {
         successMessage = @"人脸注册成功";
@@ -209,12 +220,13 @@
     [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = @"密码";
         textField.secureTextEntry = YES;
+        textField.keyboardType = UIKeyboardTypeASCIICapable;
     }];
     [alert addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [KVNProgress showWithStatus:@"验证中"];
         [ActionPerformer loginWithName:[[NSUserDefaults standardUserDefaults] objectForKey:USER_NAME] password:alert.textFields[0].text andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
             if (success) {
-                [KVNProgress dismiss];
+                [KVNProgress showSuccessWithStatus:@"密码验证成功"];
                 [self setUnlocked:YES];
             }else {
                 [KVNProgress showErrorWithStatus:message completion:^{
@@ -253,8 +265,11 @@
 
 - (IBAction)unwindToWelcomeView:(UIStoryboardSegue *)segue {
     if ([segue.sourceViewController isKindOfClass:[CalendarViewController class]]) {
+        selfie = nil;
+        emotion = NO_EMOTION;
         [self setUnlocked:NO];
-        [self performSelector:@selector(unlock:) withObject:nil afterDelay:0.5];
+        shouldStopAnimate = YES;
+        [self performSelector:@selector(unlockWithSelfie) withObject:nil afterDelay:0.5];
     }
 }
 

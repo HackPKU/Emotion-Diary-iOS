@@ -82,14 +82,16 @@
             [KVNProgress showErrorWithStatus:message];
             return;
         }
+        [[NSUserDefaults standardUserDefaults] setValuesForKeysWithDictionary:@{USER_ID : dataLogin[@"userid"], TOKEN: dataLogin[@"token"]}];
         [ActionPerformer viewUserWithName:dataLogin[@"name"] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable dataUserInfo) {
             if (!success) {
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_ID];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:TOKEN];
                 [KVNProgress showErrorWithStatus:message];
                 return;
             }
             [[NSUserDefaults standardUserDefaults] setValuesForKeysWithDictionary:@{USER_ID : dataLogin[@"userid"], TOKEN: dataLogin[@"token"], USER_NAME: dataLogin[@"name"], USER_INFO: dataUserInfo}];
-            // TODO: Handle faceID not match
-            [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_COMPLETED_NOTIFICATION object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:USER_CHANGED_NOTIFICATION object:nil];
             [KVNProgress showSuccessWithStatus:@"登陆成功" completion:^{
                 [self dismissViewControllerAnimated:YES completion:nil];
             }];

@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01110B241CE0520300540608 /* UserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01110B231CE0520300540608 /* UserTableViewCell.m */; };
+		0114C84B1CE2353200ABB188 /* InfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0114C84A1CE2353200ABB188 /* InfoTableViewController.m */; };
 		01360A591CD1174400BB02B0 /* ActionPerformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 01360A581CD1174400BB02B0 /* ActionPerformer.m */; };
 		01360A5C1CD1180A00BB02B0 /* EmotionDiary.m in Sources */ = {isa = PBXBuildFile; fileRef = 01360A5B1CD1180A00BB02B0 /* EmotionDiary.m */; };
 		0148B0A71CB97D0A00E8FC08 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 0148B0A61CB97D0A00E8FC08 /* Utilities.m */; };
-		015324E81CD8BD7700272D03 /* StatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 015324E71CD8BD7700272D03 /* StatTableViewCell.m */; };
 		015324EB1CD8BE0100272D03 /* UserTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 015324EA1CD8BE0100272D03 /* UserTableViewController.m */; };
 		015324F01CD8CF4D00272D03 /* UserCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 015324EE1CD8CF4D00272D03 /* UserCenter.storyboard */; };
 		015324FE1CD9066E00272D03 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 015325001CD9066E00272D03 /* InfoPlist.strings */; };
@@ -73,6 +74,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		01110B221CE0520300540608 /* UserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTableViewCell.h; sourceTree = "<group>"; };
+		01110B231CE0520300540608 /* UserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTableViewCell.m; sourceTree = "<group>"; };
+		0114C8491CE2353200ABB188 /* InfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoTableViewController.h; sourceTree = "<group>"; };
+		0114C84A1CE2353200ABB188 /* InfoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoTableViewController.m; sourceTree = "<group>"; };
 		0115503C1CD24DC6009295F4 /* APIKey+APISecret.sample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "APIKey+APISecret.sample.h"; sourceTree = "<group>"; };
 		01360A571CD1174400BB02B0 /* ActionPerformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionPerformer.h; sourceTree = "<group>"; };
 		01360A581CD1174400BB02B0 /* ActionPerformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionPerformer.m; sourceTree = "<group>"; };
@@ -80,8 +85,6 @@
 		01360A5B1CD1180A00BB02B0 /* EmotionDiary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionDiary.m; sourceTree = "<group>"; };
 		0148B0A51CB97D0A00E8FC08 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		0148B0A61CB97D0A00E8FC08 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
-		015324E61CD8BD7700272D03 /* StatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatTableViewCell.h; sourceTree = "<group>"; };
-		015324E71CD8BD7700272D03 /* StatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatTableViewCell.m; sourceTree = "<group>"; };
 		015324E91CD8BE0100272D03 /* UserTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTableViewController.h; sourceTree = "<group>"; };
 		015324EA1CD8BE0100272D03 /* UserTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTableViewController.m; sourceTree = "<group>"; };
 		015324EF1CD8CF4D00272D03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/UserCenter.storyboard; sourceTree = "<group>"; };
@@ -204,8 +207,10 @@
 				015324EE1CD8CF4D00272D03 /* UserCenter.storyboard */,
 				015324E91CD8BE0100272D03 /* UserTableViewController.h */,
 				015324EA1CD8BE0100272D03 /* UserTableViewController.m */,
-				015324E61CD8BD7700272D03 /* StatTableViewCell.h */,
-				015324E71CD8BD7700272D03 /* StatTableViewCell.m */,
+				01110B221CE0520300540608 /* UserTableViewCell.h */,
+				01110B231CE0520300540608 /* UserTableViewCell.m */,
+				0114C8491CE2353200ABB188 /* InfoTableViewController.h */,
+				0114C84A1CE2353200ABB188 /* InfoTableViewController.m */,
 				017DB3B41CDC6208005AB1D3 /* TranslucentViewController.h */,
 				017DB3B51CDC6208005AB1D3 /* TranslucentViewController.m */,
 				017DB3A91CDB80D4005AB1D3 /* LoginViewController.h */,
@@ -512,7 +517,6 @@
 				018EF45A1CC761EE00E712BC /* FaceppDetection.m in Sources */,
 				018EF45D1CC761EE00E712BC /* FaceppGrouping.m in Sources */,
 				018EF4621CC761EE00E712BC /* FaceppError.m in Sources */,
-				015324E81CD8BD7700272D03 /* StatTableViewCell.m in Sources */,
 				017DB3AB1CDB80D4005AB1D3 /* LoginViewController.m in Sources */,
 				018EF45B1CC761EE00E712BC /* FaceppFaceset.m in Sources */,
 				01B406191CB7FF7500B242D6 /* CalendarViewController.m in Sources */,
@@ -525,11 +529,13 @@
 				018EF4631CC761EE00E712BC /* FaceppResult.m in Sources */,
 				018EF45F1CC761EE00E712BC /* FaceppPerson.m in Sources */,
 				018EF4601CC761EE00E712BC /* FaceppRecognition.m in Sources */,
+				01110B241CE0520300540608 /* UserTableViewCell.m in Sources */,
 				015334DF1CB8B2DF00E3D2F1 /* CalendarTableViewCell.m in Sources */,
 				018EF45E1CC761EE00E712BC /* FaceppInfo.m in Sources */,
 				017DB3B61CDC6208005AB1D3 /* TranslucentViewController.m in Sources */,
 				0169FDFB1CDE4D4C00201130 /* RegisterTableViewCell.m in Sources */,
 				01BF4B441CD7826A00FEDFCE /* TimelineTableViewController.m in Sources */,
+				0114C84B1CE2353200ABB188 /* InfoTableViewController.m in Sources */,
 				01E29C4D1CB88F4600DA815B /* WelcomeViewController.m in Sources */,
 				015324EB1CD8BE0100272D03 /* UserTableViewController.m in Sources */,
 				018EF45C1CC761EE00E712BC /* FaceppGroup.m in Sources */,

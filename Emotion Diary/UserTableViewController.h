@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 
+#define UNLOCK_TYPE @"unlockType"
+
+typedef NS_ENUM(NSInteger, EmotionDiaryUnlockType) {
+    EmotionDiaryUnlockTypeSelfie,
+    EmotionDiaryUnlockTypeTouchID
+};
+
 @interface UserTableViewController : UITableViewController <MFMailComposeViewControllerDelegate>
 
 @end

@@ -53,7 +53,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (totalNumber > 0) {
         CalendarTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"diary" forIndexPath:indexPath];
-        [cell setDiary:[[EmotionDiaryManager sharedManager] getDiaryOfIndex:indexPath.row]];
+        cell.diary = [[EmotionDiaryManager sharedManager] getDiaryOfIndex:indexPath.row];
         return cell;
     }else {
         return [tableView dequeueReusableCellWithIdentifier:@"noDiary" forIndexPath:indexPath];
@@ -109,7 +109,7 @@
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"viewDiary"]) {
         DiaryTableViewController *dest = [[[segue destinationViewController] viewControllers] firstObject];
-        dest.simpleDiary = ((CalendarTableViewCell *)sender).savedDiary;
+        dest.simpleDiary = ((CalendarTableViewCell *)sender).diary;
     }
 }
 

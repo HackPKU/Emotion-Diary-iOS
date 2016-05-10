@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param string The data to be calculated
  * @return MD5 encrypted string
  */
-+ (NSString *)MD5:(NSString *)string;
++ (NSString * _Nullable)MD5:(NSString * _Nullable)string;
 
 /**
  * Check whether the string is a valid Email

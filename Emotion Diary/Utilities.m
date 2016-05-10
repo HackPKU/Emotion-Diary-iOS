@@ -12,7 +12,10 @@
 
 @implementation Utilities
 
-+ (NSString *)MD5:(NSString *)string {
++ (NSString * _Nullable)MD5:(NSString * _Nullable)string {
+    if (!string) {
+        return nil;
+    }
     const char* cStr = [string UTF8String];
     unsigned char digist[CC_MD5_DIGEST_LENGTH]; // CC_MD5_DIGEST_LENGTH = 16
     CC_MD5(cStr, (unsigned int)strlen(cStr), digist);

@@ -7,6 +7,8 @@
 //
 
 #import "UserTableViewController.h"
+#import "UserTableViewCell.h"
+#import <LocalAuthentication/LocalAuthentication.h>
 #import "sys/utsname.h"
 
 @interface UserTableViewController ()
@@ -17,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUser) name:LOGIN_COMPLETED_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUser) name:USER_CHANGED_NOTIFICATION object:nil];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -29,6 +31,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)unlockTypeChanged:(UISegmentedControl *)sender {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:sender.selectedSegmentIndex == 0 ? EmotionDiaryUnlockTypeSelfie : EmotionDiaryUnlockTypeTouchID] forKey:UNLOCK_TYPE];
 }
 
 #pragma mark - Table view data source
@@ -43,7 +49,7 @@
             return 1;
             break;
         case 1:
-            return [ActionPerformer hasLoggedIn] ? 0 : 1;
+            return 1 + [[LAContext new] canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil];
             break;
         case 2:
             return 4;
@@ -72,13 +78,13 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.section) {
-        case 0:
-            return 200.0;
-            break;
-        default:
-            return 44.0;
-            break;
+    if (indexPath.section == 0) {
+        return 200.0;
+    }else {
+        if ([ActionPerformer hasLoggedIn] && indexPath.section == 1 && indexPath.row == 0) {
+            return 80.0;
+        }
+        return 44.0;
     }
 }
 
@@ -86,10 +92,20 @@
     if (indexPath.section == 0) {
         return [tableView dequeueReusableCellWithIdentifier:@"stat"];
     }else if (indexPath.section == 1) {
-        if ([ActionPerformer hasLoggedIn]) {
-            return nil;
-        }else {
-            return [tableView dequeueReusableCellWithIdentifier:@"noUser"];
+        if (indexPath.row == 0) {
+            if ([ActionPerformer hasLoggedIn]) {
+                UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"user"];
+                cell.labelName.text = [[NSUserDefaults standardUserDefaults] objectForKey:USER_NAME];
+                NSString *iconName = [[[NSUserDefaults standardUserDefaults] objectForKey:USER_INFO] objectForKey:@"icon"];
+                [cell.imageIcon sd_setImageWithURL:[ActionPerformer getImageURLWithName:iconName type:EmotionDiaryImageTypeIcon] placeholderImage:PLACEHOLDER_IMAGE options:SDWebImageProgressiveDownload];
+                return cell;
+            }else {
+                return [tableView dequeueReusableCellWithIdentifier:@"noUser"];
+            }
+        }else if (indexPath.row == 1) {
+            UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"unlock"];
+            cell.segmentUnlockType.selectedSegmentIndex = [[[NSUserDefaults standardUserDefaults] objectForKey:UNLOCK_TYPE] integerValue] == EmotionDiaryUnlockTypeSelfie ? 0 : 1;
+            return cell;
         }
     }else if (indexPath.section == 2){
         if (indexPath.row == 0) {
@@ -147,9 +163,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == 1) {
-        
-    }else if (indexPath.section == 2) {
+    if (indexPath.section == 2) {
         if (indexPath.row == 0) {
             NSString *urlString = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@", APP_STORE_ID];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];

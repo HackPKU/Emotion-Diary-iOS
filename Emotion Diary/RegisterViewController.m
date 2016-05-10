@@ -160,7 +160,7 @@
         return;
     }
     [KVNProgress showWithStatus:@"注册中"];
-    [ActionPerformer registerWithName:name password:password sex:sex email:email icon:nil andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+    [ActionPerformer registerWithName:name password:password sex:sex email:email icon:nil personID:[[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
         if (!success) {
             [KVNProgress showErrorWithStatus:message];
             return;
@@ -169,7 +169,7 @@
         [KVNProgress showSuccessWithStatus:@"注册成功" completion:^{
             [self dismissViewControllerAnimated:YES completion:^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:REGISTER_COMPLETED_NOTIFOCATION object:nil];
-                [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_COMPLETED_NOTIFICATION object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:USER_CHANGED_NOTIFICATION object:nil];
             }];
         }];
     }];

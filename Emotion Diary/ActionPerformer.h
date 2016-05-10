@@ -17,7 +17,7 @@
 #define PERSON_ID @"personID"
 
 #define ENTER_MAIN_VIEW_NOTIFICATION @"EnterMainViewNotification"
-#define LOGIN_COMPLETED_NOTIFICATION @"LoginCompletedNotification"
+#define USER_CHANGED_NOTIFICATION @"UserChangedNotification"
 #define REGISTER_COMPLETED_NOTIFOCATION @"RegisterCompletedNotification"
 
 typedef NS_ENUM(NSInteger, EmotionDiaryImageType) {
@@ -34,7 +34,7 @@ typedef void (^ActionPerformerResultBlock)(BOOL success, NSString * _Nullable me
 
 #pragma mark - Server connection
 
-+ (void)registerWithName:(NSString *)name password:(NSString *)password sex:(NSString * _Nullable)sex email:(NSString * _Nullable)email icon:(NSString * _Nullable)icon andBlock:(ActionPerformerResultBlock)block;
++ (void)registerWithName:(NSString *)name password:(NSString *)password sex:(NSString * _Nullable)sex email:(NSString * _Nullable)email icon:(NSString * _Nullable)icon personID:(NSString *)personID andBlock:(ActionPerformerResultBlock)block;
 
 + (void)loginWithName:(NSString *)name password:(NSString *)password andBlock:(ActionPerformerResultBlock)block;
 
@@ -42,7 +42,9 @@ typedef void (^ActionPerformerResultBlock)(BOOL success, NSString * _Nullable me
 
 + (void)viewUserWithName:(NSString *)name andBlock:(ActionPerformerResultBlock)block;
 
-+ (void)editUserWithName:(NSString *)name password:(NSString *)password newPassword:(NSString * _Nullable)newPassword sex:(NSString * _Nullable)sex email:(NSString * _Nullable)email icon:(NSString * _Nullable)icon andBlock:(ActionPerformerResultBlock)block;
++ (void)editUserWithName:(NSString *)name password:(NSString *)password newPassword:(NSString * _Nullable)newPassword sex:(NSString * _Nullable)sex email:(NSString * _Nullable)email icon:(NSString * _Nullable)icon personID:(NSString *)personID andBlock:(ActionPerformerResultBlock)block;
+
++ (void)editIconWithPassword:(NSString *)password icon:(NSString *)icon andBlock:(ActionPerformerResultBlock)block;
 
 + (void)editPersonIDWithPassword:(NSString *)password personID:(NSString *)personID andBlock:(ActionPerformerResultBlock)block;
 
@@ -60,13 +62,15 @@ typedef void (^ActionPerformerResultBlock)(BOOL success, NSString * _Nullable me
 
 + (void)uploadImage:(UIImage *)image type:(EmotionDiaryImageType)type andBlock:(ActionPerformerResultBlock)block;
 
++ (NSURL * _Nullable)getImageURLWithName:(NSString *)name type:(EmotionDiaryImageType)type;
+
 #pragma mark - Face++ connection
 
 + (void)registerFaceWithImage:(UIImage *)image andBlock:(ActionPerformerResultBlock)block;
 
 + (void)verifyFaceWithImage:(UIImage *)image andBlock:(ActionPerformerResultBlock)block;
 
-+ (void)deletePersonWithBlock:(ActionPerformerResultBlock)block;
++ (void)deletePersonID:(NSString *)personID WithBlock:(ActionPerformerResultBlock)block;
 
 #pragma mark - Local functions
 
