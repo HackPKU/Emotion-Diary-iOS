@@ -49,7 +49,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (totalNumber > 0) {
-        return 155.0;
+        return 150.0;
     }else {
         return 100.0;
     }
@@ -67,8 +67,22 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+- (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (totalNumber > 0) {
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        [UIView animateWithDuration:0.1 animations:^{
+            cell.alpha = 0.6;
+        }];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (totalNumber > 0) {
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        [UIView animateWithDuration:0.1 animations:^{
+            cell.alpha = 1.0;
+        }];
+    }
 }
 
 /*

@@ -51,13 +51,15 @@
     }
     SyncTableViewCell *cell;
     NSDictionary *dict = [[EmotionDiaryManager sharedManager] getSyncDataOfIndex:indexPath.row];
-    if ([dict[@"state"] isEqualToString:SYNC_STATE_SYNCING]) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"syncing" forIndexPath:indexPath];
-    }else if ([dict[@"state"] isEqualToString:SYNC_STATE_WAITING]){
-        cell = [tableView dequeueReusableCellWithIdentifier:@"waiting" forIndexPath:indexPath];
-    }else {
+    if ([dict[@"state"] isKindOfClass:[NSString class]]) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"error" forIndexPath:indexPath];
         cell.labelError.text = dict[@"state"];
+    }else {
+        if ([dict[@"state"] isEqual:SYNC_STATE_SYNCING]) {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"syncing" forIndexPath:indexPath];
+        }else if ([dict[@"state"] isEqual:SYNC_STATE_WAITING]){
+            cell = [tableView dequeueReusableCellWithIdentifier:@"waiting" forIndexPath:indexPath];
+        }
     }
     [cell setDiary:dict[@"diary"]];
     

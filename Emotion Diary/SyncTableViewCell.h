@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *labelText;
 @property (strong, nonatomic) IBOutlet UILabel *labelTime;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *indicatorSyncing;
 @property (strong, nonatomic) IBOutlet UILabel *labelError;
 
 - (void)setDiary:(EmotionDiary *)newDiary;

@@ -37,7 +37,7 @@
                                             </connections>
                                         </segmentedControl>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KWS-sK-1cj" customClass="BEMSimpleLineGraphView">
-                                            <rect key="frame" x="16" y="54" width="568" height="137.5"/>
+                                            <rect key="frame" x="16" y="54" width="568" height="145.5"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="colorBottom">
@@ -65,8 +65,7 @@
                                         </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottomMargin" secondItem="KWS-sK-1cj" secondAttribute="bottom" id="5CX-AR-SID"/>
-                                        <constraint firstItem="KWS-sK-1cj" firstAttribute="centerX" secondItem="8oi-Qc-7b4" secondAttribute="centerX" id="8lg-e9-oea"/>
+                                        <constraint firstAttribute="bottom" secondItem="KWS-sK-1cj" secondAttribute="bottom" id="5CX-AR-SID"/>
                                         <constraint firstItem="KWS-sK-1cj" firstAttribute="top" secondItem="cJe-2M-fn1" secondAttribute="bottom" constant="12" id="CbC-fg-DGD"/>
                                         <constraint firstItem="cJe-2M-fn1" firstAttribute="centerX" secondItem="8oi-Qc-7b4" secondAttribute="centerX" id="Jam-l7-87M"/>
                                         <constraint firstItem="KWS-sK-1cj" firstAttribute="leading" secondItem="8oi-Qc-7b4" secondAttribute="leadingMargin" constant="8" id="Sxj-4X-f9f"/>
@@ -117,14 +116,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="P6x-Y1-XNU">
-                                            <rect key="frame" x="16" y="15" width="50" height="50"/>
+                                            <rect key="frame" x="16" y="12.5" width="55" height="55"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="P6x-Y1-XNU" secondAttribute="height" multiplier="1:1" id="ahk-AT-5gX"/>
-                                                <constraint firstAttribute="width" constant="50" id="xK3-QV-rtf"/>
+                                                <constraint firstAttribute="width" constant="55" id="xK3-QV-rtf"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="好男人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSa-E4-7nd">
-                                            <rect key="frame" x="81" y="29" width="51" height="21"/>
+                                            <rect key="frame" x="86" y="29" width="51" height="21"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -795,6 +794,7 @@
                                     <constraint firstAttribute="bottom" secondItem="bEo-Aj-Gk4" secondAttribute="bottom" constant="5" id="Odx-WK-neT"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="indicatorSyncing" destination="bI7-kZ-Emq" id="dnt-wp-de1"/>
                                     <outlet property="labelText" destination="4DF-fZ-TF0" id="4oL-0e-5lg"/>
                                     <outlet property="labelTime" destination="bEo-Aj-Gk4" id="QsU-ev-Y95"/>
                                 </connections>

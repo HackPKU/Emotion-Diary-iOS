@@ -96,8 +96,22 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+- (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (diariesOfToday.count > 0) {
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        [UIView animateWithDuration:0.1 animations:^{
+            cell.alpha = 0.6;
+        }];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (diariesOfToday.count > 0) {
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        [UIView animateWithDuration:0.1 animations:^{
+            cell.alpha = 1.0;
+        }];
+    }
 }
 
 # pragma mark - Navigation

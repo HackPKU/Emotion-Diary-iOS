@@ -205,7 +205,7 @@ static EmotionDiaryManager *sharedManager;
         for (NSDictionary *dict in diaries) {
             if ([dict[DIARY_ID] intValue] == NO_DIARY_ID) {
                 EmotionDiary *diary = [EmotionDiaryManager createEmotionDiaryFromDictionary:dict];
-                [syncQueue addObject:@{@"diary": diary, @"state": SYNC_STATE_WAITING}];
+                [syncQueue addObject:@{@"diary": diary, @"state": SYNC_STATE_WAITING, @"error": @0}];
             }
         }
         [self postSyncNotification:[NSNumber numberWithInt:NO_DIARY_ID]];
@@ -220,30 +220,43 @@ static EmotionDiaryManager *sharedManager;
         return;
     }
     NSMutableDictionary *dict = [syncQueue[0] mutableCopy];
+    if ([dict[@"error"] intValue] > 5) { // 错误超过五次放弃尝试
+        [syncQueue removeObjectAtIndex:0];
+        [self postSyncNotification:[NSNumber numberWithInt:NO_DIARY_ID]];
+        sleep(1);
+        [self sync];
+        return;
+    }
     dict[@"state"] = SYNC_STATE_SYNCING;
     [syncQueue setObject:dict atIndexedSubscript:0];
-    [dict[@"diary"] uploadToServerWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
-        if (!success) { // 放到同步队列的末尾等待重试
+    EmotionDiary *diary = dict[@"diary"];
+    [self postSyncNotification:[NSNumber numberWithInt:diary.diaryID]];
+    [diary uploadToServerWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
+        if (!success) { // 出错则放到同步队列的末尾等待重试
+            dict[@"error"] = [NSNumber numberWithInt:[dict[@"error"] intValue] + 1];
             dict[@"state"] = message;
             [syncQueue addObject:dict];
         }
         [syncQueue removeObjectAtIndex:0];
-        [self postSyncNotification:[NSNumber numberWithInt:((EmotionDiary *)dict[@"diary"]).diaryID]];
+        [self postSyncNotification:[NSNumber numberWithInt:diary.diaryID]];
+        sleep(1);
         [self sync];
     }];
 }
 
 - (void)stopSyncing {
-    isSyncing = NO;
-    [self postSyncNotification:[NSNumber numberWithInt:NO_DIARY_ID]];
+    if (isSyncing) {
+        isSyncing = NO;
+        [self postSyncNotification:[NSNumber numberWithInt:NO_DIARY_ID]];
+    }
 }
 
 - (void)postSyncNotification:(NSNumber *)diaryID {
-    // 因为接收通知的线程一般都需要更新UI，所以在主线程发通知
     NSDictionary *dict;
     if ([diaryID intValue] != NO_DIARY_ID) {
         dict = @{DIARY_ID: diaryID};
     }
+    // 接收通知的对象大多需要更新UI 因此在主线程上发通知
     if ([[NSThread currentThread] isMainThread]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_PROGRESS_CHANGED_NOTIFOCATION object:nil userInfo:dict];
     }else {

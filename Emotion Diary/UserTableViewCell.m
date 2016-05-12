@@ -22,6 +22,8 @@
     
     if (_imageIcon) {
         _imageIcon.layer.cornerRadius = _imageIcon.frame.size.width / 2;
+        _imageIcon.layer.borderColor = [UIColor blackColor].CGColor;
+        _imageIcon.layer.borderWidth = 0.5;
     }
 }
 

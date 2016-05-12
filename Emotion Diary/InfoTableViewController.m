@@ -24,14 +24,16 @@
     [super viewDidLoad];
     
     _imageIcon.layer.cornerRadius = _imageIcon.frame.size.width / 2;
+    _imageIcon.layer.borderColor = [UIColor whiteColor].CGColor;
+    _imageIcon.layer.borderWidth = 1.0;
     for (UIButton *button in @[_buttonResetFace, _buttonLogout]) {
         button.layer.cornerRadius = 5.0;
     }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUser) name:USER_CHANGED_NOTIFICATION object:nil];
     
     // TODO: Edit icon and userinfo function
-    
-    [self refreshIcon];
-    _labelUserName.text = [[NSUserDefaults standardUserDefaults] objectForKey:USER_NAME];
+
+    [self refreshUser];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -105,12 +107,13 @@
 }
 */
 
-- (void)refreshIcon {
+- (void)refreshUser {
     NSString *iconName = [[[NSUserDefaults standardUserDefaults] objectForKey:USER_INFO] objectForKey:@"icon"];
     NSURL *iconURL = [ActionPerformer getImageURLWithName:iconName type:EmotionDiaryImageTypeIcon];
     for (UIImageView *imageView in @[_imageIcon, _imageIconBlurred]) {
         [imageView sd_setImageWithURL:iconURL placeholderImage:PLACEHOLDER_IMAGE options:SDWebImageProgressiveDownload];
     }
+    _labelUserName.text = [[NSUserDefaults standardUserDefaults] objectForKey:USER_NAME];
 }
 
 - (IBAction)touchIcon:(id)sender {
@@ -242,7 +245,6 @@
             [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USER_INFO];
             [KVNProgress showSuccessWithStatus:@"头像修改成功"];
             [[NSNotificationCenter defaultCenter] postNotificationName:USER_CHANGED_NOTIFICATION object:nil];
-            [self refreshIcon];
         }];
     }]];
     [action addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
@@ -275,7 +277,16 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:^{
-        [KVNProgress showErrorWithStatus:@"您取消了该操作"];
+        switch (imagePickerState) {
+            case CHANGE_ICON:
+                [KVNProgress showErrorWithStatus:@"您取消了该操作"];
+                break;
+            case CHANGE_PERSON_ID:
+                break;
+            default:
+                break;
+        }
+        imagePickerState = NO_STATE;
     }];
 }
 

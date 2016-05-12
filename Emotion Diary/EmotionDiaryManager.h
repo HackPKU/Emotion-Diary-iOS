@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#define SYNC_STATE_SYNCING @"EmotionDiarySyncStateSyncing"
-#define SYNC_STATE_WAITING @"EmotionDiarySyncStateWaiting"
+#define SYNC_STATE_SYNCING @1
+#define SYNC_STATE_WAITING @2
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -28,6 +28,9 @@
     _labelText.text = [diary.shortText stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     _labelTime.text = [formatter stringFromDate:diary.createTime];
+    if (_indicatorSyncing) {
+        [_indicatorSyncing startAnimating];
+    }
 }
 
 @end
