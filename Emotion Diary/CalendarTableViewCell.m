@@ -15,9 +15,7 @@
     // Initialization code
     
     _imageSelfie.layer.cornerRadius = _imageSelfie.frame.size.width / 2;
-    formatter = [[NSDateFormatter alloc] init];
-    self.layer.shouldRasterize = YES;
-    self.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    formatter = [NSDateFormatter new];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -32,7 +30,11 @@
     }
     diary = newDiary;
     if (diary.selfie.length > 0) {
-        _imageSelfie.image = [UIImage imageWithData:[Utilities getFileAtPath:SELFIE_PATH withName:diary.selfie]];
+        if (diary.hasOnlineVersion) {
+            [_imageSelfie sd_setImageWithURL:[ActionPerformer getImageURLWithName:diary.selfie type:EmotionDiaryImageTypeSelfie] placeholderImage:PLACEHOLDER_IMAGE options:SDWebImageProgressiveDownload];
+        }else {
+            _imageSelfie.image = [UIImage imageWithData:[Utilities getFileAtPath:SELFIE_PATH withName:diary.selfie]];
+        }
     }else {
         _imageSelfie.image = PLACEHOLDER_IMAGE;
     }

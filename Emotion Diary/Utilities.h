@@ -103,6 +103,16 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)createFile:(NSData *)data atPath:(NSString *)path withName:(NSString *)name;
 
 /**
+ * Delete the file at the given path
+ 
+ * The root directory is the document directory
+ * @param path The required path
+ * @param name The file name
+ * @return Whether the file is deleted successfully or YES if the file doesn't exist
+ */
++ (BOOL)deleteFileAtPath:(NSString *)path withName:(NSString *)name;
+
+/**
  * Get the file at the given path
  
  * The root directory is the document directory

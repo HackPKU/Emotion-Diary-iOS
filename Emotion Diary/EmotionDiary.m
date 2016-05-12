@@ -21,11 +21,13 @@
         _tags = tags;
         _hasTag = (_tags.count > 0);
         _text = text;
+        _shortText = (text.length > 140) ? [text substringToIndex:139] : text;
         _placeName = placeName;
         _placeLong = placeLong;
         _placeLat = placeLat;
         _weather = weather;
         _createTime = [NSDate date];
+        _diaryID = NO_DIARY_ID;
     }
     return self;
 }
@@ -33,9 +35,6 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
-        _hasLocalVersion = [aDecoder decodeBoolForKey:HAS_LOCAL_VERSION];
-        _hasOnlineVersion = [aDecoder decodeBoolForKey:HAS_ONLINE_VERSION];
-        
         _emotion = [aDecoder decodeIntForKey:EMOTION];
         _selfie = [aDecoder decodeObjectForKey:SELFIE];
         _images = [aDecoder decodeObjectForKey:IMAGES];
@@ -47,7 +46,6 @@
         _weather = [aDecoder decodeObjectForKey:WEATHER];
         _createTime = [aDecoder decodeObjectForKey:CREATE_TIME];
         
-        _userID = [aDecoder decodeIntForKey:USER_ID];
         _diaryID = [aDecoder decodeIntForKey:DIARY_ID];
         _hasImage = [aDecoder decodeBoolForKey:HAS_IMAGE];
         _hasTag = [aDecoder decodeBoolForKey:HAS_TAG];
@@ -57,9 +55,6 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeBool:_hasLocalVersion forKey:HAS_LOCAL_VERSION];
-    [aCoder encodeBool:_hasOnlineVersion forKey:HAS_ONLINE_VERSION];
-    
     [aCoder encodeInt:_emotion forKey:EMOTION];
     [aCoder encodeObject:_selfie forKey:SELFIE];
     [aCoder encodeObject:_images forKey:IMAGES];
@@ -71,81 +66,241 @@
     [aCoder encodeObject:_weather forKey:WEATHER];
     [aCoder encodeObject:_createTime forKey:CREATE_TIME];
     
-    [aCoder encodeInt:_userID forKey:USER_ID];
     [aCoder encodeInt:_diaryID forKey:DIARY_ID];
     [aCoder encodeBool:_hasImage forKey:HAS_IMAGE];
     [aCoder encodeBool:_hasTag forKey:HAS_TAG];
     [aCoder encodeObject:_shortText forKey:SHORT_TEXT];
 }
 
+- (BOOL)hasOnlineVersion {
+    return (_diaryID != NO_DIARY_ID);
+}
+
+- (NSString *)getFileName {
+    // Time as file name
+    return [Utilities MD5:[[ActionPerformer PRCStandardDateFormatter] stringFromDate:_createTime]];
+}
+
 - (void)writeToDiskWithBlock:(EmotionDiaryResultBlock)block {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if (![Utilities checkAndCreatePath:SELFIE_PATH] || ![Utilities checkAndCreatePath:IMAGES_PATH] || ![Utilities checkAndCreatePath:DIARY_PATH]) {
-            block(NO, nil);
+            block(NO, @"创建目录失败", nil);
+            return;
         }
         
-        if (_imageSelfie) {
-            NSString *selfieName;
-            do {
-                selfieName = [NSString stringWithFormat:@"%d", arc4random() % (int)1e8]; // Random number as file name
-            }while ([Utilities fileExistsAtPath:SELFIE_PATH withName:selfieName]);
-            if (![Utilities createFile:UIImageJPEGRepresentation(_imageSelfie, 0.3) atPath:SELFIE_PATH withName:selfieName]) {
-                block(NO, nil);
+        if (!self.hasOnlineVersion) {
+            if (_imageSelfie) {
+                NSString *selfieName;
+                do {
+                    selfieName = [NSString stringWithFormat:@"%d", arc4random() % (int)1e8]; // Random number as file name
+                }while ([Utilities fileExistsAtPath:SELFIE_PATH withName:selfieName]);
+                if (![Utilities createFile:UIImageJPEGRepresentation(_imageSelfie, 0.25) atPath:SELFIE_PATH withName:selfieName]) {
+                    block(NO, @"自拍文件写入失败", nil);
+                    return;
+                }
+                _selfie = selfieName;
             }
-            _selfie = selfieName;
-        }
-        
-        NSMutableArray *imageNames = [[NSMutableArray alloc] init];
-        for (UIImage *image in _imageImages) {
-            NSString *imageName;
-            do {
-                imageName = [NSString stringWithFormat:@"%d", arc4random() % (int)1e8]; // Random number as file name
-            }while ([Utilities fileExistsAtPath:IMAGES_PATH withName:imageName]);
-            if (![Utilities createFile:UIImageJPEGRepresentation(image, 0.3) atPath:IMAGES_PATH withName:imageName]) {
-                block(NO, nil);
+            
+            NSMutableArray *imageNames = [NSMutableArray new];
+            for (UIImage *image in _imageImages) {
+                NSString *imageName;
+                do {
+                    imageName = [NSString stringWithFormat:@"%d", arc4random() % (int)1e8]; // Random number as file name
+                }while ([Utilities fileExistsAtPath:IMAGES_PATH withName:imageName]);
+                if (![Utilities createFile:UIImageJPEGRepresentation(image, 0.25) atPath:IMAGES_PATH withName:imageName]) {
+                    block(NO, @"图片文件写入失败", nil);
+                    return;
+                }
+                [imageNames addObject:imageName];
             }
-            [imageNames addObject:imageName];
+            _images = imageNames;
         }
-        _images = imageNames;
         
-        NSMutableData *data = [[NSMutableData alloc] init];
+        NSMutableData *data = [NSMutableData new];
         NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
         [archiver encodeObject:self forKey:@"DIARY"];
         [archiver finishEncoding];
-        NSString *fileName = [NSString stringWithFormat:@"%f", [_createTime timeIntervalSince1970]]; // Time as file name
+        NSString *fileName = [self getFileName];
+        if ([Utilities fileExistsAtPath:DIARY_PATH withName:fileName]) {
+            [Utilities deleteFileAtPath:DIARY_PATH withName:fileName];
+        }
         if (![Utilities createFile:data atPath:DIARY_PATH withName:fileName]) {
-            block(NO, nil);
+            block(NO, @"日记文件写入失败", nil);
+            return;
         }
         // Save to NSUserDefaults
-        if ([[EmotionDiaryManager sharedManager] saveLocalDiary:self]) {
-            _hasLocalVersion = YES;
-            block(YES, nil);
+        if ([[EmotionDiaryManager sharedManager] saveDiary:self]) {
+            block(YES, nil, self);
         }else {
-            block(NO, nil);
+            block(NO, @"日记记录创建失败", nil);
         }
     });
 }
 
-- (void)getFullVersionWithBlock:(EmotionDiaryResultBlock)block {
-    NSString *fileName = [NSString stringWithFormat:@"%f", [_createTime timeIntervalSince1970]];
-    NSData *diaryData = [Utilities getFileAtPath:DIARY_PATH withName:fileName];
-    if (!diaryData) {
-        block(NO, nil);
+- (void)uploadToServerWithBlock:(EmotionDiaryResultBlock)block {
+    if (self.hasOnlineVersion) {
+        block(NO, @"该日记已上传", nil);
+        return;
     }
-    NSKeyedUnarchiver *unArchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:diaryData];
-    EmotionDiary *fullDiary = [unArchiver decodeObjectOfClass:[self class] forKey:@"DIARY"];
-    
-    if (!_hasOnlineVersion && fullDiary.selfie.length > 0) {
-        fullDiary.imageSelfie = [UIImage imageWithData:[Utilities getFileAtPath:SELFIE_PATH withName:fullDiary.selfie]];
-    }
-    if (!_hasOnlineVersion && fullDiary.images.count > 0) {
-        NSMutableArray<UIImage *> *imagesArray = [[NSMutableArray alloc] init];
-        for (NSString *imageName in fullDiary.images) {
-            [imagesArray addObject:[UIImage imageWithData:[Utilities getFileAtPath:IMAGES_PATH withName:imageName]]];
+    NSString *selfie = _selfie;
+    NSArray *images = _images;
+    [self getFullVersionWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
+        if (!success) {
+            block(NO, message, nil);
+            return;
         }
-        fullDiary.imageImages = imagesArray;
+        [self uploadSelfieWithBlock:^(BOOL success, NSString *message, NSObject * _Nullable data) {
+            if (!success) {
+                block(NO, message, nil);
+                return;
+            }
+            [self uploadImagesWithBlock:^(BOOL success, NSString *message, NSObject * _Nullable data) {
+                if (!success) {
+                    _selfie = selfie;
+                    block(NO, message, nil);
+                    return;
+                }
+                [ActionPerformer postDiary:self andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+                    if (!success) {
+                        _selfie = selfie;
+                        _images = images;
+                        block(NO, message, nil);
+                        return;
+                    }
+                    _diaryID = [data[@"diaryid"] intValue];
+                    [self writeToDiskWithBlock:^(BOOL success, NSString *message, NSObject * _Nullable data) {
+                        if (success) {
+                            [Utilities deleteFileAtPath:SELFIE_PATH withName:selfie];
+                            for (NSString *image in images) {
+                                [Utilities deleteFileAtPath:IMAGES_PATH withName:image];
+                            }
+                            block(YES, nil, self);
+                        }else {
+                            _selfie = selfie;
+                            _images = images;
+                            _diaryID = NO_DIARY_ID;
+                            block(NO, message, nil);
+                        }
+                        
+                    }];
+                }];
+            }];
+        }];
+    }];
+}
+
+- (void)uploadSelfieWithBlock:(EmotionDiaryResultBlock)block {
+    if (!_imageSelfie) {
+        block(YES, nil, self);
+        return;
     }
-    block(YES, fullDiary);
+    [ActionPerformer uploadImage:_imageSelfie type:EmotionDiaryImageTypeSelfie andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+        if (!success) {
+            block(NO, message, nil);
+            return;
+        }
+        _selfie = data[@"file_name"];
+        block(YES, nil, self);
+    }];
+}
+
+- (void)uploadImagesWithBlock:(EmotionDiaryResultBlock)block {
+    NSArray *images = _images;
+    [self uploadImage:0 WithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
+        if (!success) {
+            _images = images;
+            block(NO, message, nil);
+            return;
+        }
+        block(YES, nil, self);
+    }];
+}
+
+- (void)uploadImage:(NSInteger)index WithBlock:(EmotionDiaryResultBlock)block {
+    if (index == _imageImages.count) {
+        block(YES, nil, self);
+        return;
+    }
+    UIImage *imageToUpload = _imageImages[index];
+    [ActionPerformer uploadImage:imageToUpload type:EmotionDiaryImageTypeImage andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+        if (!success) {
+            block(NO, message, nil);
+            return;
+        }
+        NSMutableArray *images = [_images mutableCopy];
+        [images replaceObjectAtIndex:index withObject:data[@"file_name"]];
+        _images = images;
+        [self uploadImage:index + 1 WithBlock:block];
+    }];
+}
+
+- (void)getFullVersionWithBlock:(EmotionDiaryResultBlock)block {
+    if (_text.length > 0 && _images && _imageSelfie && _imageImages && _tags) {
+        // Already has full version
+        block(YES, nil, self);
+        return;
+    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSData *diaryData = [Utilities getFileAtPath:DIARY_PATH withName:[self getFileName]];
+        if (diaryData) {
+            NSKeyedUnarchiver *unArchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:diaryData];
+            EmotionDiary *fullDiary = [unArchiver decodeObjectOfClass:[self class] forKey:@"DIARY"];
+            
+            _text = fullDiary.text;
+            _images = fullDiary.images;
+            _tags = fullDiary.tags;
+            
+            if (_selfie.length > 0) {
+                UIImage *selfie = [UIImage imageWithData:[Utilities getFileAtPath:SELFIE_PATH withName:_selfie]];
+                if (selfie) {
+                    _imageSelfie = selfie;
+                }
+            }
+            if (_images.count > 0) {
+                NSMutableArray<UIImage *> *imagesArray = [NSMutableArray new];
+                for (NSString *imageName in _images) {
+                    UIImage *image = [UIImage imageWithData:[Utilities getFileAtPath:IMAGES_PATH withName:imageName]];
+                    if (image) {
+                        [imagesArray addObject:image];
+                    }
+                }
+                if (imagesArray.count == _images.count) {
+                    _imageImages = imagesArray;
+                }
+            }
+            
+            block(YES, nil, self);
+        }else {
+            [ActionPerformer viewDiaryWithDiaryID:_diaryID shareKey:nil andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+                if (!success) {
+                    block(NO, message, nil);
+                    return;
+                }
+                
+                _emotion = [data[@"emotion"] intValue];
+                _selfie = data[@"selfie"];
+                _images = data[@"images"];
+                _hasImage = (_images.count > 0);
+                _tags = data[@"tags"];
+                _hasTag = (_tags.count > 0);
+                NSString *text = data[@"text"];
+                _text = text;
+                _shortText = (text.length > 140) ? [text substringToIndex:139] : text;
+                _placeName = data[@"place_name"];
+                _placeLong = [data[@"place_long"] floatValue];
+                _placeLat = [data[@"place_lat"] floatValue];
+                _weather = data[@"weather"];
+                _createTime = [[ActionPerformer PRCStandardDateFormatter] dateFromString:data[@"create_time"]];
+                
+                // 写入本地，下次加载时就不需要再从网络获取
+                [self writeToDiskWithBlock:block];
+            }];
+        }
+    });
+}
+
+- (void)deleteWithBlock:(EmotionDiaryResultBlock)block {
+    // TODO: Delete logic
 }
 
 @end

@@ -21,19 +21,10 @@
     _cycleImageView.layer.shadowOffset = CGSizeZero;
     _cycleImageView.layer.shadowOpacity = 0.75;
     _cycleImageView.layer.shadowRadius = 6.0;
+    imageViews = [NSMutableArray new];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:SYNC_PROGRESS_CHANGED_NOTIFOCATION object:nil];
     
-    if (!_simpleDiary.hasLocalVersion) {
-        [KVNProgress showWithStatus:@"加载中"];
-    }
-    [_simpleDiary getFullVersionWithBlock:^(BOOL success, NSObject * _Nullable data) {
-        if (!success) {
-            [KVNProgress showErrorWithStatus:@"日记加载错误"];
-            return;
-        }
-        [KVNProgress dismiss];
-        diary = (EmotionDiary *)data;
-        [self updateDiaryView];
-    }];
+    [self updateDiaryView];
         
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -47,6 +38,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [KVNProgress showWithStatus:@"加载中"];
+    [self getFullVersion];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [_cycleImageView startTimer];
@@ -57,15 +54,43 @@
     [_cycleImageView stopTimer];
 }
 
+- (void)refresh {
+    [self getFullVersion];
+}
+
+- (void)getFullVersion {
+    [_diary getFullVersionWithBlock:^(BOOL success, NSString *message, NSObject * _Nullable data) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            if (!success) {
+                [KVNProgress showErrorWithStatus:message];
+                return;
+            }
+            [KVNProgress dismiss];
+            [self updateDiaryView];
+        });
+    }];
+}
+
 - (void)updateDiaryView {
-    _imageSelfie.image = diary.imageSelfie ? diary.imageSelfie : PLACEHOLDER_IMAGE;
-    _imageFace.image = [ActionPerformer getFaceImageByEmotion:diary.emotion];
-    _labelEmotion.text = [NSString stringWithFormat:@"心情指数 %d", diary.emotion];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    if (_diary.selfie.length > 0) {
+        if (_diary.hasOnlineVersion) {
+            [_imageSelfie sd_setImageWithURL:[ActionPerformer getImageURLWithName:_diary.selfie type:EmotionDiaryImageTypeSelfie] placeholderImage:PLACEHOLDER_IMAGE options:SDWebImageProgressiveDownload];
+        }else {
+            _imageSelfie.image = _diary.imageSelfie;
+        }
+    }else {
+        _imageSelfie.image = PLACEHOLDER_IMAGE;
+    }
+    _imageFace.image = [ActionPerformer getFaceImageByEmotion:_diary.emotion];
+    _labelEmotion.text = [NSString stringWithFormat:@"心情指数 %d", _diary.emotion];
+    NSDateFormatter *formatter = [NSDateFormatter new];
     [formatter setDateFormat:@"M月d日 HH:mm"];
-    _labelDateAndTime.text = [formatter stringFromDate:diary.createTime];
-    _textDetail.text = diary.text;
-    _cycleImageView.pageControl.hidden = (diary.imageImages.count <= 1);
+    _labelDateAndTime.text = [formatter stringFromDate:_diary.createTime];
+    _textDetail.text = _diary.text;
+    
+    _cycleImageView.pageControl.hidden = (_diary.images.count <= 1);
+    [imageViews removeAllObjects];
+    [self.tableView reloadData];
     [_cycleImageView reloadData];
 }
 
@@ -79,7 +104,7 @@
 */
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2 + (diary.images.count > 0);
+    return 2 + (_diary.images.count > 0);
 }
 
 /*
@@ -129,13 +154,22 @@
 #pragma mark - ZYBannerView data source
 
 - (NSInteger)numberOfItemsInBanner:(ZYBannerView *)banner {
-    return diary.imageImages.count;
+    return _diary.images.count;
 }
 
 - (UIView *)banner:(ZYBannerView *)banner viewForItemAtIndex:(NSInteger)index {
-    UIImage *image = diary.imageImages[index];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    while (imageViews.count <= index) {
+        UIImageView *imageView = [UIImageView new];
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        [imageViews addObject:imageView];
+    }
+    
+    UIImageView *imageView = imageViews[index];
+    if (_diary.hasOnlineVersion) {
+        [imageView sd_setImageWithURL:[ActionPerformer getImageURLWithName:_diary.images[index] type:EmotionDiaryImageTypeImage] placeholderImage:PLACEHOLDER_IMAGE options:SDWebImageProgressiveDownload];
+    }else {
+        imageView.image = _diary.imageImages[index];
+    }
     return imageView;
 }
 
@@ -144,7 +178,6 @@
 - (void)banner:(ZYBannerView *)banner didSelectItemAtIndex:(NSInteger)index {
     MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
     browser.enableGrid = YES;
-    browser.displayActionButton = NO;
     [browser setCurrentPhotoIndex:index];
     [self.navigationController pushViewController:browser animated:YES];
 }
@@ -152,12 +185,16 @@
 #pragma mark - MWPhotoBrowser delegate
 
 - (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
-    return diary.imageImages.count;
+    return _diary.images.count;
 }
 
 - (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
-    if (index < diary.imageImages.count) {
-        return [MWPhoto photoWithImage:diary.imageImages[index]];
+    if (index < _diary.images.count) {
+        if (_diary.hasOnlineVersion) {
+            return [MWPhoto photoWithURL:[ActionPerformer getImageURLWithName:_diary.images[index] type:EmotionDiaryImageTypeImage]];
+        }else {
+            return [MWPhoto photoWithImage:_diary.imageImages[index]];
+        }
     }
     return nil;
 }
@@ -167,9 +204,11 @@
 }
 
 - (IBAction)delete:(id)sender {
+    // TODO: Delete function
 }
 
 - (IBAction)share:(id)sender {
+    // TODO: Share function
 }
 
 #pragma mark - Navigation

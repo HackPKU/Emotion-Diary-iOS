@@ -58,10 +58,9 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"hasShownWelcome"] boolValue] == NO) {
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID] length] == 0 && ![ActionPerformer hasLoggedIn]) {
         // TODO: Welcome logic
         
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"hasShownWelcome"];
     }
 }
 
@@ -142,7 +141,7 @@
 }
 
 - (void)unlockWithSelfie {
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    UIImagePickerController *imagePicker = [UIImagePickerController new];
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
         imagePicker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
@@ -173,12 +172,7 @@
 
 - (void)analyzeSelfie:(UIImage *)image {
     [KVNProgress showWithStatus:@"面部识别中"];
-    NSString *successMessage;
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID] length] == 0) {
-        successMessage = @"人脸注册成功";
-    }else {
-        successMessage = @"人脸解锁成功";
-    }
+    BOOL isRegister = ([[[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID] length] == 0);
     ActionPerformerResultBlock block = ^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
         if (!success) {
             [KVNProgress showErrorWithStatus:message completion:^{
@@ -190,13 +184,25 @@
             [self setUnlocked:YES];
         });
         emotion = [data[@"emotion"] intValue];
-        [KVNProgress showSuccessWithStatus:successMessage];
+        if (isRegister) {
+            [KVNProgress showSuccessWithStatus:@"人脸注册成功" completion:^{
+                [WelcomeViewController showRookieWarningInViewController:self];
+            }];
+        }else {
+            [KVNProgress showSuccessWithStatus:@"人脸解锁成功"];
+        }
     };
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID] length] == 0) {
         [ActionPerformer registerFaceWithImage:image andBlock:block];
     }else {
         [ActionPerformer verifyFaceWithImage:image andBlock:block];
     }
+}
+
++ (void)showRookieWarningInViewController:(UIViewController *)vc {
+    UIAlertController *action = [UIAlertController alertControllerWithTitle:@"提示" message:@"最初几次使用时，面部识别较为严格，请尽量使用清晰、明亮的照片" preferredStyle:UIAlertControllerStyleAlert];
+    [action addAction:[UIAlertAction actionWithTitle:@"好" style:UIAlertActionStyleCancel handler:nil]];
+    [vc presentViewController:action animated:YES completion:nil];
 }
 
 - (void)unlockWithTouchID {

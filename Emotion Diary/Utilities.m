@@ -119,12 +119,7 @@
 + (BOOL)fileExistsAtPath:(NSString *)path withName:(NSString *)name {
     NSFileManager *manager = [NSFileManager defaultManager];
     NSString *fullPath = [NSString stringWithFormat:@"%@/%@/%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0], path, name];
-    BOOL isDirectory;
-    if (![manager fileExistsAtPath:fullPath isDirectory:&isDirectory]) {
-        return NO;
-    }else {
-        return isDirectory;
-    }
+    return [manager fileExistsAtPath:fullPath];
 }
 
 + (BOOL)createFile:(NSData *)data atPath:(NSString *)path withName:(NSString *)name {
@@ -134,6 +129,15 @@
         return NO;
     }
     return [manager createFileAtPath:fullPath contents:data attributes:nil];
+}
+
++ (BOOL)deleteFileAtPath:(NSString *)path withName:(NSString *)name {
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSString *fullPath = [NSString stringWithFormat:@"%@/%@/%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0], path, name];
+    if (![manager fileExistsAtPath:fullPath]) {
+        return YES;
+    }
+    return [manager removeItemAtPath:fullPath error:nil];
 }
 
 + (NSData * _Nullable)getFileAtPath:(NSString *)path withName:(NSString *)name {

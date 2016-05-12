@@ -11,10 +11,10 @@
 #import "MWPhotoBrowser.h"
 
 @interface DiaryTableViewController : UITableViewController <ZYBannerViewDelegate, ZYBannerViewDataSource, MWPhotoBrowserDelegate> {
-    EmotionDiary *diary;
+    NSMutableArray<UIImageView *> *imageViews;
 }
 
-@property EmotionDiary *simpleDiary;
+@property EmotionDiary *diary;
 
 @property (strong, nonatomic) IBOutlet UIImageView *imageSelfie;
 @property (strong, nonatomic) IBOutlet UILabel *labelDateAndTime;

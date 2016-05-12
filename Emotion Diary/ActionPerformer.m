@@ -10,7 +10,7 @@
 #import "AFNetworking.h"
 #import "FaceppAPI.h"
 
-#define LOCALHOST
+#define LOCALHOST @"http://localhost/~Frank/Emotion-Diary-Web"
 
 @implementation ActionPerformer
 
@@ -19,7 +19,7 @@
 + (NSString *)getServerUrl {
 #ifdef DEBUG
 #ifdef LOCALHOST
-    return @"http://localhost/~Frank/Emotion-Diary-Web";
+    return LOCALHOST;
 #endif
 #endif
     return [NSString stringWithFormat:@"http://%@", SERVER_URL];
@@ -28,16 +28,13 @@
 + (void)postWithDictionary:(NSDictionary * _Nullable)dictionary toUrl:(NSString * _Nonnull)url andBlock:(ActionPerformerResultBlock)block {
     NSString *fullUrl = [[ActionPerformer getServerUrl] stringByAppendingString:url];
     
-    NSMutableDictionary *request;
+    NSMutableDictionary *request = [NSMutableDictionary new];
     if (dictionary) {
-        request = [dictionary mutableCopy];
         for (NSString *key in dictionary.allKeys) {
-            if ([request[key] length] == 0) {
-                [request removeObjectForKey:key];
+            if ([dictionary[key] length] > 0) {
+                [request setObject:dictionary[key] forKey:key];
             }
         }
-    }else {
-        request = [NSMutableDictionary new];
     }
     request[@"version"] = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     request[@"platform"] = @"iOS";
@@ -122,24 +119,25 @@
 }
 
 + (void)postDiary:(EmotionDiary *)diary andBlock:(ActionPerformerResultBlock)block {
-    if (!diary.hasLocalVersion) {
-        block(NO, @"该日记没有本地存档", nil);
+    if (diary.hasOnlineVersion) {
+        block(NO, @"该日记已上传", nil);
         return;
     }
     NSMutableDictionary *request = [NSMutableDictionary new];
     request[@"emotion"] = [NSString stringWithFormat:@"%d", diary.emotion];
     request[@"selfie"] = diary.selfie;
-    request[@"images"] = [diary.images componentsJoinedByString:@" | "];
-    request[@"tags"] = [diary.tags componentsJoinedByString:@" | "];
+    if (diary.images.count > 0) {
+        request[@"images"] = [diary.images componentsJoinedByString:@" | "];
+    }
+    if (diary.tags.count > 0) {
+        request[@"tags"] = [diary.tags componentsJoinedByString:@" | "];
+    }
     request[@"text"] = diary.text;
     request[@"place_name"] = diary.placeName;
     request[@"place_long"] = [NSString stringWithFormat:@"%f", diary.placeLong];
     request[@"place_lat"] = [NSString stringWithFormat:@"%f", diary.placeLat];
     request[@"weather"] = diary.weather;
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"PRC"]];
-    request[@"create_time"] = [formatter stringFromDate:diary.createTime];
+    request[@"create_time"] = [[ActionPerformer PRCStandardDateFormatter] stringFromDate:diary.createTime];
     [ActionPerformer postWithDictionary:request toUrl:@"/api/post_diary.php" andBlock:block];
 }
 
@@ -181,15 +179,15 @@
     NSString *imageType;
     switch (type) {
         case EmotionDiaryImageTypeIcon:
-            imageData = [Utilities compressImage:image toSize:50];
+            imageData = [Utilities compressImage:[Utilities resizeImage:image toMaxWidthAndHeight:500] toSize:50];
             imageType = @"icon";
             break;
         case EmotionDiaryImageTypeSelfie:
-            imageData = [Utilities compressImage:image toSize:100];
+            imageData = [Utilities compressImage:[Utilities resizeImage:image toMaxWidthAndHeight:1000] toSize:100];
             imageType = @"selfie";
             break;
         case EmotionDiaryImageTypeImage:
-            imageData = [Utilities compressImage:image toSize:200];
+            imageData = [Utilities compressImage:[Utilities resizeImage:image toMaxWidthAndHeight:2000] toSize:200];
             imageType = @"image";
             break;
         default:
@@ -220,6 +218,13 @@
             return nil;
     }
     return [NSURL URLWithString:url];
+}
+
++ (NSDateFormatter *)PRCStandardDateFormatter {
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"PRC"]];
+    return formatter;
 }
 
 #pragma mark - Face++ connection
@@ -255,7 +260,7 @@
 #else
             NSString *groupName = @"EmotionDiary";
 #endif
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            NSDateFormatter *dateFormatter = [NSDateFormatter new];
             [dateFormatter setDateFormat:@"yyyy_MM_dd_HH_mm_ss"];
             NSString *name = [NSString stringWithFormat:@"iOS_User_%@", [dateFormatter stringFromDate:[NSDate date]]];
             FaceppResult *registerResult = [[FaceppAPI person] createWithPersonName:name andFaceId:nil andTag:@"iOS" andGroupId:nil orGroupName:@[groupName]];

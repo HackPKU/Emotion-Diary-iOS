@@ -21,4 +21,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *buttonProceed;
 @property BOOL shouldDismissAfterUnlock;
 
++ (void)showRookieWarningInViewController:(UIViewController *)vc;
+
 @end

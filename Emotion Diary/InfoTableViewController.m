@@ -7,6 +7,7 @@
 //
 
 #import "InfoTableViewController.h"
+#import "WelcomeViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
 @interface InfoTableViewController ()
@@ -22,6 +23,8 @@
     for (UIButton *button in @[_buttonResetFace, _buttonLogout]) {
         button.layer.cornerRadius = 5.0;
     }
+    
+    // TODO: Edit icon and userinfo function
     
     NSString *iconName = [[[NSUserDefaults standardUserDefaults] objectForKey:USER_INFO] objectForKey:@"icon"];
     NSURL *iconURL = [ActionPerformer getImageURLWithName:iconName type:EmotionDiaryImageTypeIcon];
@@ -117,7 +120,7 @@
             }];
             return;
         }
-        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        UIImagePickerController *imagePicker = [UIImagePickerController new];
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
             imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
             imagePicker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
@@ -153,13 +156,11 @@
                 [KVNProgress showErrorWithStatus:message];
                 return;
             }
+            [KVNProgress showSuccessWithStatus:@"面部识别重置成功" completion:^{
+                [WelcomeViewController showRookieWarningInViewController:self];
+            }];
             [ActionPerformer deletePersonID:personIDBackup WithBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
-                if (!success) {
-                    [[NSUserDefaults standardUserDefaults] setObject:personIDBackup forKey:PERSON_ID];
-                    [KVNProgress showErrorWithStatus:message];
-                    return;
-                }
-                [KVNProgress showSuccessWithStatus:@"面部识别重置成功"];
+                NSLog(@"Deleted original face in Face++");
             }];
         }];
     }];
@@ -176,18 +177,22 @@
     [action addAction:[UIAlertAction actionWithTitle:@"登出" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         [KVNProgress showWithStatus:@"正在退出登录"];
         [ActionPerformer logoutWithBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
-            if (!success) {
-                [KVNProgress showErrorWithStatus:message];
-                return;
-            }
+            
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_ID];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:TOKEN];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_NAME];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_INFO];
             [[NSNotificationCenter defaultCenter] postNotificationName:USER_CHANGED_NOTIFICATION object:nil];
-            [KVNProgress showSuccessWithStatus:@"退出登陆成功" completion:^{
-                [self.navigationController popViewControllerAnimated:YES];
-            }];
+            // TODO: 本地日记的存留处理
+            if (!success) {
+                [KVNProgress showErrorWithStatus:message completion:^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                }];
+            }else {
+                [KVNProgress showSuccessWithStatus:@"退出登陆成功" completion:^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                }];
+            }
         }];
     }]];
     [action addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];

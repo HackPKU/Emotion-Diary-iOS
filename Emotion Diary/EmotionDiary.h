@@ -9,9 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
-#define HAS_LOCAL_VERSION @"hasLocalVersion"
-#define HAS_ONLINE_VERSION @"hasOnlineVersion"
-
 #define EMOTION @"emotion"
 #define SELFIE @"selfie"
 #define IMAGES @"images"
@@ -33,15 +30,13 @@
 #define DIARY_PATH @"EmotionDiary"
 
 #define NO_EMOTION -1
-
-typedef void (^EmotionDiaryResultBlock)(BOOL success, NSObject * _Nullable data);
+#define NO_DIARY_ID -1
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface EmotionDiary : NSObject <NSCoding>
+typedef void (^EmotionDiaryResultBlock)(BOOL success, NSString * _Nullable message, NSObject * _Nullable data);
 
-@property BOOL hasLocalVersion;
-@property BOOL hasOnlineVersion;
+@interface EmotionDiary : NSObject <NSCoding>
 
 @property int emotion;
 @property NSString * _Nullable selfie;
@@ -56,7 +51,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSString * _Nullable weather;
 @property NSDate *createTime;
 
-@property int userID;
 @property int diaryID;
 @property BOOL hasImage;
 @property BOOL hasTag;
@@ -64,9 +58,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithEmotion:(int)emotion selfie:(UIImage * _Nullable)selfie images:(NSArray<UIImage *> * _Nullable)images tags:(NSArray<NSString *> * _Nullable)tags text:(NSString *)text placeName:(NSString * _Nullable)placeName placeLong:(float)placeLong placeLat:(float)placeLat weather:(NSString * _Nullable)weather;
 
+- (BOOL)hasOnlineVersion;
+
 - (void)writeToDiskWithBlock:(EmotionDiaryResultBlock)block;
 
+- (void)uploadToServerWithBlock:(EmotionDiaryResultBlock)block;
+
 - (void)getFullVersionWithBlock:(EmotionDiaryResultBlock)block;
+
+- (void)deleteWithBlock:(EmotionDiaryResultBlock)block;
 
 NS_ASSUME_NONNULL_END
 

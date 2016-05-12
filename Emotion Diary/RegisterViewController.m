@@ -159,6 +159,7 @@
         [self presentViewController:action animated:YES completion:nil];
         return;
     }
+    [self.view endEditing:YES];
     [KVNProgress showWithStatus:@"注册中"];
     [ActionPerformer registerWithName:name password:password sex:sex email:email icon:nil personID:[[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
         if (!success) {

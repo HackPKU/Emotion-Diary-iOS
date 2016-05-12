@@ -20,6 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUser) name:USER_CHANGED_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUser) name:SYNC_PROGRESS_CHANGED_NOTIFOCATION object:nil];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -49,7 +50,7 @@
             return 1;
             break;
         case 1:
-            return 1 + [[LAContext new] canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil];
+            return ([ActionPerformer hasLoggedIn] ? 2 : 1) + [[LAContext new] canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil];
             break;
         case 2:
             return 4;
@@ -92,20 +93,30 @@
     if (indexPath.section == 0) {
         return [tableView dequeueReusableCellWithIdentifier:@"stat"];
     }else if (indexPath.section == 1) {
-        if (indexPath.row == 0) {
-            if ([ActionPerformer hasLoggedIn]) {
+        if ([ActionPerformer hasLoggedIn]) {
+            if (indexPath.row == 0) {
                 UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"user"];
                 cell.labelName.text = [[NSUserDefaults standardUserDefaults] objectForKey:USER_NAME];
                 NSString *iconName = [[[NSUserDefaults standardUserDefaults] objectForKey:USER_INFO] objectForKey:@"icon"];
                 [cell.imageIcon sd_setImageWithURL:[ActionPerformer getImageURLWithName:iconName type:EmotionDiaryImageTypeIcon] placeholderImage:PLACEHOLDER_IMAGE options:SDWebImageProgressiveDownload];
                 return cell;
-            }else {
-                return [tableView dequeueReusableCellWithIdentifier:@"noUser"];
+            }else if (indexPath.row == 1) {
+                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sync"];
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", [[EmotionDiaryManager sharedManager] totalSyncNumber]];
+                return cell;
+            }else if (indexPath.row == 2) {
+                UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"unlock"];
+                cell.segmentUnlockType.selectedSegmentIndex = [[[NSUserDefaults standardUserDefaults] objectForKey:UNLOCK_TYPE] integerValue] == EmotionDiaryUnlockTypeSelfie ? 0 : 1;
+                return cell;
             }
-        }else if (indexPath.row == 1) {
-            UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"unlock"];
-            cell.segmentUnlockType.selectedSegmentIndex = [[[NSUserDefaults standardUserDefaults] objectForKey:UNLOCK_TYPE] integerValue] == EmotionDiaryUnlockTypeSelfie ? 0 : 1;
-            return cell;
+        }else {
+            if (indexPath.row == 0) {
+                return [tableView dequeueReusableCellWithIdentifier:@"noUser"];
+            }else if (indexPath.row == 1) {
+                UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"unlock"];
+                cell.segmentUnlockType.selectedSegmentIndex = [[[NSUserDefaults standardUserDefaults] objectForKey:UNLOCK_TYPE] integerValue] == EmotionDiaryUnlockTypeSelfie ? 0 : 1;
+                return cell;
+            }
         }
     }else if (indexPath.section == 2){
         if (indexPath.row == 0) {
@@ -171,7 +182,7 @@
             struct utsname systemInfo;
             uname(&systemInfo);
             NSString *platform = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
-            MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
+            MFMailComposeViewController *mail = [MFMailComposeViewController new];
             mail.mailComposeDelegate = self;
             [mail.navigationBar setBarStyle:[UINavigationBar appearance].barStyle];
             [mail.navigationBar setTintColor:[UINavigationBar appearance].tintColor];
