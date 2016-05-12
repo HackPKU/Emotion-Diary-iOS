@@ -5,6 +5,7 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 ## 功能与特点
 
 * 自拍解锁，App 进入后台后自动锁定
+* 可以本地使用或者在线使用，两者互不干扰
 
 ## 开发者
 

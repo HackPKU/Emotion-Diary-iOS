@@ -208,6 +208,7 @@ static EmotionDiaryManager *sharedManager;
                 [syncQueue addObject:@{@"diary": diary, @"state": SYNC_STATE_WAITING}];
             }
         }
+        [self postSyncNotification:[NSNumber numberWithInt:NO_DIARY_ID]];
         [self sync];
     }
 }
@@ -216,34 +217,38 @@ static EmotionDiaryManager *sharedManager;
     if (!isSyncing || self.totalSyncNumber == 0) {
         isSyncing = NO;
         [syncQueue removeAllObjects];
-        [self postSyncNotification];
         return;
     }
     NSMutableDictionary *dict = [syncQueue[0] mutableCopy];
     dict[@"state"] = SYNC_STATE_SYNCING;
     [syncQueue setObject:dict atIndexedSubscript:0];
-    [self postSyncNotification];
     [dict[@"diary"] uploadToServerWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
         if (!success) { // 放到同步队列的末尾等待重试
             dict[@"state"] = message;
             [syncQueue addObject:dict];
         }
         [syncQueue removeObjectAtIndex:0];
+        [self postSyncNotification:[NSNumber numberWithInt:((EmotionDiary *)dict[@"diary"]).diaryID]];
         [self sync];
     }];
 }
 
 - (void)stopSyncing {
     isSyncing = NO;
+    [self postSyncNotification:[NSNumber numberWithInt:NO_DIARY_ID]];
 }
 
-- (void)postSyncNotification {
+- (void)postSyncNotification:(NSNumber *)diaryID {
     // 因为接收通知的线程一般都需要更新UI，所以在主线程发通知
+    NSDictionary *dict;
+    if ([diaryID intValue] != NO_DIARY_ID) {
+        dict = @{DIARY_ID: diaryID};
+    }
     if ([[NSThread currentThread] isMainThread]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_PROGRESS_CHANGED_NOTIFOCATION object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_PROGRESS_CHANGED_NOTIFOCATION object:nil userInfo:dict];
     }else {
         dispatch_sync(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_PROGRESS_CHANGED_NOTIFOCATION object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_PROGRESS_CHANGED_NOTIFOCATION object:nil userInfo:dict];
         });
     }
 }

@@ -12,6 +12,7 @@
 
 @interface DiaryTableViewController : UITableViewController <ZYBannerViewDelegate, ZYBannerViewDataSource, MWPhotoBrowserDelegate> {
     NSMutableArray<UIImageView *> *imageViews;
+    int imageBrowserMode;
 }
 
 @property EmotionDiary *diary;

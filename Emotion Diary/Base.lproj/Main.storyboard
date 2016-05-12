@@ -842,11 +842,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="130"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="J88-Id-6Xb">
+                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="J88-Id-6Xb">
                                                     <rect key="frame" x="23" y="28" width="89" height="89"/>
+                                                    <gestureRecognizers/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="J88-Id-6Xb" secondAttribute="height" multiplier="1:1" id="b58-G9-wIi"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="87k-Bc-Kdv" appends="YES" id="6Ix-xw-s6N"/>
+                                                    </connections>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5月1日 12:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Pi-aB-7vc">
                                                     <rect key="frame" x="132" y="28" width="132.5" height="30"/>
@@ -895,7 +899,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="今天没吃药感觉自己萌萌哒" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ief-Uu-lfv">
-                                                    <rect key="frame" x="16" y="8" width="568" height="64"/>
+                                                    <rect key="frame" x="23" y="8" width="554" height="64"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -903,10 +907,10 @@
                                                 </textView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="ief-Uu-lfv" secondAttribute="trailing" constant="8" id="KZM-P4-miG"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ief-Uu-lfv" secondAttribute="trailing" constant="15" id="KZM-P4-miG"/>
                                                 <constraint firstItem="ief-Uu-lfv" firstAttribute="bottom" secondItem="heD-5m-Jus" secondAttribute="bottomMargin" id="lIV-Ks-vsh"/>
                                                 <constraint firstItem="ief-Uu-lfv" firstAttribute="top" secondItem="heD-5m-Jus" secondAttribute="topMargin" id="rja-2g-gM7"/>
-                                                <constraint firstItem="ief-Uu-lfv" firstAttribute="leading" secondItem="heD-5m-Jus" secondAttribute="leadingMargin" constant="8" id="xUi-u3-5xz"/>
+                                                <constraint firstItem="ief-Uu-lfv" firstAttribute="leading" secondItem="heD-5m-Jus" secondAttribute="leadingMargin" constant="15" id="xUi-u3-5xz"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -976,6 +980,11 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TqP-yJ-am0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="87k-Bc-Kdv">
+                    <connections>
+                        <action selector="touchSelfie:" destination="8IW-4c-vs6" id="KS1-tx-vE5"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1867" y="1155"/>
         </scene>

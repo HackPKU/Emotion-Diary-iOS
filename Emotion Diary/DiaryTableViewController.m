@@ -8,6 +8,9 @@
 
 #import "DiaryTableViewController.h"
 
+#define BROWSE_SELFIE 1
+#define BROWSE_IMAGE 2
+
 @interface DiaryTableViewController ()
 
 @end
@@ -22,7 +25,7 @@
     _cycleImageView.layer.shadowOpacity = 0.75;
     _cycleImageView.layer.shadowRadius = 6.0;
     imageViews = [NSMutableArray new];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:SYNC_PROGRESS_CHANGED_NOTIFOCATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:SYNC_PROGRESS_CHANGED_NOTIFOCATION object:nil];
     
     [self updateDiaryView];
         
@@ -54,8 +57,10 @@
     [_cycleImageView stopTimer];
 }
 
-- (void)refresh {
-    [self getFullVersion];
+- (void)refresh:(NSNotification *)noti {
+    if (_diary.diaryID == NO_DIARY_ID || [noti.userInfo[DIARY_ID] intValue] == _diary.diaryID) {
+        [self getFullVersion];
+    }
 }
 
 - (void)getFullVersion {
@@ -179,28 +184,61 @@
     MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
     browser.enableGrid = YES;
     [browser setCurrentPhotoIndex:index];
+    imageBrowserMode = BROWSE_IMAGE;
     [self.navigationController pushViewController:browser animated:YES];
 }
 
 #pragma mark - MWPhotoBrowser delegate
 
 - (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
-    return _diary.images.count;
+    switch (imageBrowserMode) {
+        case BROWSE_SELFIE:
+            return 1;
+        case BROWSE_IMAGE:
+            return _diary.images.count;
+        default:
+            return 0;
+    }
 }
 
 - (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
-    if (index < _diary.images.count) {
-        if (_diary.hasOnlineVersion) {
-            return [MWPhoto photoWithURL:[ActionPerformer getImageURLWithName:_diary.images[index] type:EmotionDiaryImageTypeImage]];
-        }else {
-            return [MWPhoto photoWithImage:_diary.imageImages[index]];
-        }
+    switch (imageBrowserMode) {
+        case BROWSE_SELFIE:
+            if (_diary.hasOnlineVersion) {
+                return [MWPhoto photoWithURL:[ActionPerformer getImageURLWithName:_diary.selfie type:EmotionDiaryImageTypeSelfie]];
+            }else {
+                return [MWPhoto photoWithImage:_imageSelfie.image];
+            }
+        case BROWSE_IMAGE:
+            if (index < _diary.images.count) {
+                if (_diary.hasOnlineVersion) {
+                    return [MWPhoto photoWithURL:[ActionPerformer getImageURLWithName:_diary.images[index] type:EmotionDiaryImageTypeImage]];
+                }else {
+                    return [MWPhoto photoWithImage:_diary.imageImages[index]];
+                }
+            }
+            return nil;
+        default:
+            return nil;
     }
-    return nil;
 }
 
 - (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser thumbPhotoAtIndex:(NSUInteger)index {
-    return [self photoBrowser:photoBrowser photoAtIndex:index];
+    switch (imageBrowserMode) {
+        case BROWSE_SELFIE:
+            return nil;
+        case BROWSE_IMAGE:
+            return [self photoBrowser:photoBrowser photoAtIndex:index];
+        default:
+            return nil;
+    }
+}
+
+- (IBAction)touchSelfie:(id)sender {
+    MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+    browser.enableGrid = NO;
+    imageBrowserMode = BROWSE_SELFIE;
+    [self.navigationController pushViewController:browser animated:YES];
 }
 
 - (IBAction)delete:(id)sender {

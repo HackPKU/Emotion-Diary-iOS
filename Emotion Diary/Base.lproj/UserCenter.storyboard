@@ -519,15 +519,19 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="600" height="199.5"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="u90-eY-eQ2">
-                                                                <rect key="frame" x="245" y="25" width="110" height="110"/>
+                                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="u90-eY-eQ2">
+                                                                <rect key="frame" x="240" y="20" width="120" height="120"/>
+                                                                <gestureRecognizers/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="110" id="Ych-Mf-5C9"/>
+                                                                    <constraint firstAttribute="width" constant="120" id="Ych-Mf-5C9"/>
                                                                     <constraint firstAttribute="width" secondItem="u90-eY-eQ2" secondAttribute="height" multiplier="1:1" id="fx2-Ti-T9s"/>
                                                                 </constraints>
+                                                                <connections>
+                                                                    <outletCollection property="gestureRecognizers" destination="V7t-Pv-NjV" appends="YES" id="Rid-hT-pBQ"/>
+                                                                </connections>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="好男人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vhv-za-QdV">
-                                                                <rect key="frame" x="272" y="155" width="57" height="23"/>
+                                                                <rect key="frame" x="272" y="160" width="57" height="23"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
@@ -621,6 +625,11 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dj4-7R-9E7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="V7t-Pv-NjV">
+                    <connections>
+                        <action selector="touchIcon:" destination="36w-LO-aYy" id="ZqD-UB-g1I"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3491" y="-1362"/>
         </scene>
