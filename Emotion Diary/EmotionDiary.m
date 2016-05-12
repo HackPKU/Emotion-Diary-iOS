@@ -77,7 +77,7 @@
 }
 
 - (NSString *)getFileName {
-    // Time as file name
+    // 创建时间作为本地文件名，时间精确到秒，以与服务器兼容
     return [Utilities MD5:[[ActionPerformer PRCStandardDateFormatter] stringFromDate:_createTime]];
 }
 
@@ -89,10 +89,11 @@
         }
         
         if (!self.hasOnlineVersion) {
+            // 图片文件名使用随机数字
             if (_imageSelfie) {
                 NSString *selfieName;
                 do {
-                    selfieName = [NSString stringWithFormat:@"%d", arc4random() % (int)1e8]; // Random number as file name
+                    selfieName = [NSString stringWithFormat:@"%d", arc4random() % (int)1e8];
                 }while ([Utilities fileExistsAtPath:SELFIE_PATH withName:selfieName]);
                 if (![Utilities createFile:UIImageJPEGRepresentation(_imageSelfie, 0.25) atPath:SELFIE_PATH withName:selfieName]) {
                     block(NO, @"自拍文件写入失败", nil);
@@ -105,7 +106,7 @@
             for (UIImage *image in _imageImages) {
                 NSString *imageName;
                 do {
-                    imageName = [NSString stringWithFormat:@"%d", arc4random() % (int)1e8]; // Random number as file name
+                    imageName = [NSString stringWithFormat:@"%d", arc4random() % (int)1e8];
                 }while ([Utilities fileExistsAtPath:IMAGES_PATH withName:imageName]);
                 if (![Utilities createFile:UIImageJPEGRepresentation(image, 0.25) atPath:IMAGES_PATH withName:imageName]) {
                     block(NO, @"图片文件写入失败", nil);
