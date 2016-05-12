@@ -9,6 +9,7 @@
 #import "WelcomeViewController.h"
 #import "CalendarViewController.h"
 #import "RecordTableViewController.h"
+#import "UserTableViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <LocalAuthentication/LocalAuthentication.h>
 
@@ -44,7 +45,7 @@
     }
 #endif
     
-    [self performSelector:@selector(animateButtonCamera) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(animateButtonUnlock) withObject:nil afterDelay:0.5];
     
     // Do any additional setup after loading the view.
     
@@ -57,10 +58,9 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"hasShownWelcome"] boolValue] == NO) {
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID] length] == 0 && ![ActionPerformer hasLoggedIn]) {
         // TODO: Welcome logic
         
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"hasShownWelcome"];
     }
 }
 
@@ -69,14 +69,14 @@
     shouldStopAnimate = YES;
 }
 
-- (void)animateButtonCamera {
+- (void)animateButtonUnlock {
     [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-        _buttonCamera.alpha = 1.5 - _buttonCamera.alpha;
+        _buttonUnlock.alpha = 1.5 - _buttonUnlock.alpha;
     } completion:^(BOOL finished) {
         if (shouldStopAnimate) {
-            _buttonCamera.alpha = 1.0;
+            _buttonUnlock.alpha = 1.0;
         }else {
-            [self animateButtonCamera];
+            [self animateButtonUnlock];
         }
     }];
 }
@@ -87,11 +87,11 @@
         button.enabled = unlocked;
         button.alpha = unlocked ? 1.0 : 0.6;
     }
-    _buttonCamera.userInteractionEnabled = !unlocked;
+    _buttonUnlock.userInteractionEnabled = !unlocked;
     _labelHint.text = unlocked ? @"解锁成功" : @"自拍解锁";
     if (!unlocked && shouldStopAnimate) {
         shouldStopAnimate = NO;
-        [self animateButtonCamera];
+        [self animateButtonUnlock];
     }
     if (unlocked && _shouldDismissAfterUnlock) {
         [self performSelector:@selector(dismiss) withObject:nil afterDelay:0.5];
@@ -100,73 +100,29 @@
 
 - (void)directUnlock {
     if ([[Utilities getCurrentViewController] isKindOfClass:self.class] && !hasUnkocked) {
-        [self takePicture:nil];
+        [self unlock:nil];
     }
 }
 
-- (IBAction)takePicture:(id)sender {
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        imagePicker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
-    }else {
-        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+- (IBAction)unlock:(id)sender {
+    switch ([[[NSUserDefaults standardUserDefaults] objectForKey:UNLOCK_TYPE] integerValue]) {
+        case EmotionDiaryUnlockTypeSelfie:
+            [self unlockWithSelfie];
+            break;
+        case EmotionDiaryUnlockTypeTouchID:
+            [self unlockWithTouchID];
+            break;
+        default:
+            [self unlockWithSelfie];
+            break;
     }
-    imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
-    imagePicker.delegate = self;
-    [self presentViewController:imagePicker animated:YES completion:nil];
     shouldStopAnimate = YES;
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    selfie = [info objectForKey:UIImagePickerControllerOriginalImage];
-    selfie = [Utilities normalizedImage:selfie];
-#ifdef DEBUG_IMAGE
-    selfie = DEBUG_IMAGE;
-#endif
-    [picker dismissViewControllerAnimated:YES completion:^{
-        [self analyzeSelfie:selfie];
-    }];
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    [picker dismissViewControllerAnimated:YES completion:^{
-        [self showWarning];
-    }];
-}
-
-- (void)analyzeSelfie:(UIImage *)image {
-    [KVNProgress showWithStatus:@"分析中"];
-    NSString *successMessage;
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID] length] == 0) {
-        successMessage = @"人脸注册成功";
-    }else {
-        successMessage = @"人脸解锁成功";
-    }
-    ActionPerformerResultBlock block = ^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
-        if (!success) {
-            [KVNProgress showErrorWithStatus:message completion:^{
-                [self showWarning];
-            }];
-            return;
-        }
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            [self setUnlocked:YES];
-        });
-        emotion = [data[@"emotion"] intValue];
-        [KVNProgress showSuccessWithStatus:successMessage];
-    };
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID] length] == 0) {
-        [ActionPerformer registerFaceWithImage:image andBlock:block];
-    }else {
-        [ActionPerformer verifyFaceWithImage:image andBlock:block];
-    }
-}
-
 - (void)showWarning {
-    UIAlertController *action = [UIAlertController alertControllerWithTitle:@"警告" message:@"您必须通过认证才能解锁日记" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *action = [UIAlertController alertControllerWithTitle:@"抱歉" message:@"您必须通过认证才能解锁日记" preferredStyle:UIAlertControllerStyleAlert];
     [action addAction:[UIAlertAction actionWithTitle:@"自拍解锁" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self takePicture:nil];
+        [self unlockWithSelfie];
     }]];
     if ([[LAContext new] canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil]) {
         [action addAction:[UIAlertAction actionWithTitle:@"Touch ID" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -184,13 +140,80 @@
     [self presentViewController:action animated:YES completion:nil];
 }
 
+- (void)unlockWithSelfie {
+    UIImagePickerController *imagePicker = [UIImagePickerController new];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        imagePicker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+    }else {
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
+    imagePicker.delegate = self;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    selfie = [Utilities normalizedImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
+#ifdef DEBUG_IMAGE
+    selfie = DEBUG_IMAGE;
+#endif
+    [picker dismissViewControllerAnimated:YES completion:^{
+        [self analyzeSelfie:selfie];
+    }];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:^{
+        [self showWarning];
+    }];
+}
+
+- (void)analyzeSelfie:(UIImage *)image {
+    [KVNProgress showWithStatus:@"面部识别中"];
+    BOOL isRegister = ([[[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID] length] == 0);
+    ActionPerformerResultBlock block = ^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+        if (!success) {
+            [KVNProgress showErrorWithStatus:message completion:^{
+                [self showWarning];
+            }];
+            return;
+        }
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self setUnlocked:YES];
+        });
+        emotion = [data[@"emotion"] intValue];
+        if (isRegister) {
+            [KVNProgress showSuccessWithStatus:@"人脸注册成功" completion:^{
+                [WelcomeViewController showRookieWarningInViewController:self];
+            }];
+        }else {
+            [KVNProgress showSuccessWithStatus:@"人脸解锁成功"];
+        }
+    };
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID] length] == 0) {
+        [ActionPerformer registerFaceWithImage:image andBlock:block];
+    }else {
+        [ActionPerformer verifyFaceWithImage:image andBlock:block];
+    }
+}
+
++ (void)showRookieWarningInViewController:(UIViewController *)vc {
+    UIAlertController *action = [UIAlertController alertControllerWithTitle:@"提示" message:@"最初几次使用时，面部识别较为严格，请尽量使用清晰、明亮的照片" preferredStyle:UIAlertControllerStyleAlert];
+    [action addAction:[UIAlertAction actionWithTitle:@"好" style:UIAlertActionStyleCancel handler:nil]];
+    [vc presentViewController:action animated:YES completion:nil];
+}
+
 - (void)unlockWithTouchID {
     [[LAContext new] evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:@"使用 Touch ID 解锁情绪日记" reply:^(BOOL success, NSError * _Nullable error) {
         dispatch_sync(dispatch_get_main_queue(), ^{
             if (success) {
                 [self setUnlocked:YES];
             }else {
-                [KVNProgress showErrorWithStatus:@"Touch ID 认证失败"];
+                [KVNProgress showErrorWithStatus:@"Touch ID 认证失败" completion:^{
+                    [self showWarning];
+                }];
                 [self setUnlocked:NO];
                 hasUnkocked = YES; // 暂时设置此变量以防止自动自拍
             }
@@ -203,15 +226,18 @@
     [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = @"密码";
         textField.secureTextEntry = YES;
+        textField.keyboardType = UIKeyboardTypeASCIICapable;
     }];
     [alert addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [KVNProgress showWithStatus:@"验证中"];
         [ActionPerformer loginWithName:[[NSUserDefaults standardUserDefaults] objectForKey:USER_NAME] password:alert.textFields[0].text andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
             if (success) {
-                [KVNProgress dismiss];
+                [KVNProgress showSuccessWithStatus:@"密码验证成功"];
                 [self setUnlocked:YES];
             }else {
-                [KVNProgress showErrorWithStatus:message];
+                [KVNProgress showErrorWithStatus:message completion:^{
+                    [self showWarning];
+                }];
                 [self setUnlocked:NO];
             }
         }];
@@ -245,8 +271,11 @@
 
 - (IBAction)unwindToWelcomeView:(UIStoryboardSegue *)segue {
     if ([segue.sourceViewController isKindOfClass:[CalendarViewController class]]) {
+        selfie = nil;
+        emotion = NO_EMOTION;
         [self setUnlocked:NO];
-        [self performSelector:@selector(takePicture:) withObject:nil afterDelay:0.5];
+        shouldStopAnimate = YES;
+        [self performSelector:@selector(unlockWithSelfie) withObject:nil afterDelay:0.5];
     }
 }
 

@@ -18,6 +18,8 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 * 向开发者索取 `API_KEY` 和 `API_SECRET` 填入 `APIKey+APISecret.h`
 * 编译并运行程序
 
+> `DEBUG` 模式下，日志和错误会被详细地输出，可在 `Emotion Diary-Prefix.pch` 中取消定义 `DEBUG` 模式
+
 > 在 `DEBUG` 模式以及宏定义了 `DEBUG_IMAGE` 的情况下，进入 App 无需自拍自动解锁以方便测试，进入后台恢复后会自动退出验证界面，任意选择照片后会被替换为 `DEBUG_IMAGE`，该宏定义可在 `WelcomeViewController.m` 中修改或去除
 
 > 在 `DEBUG` 模式以及宏定义了 `LOCALHOST` 的情况下，使用 localhost 调试程序，如果需要使用在线的服务器，请在 `ActionPerformer.m` 中取消定义 `LOCALHOST`
@@ -27,24 +29,26 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 * 2016/04/25 完成功能构思和UI、图标概念设计
 * 2016/04/29 完成服务器 API 的编写
 * 2016/05/03 完成本地日记 App 的功能
+* 2016/05/09 完成注册和登录功能
 
 ## 重要类说明
 
 #### `EmotionDiary`
 
-* 日记类，遵循 `NSCoding` 协议，可实现对本地和在线日记的封装和存储
+* 日记类，遵循 `NSCoding` 协议，可实现对本地和在线日记的封装、读取和存储
 
 #### `EmotionDiaryManager`
 
 * 考虑到用户使用后日记数量可能很多，每次都从磁盘读取日记数据会导致极低的效率，因此建立一个专门的管理类用于大量日记数据的处理
 * 使用单例模式 `sharedManager`
 * 完成获取心情的统计数据功能，单例有一个内存中的 `diaries` 变量，与 `NSUserDefaults` 保持同步，可以极大地提高查询的效率
-* 完成对本地和在线单篇日记的存储
+* 完成对本地和在线单篇日记的记录
+* 完成日记的同步功能
 
 #### `ActionPerformer`
 
 * 用于执行一些网络和本地动作，所有函数均为类函数，网络动作使用 block 与其它函数通讯
-* 总体上分为服务器通讯模块，人脸识别模块，本地功能模块
+* 总体上分为服务器通讯模块，面部识别模块，本地功能模块
 
 #### `Utilities`
 

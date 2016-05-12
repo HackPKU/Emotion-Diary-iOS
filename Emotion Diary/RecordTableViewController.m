@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    images = [[NSMutableArray alloc] init];
+    images = [NSMutableArray new];
     showCamera = YES;
     _imageSelfie.layer.cornerRadius = _imageSelfie.frame.size.width / 2;
     [self setSelfieImage];
@@ -30,8 +30,6 @@
         _emotion = 50;
     }
     _sliderEmotion.value = _emotion;
-    _sliderEmotion.userInteractionEnabled = _selfie ? NO : YES;
-    _sliderEmotion.alpha = _selfie ? 0.0 : 1.0;
     [self updateEmotion];
     
     _textRecord.scrollsToTop = NO;
@@ -53,6 +51,10 @@
     UIImage *displaySelfie = _selfie;
     if (!displaySelfie) {
         displaySelfie = PLACEHOLDER_IMAGE;
+    }else {
+#ifndef DEBUG
+        _buttonCamera.hidden = YES;
+#endif
     }
     _imageSelfie.image = displaySelfie;
     _imageSelfieBlurred.image = displaySelfie;
@@ -143,20 +145,29 @@
 
 #pragma mark - Emotion adjust
 
-- (IBAction)showEmotionSlider:(id)sender {
-    _sliderEmotion.userInteractionEnabled = !_sliderEmotion.userInteractionEnabled;
-    [UIView animateWithDuration:0.3 animations:^{
-        _sliderEmotion.alpha = 1 - _sliderEmotion.alpha;
-    }];
-}
-
 - (IBAction)emotionChanged:(UISlider *)sender {
     _emotion = (int)sender.value;
     [self updateEmotion];
 }
 
 - (void)updateEmotion {
-    [_buttonFace setImage:[ActionPerformer getFaceImageByEmotion:_emotion] forState:UIControlStateNormal];
+    _imageFace.image = [ActionPerformer getFaceImageByEmotion:_emotion];
+}
+
+#pragma mark - Retake photo
+
+- (IBAction)retakePhoto:(id)sender {
+    UIImagePickerController *imagePicker = [UIImagePickerController new];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        imagePicker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+    }else {
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
+    imagePicker.delegate = self;
+    isTakingSelfie = YES;
+    [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
 #pragma mark - Image picker collection view
@@ -238,7 +249,7 @@
     UIAlertController *action = [UIAlertController alertControllerWithTitle:@"选择图片来源" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [action addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            UIImagePickerController *imagePicker = [UIImagePickerController new];
             imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
             imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
             imagePicker.delegate = self;
@@ -263,13 +274,25 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    [self addImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
+    if (isTakingSelfie) {
+        _selfie = [Utilities normalizedImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
+        [self setSelfieImage];
+    }else {
+        [self addImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
+    }
+    isTakingSelfie = NO;
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    isTakingSelfie = NO;
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)presentImagePicker:(UIButton *)sender {
     [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status){
         dispatch_async(dispatch_get_main_queue(), ^{
-            CTAssetsPickerController *picker = [[CTAssetsPickerController alloc] init];
+            CTAssetsPickerController *picker = [CTAssetsPickerController new];
             picker.delegate = self;
             picker.showsEmptyAlbums = NO;
             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -285,7 +308,7 @@
 - (void)assetsPickerController:(CTAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets {
     [picker dismissViewControllerAnimated:YES completion:^{
         for (PHAsset *asset in assets) {
-            PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+            PHImageRequestOptions *options = [PHImageRequestOptions new];
             options.version = PHImageRequestOptionsVersionCurrent;
             options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
             options.synchronous = YES;
@@ -322,15 +345,17 @@
 - (IBAction)done:(id)sender {
     EmotionDiary *diary = [[EmotionDiary alloc] initWithEmotion:(int)_sliderEmotion.value selfie:_selfie images:images tags:nil text:_textRecord.text placeName:nil placeLong:0.0 placeLat:0.0 weather:nil];
     [KVNProgress showWithStatus:@"日记保存中"];
-    [diary writeToDiskWithBlock:^(BOOL success, NSObject * _Nullable data) {
-        if (success) {
-            [KVNProgress showSuccessWithStatus:@"日记保存成功"];
-        }else {
-            [KVNProgress showErrorWithStatus:@"日记保存失败"];
-        }
-        [self.navigationController dismissViewControllerAnimated:YES completion:^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:ENTER_MAIN_VIEW_NOTIFICATION object:nil];
-        }];
+    [diary writeToDiskWithBlock:^(BOOL success, NSString *message, NSObject * _Nullable data) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            if (success) {
+                [KVNProgress showSuccessWithStatus:@"日记保存成功"];
+            }else {
+                [KVNProgress showErrorWithStatus:message];
+            }
+            [self.navigationController dismissViewControllerAnimated:YES completion:^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:ENTER_MAIN_VIEW_NOTIFICATION object:nil];
+            }];
+        });
     }];
 }
 

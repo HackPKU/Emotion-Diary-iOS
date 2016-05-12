@@ -1,22 +1,28 @@
 //
-//  StatTableViewCell.m
+//  UserTableViewCell.m
 //  Emotion Diary
 //
-//  Created by 范志康 on 16/5/3.
+//  Created by 范志康 on 16/5/9.
 //  Copyright © 2016年 范志康. All rights reserved.
 //
 
-#import "StatTableViewCell.h"
+#import "UserTableViewCell.h"
 
-@implementation StatTableViewCell
+@implementation UserTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
     
-    _lineChart.delegate = self;
-    _lineChart.dataSource = self;
-    [self changeScope:_segmentScope];
+    if (_lineChart) {
+        _lineChart.delegate = self;
+        _lineChart.dataSource = self;
+        [self changeScope:_segmentScope];
+    }
+    
+    if (_imageIcon) {
+        _imageIcon.layer.cornerRadius = _imageIcon.frame.size.width / 2;
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

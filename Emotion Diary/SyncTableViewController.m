@@ -1,24 +1,22 @@
 //
-//  TimelineTableViewController.m
+//  SyncTableViewController.m
 //  Emotion Diary
 //
-//  Created by 范志康 on 16/5/2.
+//  Created by 范志康 on 16/5/11.
 //  Copyright © 2016年 范志康. All rights reserved.
 //
 
-#import "TimelineTableViewController.h"
-#import "CalendarTableViewCell.h"
-#import "DiaryTableViewController.h"
+#import "SyncTableViewController.h"
+#import "SyncTableViewCell.h"
 
-@interface TimelineTableViewController ()
+@interface SyncTableViewController ()
 
 @end
 
-@implementation TimelineTableViewController
+@implementation SyncTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    totalNumber = [[EmotionDiaryManager sharedManager] totalDiaryNumber];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:SYNC_PROGRESS_CHANGED_NOTIFOCATION object:nil];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -44,31 +42,28 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return MAX(totalNumber, 1);
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (totalNumber > 0) {
-        return 155.0;
-    }else {
-        return 100.0;
-    }
+    return MAX([[EmotionDiaryManager sharedManager] totalSyncNumber], 1);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (totalNumber > 0) {
-        CalendarTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"diary" forIndexPath:indexPath];
-        cell.diary = [[EmotionDiaryManager sharedManager] getDiaryOfIndex:indexPath.row];
-        return cell;
-    }else {
-        return [tableView dequeueReusableCellWithIdentifier:@"noDiary" forIndexPath:indexPath];
+    if ([[EmotionDiaryManager sharedManager] totalSyncNumber] == 0) {
+        return [tableView dequeueReusableCellWithIdentifier:@"noSync" forIndexPath:indexPath];
     }
-}
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    SyncTableViewCell *cell;
+    NSDictionary *dict = [[EmotionDiaryManager sharedManager] getSyncDataOfIndex:indexPath.row];
+    if ([dict[@"state"] isEqualToString:SYNC_STATE_SYNCING]) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"syncing" forIndexPath:indexPath];
+    }else if ([dict[@"state"] isEqualToString:SYNC_STATE_WAITING]){
+        cell = [tableView dequeueReusableCellWithIdentifier:@"waiting" forIndexPath:indexPath];
+    }else {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"error" forIndexPath:indexPath];
+        cell.labelError.text = dict[@"state"];
+    }
+    [cell setDiary:dict[@"diary"]];
+    
+    // Configure the cell...
+    
+    return cell;
 }
 
 /*
@@ -105,17 +100,22 @@
 }
 */
 
-- (IBAction)search:(id)sender {
+- (IBAction)stop:(id)sender {
+    [[EmotionDiaryManager sharedManager] stopSyncing];
 }
+
+- (IBAction)sync:(id)sender {
+    [[EmotionDiaryManager sharedManager] startSyncing];
+}
+
+/*
+#pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"viewDiary"]) {
-        DiaryTableViewController *dest = [[[segue destinationViewController] viewControllers] firstObject];
-        dest.diary = ((CalendarTableViewCell *)sender).diary;
-    }
 }
+*/
 
 @end

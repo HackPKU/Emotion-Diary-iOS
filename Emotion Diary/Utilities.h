@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param string The data to be calculated
  * @return MD5 encrypted string
  */
-+ (NSString *)MD5:(NSString *)string;
++ (NSString * _Nullable)MD5:(NSString * _Nullable)string;
 
 /**
  * Check whether the string is a valid Email
@@ -101,6 +101,16 @@ NS_ASSUME_NONNULL_BEGIN
  * @return Whether the file is created successfully
  */
 + (BOOL)createFile:(NSData *)data atPath:(NSString *)path withName:(NSString *)name;
+
+/**
+ * Delete the file at the given path
+ 
+ * The root directory is the document directory
+ * @param path The required path
+ * @param name The file name
+ * @return Whether the file is deleted successfully or YES if the file doesn't exist
+ */
++ (BOOL)deleteFileAtPath:(NSString *)path withName:(NSString *)name;
 
 /**
  * Get the file at the given path

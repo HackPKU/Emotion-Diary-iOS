@@ -93,7 +93,7 @@
             cell.textContent.secureTextEntry = YES;
             cell.textContent.keyboardType = UIKeyboardTypeASCIICapable;
         }else if (indexPath.row == EMAIL_INDEX) {
-            cell.textContent.placeholder = @"邮箱，选填";
+            cell.textContent.placeholder = @"邮箱，选填，找回密码时使用";
             cell.textContent.secureTextEntry = NO;
             cell.textContent.keyboardType = UIKeyboardTypeEmailAddress;
         }
@@ -114,6 +114,16 @@
         return cell.segmentSex;
     }
     return nil;
+}
+
+- (IBAction)didEndOnExit:(id)sender {
+    if (sender == [self getContentAtIndex:USER_NAME_INDEX]) {
+        [[self getContentAtIndex:PASSWORD_INDEX] becomeFirstResponder];
+    }else if (sender == [self getContentAtIndex:PASSWORD_INDEX]) {
+        [[self getContentAtIndex:PASSWORD_SURE_INDEX] becomeFirstResponder];
+    }else if (sender == [self getContentAtIndex:PASSWORD_SURE_INDEX]) {
+        [[self getContentAtIndex:EMAIL_INDEX] becomeFirstResponder];
+    }
 }
 
 - (IBAction)register:(id)sender {
@@ -149,8 +159,9 @@
         [self presentViewController:action animated:YES completion:nil];
         return;
     }
+    [self.view endEditing:YES];
     [KVNProgress showWithStatus:@"注册中"];
-    [ActionPerformer registerWithName:name password:password sex:sex email:email icon:nil andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+    [ActionPerformer registerWithName:name password:password sex:sex email:email icon:nil personID:[[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
         if (!success) {
             [KVNProgress showErrorWithStatus:message];
             return;
@@ -159,7 +170,7 @@
         [KVNProgress showSuccessWithStatus:@"注册成功" completion:^{
             [self dismissViewControllerAnimated:YES completion:^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:REGISTER_COMPLETED_NOTIFOCATION object:nil];
-                [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_COMPLETED_NOTIFICATION object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:USER_CHANGED_NOTIFICATION object:nil];
             }];
         }];
     }];

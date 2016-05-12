@@ -18,8 +18,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setCalendarScope:self.view.frame.size.height];
+    [self setCalendarScope:[NSNumber numberWithFloat:self.view.frame.size.height]];
     diariesOfToday = [[EmotionDiaryManager sharedManager] getDiaryOfDate:[NSDate date]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:SYNC_PROGRESS_CHANGED_NOTIFOCATION object:nil];
     
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -31,11 +32,11 @@
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-    [self setCalendarScope:size.height];
+    [self performSelector:@selector(setCalendarScope:) withObject:[NSNumber numberWithFloat:size.height] afterDelay:[coordinator transitionDuration]];
 }
 
-- (void)setCalendarScope:(CGFloat)height {
-    if (height >= 500) {
+- (void)setCalendarScope:(NSNumber *)height {
+    if ([height floatValue] >= 500) {
         [_calendar setScope:FSCalendarScopeMonth animated:YES];
     }else {
         [_calendar setScope:FSCalendarScopeWeek animated:YES];
@@ -57,6 +58,11 @@
 
 - (NSInteger)calendar:(FSCalendar *)calendar numberOfEventsForDate:(NSDate *)date {
     return [[EmotionDiaryManager sharedManager] getDiaryOfDate:date].count;
+}
+
+- (void)refresh {
+    diariesOfToday = [[EmotionDiaryManager sharedManager] getDiaryOfDate:_calendar.selectedDate ? _calendar.selectedDate : [NSDate date]];
+    [_detailTableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -81,7 +87,7 @@
     if (diariesOfToday.count > 0) {
         CalendarTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"diary" forIndexPath:indexPath];
         cell.labelDate.hidden = (indexPath.row != 0);
-        [cell setDiary:diariesOfToday[indexPath.row]];
+        cell.diary = diariesOfToday[indexPath.row];
         return cell;
     }else {
         return [tableView dequeueReusableCellWithIdentifier:@"noDiary" forIndexPath:indexPath];
@@ -102,7 +108,7 @@
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"viewDiary"]) {
         DiaryTableViewController *dest = [[[segue destinationViewController] viewControllers] firstObject];
-        dest.simpleDiary = ((CalendarTableViewCell *)sender).savedDiary;
+        dest.diary = ((CalendarTableViewCell *)sender).diary;
     }
 }
 

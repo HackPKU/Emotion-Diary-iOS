@@ -12,7 +12,10 @@
 
 @implementation Utilities
 
-+ (NSString *)MD5:(NSString *)string {
++ (NSString * _Nullable)MD5:(NSString * _Nullable)string {
+    if (!string) {
+        return nil;
+    }
     const char* cStr = [string UTF8String];
     unsigned char digist[CC_MD5_DIGEST_LENGTH]; // CC_MD5_DIGEST_LENGTH = 16
     CC_MD5(cStr, (unsigned int)strlen(cStr), digist);
@@ -116,12 +119,7 @@
 + (BOOL)fileExistsAtPath:(NSString *)path withName:(NSString *)name {
     NSFileManager *manager = [NSFileManager defaultManager];
     NSString *fullPath = [NSString stringWithFormat:@"%@/%@/%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0], path, name];
-    BOOL isDirectory;
-    if (![manager fileExistsAtPath:fullPath isDirectory:&isDirectory]) {
-        return NO;
-    }else {
-        return isDirectory;
-    }
+    return [manager fileExistsAtPath:fullPath];
 }
 
 + (BOOL)createFile:(NSData *)data atPath:(NSString *)path withName:(NSString *)name {
@@ -131,6 +129,15 @@
         return NO;
     }
     return [manager createFileAtPath:fullPath contents:data attributes:nil];
+}
+
++ (BOOL)deleteFileAtPath:(NSString *)path withName:(NSString *)name {
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSString *fullPath = [NSString stringWithFormat:@"%@/%@/%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0], path, name];
+    if (![manager fileExistsAtPath:fullPath]) {
+        return YES;
+    }
+    return [manager removeItemAtPath:fullPath error:nil];
 }
 
 + (NSData * _Nullable)getFileAtPath:(NSString *)path withName:(NSString *)name {

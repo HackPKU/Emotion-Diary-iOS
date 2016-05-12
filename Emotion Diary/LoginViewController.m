@@ -76,20 +76,24 @@
         [self presentViewController:action animated:YES completion:nil];
         return;
     }
+    [self.view endEditing:YES];
     [KVNProgress showWithStatus:@"登录中"];
     [ActionPerformer loginWithName:username password:password andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable dataLogin) {
         if (!success) {
             [KVNProgress showErrorWithStatus:message];
             return;
         }
+        [[NSUserDefaults standardUserDefaults] setValuesForKeysWithDictionary:@{USER_ID : dataLogin[@"userid"], TOKEN: dataLogin[@"token"]}];
         [ActionPerformer viewUserWithName:dataLogin[@"name"] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable dataUserInfo) {
             if (!success) {
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_ID];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:TOKEN];
                 [KVNProgress showErrorWithStatus:message];
                 return;
             }
+            // TODO: PersonID 与本地不一致时的处理
             [[NSUserDefaults standardUserDefaults] setValuesForKeysWithDictionary:@{USER_ID : dataLogin[@"userid"], TOKEN: dataLogin[@"token"], USER_NAME: dataLogin[@"name"], USER_INFO: dataUserInfo}];
-            // TODO: Handle faceID not match
-            [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_COMPLETED_NOTIFICATION object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:USER_CHANGED_NOTIFICATION object:nil];
             [KVNProgress showSuccessWithStatus:@"登陆成功" completion:^{
                 [self dismissViewControllerAnimated:YES completion:nil];
             }];
