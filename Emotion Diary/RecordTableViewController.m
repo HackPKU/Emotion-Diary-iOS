@@ -24,14 +24,15 @@
     images = [NSMutableArray new];
     showCamera = YES;
     _imageSelfie.layer.cornerRadius = _imageSelfie.frame.size.width / 2;
-    [self setSelfieImage];
+    _imageSelfie.layer.borderColor = [UIColor whiteColor].CGColor;
+    _imageSelfie.layer.borderWidth = 1.0;
     
+    [self setSelfieImage];
     if (_emotion == NO_EMOTION) {
         _emotion = 50;
     }
     _sliderEmotion.value = _emotion;
     [self updateEmotion];
-    
     _textRecord.scrollsToTop = NO;
     [self textViewDidChange:_textRecord];
     
@@ -49,12 +50,11 @@
 
 - (void)setSelfieImage {
     UIImage *displaySelfie = _selfie;
+#ifndef DEBUG
+    _buttonCamera.hidden = _selfie;
+#endif
     if (!displaySelfie) {
         displaySelfie = PLACEHOLDER_IMAGE;
-    }else {
-#ifndef DEBUG
-        _buttonCamera.hidden = YES;
-#endif
     }
     _imageSelfie.image = displaySelfie;
     _imageSelfieBlurred.image = displaySelfie;

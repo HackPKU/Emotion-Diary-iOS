@@ -1,23 +1,23 @@
 //
-//  SyncTableViewController.m
+//  UploadTableViewController.m
 //  Emotion Diary
 //
 //  Created by 范志康 on 16/5/11.
 //  Copyright © 2016年 范志康. All rights reserved.
 //
 
-#import "SyncTableViewController.h"
-#import "SyncTableViewCell.h"
+#import "UploadTableViewController.h"
+#import "UploadTableViewCell.h"
 
-@interface SyncTableViewController ()
+@interface UploadTableViewController ()
 
 @end
 
-@implementation SyncTableViewController
+@implementation UploadTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:SYNC_PROGRESS_CHANGED_NOTIFOCATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:UPLOAD_PROGRESS_CHANGED_NOTIFOCATION object:nil];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -42,22 +42,24 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return MAX([[EmotionDiaryManager sharedManager] totalSyncNumber], 1);
+    return MAX([[EmotionDiaryManager sharedManager] totalUploadNumber], 1);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([[EmotionDiaryManager sharedManager] totalSyncNumber] == 0) {
-        return [tableView dequeueReusableCellWithIdentifier:@"noSync" forIndexPath:indexPath];
+    if ([[EmotionDiaryManager sharedManager] totalUploadNumber] == 0) {
+        return [tableView dequeueReusableCellWithIdentifier:@"noUpload" forIndexPath:indexPath];
     }
-    SyncTableViewCell *cell;
-    NSDictionary *dict = [[EmotionDiaryManager sharedManager] getSyncDataOfIndex:indexPath.row];
-    if ([dict[@"state"] isEqualToString:SYNC_STATE_SYNCING]) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"syncing" forIndexPath:indexPath];
-    }else if ([dict[@"state"] isEqualToString:SYNC_STATE_WAITING]){
-        cell = [tableView dequeueReusableCellWithIdentifier:@"waiting" forIndexPath:indexPath];
-    }else {
+    UploadTableViewCell *cell;
+    NSDictionary *dict = [[EmotionDiaryManager sharedManager] getUploadDataOfIndex:indexPath.row];
+    if ([dict[@"state"] isKindOfClass:[NSString class]]) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"error" forIndexPath:indexPath];
         cell.labelError.text = dict[@"state"];
+    }else {
+        if ([dict[@"state"] isEqual:UPLOAD_STATE_SYNCING]) {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"uploading" forIndexPath:indexPath];
+        }else if ([dict[@"state"] isEqual:UPLOAD_STATE_WAITING]){
+            cell = [tableView dequeueReusableCellWithIdentifier:@"waiting" forIndexPath:indexPath];
+        }
     }
     [cell setDiary:dict[@"diary"]];
     
@@ -101,11 +103,11 @@
 */
 
 - (IBAction)stop:(id)sender {
-    [[EmotionDiaryManager sharedManager] stopSyncing];
+    [[EmotionDiaryManager sharedManager] stopUploading];
 }
 
-- (IBAction)sync:(id)sender {
-    [[EmotionDiaryManager sharedManager] startSyncing];
+- (IBAction)upload:(id)sender {
+    [[EmotionDiaryManager sharedManager] startUploading];
 }
 
 /*

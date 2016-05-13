@@ -5,6 +5,7 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 ## 功能与特点
 
 * 自拍解锁，App 进入后台后自动锁定
+* 可以本地使用或者在线使用，两者功能独立，也可互通数据
 
 ## 开发者
 
@@ -30,12 +31,13 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 * 2016/04/29 完成服务器 API 的编写
 * 2016/05/03 完成本地日记 App 的功能
 * 2016/05/09 完成注册和登录功能
+* 2016/05/14 完成日记上传和同步功能
 
 ## 重要类说明
 
 #### `EmotionDiary`
 
-* 日记类，遵循 `NSCoding` 协议，可实现对本地和在线日记的封装、读取和存储
+* 日记类，遵循 `NSCoding` 协议，可实现对本地和在线日记的封装、读取、上传、删除等管理
 
 #### `EmotionDiaryManager`
 
@@ -47,12 +49,12 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 
 #### `ActionPerformer`
 
-* 用于执行一些网络和本地动作，所有函数均为类函数，网络动作使用 block 与其它函数通讯
+* 用于执行一些网络和本地动作，所有函数均为类函数，网络部分使用 block 与其它函数通讯
 * 总体上分为服务器通讯模块，面部识别模块，本地功能模块
 
 #### `Utilities`
 
-* 用于实现一些常用的功能，例如加密，图片处理，文件管理等
+* 用于实现一些常用的功能，例如加密，验证，图片处理，文件管理等
 * 具体功能在注释中有详细说明
 
 ## 第三方库说明
@@ -63,5 +65,5 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 * `BEMSimpleLineGraph` 图表库，用于统计界面的统计图
 * `SDWebImage` 网络图片库，用于日记的头像和图片的加载和显示
 * `CTAssetsPickerController` 照片选择库，用于记录日记界面选择图片
-* `MWPhotoBrowser` 照片浏览库，用于记录日记和查看日记界面的图片浏览
+* `MWPhotoBrowser` 照片浏览库，用于多个界面的图片浏览
 * `ZYBannerView` 照片轮播器，用于查看日记界面的图片轮播

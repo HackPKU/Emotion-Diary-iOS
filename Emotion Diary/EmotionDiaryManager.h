@@ -8,22 +8,27 @@
 
 #import <Foundation/Foundation.h>
 
-#define SYNC_STATE_SYNCING @"EmotionDiarySyncStateSyncing"
-#define SYNC_STATE_WAITING @"EmotionDiarySyncStateWaiting"
+#define UPLOAD_STATE_SYNCING @1
+#define UPLOAD_STATE_WAITING @2
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface EmotionDiaryManager : NSObject {
     NSMutableArray<NSDictionary *> *diaries;
-    BOOL isSyncing;
-    NSMutableArray<NSDictionary *> *syncQueue;
+    BOOL isUploading;
+    NSMutableArray<NSDictionary *> *uploadQueue;
+    NSDateFormatter *PRCDateFormatter;
 }
 
 + (EmotionDiaryManager *)sharedManager; // 单例模式
 
+- (NSDateFormatter *)PRCDateFormatter;
+
 #pragma mark - Storage function
 
 - (BOOL)saveDiary:(EmotionDiary *)diary;
+
+- (BOOL)deleteDiary:(EmotionDiary *)diary;
 
 #pragma mark - Stat function
 
@@ -35,15 +40,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (EmotionDiary * _Nullable)getDiaryOfIndex:(NSInteger)index;
 
-#pragma mark - Sync function
+#pragma mark - Upload and sync function
 
-- (void)startSyncing;
+- (void)startUploading;
 
-- (void)stopSyncing;
+- (void)stopUploading;
 
-- (NSInteger)totalSyncNumber;
+- (NSInteger)totalUploadNumber;
 
-- (NSDictionary * _Nullable)getSyncDataOfIndex:(NSInteger)index;
+- (NSDictionary * _Nullable)getUploadDataOfIndex:(NSInteger)index;
+
+- (void)syncDiaryOfYear:(NSInteger)year month:(NSInteger)month fromServerWithBlock:(EmotionDiaryResultBlock)block;
 
 NS_ASSUME_NONNULL_END
 

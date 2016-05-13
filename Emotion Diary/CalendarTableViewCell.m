@@ -15,6 +15,9 @@
     // Initialization code
     
     _imageSelfie.layer.cornerRadius = _imageSelfie.frame.size.width / 2;
+    if (_viewContainer) {
+        _viewContainer.layer.cornerRadius = 10.0;
+    }
     formatter = [NSDateFormatter new];
 }
 
@@ -33,7 +36,13 @@
         if (diary.hasOnlineVersion) {
             [_imageSelfie sd_setImageWithURL:[ActionPerformer getImageURLWithName:diary.selfie type:EmotionDiaryImageTypeSelfie] placeholderImage:PLACEHOLDER_IMAGE options:SDWebImageProgressiveDownload];
         }else {
-            _imageSelfie.image = [UIImage imageWithData:[Utilities getFileAtPath:SELFIE_PATH withName:diary.selfie]];
+            // 后台读取文件 否则 cell 滚动流畅度低下
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                UIImage *image = [UIImage imageWithData:[Utilities getFileAtPath:SELFIE_PATH withName:diary.selfie]];
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    _imageSelfie.image = image;
+                });
+            });
         }
     }else {
         _imageSelfie.image = PLACEHOLDER_IMAGE;

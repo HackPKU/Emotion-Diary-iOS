@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MWPhotoBrowser.h"
 
-@interface InfoTableViewController : UITableViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
+@interface InfoTableViewController : UITableViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, MWPhotoBrowserDelegate> {
+    int imagePickerState;
     NSString *password;
 }
 

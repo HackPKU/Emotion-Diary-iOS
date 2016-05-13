@@ -19,6 +19,7 @@
 #define ENTER_MAIN_VIEW_NOTIFICATION @"EnterMainViewNotification"
 #define USER_CHANGED_NOTIFICATION @"UserChangedNotification"
 #define REGISTER_COMPLETED_NOTIFOCATION @"RegisterCompletedNotification"
+#define UPLOAD_PROGRESS_CHANGED_NOTIFOCATION @"UploadProgressChangedNotification"
 #define SYNC_PROGRESS_CHANGED_NOTIFOCATION @"SyncProgressChangedNotification"
 
 typedef NS_ENUM(NSInteger, EmotionDiaryImageType) {
@@ -59,13 +60,13 @@ typedef void (^ActionPerformerResultBlock)(BOOL success, NSString * _Nullable me
 
 + (void)shareDiaryWithDiaryID:(int)diaryID andBlock:(ActionPerformerResultBlock)block;
 
++ (void)viewShareListWithBlock:(ActionPerformerResultBlock)block;
+
 + (void)unshareDiaryWithDiaryID:(int)diaryID andBlock:(ActionPerformerResultBlock)block;
 
 + (void)uploadImage:(UIImage *)image type:(EmotionDiaryImageType)type andBlock:(ActionPerformerResultBlock)block;
 
 + (NSURL * _Nullable)getImageURLWithName:(NSString *)name type:(EmotionDiaryImageType)type;
-
-+ (NSDateFormatter *)PRCStandardDateFormatter;
 
 #pragma mark - Face++ connection
 

@@ -10,6 +10,10 @@
 #import "WelcomeViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
+#define NO_STATE 0
+#define CHANGE_ICON 1
+#define CHANGE_PERSON_ID 2
+
 @interface InfoTableViewController ()
 
 @end
@@ -20,18 +24,16 @@
     [super viewDidLoad];
     
     _imageIcon.layer.cornerRadius = _imageIcon.frame.size.width / 2;
+    _imageIcon.layer.borderColor = [UIColor whiteColor].CGColor;
+    _imageIcon.layer.borderWidth = 1.0;
     for (UIButton *button in @[_buttonResetFace, _buttonLogout]) {
         button.layer.cornerRadius = 5.0;
     }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUser) name:USER_CHANGED_NOTIFICATION object:nil];
     
     // TODO: Edit icon and userinfo function
-    
-    NSString *iconName = [[[NSUserDefaults standardUserDefaults] objectForKey:USER_INFO] objectForKey:@"icon"];
-    NSURL *iconURL = [ActionPerformer getImageURLWithName:iconName type:EmotionDiaryImageTypeIcon];
-    for (UIImageView *imageView in @[_imageIcon, _imageIconBlurred]) {
-        [imageView sd_setImageWithURL:iconURL placeholderImage:PLACEHOLDER_IMAGE options:SDWebImageProgressiveDownload];
-    }
-    _labelUserName.text = [[NSUserDefaults standardUserDefaults] objectForKey:USER_NAME];
+
+    [self refreshUser];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -105,6 +107,49 @@
 }
 */
 
+- (void)refreshUser {
+    NSString *iconName = [[[NSUserDefaults standardUserDefaults] objectForKey:USER_INFO] objectForKey:@"icon"];
+    NSURL *iconURL = [ActionPerformer getImageURLWithName:iconName type:EmotionDiaryImageTypeIcon];
+    for (UIImageView *imageView in @[_imageIcon, _imageIconBlurred]) {
+        [imageView sd_setImageWithURL:iconURL placeholderImage:PLACEHOLDER_IMAGE options:SDWebImageProgressiveDownload];
+    }
+    _labelUserName.text = [[NSUserDefaults standardUserDefaults] objectForKey:USER_NAME];
+}
+
+- (IBAction)touchIcon:(id)sender {
+    UIAlertController *action = [UIAlertController alertControllerWithTitle:@"选择操作" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [action addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            UIImagePickerController *imagePicker = [UIImagePickerController new];
+            imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            imagePicker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+            imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
+            imagePicker.delegate = self;
+            imagePickerState = CHANGE_ICON;
+            [self presentViewController:imagePicker animated:YES completion:nil];
+        }]];
+    }
+    [action addAction:[UIAlertAction actionWithTitle:@"照片图库" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIImagePickerController *imagePicker = [UIImagePickerController new];
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
+        imagePicker.delegate = self;
+        imagePickerState = CHANGE_ICON;
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    }]];
+    if ([[[[NSUserDefaults standardUserDefaults] objectForKey:USER_INFO] objectForKey:@"icon"] length] > 0) {
+        [action addAction:[UIAlertAction actionWithTitle:@"查看头像" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+            browser.enableGrid = NO;
+            [self.navigationController pushViewController:browser animated:YES];
+        }]];
+    }
+    [action addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    action.popoverPresentationController.sourceView = _imageIcon;
+    action.popoverPresentationController.sourceRect = _imageIcon.bounds;
+    [self presentViewController:action animated:YES completion:nil];
+}
+
 - (IBAction)resetFace:(id)sender {
     UIAlertController *action = [UIAlertController alertControllerWithTitle:@"提示" message:@"您将会重拍照片作为面部识别的依据" preferredStyle:UIAlertControllerStyleAlert];
     [action addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
@@ -129,17 +174,81 @@
         }
         imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
         imagePicker.delegate = self;
+        imagePickerState = CHANGE_PERSON_ID;
         [self presentViewController:imagePicker animated:YES completion:nil];
     }]];
     [action addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:action animated:YES completion:nil];
 }
 
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+    return 1;
+}
+
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    return [MWPhoto photoWithImage:_imageIcon.image];
+}
+
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *selfie = [Utilities normalizedImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
     [picker dismissViewControllerAnimated:YES completion:^{
-        [self resetPersonIDWithSelfie:selfie];
+        switch (imagePickerState) {
+            case CHANGE_ICON:
+                [self uploadIconWithSelfie:selfie];
+                break;
+            case CHANGE_PERSON_ID:
+                [self resetPersonIDWithSelfie:selfie];
+                break;
+            default:
+                break;
+        }
+        imagePickerState = NO_STATE;
     }];
+}
+
+- (void)uploadIconWithSelfie:(UIImage *)selfie {
+    [KVNProgress showWithStatus:@"上传头像中"];
+    [ActionPerformer uploadImage:selfie type:EmotionDiaryImageTypeIcon andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+        if (!success) {
+            [KVNProgress showErrorWithStatus:message];
+            return;
+        }
+        [KVNProgress dismiss];
+        [self editIconWithFileName:data[@"file_name"]];
+    }];
+}
+
+- (void)editIconWithFileName:(NSString *)fileName {
+    UIAlertController *action = [UIAlertController alertControllerWithTitle:@"验证密码" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [action addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"输入账号密码以验证身份";
+        textField.secureTextEntry = YES;
+        textField.keyboardType = UIKeyboardTypeASCIICapable;
+    }];
+    [action addAction:[UIAlertAction actionWithTitle:@"更改头像" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull act) {
+        password = action.textFields[0].text;
+        if (password.length == 0) {
+            [KVNProgress showErrorWithStatus:@"您未输入账号密码" completion:^{
+                [self resetFace:nil];
+            }];
+            return;
+        }
+        [KVNProgress showWithStatus:@"修改头像中"];
+        [ActionPerformer editIconWithPassword:password icon:fileName andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+            if (!success) {
+                [KVNProgress showErrorWithStatus:message];
+                return;
+            }
+            NSMutableDictionary *dict = [[[NSUserDefaults standardUserDefaults] objectForKey:USER_INFO] mutableCopy];
+            dict[@"icon"] = fileName;
+            [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USER_INFO];
+            [KVNProgress showSuccessWithStatus:@"头像修改成功"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:USER_CHANGED_NOTIFICATION object:nil];
+        }];
+    }]];
+    [action addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:action animated:YES completion:nil];
 }
 
 - (void)resetPersonIDWithSelfie:(UIImage *)selfie {
@@ -168,7 +277,16 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:^{
-        [KVNProgress showErrorWithStatus:@"您取消了该操作"];
+        switch (imagePickerState) {
+            case CHANGE_ICON:
+                [KVNProgress showErrorWithStatus:@"您取消了该操作"];
+                break;
+            case CHANGE_PERSON_ID:
+                break;
+            default:
+                break;
+        }
+        imagePickerState = NO_STATE;
     }];
 }
 

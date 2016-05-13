@@ -19,8 +19,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUser) name:USER_CHANGED_NOTIFICATION object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUser) name:SYNC_PROGRESS_CHANGED_NOTIFOCATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUserView) name:USER_CHANGED_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshSyncNum) name:UPLOAD_PROGRESS_CHANGED_NOTIFOCATION object:nil];
+    [self reloadUserInfo];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -101,8 +102,8 @@
                 [cell.imageIcon sd_setImageWithURL:[ActionPerformer getImageURLWithName:iconName type:EmotionDiaryImageTypeIcon] placeholderImage:PLACEHOLDER_IMAGE options:SDWebImageProgressiveDownload];
                 return cell;
             }else if (indexPath.row == 1) {
-                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sync"];
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", [[EmotionDiaryManager sharedManager] totalSyncNumber]];
+                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"upload"];
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", [[EmotionDiaryManager sharedManager] totalUploadNumber]];
                 return cell;
             }else if (indexPath.row == 2) {
                 UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"unlock"];
@@ -129,7 +130,7 @@
             return [tableView dequeueReusableCellWithIdentifier:@"about"];
         }
     }
-    return nil;
+    return [UITableViewCell new];
 }
 
 /*
@@ -166,8 +167,24 @@
 }
 */
 
-- (void)refreshUser {
+- (void)reloadUserInfo {
+    if ([ActionPerformer hasLoggedIn]) {
+        [ActionPerformer viewUserWithName:[[NSUserDefaults standardUserDefaults] objectForKey:USER_NAME] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable dataUserInfo) {
+            if (!success) {
+                return;
+            }
+            [[NSUserDefaults standardUserDefaults] setValuesForKeysWithDictionary:@{USER_INFO: dataUserInfo}];
+            [[NSNotificationCenter defaultCenter] postNotificationName:USER_CHANGED_NOTIFICATION object:nil];
+        }];
+    }
+}
+
+- (void)refreshUserView {
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (void)refreshSyncNum {
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark - Table view delegate
