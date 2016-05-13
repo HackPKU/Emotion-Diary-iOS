@@ -137,7 +137,7 @@
     request[@"place_long"] = [NSString stringWithFormat:@"%f", diary.placeLong];
     request[@"place_lat"] = [NSString stringWithFormat:@"%f", diary.placeLat];
     request[@"weather"] = diary.weather;
-    request[@"create_time"] = [[ActionPerformer PRCStandardDateFormatter] stringFromDate:diary.createTime];
+    request[@"create_time"] = [[[EmotionDiaryManager sharedManager] PRCDateFormatter] stringFromDate:diary.createTime];
     [ActionPerformer postWithDictionary:request toUrl:@"/api/post_diary.php" andBlock:block];
 }
 
@@ -165,6 +165,10 @@
     NSMutableDictionary *request = [NSMutableDictionary new];
     request[@"diaryid"] = [NSString stringWithFormat:@"%d", diaryID];
     [ActionPerformer postWithDictionary:request toUrl:@"/api/share_diary.php" andBlock:block];
+}
+
++ (void)viewShareListWithBlock:(ActionPerformerResultBlock)block {
+    [ActionPerformer postWithDictionary:nil toUrl:@"/api/share_list.php" andBlock:block];
 }
 
 + (void)unshareDiaryWithDiaryID:(int)diaryID andBlock:(ActionPerformerResultBlock)block {
@@ -220,13 +224,6 @@
     return [NSURL URLWithString:url];
 }
 
-+ (NSDateFormatter *)PRCStandardDateFormatter {
-    NSDateFormatter *formatter = [NSDateFormatter new];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"PRC"]];
-    return formatter;
-}
-
 #pragma mark - Face++ connection
 
 + (void)processFaceppResult:(FaceppResult * _Nonnull)result andBlock:(ActionPerformerResultBlock)block {
@@ -243,7 +240,7 @@
 
 + (void)registerFaceWithImage:(UIImage *)image andBlock:(ActionPerformerResultBlock)block {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        FaceppResult *detectResult = [[FaceppAPI detection] detectWithURL:nil orImageData:[Utilities compressImage:image toSize:100] mode:FaceppDetectionModeOneFace];
+        FaceppResult *detectResult = [[FaceppAPI detection] detectWithURL:nil orImageData:[Utilities compressImage:image toSize:50] mode:FaceppDetectionModeOneFace];
         [ActionPerformer processFaceppResult:detectResult andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
             if (!success) {
                 [ActionPerformer processFaceppResult:detectResult andBlock:block];

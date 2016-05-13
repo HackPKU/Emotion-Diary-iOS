@@ -14,7 +14,7 @@ static EmotionDiaryManager *sharedManager;
 
 + (EmotionDiaryManager *)sharedManager {
     @synchronized (self) {
-        if (sharedManager == nil) {
+        if (!sharedManager) {
             sharedManager = [EmotionDiaryManager new];
         }
     }
@@ -28,10 +28,19 @@ static EmotionDiaryManager *sharedManager;
         if (!diaries) {
             diaries = [NSMutableArray new];
         }
-        isSyncing = NO;
-        syncQueue = [NSMutableArray new];
+        isUploading = NO;
+        uploadQueue = [NSMutableArray new];
     }
     return self;
+}
+
+- (NSDateFormatter *)PRCDateFormatter {
+    if (!PRCDateFormatter) {
+        PRCDateFormatter = [NSDateFormatter new];
+        [PRCDateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        [PRCDateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"PRC"]];
+    }
+    return PRCDateFormatter;
 }
 
 #pragma mark - Storage function
@@ -45,37 +54,56 @@ static EmotionDiaryManager *sharedManager;
                         HAS_TAG: [NSNumber numberWithBool:(diary.tags.count > 0 || diary.hasTag)],
                         SHORT_TEXT: diary.shortText,
                         PLACE_NAME: [self filter:diary.placeName],
-                        PLACE_LONG: [NSNumber numberWithFloat:diary.placeLong],
-                        PLACE_LAT: [NSNumber numberWithFloat:diary.placeLat],
                         WEATHER: [self filter:diary.placeName],
                         CREATE_TIME: diary.createTime,
                         DIARY_ID: [NSNumber numberWithInt:diary.diaryID]
                         };
+    
+    // TODO: 二分查找优化
     for (int i = 0; i < diaries.count; i++) {
         NSDictionary *dict = diaries[i];
-        if (ABS([diary.createTime timeIntervalSinceDate:dict[CREATE_TIME]]) < 1) {
+        NSTimeInterval interval = [diary.createTime timeIntervalSinceDate:dict[CREATE_TIME]];
+        if (ABS(interval) < 1) {
+            [diaries removeObjectAtIndex:i];
+            break;
+        }
+        if (interval > 1) { // TODO: Verify
+            break;
+        }
+    }
+    
+    [diaries addObject:diaryDictionary];
+    return [self saveWithSort:YES];
+}
+
+- (BOOL)deleteDiary:(EmotionDiary *)diary {
+    for (int i = 0; i < diaries.count; i++) {
+        NSDictionary *dict = diaries[i];
+        NSTimeInterval interval = [diary.createTime timeIntervalSinceDate:dict[CREATE_TIME]];
+        if (ABS(interval) < 1) {
             [diaries removeObjectAtIndex:i];
             break;
         }
     }
-    [diaries addObject:diaryDictionary];
-    return [self sortAndSave];
+    return [self saveWithSort:NO];
 }
 
 - (NSString *)filter:(NSString *)string {
     return string ? string : @"";
 }
 
-- (BOOL)sortAndSave {
-    // 按时间降序排列
-    diaries = [NSMutableArray arrayWithArray:[diaries sortedArrayUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
-        return [obj2[CREATE_TIME] compare:obj1[CREATE_TIME]];
-    }]];
+- (BOOL)saveWithSort:(BOOL)sort {
+    if (sort) {
+        // 按时间降序排列
+        [diaries sortUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
+            return [obj2[CREATE_TIME] compare:obj1[CREATE_TIME]];
+        }];
+    }
     [[NSUserDefaults standardUserDefaults] setObject:diaries forKey:@"diaries"];
     return [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+ (EmotionDiary *)createEmotionDiaryFromDictionary:(NSDictionary *)dict {
++ (EmotionDiary *)createEmotionDiaryFromLocalDictionary:(NSDictionary *)dict {
     EmotionDiary *diary = [EmotionDiary new];
     diary.emotion = [dict[EMOTION] intValue];
     diary.selfie = dict[SELFIE];
@@ -83,11 +111,23 @@ static EmotionDiaryManager *sharedManager;
     diary.hasTag = [dict[HAS_TAG] boolValue];
     diary.shortText = dict[SHORT_TEXT];
     diary.placeName = dict[PLACE_NAME];
-    diary.placeLong = [dict[PLACE_LONG] doubleValue];
-    diary.placeLat = [dict[PLACE_LAT] doubleValue];
     diary.weather = dict[WEATHER];
     diary.createTime = dict[CREATE_TIME];
     diary.diaryID = [dict[DIARY_ID] intValue];
+    return diary;
+}
+
++ (EmotionDiary *)createEmotionDiaryFromServerDictionary:(NSDictionary *)dict {
+    EmotionDiary *diary = [EmotionDiary new];
+    diary.emotion = [dict[@"emotion"] intValue];
+    diary.selfie = dict[@"selfie"];
+    diary.hasImage = [dict[@"has_image"] boolValue];
+    diary.hasTag = [dict[@"has_tag"] boolValue];
+    diary.shortText = dict[@"short_text"];
+    diary.placeName = dict[@"place_name"];
+    diary.weather = dict[@"weather"];
+    diary.createTime = [[[EmotionDiaryManager sharedManager] PRCDateFormatter] dateFromString:dict[@"create_time"]];
+    diary.diaryID = [dict[@"diaryid"] intValue];
     return diary;
 }
 
@@ -105,7 +145,7 @@ static EmotionDiaryManager *sharedManager;
         NSDictionary *diary = diaries[i];
         NSDate *diaryDate = diary[CREATE_TIME];
         if ([[NSCalendar currentCalendar] isDate:diaryDate inSameDayAsDate:date]) {
-            [result addObject:[EmotionDiaryManager createEmotionDiaryFromDictionary:diary]];
+            [result addObject:[EmotionDiaryManager createEmotionDiaryFromLocalDictionary:diary]];
         }else if ([date timeIntervalSinceDate:diaryDate] > 0) {
             break;
         }
@@ -193,88 +233,135 @@ static EmotionDiaryManager *sharedManager;
     if (index < 0 || index >= self.totalDiaryNumber) {
         return nil;
     }
-    return [EmotionDiaryManager createEmotionDiaryFromDictionary:diaries[index]];
+    return [EmotionDiaryManager createEmotionDiaryFromLocalDictionary:diaries[index]];
 }
 
 #pragma mark - Sync function
 
-- (void)startSyncing {
-    if (!isSyncing) {
-        isSyncing = YES;
-        [syncQueue removeAllObjects];
+- (void)startUploading {
+    if (!isUploading) {
+        isUploading = YES;
+        [uploadQueue removeAllObjects];
         for (NSDictionary *dict in diaries) {
             if ([dict[DIARY_ID] intValue] == NO_DIARY_ID) {
-                EmotionDiary *diary = [EmotionDiaryManager createEmotionDiaryFromDictionary:dict];
-                [syncQueue addObject:@{@"diary": diary, @"state": SYNC_STATE_WAITING, @"error": @0}];
+                EmotionDiary *diary = [EmotionDiaryManager createEmotionDiaryFromLocalDictionary:dict];
+                [uploadQueue addObject:@{@"diary": diary, @"state": UPLOAD_STATE_WAITING, @"error": @0}];
             }
         }
-        [self postSyncNotification:[NSNumber numberWithInt:NO_DIARY_ID]];
-        [self sync];
+        [self postNotification:UPLOAD_PROGRESS_CHANGED_NOTIFOCATION withDiaryID:NO_DIARY_ID];;
+        [self upload];
     }
 }
 
-- (void)sync {
-    if (!isSyncing || self.totalSyncNumber == 0) {
-        isSyncing = NO;
-        [syncQueue removeAllObjects];
+- (void)upload {
+    if (!isUploading || self.totalUploadNumber == 0) {
+        isUploading = NO;
+        [uploadQueue removeAllObjects];
         return;
     }
-    NSMutableDictionary *dict = [syncQueue[0] mutableCopy];
+    NSMutableDictionary *dict = [uploadQueue[0] mutableCopy];
     if ([dict[@"error"] intValue] > 5) { // 错误超过五次放弃尝试
-        [syncQueue removeObjectAtIndex:0];
-        [self postSyncNotification:[NSNumber numberWithInt:NO_DIARY_ID]];
+        [uploadQueue removeObjectAtIndex:0];
+        [self postNotification:UPLOAD_PROGRESS_CHANGED_NOTIFOCATION withDiaryID:NO_DIARY_ID];
         sleep(1);
-        [self sync];
+        [self upload];
         return;
     }
-    dict[@"state"] = SYNC_STATE_SYNCING;
-    [syncQueue setObject:dict atIndexedSubscript:0];
+    dict[@"state"] = UPLOAD_STATE_SYNCING;
+    [uploadQueue setObject:dict atIndexedSubscript:0];
     EmotionDiary *diary = dict[@"diary"];
-    [self postSyncNotification:[NSNumber numberWithInt:diary.diaryID]];
+    [self postNotification:UPLOAD_PROGRESS_CHANGED_NOTIFOCATION withDiaryID:diary.diaryID];
     [diary uploadToServerWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
         if (!success) { // 出错则放到同步队列的末尾等待重试
             dict[@"error"] = [NSNumber numberWithInt:[dict[@"error"] intValue] + 1];
             dict[@"state"] = message;
-            [syncQueue addObject:dict];
+            [uploadQueue addObject:dict];
         }
-        [syncQueue removeObjectAtIndex:0];
-        [self postSyncNotification:[NSNumber numberWithInt:diary.diaryID]];
+        [uploadQueue removeObjectAtIndex:0];
+        [self postNotification:UPLOAD_PROGRESS_CHANGED_NOTIFOCATION withDiaryID:diary.diaryID];
         sleep(1);
-        [self sync];
+        [self upload];
     }];
 }
 
-- (void)stopSyncing {
-    if (isSyncing) {
-        isSyncing = NO;
-        [self postSyncNotification:[NSNumber numberWithInt:NO_DIARY_ID]];
+- (void)stopUploading {
+    if (isUploading) {
+        isUploading = NO;
+        [self postNotification:UPLOAD_PROGRESS_CHANGED_NOTIFOCATION withDiaryID:NO_DIARY_ID];
     }
 }
 
-- (void)postSyncNotification:(NSNumber *)diaryID {
-    NSDictionary *dict;
-    if ([diaryID intValue] != NO_DIARY_ID) {
-        dict = @{DIARY_ID: diaryID};
-    }
+- (void)postNotification:(NSString *)name withDiaryID:(int)diaryID {
+    NSDictionary *dict = @{DIARY_ID: [NSNumber numberWithInt:diaryID]};
     // 接收通知的对象大多需要更新UI 因此在主线程上发通知
     if ([[NSThread currentThread] isMainThread]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_PROGRESS_CHANGED_NOTIFOCATION object:nil userInfo:dict];
+        [[NSNotificationCenter defaultCenter] postNotificationName:name object:nil userInfo:dict];
     }else {
         dispatch_sync(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_PROGRESS_CHANGED_NOTIFOCATION object:nil userInfo:dict];
+            [[NSNotificationCenter defaultCenter] postNotificationName:name object:nil userInfo:dict];
         });
     }
 }
 
-- (NSInteger)totalSyncNumber {
-    return syncQueue.count;
+- (NSInteger)totalUploadNumber {
+    return uploadQueue.count;
 }
 
-- (NSDictionary * _Nullable)getSyncDataOfIndex:(NSInteger)index {
-    if (index < 0 || index >= self.totalSyncNumber) {
+- (NSDictionary * _Nullable)getUploadDataOfIndex:(NSInteger)index {
+    if (index < 0 || index >= self.totalUploadNumber) {
         return nil;
     }
-    return syncQueue[index];
+    return uploadQueue[index];
+}
+
+- (void)syncDiaryOfYear:(NSInteger)year month:(NSInteger)month fromServerWithBlock:(EmotionDiaryResultBlock)block {
+    [ActionPerformer syncDiaryWithYear:(int)year month:(int)month andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+        if (!success) {
+            block(NO, message, nil);
+            return;
+        }
+        
+        NSArray *diaryArray = data[@"diaries"];
+        
+        // 删除本月多余的日记
+        NSArray *diariesCopy = [diaries copy];
+        for (int i = 0; i < diariesCopy.count; i++) {
+            NSDictionary *localDict = diariesCopy[i];
+            if ([localDict[DIARY_ID] intValue] == NO_DIARY_ID) { // 只有本地版
+                return;
+            }
+            NSDate *theDate = localDict[CREATE_TIME];
+            NSInteger theYear, theMonth;
+            [[NSCalendar currentCalendar] getEra:nil year:&theYear month:&theMonth day:nil fromDate:theDate];
+            if (theYear == year && theMonth == month) {
+                BOOL found = NO;
+                for (NSDictionary *onlineDict in diaryArray) {
+                    NSDate *thatDate = [PRCDateFormatter dateFromString:onlineDict[@"create_time"]];
+                    if (ABS([theDate timeIntervalSinceDate:thatDate]) < 1) {
+                        found = YES;
+                        break;
+                    }
+                }
+                if (!found) {
+                    [[EmotionDiaryManager createEmotionDiaryFromLocalDictionary:localDict] deleteLocalVersionWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
+                        NSLog(@"Deleted redundant diary %@", [PRCDateFormatter stringFromDate:localDict[CREATE_TIME]]);
+                    }];
+                }
+            }else if (theYear < year || (theYear == year && theMonth < month)) {
+                break;
+            }
+        }
+        
+        for (NSDictionary *dict in diaryArray) {
+            EmotionDiary *diary = [EmotionDiaryManager createEmotionDiaryFromServerDictionary:dict];
+            if (![self saveDiary:diary]) {
+                block(NO, @"日记记录创建失败", nil);
+                return;
+            }
+        }
+        [self postNotification:SYNC_PROGRESS_CHANGED_NOTIFOCATION withDiaryID:NO_DIARY_ID];
+        block(YES, nil, nil);
+    }];
 }
 
 @end

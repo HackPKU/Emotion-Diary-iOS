@@ -40,8 +40,8 @@
 		01B4061C1CB7FF7500B242D6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01B4061A1CB7FF7500B242D6 /* Main.storyboard */; };
 		01B4061E1CB7FF7500B242D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01B4061D1CB7FF7500B242D6 /* Assets.xcassets */; };
 		01B406211CB7FF7500B242D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01B4061F1CB7FF7500B242D6 /* LaunchScreen.storyboard */; };
-		01B952051CE3229700CA9150 /* SyncTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B952041CE3229600CA9150 /* SyncTableViewController.m */; };
-		01B952081CE3245200CA9150 /* SyncTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B952071CE3245200CA9150 /* SyncTableViewCell.m */; };
+		01B952051CE3229700CA9150 /* UploadTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B952041CE3229600CA9150 /* UploadTableViewController.m */; };
+		01B952081CE3245200CA9150 /* UploadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B952071CE3245200CA9150 /* UploadTableViewCell.m */; };
 		01BF4B441CD7826A00FEDFCE /* TimelineTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF4B431CD7826A00FEDFCE /* TimelineTableViewController.m */; };
 		01CB83D31CDC6C59003BC716 /* DonateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CB83D21CDC6C59003BC716 /* DonateViewController.m */; };
 		01CB83D61CDC6EC8003BC716 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CB83D51CDC6EC8003BC716 /* AboutViewController.m */; };
@@ -141,10 +141,10 @@
 		01B4061D1CB7FF7500B242D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01B406201CB7FF7500B242D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01B406221CB7FF7500B242D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		01B952031CE3229600CA9150 /* SyncTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncTableViewController.h; sourceTree = "<group>"; };
-		01B952041CE3229600CA9150 /* SyncTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncTableViewController.m; sourceTree = "<group>"; };
-		01B952061CE3245200CA9150 /* SyncTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncTableViewCell.h; sourceTree = "<group>"; };
-		01B952071CE3245200CA9150 /* SyncTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncTableViewCell.m; sourceTree = "<group>"; };
+		01B952031CE3229600CA9150 /* UploadTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadTableViewController.h; sourceTree = "<group>"; };
+		01B952041CE3229600CA9150 /* UploadTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadTableViewController.m; sourceTree = "<group>"; };
+		01B952061CE3245200CA9150 /* UploadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadTableViewCell.h; sourceTree = "<group>"; };
+		01B952071CE3245200CA9150 /* UploadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadTableViewCell.m; sourceTree = "<group>"; };
 		01BF4B421CD7826A00FEDFCE /* TimelineTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineTableViewController.h; sourceTree = "<group>"; };
 		01BF4B431CD7826A00FEDFCE /* TimelineTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineTableViewController.m; sourceTree = "<group>"; };
 		01CB83D11CDC6C59003BC716 /* DonateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DonateViewController.h; sourceTree = "<group>"; };
@@ -217,10 +217,10 @@
 				01110B231CE0520300540608 /* UserTableViewCell.m */,
 				0114C8491CE2353200ABB188 /* InfoTableViewController.h */,
 				0114C84A1CE2353200ABB188 /* InfoTableViewController.m */,
-				01B952031CE3229600CA9150 /* SyncTableViewController.h */,
-				01B952041CE3229600CA9150 /* SyncTableViewController.m */,
-				01B952061CE3245200CA9150 /* SyncTableViewCell.h */,
-				01B952071CE3245200CA9150 /* SyncTableViewCell.m */,
+				01B952031CE3229600CA9150 /* UploadTableViewController.h */,
+				01B952041CE3229600CA9150 /* UploadTableViewController.m */,
+				01B952061CE3245200CA9150 /* UploadTableViewCell.h */,
+				01B952071CE3245200CA9150 /* UploadTableViewCell.m */,
 				017DB3B41CDC6208005AB1D3 /* TranslucentViewController.h */,
 				017DB3B51CDC6208005AB1D3 /* TranslucentViewController.m */,
 				017DB3A91CDB80D4005AB1D3 /* LoginViewController.h */,
@@ -539,14 +539,14 @@
 				018EF4631CC761EE00E712BC /* FaceppResult.m in Sources */,
 				018EF45F1CC761EE00E712BC /* FaceppPerson.m in Sources */,
 				018EF4601CC761EE00E712BC /* FaceppRecognition.m in Sources */,
-				01B952051CE3229700CA9150 /* SyncTableViewController.m in Sources */,
+				01B952051CE3229700CA9150 /* UploadTableViewController.m in Sources */,
 				01110B241CE0520300540608 /* UserTableViewCell.m in Sources */,
 				015334DF1CB8B2DF00E3D2F1 /* CalendarTableViewCell.m in Sources */,
 				018EF45E1CC761EE00E712BC /* FaceppInfo.m in Sources */,
 				017DB3B61CDC6208005AB1D3 /* TranslucentViewController.m in Sources */,
 				0169FDFB1CDE4D4C00201130 /* RegisterTableViewCell.m in Sources */,
 				01BF4B441CD7826A00FEDFCE /* TimelineTableViewController.m in Sources */,
-				01B952081CE3245200CA9150 /* SyncTableViewCell.m in Sources */,
+				01B952081CE3245200CA9150 /* UploadTableViewCell.m in Sources */,
 				0114C84B1CE2353200ABB188 /* InfoTableViewController.m in Sources */,
 				01E29C4D1CB88F4600DA815B /* WelcomeViewController.m in Sources */,
 				015324EB1CD8BE0100272D03 /* UserTableViewController.m in Sources */,

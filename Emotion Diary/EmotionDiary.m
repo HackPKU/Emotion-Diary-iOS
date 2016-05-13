@@ -27,6 +27,7 @@
         _placeLat = placeLat;
         _weather = weather;
         _createTime = [NSDate date];
+        _isShared = NO;
         _diaryID = NO_DIARY_ID;
     }
     return self;
@@ -45,6 +46,7 @@
         _placeLat = [aDecoder decodeFloatForKey:PLACE_LAT];
         _weather = [aDecoder decodeObjectForKey:WEATHER];
         _createTime = [aDecoder decodeObjectForKey:CREATE_TIME];
+        _isShared = [aDecoder decodeObjectForKey:IS_SHARED];
         
         _diaryID = [aDecoder decodeIntForKey:DIARY_ID];
         _hasImage = [aDecoder decodeBoolForKey:HAS_IMAGE];
@@ -65,6 +67,7 @@
     [aCoder encodeFloat:_placeLat forKey:PLACE_LAT];
     [aCoder encodeObject:_weather forKey:WEATHER];
     [aCoder encodeObject:_createTime forKey:CREATE_TIME];
+    [aCoder encodeBool:_isShared forKey:IS_SHARED];
     
     [aCoder encodeInt:_diaryID forKey:DIARY_ID];
     [aCoder encodeBool:_hasImage forKey:HAS_IMAGE];
@@ -78,7 +81,7 @@
 
 - (NSString *)getFileName {
     // 创建时间作为本地文件名，时间精确到秒，以与服务器兼容
-    return [Utilities MD5:[[ActionPerformer PRCStandardDateFormatter] stringFromDate:_createTime]];
+    return [Utilities MD5:[[[EmotionDiaryManager sharedManager] PRCDateFormatter] stringFromDate:_createTime]];
 }
 
 - (void)writeToDiskWithBlock:(EmotionDiaryResultBlock)block {
@@ -250,6 +253,7 @@
             _text = fullDiary.text;
             _images = fullDiary.images;
             _tags = fullDiary.tags;
+            _isShared = fullDiary.isShared;
             
             if (_selfie.length > 0) {
                 UIImage *selfie = [UIImage imageWithData:[Utilities getFileAtPath:SELFIE_PATH withName:_selfie]];
@@ -281,8 +285,14 @@
                 _emotion = [data[@"emotion"] intValue];
                 _selfie = data[@"selfie"];
                 _images = data[@"images"];
+                if (![_images isKindOfClass:[NSArray class]]) {
+                    _images = [NSArray new];
+                }
                 _hasImage = (_images.count > 0);
                 _tags = data[@"tags"];
+                if (![_tags isKindOfClass:[NSArray class]]) {
+                    _tags = [NSArray new];
+                }
                 _hasTag = (_tags.count > 0);
                 NSString *text = data[@"text"];
                 _text = text;
@@ -291,7 +301,8 @@
                 _placeLong = [data[@"place_long"] floatValue];
                 _placeLat = [data[@"place_lat"] floatValue];
                 _weather = data[@"weather"];
-                _createTime = [[ActionPerformer PRCStandardDateFormatter] dateFromString:data[@"create_time"]];
+                _createTime = [[[EmotionDiaryManager sharedManager] PRCDateFormatter] dateFromString:data[@"create_time"]];
+                _isShared = [data[@"is_shared"] boolValue];
                 
                 // 写入本地，下次加载时就不需要再从网络获取
                 [self writeToDiskWithBlock:block];
@@ -300,8 +311,74 @@
     });
 }
 
+- (void)shareWithBlock:(EmotionDiaryResultBlock)block {
+    [ActionPerformer shareDiaryWithDiaryID:_diaryID andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+        if (!success) {
+            block(NO, message, nil);
+            return;
+        }
+        BOOL shareBackup = _isShared;
+        _isShared = YES;
+        NSString *shareKey = data[@"share_key"];
+        [self writeToDiskWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
+            if (!success) {
+                _isShared = shareBackup;
+                block(NO, message, nil);
+                return;
+            }
+            block(YES, nil, shareKey);
+        }];
+    }];
+}
+
+- (void)unshareWithBlock:(EmotionDiaryResultBlock)block {
+    [ActionPerformer unshareDiaryWithDiaryID:_diaryID andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+        if (!success) {
+            block(NO, message, nil);
+            return;
+        }
+        BOOL shareBackup = _isShared;
+        _isShared = NO;
+        [self writeToDiskWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
+            if (!success) {
+                _isShared = shareBackup;
+                block(NO, message, nil);
+                return;
+            }
+            block(YES, nil, nil);
+        }];
+    }];
+}
+
 - (void)deleteWithBlock:(EmotionDiaryResultBlock)block {
-    // TODO: Delete logic
+    if (self.hasOnlineVersion) {
+        [ActionPerformer deleteDiaryWithDiaryID:_diaryID andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+            if (!success) {
+                block(NO, message, nil);
+                return;
+            }
+            [self deleteLocalVersionWithBlock:block];
+        }];
+    }else {
+        [self deleteLocalVersionWithBlock:block];
+    }
+}
+
+- (void)deleteLocalVersionWithBlock:(EmotionDiaryResultBlock)block {
+    [Utilities deleteFileAtPath:DIARY_PATH withName:[self getFileName]];
+    if (_selfie.length > 0) {
+        [Utilities deleteFileAtPath:SELFIE_PATH withName:_selfie];
+    }
+    if (_images.count > 0) {
+        for (NSString *imageName in _images) {
+            [Utilities deleteFileAtPath:IMAGES_PATH withName:imageName];
+        }
+    }
+    if ([[EmotionDiaryManager sharedManager] deleteDiary:self]) {
+        block(YES, nil, nil);
+    }else {
+        block(NO, @"日记记录删除失败", nil);
+    }
 }
 
 @end

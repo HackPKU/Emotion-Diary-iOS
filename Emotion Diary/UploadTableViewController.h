@@ -1,5 +1,5 @@
 //
-//  SyncTableViewController.h
+//  UploadTableViewController.h
 //  Emotion Diary
 //
 //  Created by 范志康 on 16/5/11.
@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SyncTableViewController : UITableViewController
+@interface UploadTableViewController : UITableViewController
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *buttonStop;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *buttonSync;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *buttonUpload;
 
 @end

@@ -25,9 +25,10 @@
     _cycleImageView.layer.shadowOpacity = 0.75;
     _cycleImageView.layer.shadowRadius = 6.0;
     imageViews = [NSMutableArray new];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:SYNC_PROGRESS_CHANGED_NOTIFOCATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:UPLOAD_PROGRESS_CHANGED_NOTIFOCATION object:nil];
     
     [self updateDiaryView];
+    // TODO: 下拉刷新
         
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     totalNumber = [[EmotionDiaryManager sharedManager] totalDiaryNumber];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:SYNC_PROGRESS_CHANGED_NOTIFOCATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:UPLOAD_PROGRESS_CHANGED_NOTIFOCATION object:nil];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -34,6 +34,7 @@
 }
 
 - (void)refresh {
+    totalNumber = [[EmotionDiaryManager sharedManager] totalDiaryNumber];
     [self.tableView reloadData];
 }
 

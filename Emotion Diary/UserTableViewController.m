@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUserView) name:USER_CHANGED_NOTIFICATION object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshSyncNum) name:SYNC_PROGRESS_CHANGED_NOTIFOCATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshSyncNum) name:UPLOAD_PROGRESS_CHANGED_NOTIFOCATION object:nil];
     [self reloadUserInfo];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -102,8 +102,8 @@
                 [cell.imageIcon sd_setImageWithURL:[ActionPerformer getImageURLWithName:iconName type:EmotionDiaryImageTypeIcon] placeholderImage:PLACEHOLDER_IMAGE options:SDWebImageProgressiveDownload];
                 return cell;
             }else if (indexPath.row == 1) {
-                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sync"];
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", [[EmotionDiaryManager sharedManager] totalSyncNumber]];
+                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"upload"];
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", [[EmotionDiaryManager sharedManager] totalUploadNumber]];
                 return cell;
             }else if (indexPath.row == 2) {
                 UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"unlock"];

@@ -19,6 +19,7 @@
 #define PLACE_LAT @"placeLat"
 #define WEATHER @"weather"
 #define CREATE_TIME @"createTime"
+#define IS_SHARED @"isShared"
 
 #define DIARY_ID @"diaryID"
 #define HAS_IMAGE @"hasImage"
@@ -50,6 +51,7 @@ typedef void (^EmotionDiaryResultBlock)(BOOL success, NSString * _Nullable messa
 @property float placeLat;
 @property NSString * _Nullable weather;
 @property NSDate *createTime;
+@property BOOL isShared;
 
 @property int diaryID;
 @property BOOL hasImage;
@@ -66,7 +68,13 @@ typedef void (^EmotionDiaryResultBlock)(BOOL success, NSString * _Nullable messa
 
 - (void)getFullVersionWithBlock:(EmotionDiaryResultBlock)block;
 
+- (void)shareWithBlock:(EmotionDiaryResultBlock)block;
+
+- (void)unshareWithBlock:(EmotionDiaryResultBlock)block;
+
 - (void)deleteWithBlock:(EmotionDiaryResultBlock)block;
+
+- (void)deleteLocalVersionWithBlock:(EmotionDiaryResultBlock)block;
 
 NS_ASSUME_NONNULL_END
 

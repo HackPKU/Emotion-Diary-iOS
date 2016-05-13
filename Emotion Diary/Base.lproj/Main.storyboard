@@ -214,7 +214,7 @@
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="epF-94-RE2" customClass="FSCalendar">
                                 <rect key="frame" x="0.0" y="64" width="600" height="275"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="275" id="M9K-qg-4dm"/>
                                 </constraints>
@@ -239,7 +239,7 @@
                                 </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="150" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="LKz-fo-MUH">
-                                <rect key="frame" x="0.0" y="347" width="600" height="253"/>
+                                <rect key="frame" x="0.0" y="339" width="600" height="261"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="diary" rowHeight="160" id="tR6-nK-LPV" customClass="CalendarTableViewCell">
@@ -393,7 +393,7 @@
                         <constraints>
                             <constraint firstItem="LKz-fo-MUH" firstAttribute="leading" secondItem="epF-94-RE2" secondAttribute="leading" id="08W-FK-j1G"/>
                             <constraint firstAttribute="trailing" secondItem="epF-94-RE2" secondAttribute="trailing" id="4xJ-OH-W77"/>
-                            <constraint firstItem="LKz-fo-MUH" firstAttribute="top" secondItem="epF-94-RE2" secondAttribute="bottom" constant="8" id="7pO-Du-T89"/>
+                            <constraint firstItem="LKz-fo-MUH" firstAttribute="top" secondItem="epF-94-RE2" secondAttribute="bottom" id="7pO-Du-T89"/>
                             <constraint firstItem="LKz-fo-MUH" firstAttribute="trailing" secondItem="epF-94-RE2" secondAttribute="trailing" id="NKP-eW-cYB"/>
                             <constraint firstItem="epF-94-RE2" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="bqG-va-SJ2"/>
                             <constraint firstItem="LKz-fo-MUH" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="mD4-2a-mTA"/>
@@ -1087,8 +1087,8 @@
         <image name="用户" width="25" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="yXh-yJ-FIl"/>
         <segue reference="e3d-0X-6Ej"/>
         <segue reference="MEH-Jc-QhM"/>
-        <segue reference="ygb-bb-gXM"/>
     </inferredMetricsTieBreakers>
 </document>
