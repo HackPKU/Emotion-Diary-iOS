@@ -11,6 +11,7 @@
 
 @interface CalendarViewController : UIViewController <FSCalendarDelegate, FSCalendarDataSource, UITableViewDelegate, UITableViewDataSource> {
     NSArray<EmotionDiary *> *diariesOfToday;
+    NSInteger lastTimeYear, lastTimeMonth;
 }
 
 @property (strong, nonatomic) IBOutlet FSCalendar *calendar;

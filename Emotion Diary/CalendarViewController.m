@@ -59,7 +59,6 @@
 }
 
 - (void)calendarCurrentPageDidChange:(FSCalendar *)calendar {
-    // TODO: 不是每次都需要同步
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if (![ActionPerformer hasLoggedIn]) {
             return;
@@ -67,6 +66,11 @@
         NSDate *date = [calendar.currentPage dateByAddingTimeInterval:24 * 3600];
         NSInteger year, month;
         [[NSCalendar currentCalendar] getEra:nil year:&year month:&month day:nil fromDate:date];
+        if (year == lastTimeYear && month == lastTimeMonth) {
+            return;
+        }
+        lastTimeYear = year;
+        lastTimeMonth = month;
         [[EmotionDiaryManager sharedManager] syncDiaryOfYear:year month:month fromServerWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
             if (success) {
                 NSLog(@"Synced diary of %ld.%ld", year, month);
@@ -81,21 +85,9 @@
 
 - (void)refresh:(NSNotification *)noti {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        int diaryID = [noti.userInfo[DIARY_ID] intValue];
-        if (diaryID != NO_DIARY_ID) {
-            BOOL containsDiary = NO;
-            for (EmotionDiary *diary in diariesOfToday) {
-                if (diary.diaryID == diaryID) {
-                    diariesOfToday = [[EmotionDiaryManager sharedManager] getDiaryOfDate:_calendar.selectedDate ? _calendar.selectedDate : [NSDate date]];
-                    containsDiary = YES;
-                    break;
-                }
-            }
-            if (!containsDiary) {
-                return;
-            }
-        }
+        diariesOfToday = [[EmotionDiaryManager sharedManager] getDiaryOfDate:_calendar.selectedDate ? _calendar.selectedDate : [NSDate date]];
         dispatch_sync(dispatch_get_main_queue(), ^{
+            [_calendar reloadData];
             [_detailTableView reloadData];
         });
     });

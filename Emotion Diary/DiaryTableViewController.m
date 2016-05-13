@@ -243,7 +243,23 @@
 }
 
 - (IBAction)delete:(id)sender {
-    // TODO: Delete function
+    UIAlertController *action = [UIAlertController alertControllerWithTitle:@"删除日记" message:@"该操作不可逆，您确定吗？" preferredStyle:UIAlertControllerStyleAlert];
+    [action addAction:[UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        if (_diary.hasOnlineVersion) {
+            [KVNProgress showWithStatus:@"删除中"];
+        }
+        [_diary deleteWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
+            if (!success) {
+                [KVNProgress showErrorWithStatus:message];
+                return;
+            }
+            [KVNProgress showSuccessWithStatus:@"删除成功"];
+            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_PROGRESS_CHANGED_NOTIFOCATION object:nil userInfo:@{DIARY_ID: [NSNumber numberWithInt:NO_DIARY_ID]}];
+        }];
+    }]];
+    [action addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:action animated:YES completion:nil];
 }
 
 - (IBAction)share:(id)sender {
