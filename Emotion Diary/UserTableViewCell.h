@@ -24,4 +24,6 @@
 // Unlock cell
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segmentUnlockType;
 
+- (void)reloadStatData;
+
 @end

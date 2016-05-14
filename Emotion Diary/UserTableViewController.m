@@ -20,7 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUserView) name:USER_CHANGED_NOTIFICATION object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshSyncNum) name:UPLOAD_PROGRESS_CHANGED_NOTIFOCATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUploadData) name:UPLOAD_PROGRESS_CHANGED_NOTIFOCATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshSyncData) name:SYNC_PROGRESS_CHANGED_NOTIFOCATION object:nil];
     [self reloadUserInfo];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -183,8 +184,13 @@
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
-- (void)refreshSyncNum {
+- (void)refreshUploadData {
     [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (void)refreshSyncData {
+    UserTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    [cell reloadStatData];
 }
 
 #pragma mark - Table view delegate

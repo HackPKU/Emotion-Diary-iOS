@@ -17,7 +17,7 @@
     if (_lineChart) {
         _lineChart.delegate = self;
         _lineChart.dataSource = self;
-        [self changeScope:_segmentScope];
+        [self reloadStatData];
     }
     
     if (_imageIcon) {
@@ -29,6 +29,10 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)reloadStatData {
+    [self changeScope:_segmentScope];
 }
 
 - (NSInteger)numberOfPointsInLineGraph:(BEMSimpleLineGraphView *)graph {
