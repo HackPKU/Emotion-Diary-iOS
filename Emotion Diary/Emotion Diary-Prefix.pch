@@ -29,7 +29,7 @@
 #import "ActionPerformer.h"
 #import "Utilities.h"
 #import "KVNProgress.h"
-#import <SDWebImage/UIImageView+WebCache.h>
+#import "UIImageView+WebCache.h"
 
 #define APP_STORE_ID @""
 #define SERVER_URL @"www.emotiondiary.date"

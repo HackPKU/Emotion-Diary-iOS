@@ -49,7 +49,7 @@
 		01E29C4D1CB88F4600DA815B /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E29C4C1CB88F4600DA815B /* WelcomeViewController.m */; };
 		01E2DAAE1CCA0A74009E69DC /* Emotion DiaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E2DAAD1CCA0A74009E69DC /* Emotion DiaryTests.m */; };
 		01F15FC81CB8E6AA006BB341 /* RecordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F15FC71CB8E6AA006BB341 /* RecordTableViewController.m */; };
-		C8BAB25A48A3B7819B6D6974 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3DF3C1D9187607C200094B /* Pods.framework */; };
+		D4F9BD0047C52552A4CE99E2 /* Pods_Emotion_Diary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94F76FFD7184AC9432517B8A /* Pods_Emotion_Diary.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,19 +61,6 @@
 			remoteInfo = "Emotion Diary";
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		E971841B1CB8EF7500A58920 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		01110B221CE0520300540608 /* UserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTableViewCell.h; sourceTree = "<group>"; };
@@ -159,8 +146,9 @@
 		01E2DAAD1CCA0A74009E69DC /* Emotion DiaryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Emotion DiaryTests.m"; sourceTree = "<group>"; };
 		01F15FC61CB8E6AA006BB341 /* RecordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordTableViewController.h; sourceTree = "<group>"; };
 		01F15FC71CB8E6AA006BB341 /* RecordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordTableViewController.m; sourceTree = "<group>"; };
-		9721AEE52E8C304D1C65C794 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		B5FEC9CE2F888EA905CF52A3 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		28C2D780607E60B0609CBB86 /* Pods-Emotion Diary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Emotion Diary.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Emotion Diary/Pods-Emotion Diary.debug.xcconfig"; sourceTree = "<group>"; };
+		94F76FFD7184AC9432517B8A /* Pods_Emotion_Diary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Emotion_Diary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		99480846A901E1FA94932EDA /* Pods-Emotion Diary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Emotion Diary.release.xcconfig"; path = "Pods/Target Support Files/Pods-Emotion Diary/Pods-Emotion Diary.release.xcconfig"; sourceTree = "<group>"; };
 		BA3DF3C1D9187607C200094B /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E97184371CB8F68A00A58920 /* Emotion DiaryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Emotion DiaryTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E971843B1CB8F68A00A58920 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -171,7 +159,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8BAB25A48A3B7819B6D6974 /* Pods.framework in Frameworks */,
+				D4F9BD0047C52552A4CE99E2 /* Pods_Emotion_Diary.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,8 +281,8 @@
 				01B406101CB7FF7500B242D6 /* Emotion Diary */,
 				E97184381CB8F68A00A58920 /* Emotion DiaryTests */,
 				01B4060F1CB7FF7500B242D6 /* Products */,
-				3B73EC5709F5C116C582D080 /* Pods */,
 				552E1C0E7E2FF588E790D67A /* Frameworks */,
+				FC2755A0B548A2ADFF5DE1B0 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -341,19 +329,11 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		3B73EC5709F5C116C582D080 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				B5FEC9CE2F888EA905CF52A3 /* Pods.debug.xcconfig */,
-				9721AEE52E8C304D1C65C794 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		552E1C0E7E2FF588E790D67A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				BA3DF3C1D9187607C200094B /* Pods.framework */,
+				94F76FFD7184AC9432517B8A /* Pods_Emotion_Diary.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -367,6 +347,15 @@
 			path = "Emotion DiaryTests";
 			sourceTree = "<group>";
 		};
+		FC2755A0B548A2ADFF5DE1B0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				28C2D780607E60B0609CBB86 /* Pods-Emotion Diary.debug.xcconfig */,
+				99480846A901E1FA94932EDA /* Pods-Emotion Diary.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -374,13 +363,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 01B4063B1CB7FF7500B242D6 /* Build configuration list for PBXNativeTarget "Emotion Diary" */;
 			buildPhases = (
-				F7D1C950007854CF3E01B3C0 /* Check Pods Manifest.lock */,
+				5E63BC3782EB076A1D7C4435 /* 📦 Check Pods Manifest.lock */,
 				01B4060A1CB7FF7500B242D6 /* Sources */,
 				01B4060B1CB7FF7500B242D6 /* Frameworks */,
 				01B4060C1CB7FF7500B242D6 /* Resources */,
-				E971841B1CB8EF7500A58920 /* Embed Frameworks */,
-				F581D45FE74D1B3B65A3093B /* Embed Pods Frameworks */,
-				7F52BF79A596009DAC2993AA /* Copy Pods Resources */,
+				C10F28B78D40C8ADB5498EEF /* 📦 Embed Pods Frameworks */,
+				4043C05D4EB37934F381F2A6 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -472,49 +460,49 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7F52BF79A596009DAC2993AA /* Copy Pods Resources */ = {
+		4043C05D4EB37934F381F2A6 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Emotion Diary/Pods-Emotion Diary-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F581D45FE74D1B3B65A3093B /* Embed Pods Frameworks */ = {
+		5E63BC3782EB076A1D7C4435 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F7D1C950007854CF3E01B3C0 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C10F28B78D40C8ADB5498EEF /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Emotion Diary/Pods-Emotion Diary-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -707,13 +695,12 @@
 		};
 		01B4063C1CB7FF7500B242D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B5FEC9CE2F888EA905CF52A3 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 28C2D780607E60B0609CBB86 /* Pods-Emotion Diary.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Emotion Diary/Emotion Diary-Prefix.pch";
 				INFOPLIST_FILE = "Emotion Diary/Info.plist";
@@ -721,20 +708,18 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "cn.fanzhikang.Emotion-Diary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		01B4063D1CB7FF7500B242D6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9721AEE52E8C304D1C65C794 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 99480846A901E1FA94932EDA /* Pods-Emotion Diary.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Emotion Diary/Emotion Diary-Prefix.pch";
 				INFOPLIST_FILE = "Emotion Diary/Info.plist";

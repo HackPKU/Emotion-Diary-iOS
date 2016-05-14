@@ -1,0 +1,6 @@
+framework module Pods_Emotion_Diary {
+  umbrella header "Pods-Emotion Diary-umbrella.h"
+
+  export *
+  module * { export * }
+}
