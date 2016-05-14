@@ -142,70 +142,78 @@
 }
 
 - (void)uploadToServerWithBlock:(EmotionDiaryResultBlock)block {
-    if (self.hasOnlineVersion) {
-        block(NO, @"该日记已上传", nil);
-        return;
-    }
-    NSString *selfie = _selfie;
-    NSArray *images = _images;
-    [self getFullVersionWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
-        if (!success) {
-            block(NO, message, nil);
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        if (self.hasOnlineVersion) {
+            block(NO, @"该日记已上传", nil);
             return;
         }
-        [self uploadSelfieWithBlock:^(BOOL success, NSString *message, NSObject * _Nullable data) {
+        NSString *selfie = _selfie;
+        NSArray *images = _images;
+        [self getFullVersionWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
             if (!success) {
                 block(NO, message, nil);
                 return;
             }
-            [self uploadImagesWithBlock:^(BOOL success, NSString *message, NSObject * _Nullable data) {
+            [self uploadSelfieWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
                 if (!success) {
-                    _selfie = selfie;
                     block(NO, message, nil);
                     return;
                 }
-                [ActionPerformer postDiary:self andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+                [self uploadImagesWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
                     if (!success) {
                         _selfie = selfie;
-                        _images = images;
                         block(NO, message, nil);
                         return;
                     }
-                    _diaryID = [data[@"diaryid"] intValue];
-                    [self writeToDiskWithBlock:^(BOOL success, NSString *message, NSObject * _Nullable data) {
-                        if (success) {
-                            [Utilities deleteFileAtPath:SELFIE_PATH withName:selfie];
-                            for (NSString *image in images) {
-                                [Utilities deleteFileAtPath:IMAGES_PATH withName:image];
-                            }
-                            block(YES, nil, self);
-                        }else {
+                    [ActionPerformer postDiary:self andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+                        if (!success) {
                             _selfie = selfie;
                             _images = images;
-                            _diaryID = NO_DIARY_ID;
-                            block(NO, message, nil);
+                            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                                block(NO, message, nil);
+                            });
+                            return;
                         }
-                        
+                        _diaryID = [data[@"diaryid"] intValue];
+                        [self writeToDiskWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
+                            if (success) {
+                                [Utilities deleteFileAtPath:SELFIE_PATH withName:selfie];
+                                for (NSString *image in images) {
+                                    [Utilities deleteFileAtPath:IMAGES_PATH withName:image];
+                                }
+                                block(YES, nil, self);
+                            }else {
+                                _selfie = selfie;
+                                _images = images;
+                                _diaryID = NO_DIARY_ID;
+                                block(NO, message, nil);
+                            }
+                            
+                        }];
                     }];
                 }];
             }];
         }];
-    }];
+    });
 }
 
 - (void)uploadSelfieWithBlock:(EmotionDiaryResultBlock)block {
-    if (!_imageSelfie) {
-        block(YES, nil, self);
-        return;
-    }
-    [ActionPerformer uploadImage:_imageSelfie type:EmotionDiaryImageTypeSelfie andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
-        if (!success) {
-            block(NO, message, nil);
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        if (!_imageSelfie) {
+            block(YES, nil, self);
             return;
         }
-        _selfie = data[@"file_name"];
-        block(YES, nil, self);
-    }];
+        [ActionPerformer uploadImage:_imageSelfie type:EmotionDiaryImageTypeSelfie andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                if (!success) {
+                    block(NO, message, nil);
+                    return;
+                }
+                _selfie = data[@"file_name"];
+                block(YES, nil, self);
+            });
+        }];
+    });
 }
 
 - (void)uploadImagesWithBlock:(EmotionDiaryResultBlock)block {
@@ -222,13 +230,17 @@
 
 - (void)uploadImage:(NSInteger)index WithBlock:(EmotionDiaryResultBlock)block {
     if (index == _imageImages.count) {
-        block(YES, nil, self);
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            block(YES, nil, self);
+        });
         return;
     }
     UIImage *imageToUpload = _imageImages[index];
     [ActionPerformer uploadImage:imageToUpload type:EmotionDiaryImageTypeImage andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
         if (!success) {
-            block(NO, message, nil);
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                block(NO, message, nil);
+            });
             return;
         }
         NSMutableArray *images = [_images mutableCopy];
@@ -279,7 +291,9 @@
         }else {
             [ActionPerformer viewDiaryWithDiaryID:_diaryID shareKey:nil andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
                 if (!success) {
-                    block(NO, message, nil);
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        block(NO, message, nil);
+                    });
                     return;
                 }
                 
@@ -315,7 +329,9 @@
 - (void)shareWithBlock:(EmotionDiaryResultBlock)block {
     [ActionPerformer shareDiaryWithDiaryID:_diaryID andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
         if (!success) {
-            block(NO, message, nil);
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                block(NO, message, nil);
+            });
             return;
         }
         BOOL shareBackup = _isShared;
@@ -335,7 +351,9 @@
 - (void)unshareWithBlock:(EmotionDiaryResultBlock)block {
     [ActionPerformer unshareDiaryWithDiaryID:_diaryID andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
         if (!success) {
-            block(NO, message, nil);
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                block(NO, message, nil);
+            });
             return;
         }
         BOOL shareBackup = _isShared;
@@ -355,7 +373,9 @@
     if (self.hasOnlineVersion) {
         [ActionPerformer deleteDiaryWithDiaryID:_diaryID andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
             if (!success) {
-                block(NO, message, nil);
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    block(NO, message, nil);
+                });
                 return;
             }
             [self deleteLocalVersionWithBlock:block];
@@ -366,20 +386,22 @@
 }
 
 - (void)deleteLocalVersionWithBlock:(EmotionDiaryResultBlock)block {
-    [Utilities deleteFileAtPath:DIARY_PATH withName:[self getFileName]];
-    if (_selfie.length > 0) {
-        [Utilities deleteFileAtPath:SELFIE_PATH withName:_selfie];
-    }
-    if (_images.count > 0) {
-        for (NSString *imageName in _images) {
-            [Utilities deleteFileAtPath:IMAGES_PATH withName:imageName];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [Utilities deleteFileAtPath:DIARY_PATH withName:[self getFileName]];
+        if (_selfie.length > 0) {
+            [Utilities deleteFileAtPath:SELFIE_PATH withName:_selfie];
         }
-    }
-    if ([[EmotionDiaryManager sharedManager] deleteDiary:self]) {
-        block(YES, nil, nil);
-    }else {
-        block(NO, @"日记记录删除失败", nil);
-    }
+        if (_images.count > 0) {
+            for (NSString *imageName in _images) {
+                [Utilities deleteFileAtPath:IMAGES_PATH withName:imageName];
+            }
+        }
+        if ([[EmotionDiaryManager sharedManager] deleteDiary:self]) {
+            block(YES, nil, nil);
+        }else {
+            block(NO, @"日记记录删除失败", nil);
+        }
+    });
 }
 
 @end

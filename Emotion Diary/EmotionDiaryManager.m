@@ -35,10 +35,12 @@ static EmotionDiaryManager *sharedManager;
 }
 
 - (NSDateFormatter *)PRCDateFormatter {
-    if (!PRCDateFormatter) {
-        PRCDateFormatter = [NSDateFormatter new];
-        [PRCDateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        [PRCDateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"PRC"]];
+    @synchronized (PRCDateFormatter) {
+        if (!PRCDateFormatter) {
+            PRCDateFormatter = [NSDateFormatter new];
+            [PRCDateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            [PRCDateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"PRC"]];
+        }
     }
     return PRCDateFormatter;
 }
@@ -161,15 +163,14 @@ static EmotionDiaryManager *sharedManager;
 - (NSArray<NSNumber *> *)getStatOfLastDays:(int)dayNumber {
     NSMutableArray *stat = [NSMutableArray new];
     for (int i = 0; i < dayNumber; i++) {
-        [stat addObject:diaries.count > 0 ? @[] : @[@50]];
+        [stat addObject:[(diaries.count > 0 ? @[] : @[@50]) mutableCopy]];
     }
     
-    NSMutableArray *tempArr;
     for (NSDictionary *dict in diaries) {
         int dayToToday = -[dict[CREATE_TIME] timeIntervalSinceNow] / (24 * 3600);
         if (dayToToday >= 0) {
             if (dayToToday < dayNumber) {
-                tempArr = [stat[dayToToday] mutableCopy];
+                NSMutableArray *tempArr = stat[dayToToday];
                 [tempArr addObject:dict[EMOTION]];
                 [stat setObject:tempArr atIndexedSubscript:dayToToday];
             }else {
@@ -322,55 +323,60 @@ static EmotionDiaryManager *sharedManager;
 - (void)syncDiaryOfYear:(NSInteger)year month:(NSInteger)month forced:(BOOL)forced fromServerWithBlock:(EmotionDiaryResultBlock)block {
 
     if (![self shouldSyncWithYear:year month:month forced:forced]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            block(NO, @"同步频率过高", nil);
+        });
         return;
     }
     
     [ActionPerformer syncDiaryWithYear:(int)year month:(int)month andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
-        if (!success) {
-            block(NO, message, nil);
-            return;
-        }
-        
-        NSArray *diaryArray = data[@"diaries"];
-        
-        // 删除本月多余的日记
-        NSArray *diariesCopy = [diaries copy];
-        for (int i = 0; i < diariesCopy.count; i++) {
-            NSDictionary *localDict = diariesCopy[i];
-            if ([localDict[DIARY_ID] intValue] == NO_DIARY_ID) { // 只有本地版
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            if (!success) {
+                block(NO, message, nil);
                 return;
             }
-            NSDate *theDate = localDict[CREATE_TIME];
-            NSInteger theYear, theMonth;
-            [[NSCalendar currentCalendar] getEra:nil year:&theYear month:&theMonth day:nil fromDate:theDate];
-            if (theYear == year && theMonth == month) {
-                BOOL found = NO;
-                for (NSDictionary *onlineDict in diaryArray) {
-                    NSDate *thatDate = [PRCDateFormatter dateFromString:onlineDict[@"create_time"]];
-                    if (ABS([theDate timeIntervalSinceDate:thatDate]) < 1) {
-                        found = YES;
-                        break;
+            
+            NSArray *diaryArray = data[@"diaries"];
+            
+            // 删除本月多余的日记
+            NSArray *diariesCopy = [diaries copy];
+            for (int i = 0; i < diariesCopy.count; i++) {
+                NSDictionary *localDict = diariesCopy[i];
+                if ([localDict[DIARY_ID] intValue] == NO_DIARY_ID) { // 只有本地版
+                    return;
+                }
+                NSDate *theDate = localDict[CREATE_TIME];
+                NSInteger theYear, theMonth;
+                [[NSCalendar currentCalendar] getEra:nil year:&theYear month:&theMonth day:nil fromDate:theDate];
+                if (theYear == year && theMonth == month) {
+                    BOOL found = NO;
+                    for (NSDictionary *onlineDict in diaryArray) {
+                        NSDate *thatDate = [self.PRCDateFormatter dateFromString:onlineDict[@"create_time"]];
+                        if (ABS([theDate timeIntervalSinceDate:thatDate]) < 1) {
+                            found = YES;
+                            break;
+                        }
                     }
+                    if (!found) {
+                        [[EmotionDiaryManager createEmotionDiaryFromLocalDictionary:localDict] deleteLocalVersionWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
+                            NSLog(@"Deleted redundant diary %@", [self.PRCDateFormatter stringFromDate:localDict[CREATE_TIME]]);
+                        }];
+                    }
+                }else if (theYear < year || (theYear == year && theMonth < month)) {
+                    break;
                 }
-                if (!found) {
-                    [[EmotionDiaryManager createEmotionDiaryFromLocalDictionary:localDict] deleteLocalVersionWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
-                        NSLog(@"Deleted redundant diary %@", [PRCDateFormatter stringFromDate:localDict[CREATE_TIME]]);
-                    }];
+            }
+            
+            for (NSDictionary *dict in diaryArray) {
+                EmotionDiary *diary = [EmotionDiaryManager createEmotionDiaryFromServerDictionary:dict];
+                if (![self saveDiary:diary]) {
+                    block(NO, @"日记记录创建失败", nil);
+                    return;
                 }
-            }else if (theYear < year || (theYear == year && theMonth < month)) {
-                break;
             }
-        }
-        
-        for (NSDictionary *dict in diaryArray) {
-            EmotionDiary *diary = [EmotionDiaryManager createEmotionDiaryFromServerDictionary:dict];
-            if (![self saveDiary:diary]) {
-                block(NO, @"日记记录创建失败", nil);
-                return;
-            }
-        }
-        [self postNotification:SYNC_PROGRESS_CHANGED_NOTIFOCATION withDiaryID:NO_DIARY_ID];
-        block(YES, nil, nil);
+            [self postNotification:SYNC_PROGRESS_CHANGED_NOTIFOCATION withDiaryID:NO_DIARY_ID];
+            block(YES, nil, nil);
+        });
     }];
 }
 
@@ -382,8 +388,8 @@ static EmotionDiaryManager *sharedManager;
     
     NSString *key = [NSString stringWithFormat:@"%ld.%ld", year, month];
     NSDate *date = syncInfo[key];
-    // 一小时内不重复同步
-    if (!forced && date && ABS([date timeIntervalSinceNow]) < 3600) {
+    // 十分钟内不重复同步
+    if (!forced && date && ABS([date timeIntervalSinceNow]) < 10 * 60) {
         return NO;
     }
     

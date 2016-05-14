@@ -35,6 +35,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * The block is and should always in background thread
+ */
 typedef void (^EmotionDiaryResultBlock)(BOOL success, NSString * _Nullable message, NSObject * _Nullable data);
 
 @interface EmotionDiary : NSObject <NSCoding>

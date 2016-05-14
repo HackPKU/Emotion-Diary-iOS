@@ -65,7 +65,7 @@
 }
 
 - (void)getFullVersion {
-    [_diary getFullVersionWithBlock:^(BOOL success, NSString *message, NSObject * _Nullable data) {
+    [_diary getFullVersionWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
         dispatch_sync(dispatch_get_main_queue(), ^{
             if (!success) {
                 [KVNProgress showErrorWithStatus:message];
@@ -249,13 +249,15 @@
             [KVNProgress showWithStatus:@"删除中"];
         }
         [_diary deleteWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
-            if (!success) {
-                [KVNProgress showErrorWithStatus:message];
-                return;
-            }
-            [KVNProgress showSuccessWithStatus:@"删除成功"];
-            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_PROGRESS_CHANGED_NOTIFOCATION object:nil userInfo:@{DIARY_ID: [NSNumber numberWithInt:NO_DIARY_ID]}];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                if (!success) {
+                    [KVNProgress showErrorWithStatus:message];
+                    return;
+                }
+                [KVNProgress showSuccessWithStatus:@"删除成功"];
+                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:SYNC_PROGRESS_CHANGED_NOTIFOCATION object:nil userInfo:@{DIARY_ID: [NSNumber numberWithInt:NO_DIARY_ID]}];
+            });
         }];
     }]];
     [action addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
