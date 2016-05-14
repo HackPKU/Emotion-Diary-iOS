@@ -91,9 +91,15 @@
                 [KVNProgress showErrorWithStatus:message];
                 return;
             }
-            // TODO: PersonID 与本地不一致时的处理
             [[NSUserDefaults standardUserDefaults] setValuesForKeysWithDictionary:@{USER_ID : dataLogin[@"userid"], TOKEN: dataLogin[@"token"], USER_NAME: dataLogin[@"name"], USER_INFO: dataUserInfo}];
+            NSString *personID = [[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID];
+            if (personID.length == 0) {
+                [[NSUserDefaults standardUserDefaults] setObject:dataUserInfo[@"person_id"] forKey:PERSON_ID];
+            }
+            // TODO: PersonID 与本地不一致时的处理
             [[NSNotificationCenter defaultCenter] postNotificationName:USER_CHANGED_NOTIFICATION object:nil];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:SYNC_INFO];
+            [[NSNotificationCenter defaultCenter] postNotificationName:SHOULD_SYNC_NOTIFOCATION object:nil];
             [KVNProgress showSuccessWithStatus:@"登陆成功" completion:^{
                 [self dismissViewControllerAnimated:YES completion:nil];
             }];

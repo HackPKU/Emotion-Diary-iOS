@@ -263,7 +263,7 @@
 }
 
 - (IBAction)share:(id)sender {
-    // TODO: Share function
+    // TODO: 分享
 }
 
 #pragma mark - Navigation

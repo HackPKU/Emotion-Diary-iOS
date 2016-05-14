@@ -10,6 +10,7 @@
 
 #define UPLOAD_STATE_SYNCING @1
 #define UPLOAD_STATE_WAITING @2
+#define SYNC_INFO @"syncInfo"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -50,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSDictionary * _Nullable)getUploadDataOfIndex:(NSInteger)index;
 
-- (void)syncDiaryOfYear:(NSInteger)year month:(NSInteger)month fromServerWithBlock:(EmotionDiaryResultBlock)block;
+- (void)syncDiaryOfYear:(NSInteger)year month:(NSInteger)month forced:(BOOL)forced fromServerWithBlock:(EmotionDiaryResultBlock)block;
 
 NS_ASSUME_NONNULL_END
 

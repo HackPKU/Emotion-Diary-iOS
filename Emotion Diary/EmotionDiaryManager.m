@@ -59,15 +59,20 @@ static EmotionDiaryManager *sharedManager;
                         DIARY_ID: [NSNumber numberWithInt:diary.diaryID]
                         };
     
-    // TODO: 二分查找优化
-    for (int i = 0; i < diaries.count; i++) {
+    // diaries按时间降序排列，二分查找优化
+    NSUInteger findIndex = [diaries indexOfObject:diaryDictionary inSortedRange:NSMakeRange(0, diaries.count) options:NSBinarySearchingInsertionIndex usingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) { // obj2 is the fixed object
+        NSTimeInterval interval = [obj1[CREATE_TIME] timeIntervalSinceDate:obj2[CREATE_TIME]];
+        return interval > 1 ? NSOrderedAscending : NSOrderedDescending;
+    }];
+    // 去重
+    for (NSUInteger i = findIndex; i < diaries.count; i++) {
         NSDictionary *dict = diaries[i];
         NSTimeInterval interval = [diary.createTime timeIntervalSinceDate:dict[CREATE_TIME]];
         if (ABS(interval) < 1) {
             [diaries removeObjectAtIndex:i];
             break;
         }
-        if (interval > 1) { // TODO: Verify
+        if (interval > 1) {
             break;
         }
     }
@@ -314,7 +319,12 @@ static EmotionDiaryManager *sharedManager;
     return uploadQueue[index];
 }
 
-- (void)syncDiaryOfYear:(NSInteger)year month:(NSInteger)month fromServerWithBlock:(EmotionDiaryResultBlock)block {
+- (void)syncDiaryOfYear:(NSInteger)year month:(NSInteger)month forced:(BOOL)forced fromServerWithBlock:(EmotionDiaryResultBlock)block {
+
+    if (![self shouldSyncWithYear:year month:month forced:forced]) {
+        return;
+    }
+    
     [ActionPerformer syncDiaryWithYear:(int)year month:(int)month andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
         if (!success) {
             block(NO, message, nil);
@@ -362,6 +372,24 @@ static EmotionDiaryManager *sharedManager;
         [self postNotification:SYNC_PROGRESS_CHANGED_NOTIFOCATION withDiaryID:NO_DIARY_ID];
         block(YES, nil, nil);
     }];
+}
+
+- (BOOL)shouldSyncWithYear:(NSInteger)year month:(NSInteger)month forced:(BOOL)forced {
+    NSMutableDictionary *syncInfo = [[[NSUserDefaults standardUserDefaults] objectForKey:SYNC_INFO] mutableCopy];
+    if (!syncInfo) {
+        syncInfo = [NSMutableDictionary new];
+    }
+    
+    NSString *key = [NSString stringWithFormat:@"%ld.%ld", year, month];
+    NSDate *date = syncInfo[key];
+    // 一小时内不重复同步
+    if (!forced && date && ABS([date timeIntervalSinceNow]) < 3600) {
+        return NO;
+    }
+    
+    syncInfo[key] = [NSDate date];
+    [[NSUserDefaults standardUserDefaults] setObject:syncInfo forKey:SYNC_INFO];
+    return YES;
 }
 
 @end

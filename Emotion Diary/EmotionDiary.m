@@ -239,12 +239,13 @@
 }
 
 - (void)getFullVersionWithBlock:(EmotionDiaryResultBlock)block {
-    if (_text.length > 0 && _images && _imageSelfie && _imageImages && _tags) {
-        // Already has full version
-        block(YES, nil, self);
-        return;
-    }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        if (_text.length > 0 && _images && _imageSelfie && _imageImages && _tags) {
+            // Already has full version
+            block(YES, nil, self);
+            return;
+        }
+        
         NSData *diaryData = [Utilities getFileAtPath:DIARY_PATH withName:[self getFileName]];
         if (diaryData) {
             NSKeyedUnarchiver *unArchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:diaryData];
