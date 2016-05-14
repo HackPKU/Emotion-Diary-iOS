@@ -31,7 +31,7 @@
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUser) name:USER_CHANGED_NOTIFICATION object:nil];
     
-    // TODO: Edit icon and userinfo function
+    // TODO: 编辑用户信息
 
     [self refreshUser];
     
@@ -123,6 +123,7 @@
             UIImagePickerController *imagePicker = [UIImagePickerController new];
             imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
             imagePicker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+            imagePicker.allowsEditing = YES;
             imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
             imagePicker.delegate = self;
             imagePickerState = CHANGE_ICON;
@@ -132,6 +133,7 @@
     [action addAction:[UIAlertAction actionWithTitle:@"照片图库" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         UIImagePickerController *imagePicker = [UIImagePickerController new];
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        imagePicker.allowsEditing = YES;
         imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
         imagePicker.delegate = self;
         imagePickerState = CHANGE_ICON;
@@ -191,14 +193,13 @@
 
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    UIImage *selfie = [Utilities normalizedImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
     [picker dismissViewControllerAnimated:YES completion:^{
         switch (imagePickerState) {
             case CHANGE_ICON:
-                [self uploadIconWithSelfie:selfie];
+                [self uploadIconWithSelfie:[Utilities normalizedImage:[info objectForKey:UIImagePickerControllerEditedImage]]];
                 break;
             case CHANGE_PERSON_ID:
-                [self resetPersonIDWithSelfie:selfie];
+                [self resetPersonIDWithSelfie:[Utilities normalizedImage:[info objectForKey:UIImagePickerControllerOriginalImage]]];
                 break;
             default:
                 break;

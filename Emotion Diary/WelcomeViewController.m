@@ -59,7 +59,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID] length] == 0 && ![ActionPerformer hasLoggedIn]) {
-        // TODO: Welcome logic
+        // TODO: 引导界面
         
     }
 }
@@ -185,6 +185,7 @@
         });
         emotion = [data[@"emotion"] intValue];
         if (isRegister) {
+            // TODO: 登录了但没有personID时提示
             [KVNProgress showSuccessWithStatus:@"人脸注册成功" completion:^{
                 [WelcomeViewController showRookieWarningInViewController:self];
             }];

@@ -21,6 +21,7 @@
 #define REGISTER_COMPLETED_NOTIFOCATION @"RegisterCompletedNotification"
 #define UPLOAD_PROGRESS_CHANGED_NOTIFOCATION @"UploadProgressChangedNotification"
 #define SYNC_PROGRESS_CHANGED_NOTIFOCATION @"SyncProgressChangedNotification"
+#define SHOULD_SYNC_NOTIFOCATION @"ShouldSyncNotification"
 
 typedef NS_ENUM(NSInteger, EmotionDiaryImageType) {
     EmotionDiaryImageTypeIcon,

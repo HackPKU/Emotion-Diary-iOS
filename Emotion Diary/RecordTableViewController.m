@@ -345,13 +345,14 @@
 - (IBAction)done:(id)sender {
     EmotionDiary *diary = [[EmotionDiary alloc] initWithEmotion:(int)_sliderEmotion.value selfie:_selfie images:images tags:nil text:_textRecord.text placeName:nil placeLong:0.0 placeLat:0.0 weather:nil];
     [KVNProgress showWithStatus:@"日记保存中"];
-    [diary writeToDiskWithBlock:^(BOOL success, NSString *message, NSObject * _Nullable data) {
+    [diary writeToDiskWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
         dispatch_sync(dispatch_get_main_queue(), ^{
             if (success) {
                 [KVNProgress showSuccessWithStatus:@"日记保存成功"];
             }else {
                 [KVNProgress showErrorWithStatus:message];
             }
+            // TODO: 自动上传
             [self.navigationController dismissViewControllerAnimated:YES completion:^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:ENTER_MAIN_VIEW_NOTIFICATION object:nil];
             }];

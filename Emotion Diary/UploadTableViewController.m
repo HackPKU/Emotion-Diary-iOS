@@ -59,6 +59,8 @@
             cell = [tableView dequeueReusableCellWithIdentifier:@"uploading" forIndexPath:indexPath];
         }else if ([dict[@"state"] isEqual:UPLOAD_STATE_WAITING]){
             cell = [tableView dequeueReusableCellWithIdentifier:@"waiting" forIndexPath:indexPath];
+        }else {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"error" forIndexPath:indexPath];
         }
     }
     [cell setDiary:dict[@"diary"]];
