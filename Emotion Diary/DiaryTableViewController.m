@@ -243,7 +243,11 @@
 }
 
 - (IBAction)delete:(id)sender {
-    UIAlertController *action = [UIAlertController alertControllerWithTitle:@"删除日记" message:@"该操作不可逆，您确定吗？" preferredStyle:UIAlertControllerStyleAlert];
+    NSString *message = @"该操作不可逆，您确定吗？";
+    if (_diary.isShared) {
+        message = [message stringByAppendingString:@"\n该日记已分享，删除后分享将不存在"];
+    }
+    UIAlertController *action = [UIAlertController alertControllerWithTitle:@"删除日记" message:message preferredStyle:UIAlertControllerStyleAlert];
     [action addAction:[UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         if (_diary.hasOnlineVersion) {
             [KVNProgress showWithStatus:@"删除中"];
