@@ -75,7 +75,7 @@
         int diaryID = [noti.userInfo[DIARY_ID] intValue];
         if (diaryID != NO_DIARY_ID) {
             for (EmotionDiary *diary in diariesOfToday) {
-                if (diary.diaryID == diaryID) {
+                if (diary.diaryID == diaryID || diary.diaryID == NO_DIARY_ID) {
                     shouldRefreshDiaryOfToday = YES;
                     break;
                 }
