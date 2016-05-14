@@ -133,6 +133,7 @@
     [action addAction:[UIAlertAction actionWithTitle:@"照片图库" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         UIImagePickerController *imagePicker = [UIImagePickerController new];
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        imagePicker.allowsEditing = YES;
         imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
         imagePicker.delegate = self;
         imagePickerState = CHANGE_ICON;
