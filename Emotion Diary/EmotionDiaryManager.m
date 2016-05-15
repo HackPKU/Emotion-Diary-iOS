@@ -35,14 +35,14 @@ static EmotionDiaryManager *sharedManager;
 }
 
 - (NSDateFormatter *)PRCDateFormatter {
-    @synchronized (PRCDateFormatter) {
-        if (!PRCDateFormatter) {
-            PRCDateFormatter = [NSDateFormatter new];
-            [PRCDateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-            [PRCDateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"PRC"]];
+    @synchronized (formatter) {
+        if (!formatter) {
+            formatter = [NSDateFormatter new];
+            [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"PRC"]];
         }
     }
-    return PRCDateFormatter;
+    return formatter;
 }
 
 #pragma mark - Storage function
@@ -386,7 +386,7 @@ static EmotionDiaryManager *sharedManager;
         syncInfo = [NSMutableDictionary new];
     }
     
-    NSString *key = [NSString stringWithFormat:@"%ld.%ld", year, month];
+    NSString *key = [NSString stringWithFormat:@"%ld.%ld", (long)year, (long)month];
     NSDate *date = syncInfo[key];
     // 十分钟内不重复同步
     if (!forced && date && ABS([date timeIntervalSinceNow]) < 10 * 60) {

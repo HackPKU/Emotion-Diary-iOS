@@ -56,6 +56,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID] length] == 0 && ![ActionPerformer hasLoggedIn]) {

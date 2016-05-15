@@ -25,6 +25,12 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 
 > 在 `DEBUG` 模式以及宏定义了 `LOCALHOST` 的情况下，使用 localhost 调试程序，如果需要使用在线的服务器，请在 `ActionPerformer.m` 中取消定义 `LOCALHOST`
 
+## 已测试平台
+
+* iOS 8.4 模拟器
+* iOS 9.0 模拟器
+* iOS 9.3 真机 + 模拟器
+
 ## 主要进度记录
 
 * 2016/04/25 完成功能构思和UI、图标概念设计
@@ -32,13 +38,13 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 * 2016/05/03 完成本地日记 App 的功能
 * 2016/05/09 完成注册和登录功能
 * 2016/05/14 完成日记上传和同步功能
+* 2016/05/15 使用 CocoaPods 1.0.0 新版本
 
 ## 重要类说明
 
 #### `EmotionDiary`
 
 * 日记类，遵循 `NSCoding` 协议，可实现对本地和在线日记的封装、读取、上传、删除等管理
-* 返回的 block 始终处于后台线程
 
 #### `EmotionDiaryManager`
 
@@ -52,7 +58,6 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 
 * 用于执行一些网络和本地动作，所有函数均为类函数，网络部分使用 block 与其它函数通讯
 * 总体上分为服务器通讯模块，面部识别模块，本地功能模块
-* 服务器通讯返回的 block 在主线程，面部识别模块返回的 block 在后台线程
 
 #### `Utilities`
 

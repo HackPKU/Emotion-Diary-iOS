@@ -182,10 +182,10 @@
 #pragma mark - ZYBannerView delegate
 
 - (void)banner:(ZYBannerView *)banner didSelectItemAtIndex:(NSInteger)index {
+    imageBrowserMode = BROWSE_IMAGE;
     MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
     browser.enableGrid = YES;
     [browser setCurrentPhotoIndex:index];
-    imageBrowserMode = BROWSE_IMAGE;
     [self.navigationController pushViewController:browser animated:YES];
 }
 
@@ -225,20 +225,13 @@
 }
 
 - (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser thumbPhotoAtIndex:(NSUInteger)index {
-    switch (imageBrowserMode) {
-        case BROWSE_SELFIE:
-            return nil;
-        case BROWSE_IMAGE:
-            return [self photoBrowser:photoBrowser photoAtIndex:index];
-        default:
-            return nil;
-    }
+    return [self photoBrowser:photoBrowser photoAtIndex:index];
 }
 
 - (IBAction)touchSelfie:(id)sender {
+    imageBrowserMode = BROWSE_SELFIE;
     MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
     browser.enableGrid = NO;
-    imageBrowserMode = BROWSE_SELFIE;
     [self.navigationController pushViewController:browser animated:YES];
 }
 
@@ -269,7 +262,22 @@
 }
 
 - (IBAction)share:(id)sender {
-    // TODO: 分享
+    if (_diary.isShared) {
+        UIAlertController *action = [UIAlertController alertControllerWithTitle:@"抱歉" message:@"该日记已分享\n请至用户中心管理您的分享" preferredStyle:UIAlertControllerStyleAlert];
+        [action addAction:[UIAlertAction actionWithTitle:@"好" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:action animated:YES completion:nil];
+        return;
+    }
+    [KVNProgress showWithStatus:@"分享中"];
+    [_diary shareWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
+        if (!success) {
+            [KVNProgress showErrorWithStatus:message];
+            return;
+        }
+        [KVNProgress showSuccessWithStatus:@"分享成功\n快把链接分享给朋友吧！" completion:^{
+            [Utilities openURL:(NSURL *)data inViewController:self];
+        }];
+    }];
 }
 
 #pragma mark - Navigation

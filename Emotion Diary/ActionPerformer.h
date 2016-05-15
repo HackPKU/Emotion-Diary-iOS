@@ -31,11 +31,18 @@ typedef NS_ENUM(NSInteger, EmotionDiaryImageType) {
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * When it is about Emotion Diary server connection, the block is in main thread
+ *
+ * When it is about Face++ connection, the block is in background thread
+ */
 typedef void (^ActionPerformerResultBlock)(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data);
 
 @interface ActionPerformer : NSObject
 
 #pragma mark - Server connection
+
++ (NSString *)getServerUrl;
 
 + (void)registerWithName:(NSString *)name password:(NSString *)password sex:(NSString * _Nullable)sex email:(NSString * _Nullable)email icon:(NSString * _Nullable)icon personID:(NSString *)personID andBlock:(ActionPerformerResultBlock)block;
 
@@ -56,6 +63,8 @@ typedef void (^ActionPerformerResultBlock)(BOOL success, NSString * _Nullable me
 + (void)viewDiaryWithDiaryID:(int)diaryID shareKey:(NSString * _Nullable)shareKey andBlock:(ActionPerformerResultBlock)block;
 
 + (void)syncDiaryWithYear:(int)year month:(int)month andBlock:(ActionPerformerResultBlock)block;
+
++ (void)searchDiaryWithKeywords:(NSArray<NSString *> *)keywords andBlock:(ActionPerformerResultBlock)block;
 
 + (void)deleteDiaryWithDiaryID:(int)diaryID andBlock:(ActionPerformerResultBlock)block;
 

@@ -27,7 +27,7 @@
 }
 
 - (IBAction)donate:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:PAY_URL]];
+    [Utilities openURL:[NSURL URLWithString:PAY_URL] inViewController:self];
 }
 
 /*
