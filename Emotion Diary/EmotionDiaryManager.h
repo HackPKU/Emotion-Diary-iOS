@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSMutableArray<NSDictionary *> *diaries;
     BOOL isUploading;
     NSMutableArray<NSDictionary *> *uploadQueue;
-    NSDateFormatter *PRCDateFormatter;
+    NSDateFormatter *formatter;
 }
 
 + (EmotionDiaryManager *)sharedManager; // 单例模式

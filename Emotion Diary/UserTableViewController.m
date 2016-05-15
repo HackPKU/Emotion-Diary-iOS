@@ -104,7 +104,7 @@
                 return cell;
             }else if (indexPath.row == 1) {
                 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"upload"];
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", [[EmotionDiaryManager sharedManager] totalUploadNumber]];
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)[[EmotionDiaryManager sharedManager] totalUploadNumber]];
                 return cell;
             }else if (indexPath.row == 2) {
                 UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"unlock"];
@@ -212,9 +212,7 @@
             [mail setSubject:@"情绪日记 iOS客户端反馈"];
             [mail setToRecipients:FEEDBACK_EMAIL];
             [mail setMessageBody:[NSString stringWithFormat:@"设备：%@\n系统：iOS %@\n客户端版本：%@", platform, [[UIDevice currentDevice] systemVersion], [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]] isHTML:NO];
-            [self presentViewController:mail animated:YES completion:^{
-                [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-            }];
+            [self presentViewController:mail animated:YES completion:nil];
         }
     }
 }

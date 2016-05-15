@@ -108,7 +108,7 @@
         [[NSCalendar currentCalendar] getEra:nil year:&year month:&month day:nil fromDate:date];
         [[EmotionDiaryManager sharedManager] syncDiaryOfYear:year month:month forced:NO fromServerWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
             if (success) {
-                NSLog(@"Synced diary of %ld.%ld", year, month);
+                NSLog(@"Synced diary of %ld.%ld", (long)year, (long)month);
             }
         }];
     });
