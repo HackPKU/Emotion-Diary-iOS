@@ -398,4 +398,22 @@ static EmotionDiaryManager *sharedManager;
     return YES;
 }
 
+#pragma mark - Share function
+
+- (void)viewShareListWithBlock:(EmotionDiaryResultBlock)block {
+    [ActionPerformer viewShareListWithBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            if (!success) {
+                block(NO, message, nil);
+                return;
+            }
+            NSMutableArray<EmotionDiary *> *result = [NSMutableArray new];
+            for (NSDictionary *dict in data[@"diaries"]) {
+                [result addObject:[EmotionDiaryManager createEmotionDiaryFromServerDictionary:dict]];
+            }
+            block(YES, nil, result);
+        });
+    }];
+}
+
 @end

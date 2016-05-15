@@ -1,14 +1,14 @@
 //
-//  CalendarTableViewCell.m
+//  DiaryDetailedTableViewCell.m
 //  Emotion Diary
 //
 //  Created by 范志康 on 16/4/9.
 //  Copyright © 2016年 范志康. All rights reserved.
 //
 
-#import "CalendarTableViewCell.h"
+#import "DiaryDetailedTableViewCell.h"
 
-@implementation CalendarTableViewCell
+@implementation DiaryDetailedTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

@@ -1,5 +1,5 @@
 //
-//  CalendarTableViewCell.h
+//  DiaryDetailedTableViewCell.h
 //  Emotion Diary
 //
 //  Created by 范志康 on 16/4/9.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CalendarTableViewCell : UITableViewCell {
+@interface DiaryDetailedTableViewCell : UITableViewCell {
     EmotionDiary *diary;
     NSDateFormatter *formatter;
 }
@@ -23,6 +23,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *buttonHasTag;
 
 - (void)setDiary:(EmotionDiary *)newDiary;
+
 - (EmotionDiary *)diary;
 
 @end

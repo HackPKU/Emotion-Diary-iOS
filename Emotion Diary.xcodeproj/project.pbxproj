@@ -15,7 +15,7 @@
 		015324EB1CD8BE0100272D03 /* UserTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 015324EA1CD8BE0100272D03 /* UserTableViewController.m */; };
 		015324F01CD8CF4D00272D03 /* UserCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 015324EE1CD8CF4D00272D03 /* UserCenter.storyboard */; };
 		015324FE1CD9066E00272D03 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 015325001CD9066E00272D03 /* InfoPlist.strings */; };
-		015334DF1CB8B2DF00E3D2F1 /* CalendarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 015334DE1CB8B2DF00E3D2F1 /* CalendarTableViewCell.m */; };
+		015334DF1CB8B2DF00E3D2F1 /* DiaryDetailedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 015334DE1CB8B2DF00E3D2F1 /* DiaryDetailedTableViewCell.m */; };
 		0169FDFB1CDE4D4C00201130 /* RegisterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169FDFA1CDE4D4C00201130 /* RegisterTableViewCell.m */; };
 		017DB3AB1CDB80D4005AB1D3 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017DB3AA1CDB80D4005AB1D3 /* LoginViewController.m */; };
 		017DB3B61CDC6208005AB1D3 /* TranslucentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017DB3B51CDC6208005AB1D3 /* TranslucentViewController.m */; };
@@ -41,8 +41,9 @@
 		01B4061E1CB7FF7500B242D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01B4061D1CB7FF7500B242D6 /* Assets.xcassets */; };
 		01B406211CB7FF7500B242D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01B4061F1CB7FF7500B242D6 /* LaunchScreen.storyboard */; };
 		01B952051CE3229700CA9150 /* UploadTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B952041CE3229600CA9150 /* UploadTableViewController.m */; };
-		01B952081CE3245200CA9150 /* UploadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B952071CE3245200CA9150 /* UploadTableViewCell.m */; };
+		01B952081CE3245200CA9150 /* DiaryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B952071CE3245200CA9150 /* DiaryTableViewCell.m */; };
 		01BF4B441CD7826A00FEDFCE /* TimelineTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF4B431CD7826A00FEDFCE /* TimelineTableViewController.m */; };
+		01C036C91CE8C78A00ACC509 /* ShareTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C036C81CE8C78A00ACC509 /* ShareTableViewController.m */; };
 		01CB83D31CDC6C59003BC716 /* DonateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CB83D21CDC6C59003BC716 /* DonateViewController.m */; };
 		01CB83D61CDC6EC8003BC716 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CB83D51CDC6EC8003BC716 /* AboutViewController.m */; };
 		01DF6FEF1CD3CEE100584CE9 /* RecordCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DF6FEE1CD3CEE100584CE9 /* RecordCollectionViewCell.m */; };
@@ -78,8 +79,8 @@
 		015324EA1CD8BE0100272D03 /* UserTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTableViewController.m; sourceTree = "<group>"; };
 		015324EF1CD8CF4D00272D03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/UserCenter.storyboard; sourceTree = "<group>"; };
 		015324FF1CD9066E00272D03 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		015334DD1CB8B2DF00E3D2F1 /* CalendarTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarTableViewCell.h; sourceTree = "<group>"; };
-		015334DE1CB8B2DF00E3D2F1 /* CalendarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarTableViewCell.m; sourceTree = "<group>"; };
+		015334DD1CB8B2DF00E3D2F1 /* DiaryDetailedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiaryDetailedTableViewCell.h; sourceTree = "<group>"; };
+		015334DE1CB8B2DF00E3D2F1 /* DiaryDetailedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiaryDetailedTableViewCell.m; sourceTree = "<group>"; };
 		015AFD6A1CCBE09800389C7A /* Emotion Diary-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Emotion Diary-Prefix.pch"; sourceTree = "<group>"; };
 		0169FDF91CDE4D4C00201130 /* RegisterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterTableViewCell.h; sourceTree = "<group>"; };
 		0169FDFA1CDE4D4C00201130 /* RegisterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterTableViewCell.m; sourceTree = "<group>"; };
@@ -130,10 +131,12 @@
 		01B406221CB7FF7500B242D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01B952031CE3229600CA9150 /* UploadTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadTableViewController.h; sourceTree = "<group>"; };
 		01B952041CE3229600CA9150 /* UploadTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadTableViewController.m; sourceTree = "<group>"; };
-		01B952061CE3245200CA9150 /* UploadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadTableViewCell.h; sourceTree = "<group>"; };
-		01B952071CE3245200CA9150 /* UploadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadTableViewCell.m; sourceTree = "<group>"; };
+		01B952061CE3245200CA9150 /* DiaryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiaryTableViewCell.h; sourceTree = "<group>"; };
+		01B952071CE3245200CA9150 /* DiaryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiaryTableViewCell.m; sourceTree = "<group>"; };
 		01BF4B421CD7826A00FEDFCE /* TimelineTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineTableViewController.h; sourceTree = "<group>"; };
 		01BF4B431CD7826A00FEDFCE /* TimelineTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineTableViewController.m; sourceTree = "<group>"; };
+		01C036C71CE8C78A00ACC509 /* ShareTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareTableViewController.h; sourceTree = "<group>"; };
+		01C036C81CE8C78A00ACC509 /* ShareTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareTableViewController.m; sourceTree = "<group>"; };
 		01CB83D11CDC6C59003BC716 /* DonateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DonateViewController.h; sourceTree = "<group>"; };
 		01CB83D21CDC6C59003BC716 /* DonateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DonateViewController.m; sourceTree = "<group>"; };
 		01CB83D41CDC6EC8003BC716 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
@@ -185,12 +188,12 @@
 				01DF6FEE1CD3CEE100584CE9 /* RecordCollectionViewCell.m */,
 				01B406171CB7FF7500B242D6 /* CalendarViewController.h */,
 				01B406181CB7FF7500B242D6 /* CalendarViewController.m */,
-				015334DD1CB8B2DF00E3D2F1 /* CalendarTableViewCell.h */,
-				015334DE1CB8B2DF00E3D2F1 /* CalendarTableViewCell.m */,
-				01A5FF5F1CD65FFA00361A01 /* DiaryTableViewController.h */,
-				01A5FF601CD65FFA00361A01 /* DiaryTableViewController.m */,
+				015334DD1CB8B2DF00E3D2F1 /* DiaryDetailedTableViewCell.h */,
+				015334DE1CB8B2DF00E3D2F1 /* DiaryDetailedTableViewCell.m */,
 				01BF4B421CD7826A00FEDFCE /* TimelineTableViewController.h */,
 				01BF4B431CD7826A00FEDFCE /* TimelineTableViewController.m */,
+				01A5FF5F1CD65FFA00361A01 /* DiaryTableViewController.h */,
+				01A5FF601CD65FFA00361A01 /* DiaryTableViewController.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -207,8 +210,10 @@
 				0114C84A1CE2353200ABB188 /* InfoTableViewController.m */,
 				01B952031CE3229600CA9150 /* UploadTableViewController.h */,
 				01B952041CE3229600CA9150 /* UploadTableViewController.m */,
-				01B952061CE3245200CA9150 /* UploadTableViewCell.h */,
-				01B952071CE3245200CA9150 /* UploadTableViewCell.m */,
+				01B952061CE3245200CA9150 /* DiaryTableViewCell.h */,
+				01B952071CE3245200CA9150 /* DiaryTableViewCell.m */,
+				01C036C71CE8C78A00ACC509 /* ShareTableViewController.h */,
+				01C036C81CE8C78A00ACC509 /* ShareTableViewController.m */,
 				017DB3B41CDC6208005AB1D3 /* TranslucentViewController.h */,
 				017DB3B51CDC6208005AB1D3 /* TranslucentViewController.m */,
 				017DB3A91CDB80D4005AB1D3 /* LoginViewController.h */,
@@ -518,6 +523,7 @@
 				017DB3AB1CDB80D4005AB1D3 /* LoginViewController.m in Sources */,
 				018EF45B1CC761EE00E712BC /* FaceppFaceset.m in Sources */,
 				01B406191CB7FF7500B242D6 /* CalendarViewController.m in Sources */,
+				01C036C91CE8C78A00ACC509 /* ShareTableViewController.m in Sources */,
 				01B406161CB7FF7500B242D6 /* AppDelegate.m in Sources */,
 				01360A591CD1174400BB02B0 /* ActionPerformer.m in Sources */,
 				01F15FC81CB8E6AA006BB341 /* RecordTableViewController.m in Sources */,
@@ -529,12 +535,12 @@
 				018EF4601CC761EE00E712BC /* FaceppRecognition.m in Sources */,
 				01B952051CE3229700CA9150 /* UploadTableViewController.m in Sources */,
 				01110B241CE0520300540608 /* UserTableViewCell.m in Sources */,
-				015334DF1CB8B2DF00E3D2F1 /* CalendarTableViewCell.m in Sources */,
+				015334DF1CB8B2DF00E3D2F1 /* DiaryDetailedTableViewCell.m in Sources */,
 				018EF45E1CC761EE00E712BC /* FaceppInfo.m in Sources */,
 				017DB3B61CDC6208005AB1D3 /* TranslucentViewController.m in Sources */,
 				0169FDFB1CDE4D4C00201130 /* RegisterTableViewCell.m in Sources */,
 				01BF4B441CD7826A00FEDFCE /* TimelineTableViewController.m in Sources */,
-				01B952081CE3245200CA9150 /* UploadTableViewCell.m in Sources */,
+				01B952081CE3245200CA9150 /* DiaryTableViewCell.m in Sources */,
 				0114C84B1CE2353200ABB188 /* InfoTableViewController.m in Sources */,
 				01E29C4D1CB88F4600DA815B /* WelcomeViewController.m in Sources */,
 				015324EB1CD8BE0100272D03 /* UserTableViewController.m in Sources */,

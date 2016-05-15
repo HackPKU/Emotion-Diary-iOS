@@ -272,6 +272,9 @@
             [KVNProgress showErrorWithStatus:message];
             return;
         }
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:SHARE_STATE_CHANGED_NOTIFOCATION object:nil];
+        });
         [KVNProgress showSuccessWithStatus:@"分享成功\n快把链接分享给朋友吧！" completion:^{
             [Utilities openURL:(NSURL *)data inViewController:self];
         }];
@@ -284,10 +287,12 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+/*
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
+*/
 
 @end

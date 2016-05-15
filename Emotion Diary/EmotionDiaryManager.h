@@ -53,6 +53,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)syncDiaryOfYear:(NSInteger)year month:(NSInteger)month forced:(BOOL)forced fromServerWithBlock:(EmotionDiaryResultBlock)block;
 
+#pragma mark - Share function
+
+- (void)viewShareListWithBlock:(EmotionDiaryResultBlock)block;
+
 NS_ASSUME_NONNULL_END
 
 @end
