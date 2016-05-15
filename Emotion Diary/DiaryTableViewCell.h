@@ -1,5 +1,5 @@
 //
-//  UploadTableViewCell.h
+//  DiaryTableViewCell.h
 //  Emotion Diary
 //
 //  Created by 范志康 on 16/5/11.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UploadTableViewCell : UITableViewCell {
+@interface DiaryTableViewCell : UITableViewCell {
     EmotionDiary *diary;
     NSDateFormatter *formatter;
 }
@@ -19,5 +19,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *labelError;
 
 - (void)setDiary:(EmotionDiary *)newDiary;
+
+- (EmotionDiary *)diary;
 
 @end

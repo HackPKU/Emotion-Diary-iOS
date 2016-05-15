@@ -7,7 +7,7 @@
 //
 
 #import "UploadTableViewController.h"
-#import "UploadTableViewCell.h"
+#import "DiaryTableViewCell.h"
 
 @interface UploadTableViewController ()
 
@@ -49,7 +49,7 @@
     if ([[EmotionDiaryManager sharedManager] totalUploadNumber] == 0) {
         return [tableView dequeueReusableCellWithIdentifier:@"noUpload" forIndexPath:indexPath];
     }
-    UploadTableViewCell *cell;
+    DiaryTableViewCell *cell;
     NSDictionary *dict = [[EmotionDiaryManager sharedManager] getUploadDataOfIndex:indexPath.row];
     if ([dict[@"state"] isKindOfClass:[NSString class]]) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"error" forIndexPath:indexPath];
@@ -63,7 +63,7 @@
             cell = [tableView dequeueReusableCellWithIdentifier:@"error" forIndexPath:indexPath];
         }
     }
-    [cell setDiary:dict[@"diary"]];
+    cell.diary = dict[@"diary"];
     
     // Configure the cell...
     

@@ -153,7 +153,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="上传日记" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hC9-YP-aR9">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="上传进度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hC9-YP-aR9">
                                             <rect key="frame" x="15" y="12" width="64" height="19.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -176,8 +176,38 @@
                                     </segue>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="unlock" id="npa-3J-4Ha" customClass="UserTableViewCell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="share" textLabel="DDL-wN-6NH" detailTextLabel="0Rh-Rg-HMv" style="IBUITableViewCellStyleValue1" id="HrJ-Y4-ok2">
                                 <rect key="frame" x="0.0" y="481.5" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HrJ-Y4-ok2" id="t6f-Fb-Ntv">
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="分享管理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DDL-wN-6NH">
+                                            <rect key="frame" x="15" y="12" width="64" height="19.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="5" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0Rh-Rg-HMv">
+                                            <rect key="frame" x="555" y="12" width="10" height="19.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="j3h-gS-WYJ" kind="show" identifier="share" id="g5Z-lL-Z4q">
+                                        <segue key="commit" inheritsFrom="parent" id="eHi-1n-Itv"/>
+                                        <segue key="preview" inheritsFrom="commit" id="ii2-q0-JYv"/>
+                                    </segue>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="unlock" id="npa-3J-4Ha" customClass="UserTableViewCell">
+                                <rect key="frame" x="0.0" y="525.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="npa-3J-4Ha" id="eUZ-uK-IXA">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -217,7 +247,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="rate" textLabel="yUb-dd-uqx" style="IBUITableViewCellStyleDefault" id="ylV-zf-JHn">
-                                <rect key="frame" x="0.0" y="525.5" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="569.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ylV-zf-JHn" id="T6h-Lh-i6T">
                                     <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
@@ -234,7 +264,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="feedback" textLabel="UrL-IS-Iv3" style="IBUITableViewCellStyleDefault" id="U9L-AX-Gfe">
-                                <rect key="frame" x="0.0" y="569.5" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="613.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U9L-AX-Gfe" id="UEw-Np-zRp">
                                     <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
@@ -251,7 +281,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="donate" textLabel="TKo-im-mwL" style="IBUITableViewCellStyleDefault" id="W7i-3K-hJu">
-                                <rect key="frame" x="0.0" y="613.5" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="657.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W7i-3K-hJu" id="hBu-Wf-k1e">
                                     <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
@@ -274,7 +304,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="about" textLabel="2Yd-6A-8lV" style="IBUITableViewCellStyleDefault" id="96n-Kd-oDs">
-                                <rect key="frame" x="0.0" y="657.5" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="701.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="96n-Kd-oDs" id="XAc-cV-Uwh">
                                     <rect key="frame" x="0.0" y="0.0" width="553" height="43.5"/>
@@ -470,6 +500,91 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="69O-RQ-s6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4303" y="-525"/>
+        </scene>
+        <!--分享管理-->
+        <scene sceneID="NOk-mk-wmN">
+            <objects>
+                <tableViewController storyboardIdentifier="Share" useStoryboardIdentifierAsRestorationIdentifier="YES" id="j3h-gS-WYJ" customClass="ShareTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="uQw-E8-r9e">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" id="sI9-Sd-bBD" customClass="DiaryTableViewCell">
+                                <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sI9-Sd-bBD" id="Q9T-yI-eHD">
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015/05/01 12:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WMJ-s0-olR">
+                                            <rect key="frame" x="16" y="25" width="109.5" height="13.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="今天没吃药感觉自己萌萌哒" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80q-yo-mIU">
+                                            <rect key="frame" x="16" y="5" width="192" height="19.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="80q-yo-mIU" secondAttribute="trailing" constant="8" id="8pE-gw-8LW"/>
+                                        <constraint firstItem="80q-yo-mIU" firstAttribute="top" secondItem="Q9T-yI-eHD" secondAttribute="top" constant="5" id="C77-Ia-6vt"/>
+                                        <constraint firstItem="WMJ-s0-olR" firstAttribute="leading" secondItem="80q-yo-mIU" secondAttribute="leading" id="FA8-lJ-QWS"/>
+                                        <constraint firstItem="80q-yo-mIU" firstAttribute="leading" secondItem="Q9T-yI-eHD" secondAttribute="leadingMargin" constant="8" id="am6-v4-iTq"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="WMJ-s0-olR" secondAttribute="bottom" constant="5" id="1je-fw-AqW"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="labelText" destination="80q-yo-mIU" id="mg7-s4-qJe"/>
+                                    <outlet property="labelTime" destination="WMJ-s0-olR" id="Uhm-66-tDz"/>
+                                    <segue destination="pqm-4X-NfW" kind="show" identifier="diary" id="luQ-qu-rz5">
+                                        <segue key="commit" inheritsFrom="parent" id="279-Or-dWj"/>
+                                        <segue key="preview" inheritsFrom="commit" id="bhq-ke-dpe"/>
+                                    </segue>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="noShare" textLabel="ZeY-oJ-85I" style="IBUITableViewCellStyleDefault" id="kRK-uL-Pxm" customClass="DiaryTableViewCell">
+                                <rect key="frame" x="0.0" y="157.5" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kRK-uL-Pxm" id="bNR-Os-CFo">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="您还没有分享的日记" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZeY-oJ-85I">
+                                            <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="j3h-gS-WYJ" id="mXz-pp-qfE"/>
+                            <outlet property="delegate" destination="j3h-gS-WYJ" id="DU8-87-KGL"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="分享管理" id="i8a-rl-HLM"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CSB-oi-8ys" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4303" y="310"/>
+        </scene>
+        <!--Diary-->
+        <scene sceneID="UNw-9P-O8U">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="11l-KZ-vGz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="Diary" id="pqm-4X-NfW" sceneMemberID="viewController"/>
+            </objects>
+            <point key="canvasLocation" x="4904.5" y="24"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cfy-Fd-3ku">
@@ -750,7 +865,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="uploading" id="891-dy-8sW" customClass="UploadTableViewCell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="uploading" id="891-dy-8sW" customClass="DiaryTableViewCell">
                                 <rect key="frame" x="0.0" y="157.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="891-dy-8sW" id="sN3-ll-Ro6">
@@ -799,7 +914,7 @@
                                     <outlet property="labelTime" destination="bEo-Aj-Gk4" id="QsU-ev-Y95"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="waiting" id="5iB-jc-EKx" customClass="UploadTableViewCell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="waiting" id="5iB-jc-EKx" customClass="DiaryTableViewCell">
                                 <rect key="frame" x="0.0" y="201.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5iB-jc-EKx" id="mil-hP-LCa">
@@ -842,7 +957,7 @@
                                     <outlet property="labelTime" destination="R7q-wd-8Zq" id="94K-IU-UXe"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="error" id="noy-vD-w6B" customClass="UploadTableViewCell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="error" id="noy-vD-w6B" customClass="DiaryTableViewCell">
                                 <rect key="frame" x="0.0" y="245.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="noy-vD-w6B" id="fjZ-qq-zrq">
@@ -1204,11 +1319,13 @@ Cg
         <image name="日记本" width="100" height="111"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="s67-z5-sht"/>
+        <segue reference="qPa-4Z-Neu"/>
         <segue reference="H9q-g8-KM9"/>
         <segue reference="9Ud-nh-1Hy"/>
-        <segue reference="qPa-4Z-Neu"/>
         <segue reference="HJi-Bx-tL0"/>
+        <segue reference="g5Z-lL-Z4q"/>
+        <segue reference="s67-z5-sht"/>
+        <segue reference="luQ-qu-rz5"/>
         <segue reference="Sm7-Ng-W7U"/>
     </inferredMetricsTieBreakers>
 </document>

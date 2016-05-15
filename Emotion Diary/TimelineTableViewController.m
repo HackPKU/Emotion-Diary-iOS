@@ -7,7 +7,7 @@
 //
 
 #import "TimelineTableViewController.h"
-#import "CalendarTableViewCell.h"
+#import "DiaryDetailedTableViewCell.h"
 #import "DiaryTableViewController.h"
 
 @interface TimelineTableViewController ()
@@ -58,7 +58,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (totalNumber > 0) {
-        CalendarTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"diary" forIndexPath:indexPath];
+        DiaryDetailedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"diary" forIndexPath:indexPath];
         cell.diary = [[EmotionDiaryManager sharedManager] getDiaryOfIndex:indexPath.row];
         return cell;
     }else {
@@ -129,7 +129,7 @@
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"viewDiary"]) {
         DiaryTableViewController *dest = [[[segue destinationViewController] viewControllers] firstObject];
-        dest.diary = ((CalendarTableViewCell *)sender).diary;
+        dest.diary = ((DiaryDetailedTableViewCell *)sender).diary;
     }
 }
 

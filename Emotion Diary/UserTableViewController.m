@@ -8,6 +8,7 @@
 
 #import "UserTableViewController.h"
 #import "UserTableViewCell.h"
+#import "ShareTableViewController.h"
 #import <LocalAuthentication/LocalAuthentication.h>
 #import "sys/utsname.h"
 
@@ -22,7 +23,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUserView) name:USER_CHANGED_NOTIFICATION object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUploadData) name:UPLOAD_PROGRESS_CHANGED_NOTIFOCATION object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshSyncData) name:SYNC_PROGRESS_CHANGED_NOTIFOCATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshShareData) name:SHARE_STATE_CHANGED_NOTIFOCATION object:nil];
+    shareData = [NSMutableArray new];
     [self reloadUserInfo];
+    [self refreshShareData];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -52,7 +56,7 @@
             return 1;
             break;
         case 1:
-            return ([ActionPerformer hasLoggedIn] ? 2 : 1) + [[LAContext new] canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil];
+            return ([ActionPerformer hasLoggedIn] ? 3 : 1) + [[LAContext new] canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil];
             break;
         case 2:
             return 4;
@@ -107,6 +111,10 @@
                 cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)[[EmotionDiaryManager sharedManager] totalUploadNumber]];
                 return cell;
             }else if (indexPath.row == 2) {
+                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"share"];
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)shareData.count];
+                return cell;
+            }else if (indexPath.row == 3) {
                 UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"unlock"];
                 cell.segmentUnlockType.selectedSegmentIndex = [[[NSUserDefaults standardUserDefaults] objectForKey:UNLOCK_TYPE] integerValue] == EmotionDiaryUnlockTypeSelfie ? 0 : 1;
                 return cell;
@@ -182,6 +190,7 @@
 
 - (void)refreshUserView {
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self refreshSyncData];
 }
 
 - (void)refreshUploadData {
@@ -191,6 +200,18 @@
 - (void)refreshSyncData {
     UserTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     [cell reloadStatData];
+}
+
+- (void)refreshShareData {
+    [[EmotionDiaryManager sharedManager] viewShareListWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
+        if (!success) {
+            return;
+        }
+        shareData = (NSMutableArray *)data;
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:2 inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
+        });
+    }];
 }
 
 #pragma mark - Table view delegate
@@ -221,14 +242,17 @@
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"share"]) {
+        ShareTableViewController *dest = [segue destinationViewController];
+        dest.shareData = shareData;
+    }
 }
-*/
 
 @end

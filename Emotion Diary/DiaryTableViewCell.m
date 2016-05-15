@@ -1,14 +1,14 @@
 //
-//  UploadTableViewCell.m
+//  DiaryTableViewCell.m
 //  Emotion Diary
 //
 //  Created by 范志康 on 16/5/11.
 //  Copyright © 2016年 范志康. All rights reserved.
 //
 
-#import "UploadTableViewCell.h"
+#import "DiaryTableViewCell.h"
 
-@implementation UploadTableViewCell
+@implementation DiaryTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -31,6 +31,10 @@
     if (_indicatorUploading) {
         [_indicatorUploading startAnimating];
     }
+}
+
+- (EmotionDiary *)diary {
+    return diary;
 }
 
 @end

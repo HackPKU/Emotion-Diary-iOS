@@ -16,6 +16,8 @@ typedef NS_ENUM(NSInteger, EmotionDiaryUnlockType) {
     EmotionDiaryUnlockTypeTouchID
 };
 
-@interface UserTableViewController : UITableViewController <MFMailComposeViewControllerDelegate>
+@interface UserTableViewController : UITableViewController <MFMailComposeViewControllerDelegate> {
+    NSMutableArray<EmotionDiary *> *shareData;
+}
 
 @end

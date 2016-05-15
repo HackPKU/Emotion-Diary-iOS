@@ -258,6 +258,46 @@
             return;
         }
         
+        if (self.hasOnlineVersion && [ActionPerformer hasLoggedIn]) {
+            [ActionPerformer viewDiaryWithDiaryID:_diaryID shareKey:nil andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+                if (!success) {
+                    // 网络加载失败时尝试本地读取
+                    [self getLocalFullVersionWithBlock:block];
+                    return;
+                }
+                
+                _emotion = [data[@"emotion"] intValue];
+                _selfie = data[@"selfie"];
+                _images = data[@"images"];
+                if (![_images isKindOfClass:[NSArray class]]) {
+                    _images = [NSArray new];
+                }
+                _hasImage = (_images.count > 0);
+                _tags = data[@"tags"];
+                if (![_tags isKindOfClass:[NSArray class]]) {
+                    _tags = [NSArray new];
+                }
+                _hasTag = (_tags.count > 0);
+                NSString *text = data[@"text"];
+                _text = text;
+                _shortText = (text.length > 140) ? [text substringToIndex:139] : text;
+                _placeName = data[@"place_name"];
+                _placeLong = [data[@"place_long"] floatValue];
+                _placeLat = [data[@"place_lat"] floatValue];
+                _weather = data[@"weather"];
+                _createTime = [[[EmotionDiaryManager sharedManager] PRCDateFormatter] dateFromString:data[@"create_time"]];
+                _isShared = [data[@"is_shared"] boolValue];
+                
+                [self writeToDiskWithBlock:block];
+            }];
+        }else {
+            [self getLocalFullVersionWithBlock:block];
+        }
+    });
+}
+
+- (void)getLocalFullVersionWithBlock:(EmotionDiaryResultBlock)block {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSData *diaryData = [Utilities getFileAtPath:DIARY_PATH withName:[self getFileName]];
         if (diaryData) {
             NSKeyedUnarchiver *unArchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:diaryData];
@@ -289,39 +329,7 @@
             
             block(YES, nil, self);
         }else {
-            [ActionPerformer viewDiaryWithDiaryID:_diaryID shareKey:nil andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
-                if (!success) {
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                        block(NO, message, nil);
-                    });
-                    return;
-                }
-                
-                _emotion = [data[@"emotion"] intValue];
-                _selfie = data[@"selfie"];
-                _images = data[@"images"];
-                if (![_images isKindOfClass:[NSArray class]]) {
-                    _images = [NSArray new];
-                }
-                _hasImage = (_images.count > 0);
-                _tags = data[@"tags"];
-                if (![_tags isKindOfClass:[NSArray class]]) {
-                    _tags = [NSArray new];
-                }
-                _hasTag = (_tags.count > 0);
-                NSString *text = data[@"text"];
-                _text = text;
-                _shortText = (text.length > 140) ? [text substringToIndex:139] : text;
-                _placeName = data[@"place_name"];
-                _placeLong = [data[@"place_long"] floatValue];
-                _placeLat = [data[@"place_lat"] floatValue];
-                _weather = data[@"weather"];
-                _createTime = [[[EmotionDiaryManager sharedManager] PRCDateFormatter] dateFromString:data[@"create_time"]];
-                _isShared = [data[@"is_shared"] boolValue];
-                
-                // 写入本地，下次加载时就不需要再从网络获取
-                [self writeToDiskWithBlock:block];
-            }];
+            block(NO, @"本地日记文件载入失败", nil);
         }
     });
 }

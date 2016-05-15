@@ -7,7 +7,7 @@
 //
 
 #import "CalendarViewController.h"
-#import "CalendarTableViewCell.h"
+#import "DiaryDetailedTableViewCell.h"
 #import "DiaryTableViewController.h"
 
 @interface CalendarViewController ()
@@ -134,7 +134,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (diariesOfToday.count > 0) {
-        CalendarTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"diary" forIndexPath:indexPath];
+        DiaryDetailedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"diary" forIndexPath:indexPath];
         cell.labelDate.hidden = (indexPath.row != 0);
         cell.diary = diariesOfToday[indexPath.row];
         return cell;
@@ -171,7 +171,7 @@
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"viewDiary"]) {
         DiaryTableViewController *dest = [[[segue destinationViewController] viewControllers] firstObject];
-        dest.diary = ((CalendarTableViewCell *)sender).diary;
+        dest.diary = ((DiaryDetailedTableViewCell *)sender).diary;
     }
 }
 
