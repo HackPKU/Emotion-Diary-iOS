@@ -9,6 +9,7 @@
 #import "Utilities.h"
 #import "AppDelegate.h"
 #import <CommonCrypto/CommonCrypto.h>
+#import <SafariServices/SafariServices.h>
 
 @implementation Utilities
 
@@ -54,6 +55,17 @@
         return view;
     }
     return nil;
+}
+
++ (void)openURL:(NSURL *)url inViewController:(UIViewController *)viewController {
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0) {
+        SFSafariViewController *view = [[SFSafariViewController alloc] initWithURL:url];
+        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:view];
+        navi.navigationBarHidden = YES;
+        [viewController presentViewController:navi animated:YES completion:nil];
+    }else {
+        [[UIApplication sharedApplication] openURL:url];
+    }
 }
 
 + (UIImage *)createImageWithColor:(UIColor *)color {

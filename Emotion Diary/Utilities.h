@@ -43,6 +43,13 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIViewController * _Nullable)getCurrentViewControllerWhileClass:(Class _Nullable)class appearsWithTime:(int)appearTime andCanBeTop:(BOOL)canBeTop;
 
 /**
+ * Open the URL in SFSafariViewController (iOS >= 9.0) or Safari (iOS < 9.0)
+ * @param url The URL to open
+ * @param viewController The view controller to present the SFSafariViewController
+ */
++ (void)openURL:(NSURL *)url inViewController:(UIViewController *)viewController;
+
+/**
  * Create an UIImage with the given color
  * @param color The color to create the image
  * @return UIImage with a 1.0f × 1.0f size
