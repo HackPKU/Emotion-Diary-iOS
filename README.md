@@ -25,6 +25,12 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 
 > 在 `DEBUG` 模式以及宏定义了 `LOCALHOST` 的情况下，使用 localhost 调试程序，如果需要使用在线的服务器，请在 `ActionPerformer.m` 中取消定义 `LOCALHOST`
 
+## 已测试平台
+
+* iOS 8.4 模拟器
+* iOS 9.0 模拟器
+* iOS 9.3 真机 + 模拟器
+
 ## 主要进度记录
 
 * 2016/04/25 完成功能构思和UI、图标概念设计
