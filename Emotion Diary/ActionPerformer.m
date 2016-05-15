@@ -155,6 +155,12 @@
     [ActionPerformer postWithDictionary:request toUrl:@"/api/sync_diary.php" andBlock:block];
 }
 
++ (void)searchDiaryWithKeywords:(NSArray<NSString *> *)keywords andBlock:(ActionPerformerResultBlock)block {
+    NSMutableDictionary *request = [NSMutableDictionary new];
+    request[@"keywords"] = [keywords componentsJoinedByString:@" | "];
+    [ActionPerformer postWithDictionary:request toUrl:@"/api/search_diary.php" andBlock:block];
+}
+
 + (void)deleteDiaryWithDiaryID:(int)diaryID andBlock:(ActionPerformerResultBlock)block {
     NSMutableDictionary *request = [NSMutableDictionary new];
     request[@"diaryid"] = [NSString stringWithFormat:@"%d", diaryID];

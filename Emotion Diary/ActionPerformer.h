@@ -42,6 +42,8 @@ typedef void (^ActionPerformerResultBlock)(BOOL success, NSString * _Nullable me
 
 #pragma mark - Server connection
 
++ (NSString *)getServerUrl;
+
 + (void)registerWithName:(NSString *)name password:(NSString *)password sex:(NSString * _Nullable)sex email:(NSString * _Nullable)email icon:(NSString * _Nullable)icon personID:(NSString *)personID andBlock:(ActionPerformerResultBlock)block;
 
 + (void)loginWithName:(NSString *)name password:(NSString *)password andBlock:(ActionPerformerResultBlock)block;
@@ -61,6 +63,8 @@ typedef void (^ActionPerformerResultBlock)(BOOL success, NSString * _Nullable me
 + (void)viewDiaryWithDiaryID:(int)diaryID shareKey:(NSString * _Nullable)shareKey andBlock:(ActionPerformerResultBlock)block;
 
 + (void)syncDiaryWithYear:(int)year month:(int)month andBlock:(ActionPerformerResultBlock)block;
+
++ (void)searchDiaryWithKeywords:(NSArray<NSString *> *)keywords andBlock:(ActionPerformerResultBlock)block;
 
 + (void)deleteDiaryWithDiaryID:(int)diaryID andBlock:(ActionPerformerResultBlock)block;
 

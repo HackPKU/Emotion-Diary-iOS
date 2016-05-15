@@ -46,7 +46,7 @@
         _placeLat = [aDecoder decodeFloatForKey:PLACE_LAT];
         _weather = [aDecoder decodeObjectForKey:WEATHER];
         _createTime = [aDecoder decodeObjectForKey:CREATE_TIME];
-        _isShared = [aDecoder decodeObjectForKey:IS_SHARED];
+        _isShared = [aDecoder decodeBoolForKey:IS_SHARED];
         
         _diaryID = [aDecoder decodeIntForKey:DIARY_ID];
         _hasImage = [aDecoder decodeBoolForKey:HAS_IMAGE];
@@ -343,7 +343,7 @@
                 block(NO, message, nil);
                 return;
             }
-            block(YES, nil, shareKey);
+            block(YES, nil, [NSURL URLWithString:[NSString stringWithFormat:@"%@/web/diary/?diaryid=%d&share_key=%@", [ActionPerformer getServerUrl], _diaryID, shareKey]]);
         }];
     }];
 }

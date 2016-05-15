@@ -225,14 +225,7 @@
 }
 
 - (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser thumbPhotoAtIndex:(NSUInteger)index {
-    switch (imageBrowserMode) {
-        case BROWSE_SELFIE:
-            return nil;
-        case BROWSE_IMAGE:
-            return [self photoBrowser:photoBrowser photoAtIndex:index];
-        default:
-            return nil;
-    }
+    return [self photoBrowser:photoBrowser photoAtIndex:index];
 }
 
 - (IBAction)touchSelfie:(id)sender {
@@ -269,7 +262,16 @@
 }
 
 - (IBAction)share:(id)sender {
-    // TODO: 分享
+    [KVNProgress showWithStatus:@"分享中"];
+    [_diary shareWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
+        if (!success) {
+            [KVNProgress showErrorWithStatus:message];
+            return;
+        }
+        [KVNProgress showSuccessWithStatus:@"成功\n快把日记分享给朋友吧！" completion:^{
+            [Utilities openURL:(NSURL *)data inViewController:self];
+        }];
+    }];
 }
 
 #pragma mark - Navigation
