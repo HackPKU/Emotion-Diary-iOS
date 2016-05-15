@@ -294,7 +294,7 @@
 - (IBAction)logout:(id)sender {
     UIAlertController *action = [UIAlertController alertControllerWithTitle:@"提示" message:@"您确定要退出登录吗" preferredStyle:UIAlertControllerStyleAlert];
     [action addAction:[UIAlertAction actionWithTitle:@"登出" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        [KVNProgress showWithStatus:@"正在退出登录"];
+        [KVNProgress showWithStatus:@"退出登录中"];
         [ActionPerformer logoutWithBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
             
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_ID];

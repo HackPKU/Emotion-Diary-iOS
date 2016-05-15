@@ -44,7 +44,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [KVNProgress showWithStatus:@"加载中"];
     [self getFullVersion];
 }
 
@@ -71,7 +70,6 @@
                 [KVNProgress showErrorWithStatus:message];
                 return;
             }
-            [KVNProgress dismiss];
             [self updateDiaryView];
         });
     }];
@@ -263,7 +261,7 @@
 
 - (IBAction)share:(id)sender {
     if (_diary.isShared) {
-        UIAlertController *action = [UIAlertController alertControllerWithTitle:@"抱歉" message:@"该日记已分享\n请至用户中心管理您的分享" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *action = [UIAlertController alertControllerWithTitle:@"该日记已分享" message:@"请至用户中心管理您的分享" preferredStyle:UIAlertControllerStyleAlert];
         [action addAction:[UIAlertAction actionWithTitle:@"好" style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:action animated:YES completion:nil];
         return;
