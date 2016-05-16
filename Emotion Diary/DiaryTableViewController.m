@@ -111,6 +111,19 @@
     return 2 + (_diary.images.count > 0);
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        return 130.0;
+    }else if (indexPath.row == 1) {
+        // 根据 AutoLayout 自动计算高度
+        CGFloat height = [_textDetail systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        return height + 17.0; // 8.0 + 8.0 + 1.0, 1.0 是分割线高度
+    }else if (indexPath.row == 2){
+        return 250.0;
+    }
+    return 0.0;
+}
+
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
