@@ -149,7 +149,7 @@
         }
         NSString *selfie = _selfie;
         NSArray *images = _images;
-        [self getFullVersionWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
+        [self getLocalFullVersionWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
             if (!success) {
                 block(NO, message, nil);
                 return;
@@ -250,7 +250,7 @@
     }];
 }
 
-- (void)getFullVersionWithBlock:(EmotionDiaryResultBlock)block {
+- (void)getOnlineFullVersionWithBlock:(EmotionDiaryResultBlock)block {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if (_text.length > 0 && _images && _imageSelfie && _imageImages && _tags) {
             // Already has full version
@@ -258,11 +258,10 @@
             return;
         }
         
-        if (self.hasOnlineVersion && [ActionPerformer hasLoggedIn]) {
+        if (self.hasOnlineVersion) {
             [ActionPerformer viewDiaryWithDiaryID:_diaryID shareKey:nil andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
                 if (!success) {
-                    // 网络加载失败时尝试本地读取
-                    [self getLocalFullVersionWithBlock:block];
+                    block(NO, message, nil);
                     return;
                 }
                 
@@ -291,13 +290,19 @@
                 [self writeToDiskWithBlock:block];
             }];
         }else {
-            [self getLocalFullVersionWithBlock:block];
+            block(NO, @"该日记还未上传", nil);
         }
     });
 }
 
 - (void)getLocalFullVersionWithBlock:(EmotionDiaryResultBlock)block {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        if (_text.length > 0 && _images && _imageSelfie && _imageImages && _tags) {
+            // Already has full version
+            block(YES, nil, self);
+            return;
+        }
+        
         NSData *diaryData = [Utilities getFileAtPath:DIARY_PATH withName:[self getFileName]];
         if (diaryData) {
             NSKeyedUnarchiver *unArchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:diaryData];

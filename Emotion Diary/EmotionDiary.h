@@ -69,7 +69,9 @@ typedef void (^EmotionDiaryResultBlock)(BOOL success, NSString * _Nullable messa
 
 - (void)uploadToServerWithBlock:(EmotionDiaryResultBlock)block;
 
-- (void)getFullVersionWithBlock:(EmotionDiaryResultBlock)block;
+- (void)getOnlineFullVersionWithBlock:(EmotionDiaryResultBlock)block;
+
+- (void)getLocalFullVersionWithBlock:(EmotionDiaryResultBlock)block;
 
 - (void)shareWithBlock:(EmotionDiaryResultBlock)block;
 

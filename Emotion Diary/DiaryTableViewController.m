@@ -64,11 +64,27 @@
 }
 
 - (void)getFullVersion {
-    [_diary getFullVersionWithBlock:^(BOOL success, NSString * _Nullable message, NSObject * _Nullable data) {
+    // 先读取本地文件
+    [_diary getLocalFullVersionWithBlock:^(BOOL successLocal, NSString * _Nullable message, NSObject * _Nullable data) {
         dispatch_sync(dispatch_get_main_queue(), ^{
-            if (!success) {
+            // 如果存在在线版，则读取在线日记
+            if (_diary.hasOnlineVersion) {
+                [_diary getOnlineFullVersionWithBlock:^(BOOL successOnline, NSString * _Nullable message, NSObject * _Nullable data) {
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        if (!successOnline && !successLocal) {
+                            [KVNProgress showErrorWithStatus:message];
+                            return;
+                        }
+                        if (successOnline) {
+                            [self updateDiaryView];
+                        }
+                    });
+                }];
+            }else {
+                if (!successLocal) {
                 [KVNProgress showErrorWithStatus:message];
-                return;
+                    return;
+                }
             }
             [self updateDiaryView];
         });
@@ -273,6 +289,12 @@
 }
 
 - (IBAction)share:(id)sender {
+    if (!_diary.hasOnlineVersion) {
+        UIAlertController *action = [UIAlertController alertControllerWithTitle:@"该日记未上传" message:@"请先至用户中心同步日记" preferredStyle:UIAlertControllerStyleAlert];
+        [action addAction:[UIAlertAction actionWithTitle:@"好" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:action animated:YES completion:nil];
+        return;
+    }
     if (_diary.isShared) {
         UIAlertController *action = [UIAlertController alertControllerWithTitle:@"该日记已分享" message:@"请至用户中心管理您的分享" preferredStyle:UIAlertControllerStyleAlert];
         [action addAction:[UIAlertAction actionWithTitle:@"好" style:UIAlertActionStyleCancel handler:nil]];
