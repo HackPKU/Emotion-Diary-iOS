@@ -916,6 +916,9 @@
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="今天没吃药感觉自己萌萌哒" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ief-Uu-lfv">
                                                     <rect key="frame" x="23" y="8" width="554" height="64"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="cGf-EW-djV"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
@@ -923,8 +926,8 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="ief-Uu-lfv" secondAttribute="trailing" constant="15" id="KZM-P4-miG"/>
-                                                <constraint firstItem="ief-Uu-lfv" firstAttribute="bottom" secondItem="heD-5m-Jus" secondAttribute="bottomMargin" id="lIV-Ks-vsh"/>
-                                                <constraint firstItem="ief-Uu-lfv" firstAttribute="top" secondItem="heD-5m-Jus" secondAttribute="topMargin" id="rja-2g-gM7"/>
+                                                <constraint firstAttribute="bottom" secondItem="ief-Uu-lfv" secondAttribute="bottom" constant="8" id="lIV-Ks-vsh"/>
+                                                <constraint firstItem="ief-Uu-lfv" firstAttribute="top" secondItem="heD-5m-Jus" secondAttribute="top" constant="8" id="rja-2g-gM7"/>
                                                 <constraint firstItem="ief-Uu-lfv" firstAttribute="leading" secondItem="heD-5m-Jus" secondAttribute="leadingMargin" constant="15" id="xUi-u3-5xz"/>
                                             </constraints>
                                         </tableViewCellContentView>

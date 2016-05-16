@@ -46,6 +46,10 @@
     return _shareData.count > 0 ? @"左划以删除或取消分享" : nil;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    return _shareData.count > 0 ? @"取消分享后原链接将失效" : nil;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (_shareData.count > 0) {
         DiaryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
@@ -91,6 +95,12 @@
     return YES;
 }
 */
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewRowAction *unshareAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"取消分享" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
@@ -147,7 +157,7 @@
     if ([segue.identifier isEqualToString:@"diary"]) {
         DiaryTableViewController *dest = [segue destinationViewController];
         dest.navigationItem.rightBarButtonItems = nil;
-        dest.navigationItem.leftBarButtonItems = nil;
+        dest.navigationItem.leftBarButtonItems = nil; // 变为滑动返回
         dest.diary = ((DiaryTableViewCell *)sender).diary;
     }
 }

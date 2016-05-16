@@ -321,7 +321,6 @@ static EmotionDiaryManager *sharedManager;
 }
 
 - (void)syncDiaryOfYear:(NSInteger)year month:(NSInteger)month forced:(BOOL)forced fromServerWithBlock:(EmotionDiaryResultBlock)block {
-
     if (![self shouldSyncWithYear:year month:month forced:forced]) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             block(NO, @"同步频率过高", nil);
