@@ -98,10 +98,9 @@
             }
             // TODO: PersonID 与本地不一致时的处理
             [[NSNotificationCenter defaultCenter] postNotificationName:USER_CHANGED_NOTIFICATION object:nil];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:SYNC_INFO];
+            [[NSNotificationCenter defaultCenter] postNotificationName:SHOULD_SYNC_NOTIFOCATION object:nil];
             [KVNProgress showSuccessWithStatus:@"登陆成功" completion:^{
-                 // TODO: iPad 上卡死
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:SYNC_INFO];
-                [[NSNotificationCenter defaultCenter] postNotificationName:SHOULD_SYNC_NOTIFOCATION object:nil];
                 [self dismissViewControllerAnimated:YES completion:nil];
             }];
         }];
