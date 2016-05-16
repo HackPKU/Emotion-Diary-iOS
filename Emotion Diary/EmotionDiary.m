@@ -260,34 +260,36 @@
         
         if (self.hasOnlineVersion) {
             [ActionPerformer viewDiaryWithDiaryID:_diaryID shareKey:nil andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
-                if (!success) {
-                    block(NO, message, nil);
-                    return;
-                }
-                
-                _emotion = [data[@"emotion"] intValue];
-                _selfie = data[@"selfie"];
-                _images = data[@"images"];
-                if (![_images isKindOfClass:[NSArray class]]) {
-                    _images = [NSArray new];
-                }
-                _hasImage = (_images.count > 0);
-                _tags = data[@"tags"];
-                if (![_tags isKindOfClass:[NSArray class]]) {
-                    _tags = [NSArray new];
-                }
-                _hasTag = (_tags.count > 0);
-                NSString *text = data[@"text"];
-                _text = text;
-                _shortText = (text.length > 140) ? [text substringToIndex:139] : text;
-                _placeName = data[@"place_name"];
-                _placeLong = [data[@"place_long"] floatValue];
-                _placeLat = [data[@"place_lat"] floatValue];
-                _weather = data[@"weather"];
-                _createTime = [[[EmotionDiaryManager sharedManager] PRCDateFormatter] dateFromString:data[@"create_time"]];
-                _isShared = [data[@"is_shared"] boolValue];
-                
-                [self writeToDiskWithBlock:block];
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    if (!success) {
+                        block(NO, message, nil);
+                        return;
+                    }
+                    
+                    _emotion = [data[@"emotion"] intValue];
+                    _selfie = data[@"selfie"];
+                    _images = data[@"images"];
+                    if (![_images isKindOfClass:[NSArray class]]) {
+                        _images = [NSArray new];
+                    }
+                    _hasImage = (_images.count > 0);
+                    _tags = data[@"tags"];
+                    if (![_tags isKindOfClass:[NSArray class]]) {
+                        _tags = [NSArray new];
+                    }
+                    _hasTag = (_tags.count > 0);
+                    NSString *text = data[@"text"];
+                    _text = text;
+                    _shortText = (text.length > 140) ? [text substringToIndex:139] : text;
+                    _placeName = data[@"place_name"];
+                    _placeLong = [data[@"place_long"] floatValue];
+                    _placeLat = [data[@"place_lat"] floatValue];
+                    _weather = data[@"weather"];
+                    _createTime = [[[EmotionDiaryManager sharedManager] PRCDateFormatter] dateFromString:data[@"create_time"]];
+                    _isShared = [data[@"is_shared"] boolValue];
+                    
+                    [self writeToDiskWithBlock:block];
+                });
             }];
         }else {
             block(NO, @"该日记还未上传", nil);
