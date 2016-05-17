@@ -28,7 +28,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:UPLOAD_PROGRESS_CHANGED_NOTIFOCATION object:nil];
     
     [self updateDiaryView];
-    // TODO: 下拉刷新
         
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -108,10 +107,12 @@
     _labelDateAndTime.text = [formatter stringFromDate:_diary.createTime];
     _textDetail.text = _diary.text;
     
-    _cycleImageView.pageControl.hidden = (_diary.images.count <= 1);
-    [imageViews removeAllObjects];
-    [self.tableView reloadData];
-    [_cycleImageView reloadData];
+    if (_diary.images.count > 0) {
+        _cycleImageView.pageControl.hidden = (_diary.images.count <= 1);
+        [imageViews removeAllObjects];
+        [self.tableView reloadData];
+        [_cycleImageView reloadData];
+    }
 }
 
 #pragma mark - Table view data source
