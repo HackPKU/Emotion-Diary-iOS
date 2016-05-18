@@ -31,6 +31,12 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 * iOS 9.0 模拟器
 * iOS 9.3 真机 + 模拟器
 
+## 可能的问题
+
+* 模拟器经常会输出 `KVNProgress` 的警告，是因为提示状态变化太快，前一个状态的显示时间未到默认的最短时间，该警告可忽略
+* 发邮件反馈在模拟器上可能无法打开并提示 `MailCompositionService` 意外退出，这是模拟器的 Bug，真机上不会出现
+* 日记正文如果有电话、网站、邮件等，在 iOS9 系统下长按不会跳出对话框，并且模拟器会输出警告，回到 RootViewController 后对话框才出现，这是 iOS9 系统的 Bug
+
 ## 主要进度记录
 
 * 2016/04/25 完成功能构思和UI、图标概念设计
