@@ -29,7 +29,7 @@ PODS:
   - SDWebImage (3.7.6):
     - SDWebImage/Core (= 3.7.6)
   - SDWebImage/Core (3.7.6)
-  - ZYBannerView (0.1.1)
+  - ZYBannerView (0.1.3)
 
 DEPENDENCIES:
   - AFNetworking
@@ -52,7 +52,7 @@ SPEC CHECKSUMS:
   MWPhotoBrowser: 5836d7aa041dc05a13de380c246826578adc5ea5
   PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
-  ZYBannerView: b4648794591c648f70b02b6ce16ad811c0653a7d
+  ZYBannerView: 43515c479cb46021112926d89a207d0204c0966a
 
 PODFILE CHECKSUM: 412ffe5870718584146254917a225af77755ae40
 
