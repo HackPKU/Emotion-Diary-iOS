@@ -18,6 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:UPLOAD_PROGRESS_CHANGED_NOTIFOCATION object:nil];
+    [self setBarButtonItem];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -32,7 +33,12 @@
 }
 
 - (void)refresh {
+    [self setBarButtonItem];
     [self.tableView reloadData];
+}
+
+- (void)setBarButtonItem {
+    self.navigationItem.rightBarButtonItems = ([[EmotionDiaryManager sharedManager] totalUploadNumber] == 0) ? @[_buttonUpload] : @[_buttonStop];
 }
 
 #pragma mark - Table view data source
@@ -43,6 +49,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return MAX([[EmotionDiaryManager sharedManager] totalUploadNumber], 1);
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return ([[EmotionDiaryManager sharedManager] totalUploadNumber] == 0) ? @"点击右上角以开始上传" : @"点击右上角以结束上传";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

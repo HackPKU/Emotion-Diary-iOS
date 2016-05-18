@@ -33,9 +33,8 @@ typedef NS_ENUM(NSInteger, EmotionDiaryImageType) {
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * When it is about Emotion Diary server connection, the block is in main thread
- *
- * When it is about Face++ connection, the block is in background thread
+ * @remark When it is about Emotion Diary server connection, the block is in main thread
+ * @remark When it is about Face++ connection, the block is in background thread
  */
 typedef void (^ActionPerformerResultBlock)(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data);
 

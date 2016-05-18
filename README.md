@@ -31,6 +31,12 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 * iOS 9.0 模拟器
 * iOS 9.3 真机 + 模拟器
 
+## 可能的问题
+
+* 模拟器经常会输出 `KVNProgress` 的警告，是因为提示状态变化太快，前一个状态的显示时间未到默认的最短时间，该警告可忽略
+* 发邮件反馈在模拟器上可能无法打开并提示 `MailCompositionService` 意外退出，这是模拟器的 Bug，真机上不会出现
+* 日记正文如果有电话、网站、邮件等，在 iOS9 系统下长按不会跳出对话框，并且模拟器会输出警告，回到 RootViewController 后对话框才出现，这是 iOS9 系统的 Bug
+
 ## 主要进度记录
 
 * 2016/04/25 完成功能构思和UI、图标概念设计
@@ -44,14 +50,14 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 
 #### `EmotionDiary`
 
-* 日记类，遵循 `NSCoding` 协议，可实现对本地和在线日记的封装、读取、上传、删除等管理
+* 日记类，遵循 `NSCoding` 协议，可实现对本地和在线日记的封装、存储、读取、上传、删除等管理
 
 #### `EmotionDiaryManager`
 
 * 考虑到用户使用后日记数量可能很多，每次都从磁盘读取日记数据会导致极低的效率，因此建立一个专门的管理类用于大量日记数据的处理
 * 使用单例模式 `sharedManager`
 * 完成获取心情的统计数据功能，单例有一个内存中的 `diaries` 变量，与 `NSUserDefaults` 保持同步，可以极大地提高查询的效率
-* 完成对本地和在线单篇日记的记录
+* 完成对本地和在线日记的记录
 * 完成日记的同步功能
 
 #### `ActionPerformer`
@@ -61,7 +67,7 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 
 #### `Utilities`
 
-* 用于实现一些常用的功能，例如加密，验证，图片处理，文件管理等
+* 用于实现一些常用的功能，例如加密、验证、图片处理、文件管理等，所有函数均为类函数
 * 具体功能在注释中有详细说明
 
 ## 第三方库说明

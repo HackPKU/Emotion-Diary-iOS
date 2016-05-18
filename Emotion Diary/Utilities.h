@@ -81,8 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Check whether the path exists. If not, try to create one.
- 
- * The root directory is the document directory
+ * @remark The root directory is the document directory
  * @param path The required path
  * @return Whether the path exists after the function
  */
@@ -90,8 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Check whether the file exists at the given path
- 
- * The root directory is the document directory
+ * @remark The root directory is the document directory
  * @param path The required path
  * @param name The file name
  * @return Whether the file exists
@@ -100,8 +98,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Create file at the given path
- 
- * The root directory is the document directory
+ * @remark The root directory is the document directory
  * @param data The data to be saved as file
  * @param path The required path
  * @param name The file name
@@ -111,8 +108,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Delete the file at the given path
- 
- * The root directory is the document directory
+ * @remark The root directory is the document directory
  * @param path The required path
  * @param name The file name
  * @return Whether the file is deleted successfully or YES if the file doesn't exist
@@ -121,8 +117,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Get the file at the given path
- 
- * The root directory is the document directory
+ * @remark The root directory is the document directory
  * @param path The required path
  * @param name The file name
  * @return The data of the file (if exists) or nil

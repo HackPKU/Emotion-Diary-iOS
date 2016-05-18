@@ -1,6 +1,5 @@
 //
 //  ZYBannerView.m
-//  DuoBao
 //
 //  Created by 张志延 on 15/10/17.
 //  Copyright (c) 2015年 tongbu. All rights reserved.
@@ -73,6 +72,7 @@ static NSString *banner_footer = @"banner_footer";
     self.flowLayout.itemSize = self.bounds.size;
     self.flowLayout.footerReferenceSize = CGSizeMake(ZY_FOOTER_WIDTH, self.frame.size.height);
     self.collectionView.frame = self.bounds;
+    [self.collectionView reloadData];
     
     // pageControl
     if (CGRectEqualToRect(self.pageControl.frame, CGRectZero)) {
@@ -306,6 +306,12 @@ static NSString *banner_footer = @"banner_footer";
 #pragma mark - setters & getters
 #pragma mark 属性
 
+- (void)setFrame:(CGRect)frame
+{
+    self.pageControl.frame = CGRectZero;
+    [super setFrame:frame];
+}
+
 /**
  *  数据源
  */
@@ -390,14 +396,14 @@ static NSString *banner_footer = @"banner_footer";
 /**
  *  自动滑动间隔时间
  */
-- (void)setScrollInterval:(NSTimeInterval)scrollInterval
+- (void)setScrollInterval:(CGFloat)scrollInterval
 {
     _scrollInterval = scrollInterval;
     
     [self startTimer];
 }
 
-- (NSTimeInterval)scrollInterval
+- (CGFloat)scrollInterval
 {
     if (!_scrollInterval) {
         _scrollInterval = 3.0; // default

@@ -19,16 +19,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Translucent view and navigation bar
+    [self.view setBackgroundColor:[UIColor clearColor]];
+    for (UITableViewCell *cell in @[_cellInfo, _cellText, _cellImages]) {
+        cell.backgroundColor = [UIColor clearColor];
+    }
+    [self.navigationController.navigationBar setTranslucent:YES];
+    [self.navigationController.navigationBar setBackgroundImage:[Utilities createImageWithColor:[UIColor clearColor]] forBarMetrics:UIBarMetricsDefault];
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"牛皮纸"]]; // TODO: 背景图可更换
+    
     _imageSelfie.layer.cornerRadius = _imageSelfie.frame.size.width / 2;
     _cycleImageView.layer.shadowColor = [UIColor blackColor].CGColor;
     _cycleImageView.layer.shadowOffset = CGSizeZero;
     _cycleImageView.layer.shadowOpacity = 0.75;
     _cycleImageView.layer.shadowRadius = 6.0;
+    
     imageViews = [NSMutableArray new];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:UPLOAD_PROGRESS_CHANGED_NOTIFOCATION object:nil];
     
-    [self updateDiaryView];
-    // TODO: 下拉刷新
+    [self getFullVersion];
         
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -40,11 +50,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self getFullVersion];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -108,10 +113,12 @@
     _labelDateAndTime.text = [formatter stringFromDate:_diary.createTime];
     _textDetail.text = _diary.text;
     
-    _cycleImageView.pageControl.hidden = (_diary.images.count <= 1);
-    [imageViews removeAllObjects];
+    if (_diary.images.count > 0) {
+        _cycleImageView.pageControl.hidden = (_diary.images.count <= 1);
+        [imageViews removeAllObjects];
+        [_cycleImageView reloadData];
+    }
     [self.tableView reloadData];
-    [_cycleImageView reloadData];
 }
 
 #pragma mark - Table view data source
