@@ -67,7 +67,7 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 
 #### `Utilities`
 
-* 用于实现一些常用的功能，例如加密，验证，图片处理，文件管理等，所有函数均为类函数
+* 用于实现一些常用的功能，例如加密、验证、图片处理、文件管理等，所有函数均为类函数
 * 具体功能在注释中有详细说明
 
 ## 第三方库说明
