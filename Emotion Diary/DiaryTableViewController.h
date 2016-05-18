@@ -17,6 +17,10 @@
 
 @property EmotionDiary *diary;
 
+@property (strong, nonatomic) IBOutlet UITableViewCell *cellInfo;
+@property (strong, nonatomic) IBOutlet UITableViewCell *cellText;
+@property (strong, nonatomic) IBOutlet UITableViewCell *cellImages;
+
 @property (strong, nonatomic) IBOutlet UIImageView *imageSelfie;
 @property (strong, nonatomic) IBOutlet UILabel *labelDateAndTime;
 @property (strong, nonatomic) IBOutlet UILabel *labelEmotion;
