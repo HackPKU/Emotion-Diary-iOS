@@ -155,9 +155,8 @@
     // Pass the selected object to the new view controller.
     
     if ([segue.identifier isEqualToString:@"diary"]) {
-        DiaryTableViewController *dest = [segue destinationViewController];
+        DiaryTableViewController *dest = [[[segue destinationViewController] viewControllers] firstObject];
         dest.navigationItem.rightBarButtonItems = nil;
-        dest.navigationItem.leftBarButtonItems = nil; // 变为滑动返回
         dest.diary = ((DiaryTableViewCell *)sender).diary;
     }
 }

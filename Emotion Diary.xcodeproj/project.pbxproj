@@ -16,6 +16,7 @@
 		015324F01CD8CF4D00272D03 /* UserCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 015324EE1CD8CF4D00272D03 /* UserCenter.storyboard */; };
 		015324FE1CD9066E00272D03 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 015325001CD9066E00272D03 /* InfoPlist.strings */; };
 		015334DF1CB8B2DF00E3D2F1 /* DiaryDetailedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 015334DE1CB8B2DF00E3D2F1 /* DiaryDetailedTableViewCell.m */; };
+		015FADA11CEF186800AA2A83 /* MFMailComposeViewController+LightContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 015FADA01CEF186800AA2A83 /* MFMailComposeViewController+LightContent.m */; };
 		0169FDFB1CDE4D4C00201130 /* RegisterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169FDFA1CDE4D4C00201130 /* RegisterTableViewCell.m */; };
 		017DB3AB1CDB80D4005AB1D3 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017DB3AA1CDB80D4005AB1D3 /* LoginViewController.m */; };
 		017DB3B61CDC6208005AB1D3 /* TranslucentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017DB3B51CDC6208005AB1D3 /* TranslucentViewController.m */; };
@@ -82,6 +83,8 @@
 		015334DD1CB8B2DF00E3D2F1 /* DiaryDetailedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiaryDetailedTableViewCell.h; sourceTree = "<group>"; };
 		015334DE1CB8B2DF00E3D2F1 /* DiaryDetailedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiaryDetailedTableViewCell.m; sourceTree = "<group>"; };
 		015AFD6A1CCBE09800389C7A /* Emotion Diary-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Emotion Diary-Prefix.pch"; sourceTree = "<group>"; };
+		015FAD9F1CEF186800AA2A83 /* MFMailComposeViewController+LightContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MFMailComposeViewController+LightContent.h"; sourceTree = "<group>"; };
+		015FADA01CEF186800AA2A83 /* MFMailComposeViewController+LightContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MFMailComposeViewController+LightContent.m"; sourceTree = "<group>"; };
 		0169FDF91CDE4D4C00201130 /* RegisterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterTableViewCell.h; sourceTree = "<group>"; };
 		0169FDFA1CDE4D4C00201130 /* RegisterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterTableViewCell.m; sourceTree = "<group>"; };
 		017DB3A91CDB80D4005AB1D3 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -226,6 +229,8 @@
 				01CB83D21CDC6C59003BC716 /* DonateViewController.m */,
 				01CB83D41CDC6EC8003BC716 /* AboutViewController.h */,
 				01CB83D51CDC6EC8003BC716 /* AboutViewController.m */,
+				015FAD9F1CEF186800AA2A83 /* MFMailComposeViewController+LightContent.h */,
+				015FADA01CEF186800AA2A83 /* MFMailComposeViewController+LightContent.m */,
 			);
 			name = UserCenter;
 			sourceTree = "<group>";
@@ -525,6 +530,7 @@
 				01B406191CB7FF7500B242D6 /* CalendarViewController.m in Sources */,
 				01C036C91CE8C78A00ACC509 /* ShareTableViewController.m in Sources */,
 				01B406161CB7FF7500B242D6 /* AppDelegate.m in Sources */,
+				015FADA11CEF186800AA2A83 /* MFMailComposeViewController+LightContent.m in Sources */,
 				01360A591CD1174400BB02B0 /* ActionPerformer.m in Sources */,
 				01F15FC81CB8E6AA006BB341 /* RecordTableViewController.m in Sources */,
 				01CB83D61CDC6EC8003BC716 /* AboutViewController.m in Sources */,

@@ -98,8 +98,8 @@
         if ([ActionPerformer hasLoggedIn]) {
             if (indexPath.row == 0) {
                 UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"user"];
-                cell.labelName.text = [[NSUserDefaults standardUserDefaults] objectForKey:USER_NAME];
-                NSString *iconName = [[[NSUserDefaults standardUserDefaults] objectForKey:USER_INFO] objectForKey:@"icon"];
+                cell.labelName.text = [USER_DEFAULT objectForKey:USER_NAME];
+                NSString *iconName = [[USER_DEFAULT objectForKey:USER_INFO] objectForKey:@"icon"];
                 [cell.imageIcon sd_setImageWithURL:[ActionPerformer getImageURLWithName:iconName type:EmotionDiaryImageTypeIcon] placeholderImage:PLACEHOLDER_IMAGE options:SDWebImageProgressiveDownload];
                 return cell;
             }else if (indexPath.row == 1) {
@@ -170,13 +170,18 @@
 }
 */
 
+- (void)refreshSyncData {
+    UserTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    [cell reloadStatData];
+}
+
 - (void)reloadUserInfo {
     if ([ActionPerformer hasLoggedIn]) {
-        [ActionPerformer viewUserWithName:[[NSUserDefaults standardUserDefaults] objectForKey:USER_NAME] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable dataUserInfo) {
+        [ActionPerformer viewUserWithName:[USER_DEFAULT objectForKey:USER_NAME] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable dataUserInfo) {
             if (!success) {
                 return;
             }
-            [[NSUserDefaults standardUserDefaults] setValuesForKeysWithDictionary:@{USER_INFO: dataUserInfo}];
+            [USER_DEFAULT setValuesForKeysWithDictionary:@{USER_INFO: dataUserInfo}];
             [[NSNotificationCenter defaultCenter] postNotificationName:USER_CHANGED_NOTIFICATION object:nil];
         }];
     }
@@ -185,15 +190,7 @@
 - (void)refreshUserView {
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
     [self refreshSyncData];
-}
-
-- (void)refreshUploadData {
-    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
-}
-
-- (void)refreshSyncData {
-    UserTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    [cell reloadStatData];
+    [self refreshShareData];
 }
 
 - (void)refreshShareData {
@@ -203,9 +200,13 @@
         }
         shareData = (NSMutableArray *)data;
         dispatch_sync(dispatch_get_main_queue(), ^{
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:2 inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
         });
     }];
+}
+
+- (void)refreshUploadData {
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:2 inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark - Table view delegate
@@ -227,7 +228,6 @@
             [mail setSubject:@"情绪日记 iOS客户端反馈"];
             [mail setToRecipients:FEEDBACK_EMAIL];
             [mail setMessageBody:[NSString stringWithFormat:@"设备：%@\n系统：iOS %@\n客户端版本：%@", platform, [[UIDevice currentDevice] systemVersion], [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]] isHTML:NO];
-            // TODO: Status Bar 颜色不对
             [self presentViewController:mail animated:YES completion:nil];
         }
     }

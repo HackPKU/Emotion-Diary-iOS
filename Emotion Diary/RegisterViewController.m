@@ -161,12 +161,12 @@
     }
     [self.view endEditing:YES];
     [KVNProgress showWithStatus:@"注册中"];
-    [ActionPerformer registerWithName:name password:password sex:sex email:email icon:nil personID:[[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+    [ActionPerformer registerWithName:name password:password sex:sex email:email icon:nil personID:[USER_DEFAULT objectForKey:PERSON_ID] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
         if (!success) {
             [KVNProgress showErrorWithStatus:message];
             return;
         }
-        [[NSUserDefaults standardUserDefaults] setValuesForKeysWithDictionary:@{USER_ID: data[@"userid"], TOKEN: data[@"token"], USER_NAME: name, USER_INFO:@{@"sex": sex, @"email": email}}];
+        [USER_DEFAULT setValuesForKeysWithDictionary:@{USER_ID: data[@"userid"], TOKEN: data[@"token"], USER_NAME: name, USER_INFO:@{@"sex": sex, @"email": email}}];
         [KVNProgress showSuccessWithStatus:@"注册成功" completion:^{
             [self dismissViewControllerAnimated:YES completion:^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:REGISTER_COMPLETED_NOTIFOCATION object:nil];

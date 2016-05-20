@@ -58,7 +58,7 @@
 }
 
 + (void)openURL:(NSURL *)url inViewController:(UIViewController *)viewController {
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0) {
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"9.0")) {
         SFSafariViewController *view = [[SFSafariViewController alloc] initWithURL:url];
         UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:view];
         navi.navigationBarHidden = YES;
@@ -118,44 +118,39 @@
 }
 
 + (BOOL)checkAndCreatePath:(NSString *)path {
-    NSFileManager *manager = [NSFileManager defaultManager];
     NSString *fullPath = [NSString stringWithFormat:@"%@/%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0], path];
     BOOL isDirectory;
-    if (![manager fileExistsAtPath:fullPath isDirectory:&isDirectory]) {
-        return [manager createDirectoryAtPath:fullPath withIntermediateDirectories:NO attributes:nil error:nil];
+    if (![FILE_MANAGER fileExistsAtPath:fullPath isDirectory:&isDirectory]) {
+        return [FILE_MANAGER createDirectoryAtPath:fullPath withIntermediateDirectories:NO attributes:nil error:nil];
     }else {
         return isDirectory;
     }
 }
 
 + (BOOL)fileExistsAtPath:(NSString *)path withName:(NSString *)name {
-    NSFileManager *manager = [NSFileManager defaultManager];
     NSString *fullPath = [NSString stringWithFormat:@"%@/%@/%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0], path, name];
-    return [manager fileExistsAtPath:fullPath];
+    return [FILE_MANAGER fileExistsAtPath:fullPath];
 }
 
 + (BOOL)createFile:(NSData *)data atPath:(NSString *)path withName:(NSString *)name {
-    NSFileManager *manager = [NSFileManager defaultManager];
     NSString *fullPath = [NSString stringWithFormat:@"%@/%@/%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0], path, name];
-    if ([manager fileExistsAtPath:fullPath]) {
+    if ([FILE_MANAGER fileExistsAtPath:fullPath]) {
         return NO;
     }
-    return [manager createFileAtPath:fullPath contents:data attributes:nil];
+    return [FILE_MANAGER createFileAtPath:fullPath contents:data attributes:nil];
 }
 
 + (BOOL)deleteFileAtPath:(NSString *)path withName:(NSString *)name {
-    NSFileManager *manager = [NSFileManager defaultManager];
     NSString *fullPath = [NSString stringWithFormat:@"%@/%@/%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0], path, name];
-    if (![manager fileExistsAtPath:fullPath]) {
+    if (![FILE_MANAGER fileExistsAtPath:fullPath]) {
         return YES;
     }
-    return [manager removeItemAtPath:fullPath error:nil];
+    return [FILE_MANAGER removeItemAtPath:fullPath error:nil];
 }
 
 + (NSData * _Nullable)getFileAtPath:(NSString *)path withName:(NSString *)name {
-    NSFileManager *manager = [NSFileManager defaultManager];
     NSString *fullPath = [NSString stringWithFormat:@"%@/%@/%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0], path, name];
-    return [manager contentsAtPath:fullPath];
+    return [FILE_MANAGER contentsAtPath:fullPath];
 }
 
 @end

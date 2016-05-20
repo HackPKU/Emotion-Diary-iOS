@@ -108,12 +108,12 @@
 */
 
 - (void)refreshUser {
-    NSString *iconName = [[[NSUserDefaults standardUserDefaults] objectForKey:USER_INFO] objectForKey:@"icon"];
+    NSString *iconName = [[USER_DEFAULT objectForKey:USER_INFO] objectForKey:@"icon"];
     NSURL *iconURL = [ActionPerformer getImageURLWithName:iconName type:EmotionDiaryImageTypeIcon];
     for (UIImageView *imageView in @[_imageIcon, _imageIconBlurred]) {
         [imageView sd_setImageWithURL:iconURL placeholderImage:PLACEHOLDER_IMAGE options:SDWebImageProgressiveDownload];
     }
-    _labelUserName.text = [[NSUserDefaults standardUserDefaults] objectForKey:USER_NAME];
+    _labelUserName.text = [USER_DEFAULT objectForKey:USER_NAME];
 }
 
 - (IBAction)touchIcon:(id)sender {
@@ -139,7 +139,7 @@
         imagePickerState = CHANGE_ICON;
         [self presentViewController:imagePicker animated:YES completion:nil];
     }]];
-    if ([[[[NSUserDefaults standardUserDefaults] objectForKey:USER_INFO] objectForKey:@"icon"] length] > 0) {
+    if ([[[USER_DEFAULT objectForKey:USER_INFO] objectForKey:@"icon"] length] > 0) {
         [action addAction:[UIAlertAction actionWithTitle:@"查看头像" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
             browser.enableGrid = NO;
@@ -241,9 +241,9 @@
                 [KVNProgress showErrorWithStatus:message];
                 return;
             }
-            NSMutableDictionary *dict = [[[NSUserDefaults standardUserDefaults] objectForKey:USER_INFO] mutableCopy];
+            NSMutableDictionary *dict = [[USER_DEFAULT objectForKey:USER_INFO] mutableCopy];
             dict[@"icon"] = fileName;
-            [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USER_INFO];
+            [USER_DEFAULT setObject:dict forKey:USER_INFO];
             [KVNProgress showSuccessWithStatus:@"头像修改成功"];
             [[NSNotificationCenter defaultCenter] postNotificationName:USER_CHANGED_NOTIFICATION object:nil];
         }];
@@ -254,15 +254,15 @@
 
 - (void)resetPersonIDWithSelfie:(UIImage *)selfie {
     [KVNProgress showWithStatus:@"面部识别中"];
-    NSString *personIDBackup = [[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID];
+    NSString *personIDBackup = [USER_DEFAULT objectForKey:PERSON_ID];
     [ActionPerformer registerFaceWithImage:selfie andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
         if (!success) {
             [KVNProgress showErrorWithStatus:message];
             return;
         }
-        [ActionPerformer editPersonIDWithPassword:password personID:[[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+        [ActionPerformer editPersonIDWithPassword:password personID:[USER_DEFAULT objectForKey:PERSON_ID] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
             if (!success) {
-                [[NSUserDefaults standardUserDefaults] setObject:personIDBackup forKey:PERSON_ID];
+                [USER_DEFAULT setObject:personIDBackup forKey:PERSON_ID];
                 [KVNProgress showErrorWithStatus:message];
                 return;
             }
@@ -278,15 +278,7 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:^{
-        switch (imagePickerState) {
-            case CHANGE_ICON:
-                [KVNProgress showErrorWithStatus:@"您取消了该操作"];
-                break;
-            case CHANGE_PERSON_ID:
-                break;
-            default:
-                break;
-        }
+        [KVNProgress showErrorWithStatus:@"您取消了该操作"];
         imagePickerState = NO_STATE;
     }];
 }
@@ -297,10 +289,10 @@
         [KVNProgress showWithStatus:@"退出登录中"];
         [ActionPerformer logoutWithBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
             
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_ID];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:TOKEN];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_NAME];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_INFO];
+            [USER_DEFAULT removeObjectForKey:USER_ID];
+            [USER_DEFAULT removeObjectForKey:TOKEN];
+            [USER_DEFAULT removeObjectForKey:USER_NAME];
+            [USER_DEFAULT removeObjectForKey:USER_INFO];
             [[NSNotificationCenter defaultCenter] postNotificationName:USER_CHANGED_NOTIFICATION object:nil];
             // TODO: 本地日记的存留处理
             if (!success) {
