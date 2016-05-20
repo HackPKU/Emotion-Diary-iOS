@@ -944,7 +944,7 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rdl-f1-8pr" customClass="ZYBannerView">
                                                     <rect key="frame" x="30" y="28" width="540" height="194"/>
-                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="shouldLoop" value="YES"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="showFooter" value="NO"/>

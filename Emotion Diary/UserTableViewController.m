@@ -40,10 +40,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)unlockTypeChanged:(UISegmentedControl *)sender {
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:sender.selectedSegmentIndex == 0 ? EmotionDiaryUnlockTypeSelfie : EmotionDiaryUnlockTypeTouchID] forKey:UNLOCK_TYPE];
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -56,7 +52,7 @@
             return 1;
             break;
         case 1:
-            return ([ActionPerformer hasLoggedIn] ? 3 : 1) + [[LAContext new] canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil];
+            return ([ActionPerformer hasLoggedIn] ? 4 : 1) + [[LAContext new] canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil];
             break;
         case 2:
             return 4;
@@ -107,25 +103,23 @@
                 [cell.imageIcon sd_setImageWithURL:[ActionPerformer getImageURLWithName:iconName type:EmotionDiaryImageTypeIcon] placeholderImage:PLACEHOLDER_IMAGE options:SDWebImageProgressiveDownload];
                 return cell;
             }else if (indexPath.row == 1) {
-                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"upload"];
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)[[EmotionDiaryManager sharedManager] totalUploadNumber]];
-                return cell;
-            }else if (indexPath.row == 2) {
                 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"share"];
                 cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)shareData.count];
                 return cell;
-            }else if (indexPath.row == 3) {
-                UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"unlock"];
-                cell.segmentUnlockType.selectedSegmentIndex = [[[NSUserDefaults standardUserDefaults] objectForKey:UNLOCK_TYPE] integerValue] == EmotionDiaryUnlockTypeSelfie ? 0 : 1;
+            }else if (indexPath.row == 2) {
+                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"upload"];
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)[[EmotionDiaryManager sharedManager] totalUploadNumber]];
                 return cell;
+            }else if (indexPath.row == 3) {
+                return [tableView dequeueReusableCellWithIdentifier:@"autoUpload"];
+            }else if (indexPath.row == 4) {
+                return [tableView dequeueReusableCellWithIdentifier:@"unlock"];
             }
         }else {
             if (indexPath.row == 0) {
                 return [tableView dequeueReusableCellWithIdentifier:@"noUser"];
             }else if (indexPath.row == 1) {
-                UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"unlock"];
-                cell.segmentUnlockType.selectedSegmentIndex = [[[NSUserDefaults standardUserDefaults] objectForKey:UNLOCK_TYPE] integerValue] == EmotionDiaryUnlockTypeSelfie ? 0 : 1;
-                return cell;
+                return [tableView dequeueReusableCellWithIdentifier:@"unlock"];
             }
         }
     }else if (indexPath.section == 2){

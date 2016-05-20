@@ -38,6 +38,14 @@
 #define APP_COLOR [UIColor colorWithRed:255.0/255.0 green:190.0/255.0 blue:60.0/255.0 alpha:1.0]
 #define PLACEHOLDER_IMAGE [UIImage imageNamed:@"placeholder"]
 
+#define UNLOCK_TYPE @"unlockType"
+#define AUTO_UPLOAD @"autoUpload"
+
+typedef NS_ENUM(NSInteger, EmotionDiaryUnlockType) {
+    EmotionDiaryUnlockTypeSelfie,
+    EmotionDiaryUnlockTypeTouchID
+};
+
 #endif
 
 #endif /* Emotion_Diary_Prefix_pch */
