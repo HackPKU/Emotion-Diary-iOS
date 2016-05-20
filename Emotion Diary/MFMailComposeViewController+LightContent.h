@@ -1,5 +1,5 @@
 //
-//  MailViewController+LightContent.h
+//  MFMailComposeViewController+LightContent.h
 //  Emotion Diary
 //
 //  Created by 范志康 on 16/5/20.
