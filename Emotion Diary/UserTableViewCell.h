@@ -21,6 +21,9 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imageIcon;
 @property (strong, nonatomic) IBOutlet UILabel *labelName;
 
+// Auto upload cell
+@property (strong, nonatomic) IBOutlet UISwitch *switchAutoUpload;
+
 // Unlock cell
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segmentUnlockType;
 

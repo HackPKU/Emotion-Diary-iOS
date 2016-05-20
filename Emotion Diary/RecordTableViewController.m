@@ -352,7 +352,9 @@
             }else {
                 [KVNProgress showErrorWithStatus:message];
             }
-            // TODO: 自动上传
+            if ([ActionPerformer hasLoggedIn] && [[[NSUserDefaults standardUserDefaults] objectForKey:AUTO_UPLOAD] boolValue]) {
+                [[EmotionDiaryManager sharedManager] startUploading];
+            }
             [self.navigationController dismissViewControllerAnimated:YES completion:^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:ENTER_MAIN_VIEW_NOTIFICATION object:nil];
             }];

@@ -23,6 +23,14 @@
     if (_imageIcon) {
         _imageIcon.layer.cornerRadius = _imageIcon.frame.size.width / 2;
     }
+    
+    if (_switchAutoUpload) {
+        [_switchAutoUpload setOn:[[[NSUserDefaults standardUserDefaults] objectForKey:AUTO_UPLOAD] boolValue]];
+    }
+    
+    if (_segmentUnlockType) {
+        _segmentUnlockType.selectedSegmentIndex = [[[NSUserDefaults standardUserDefaults] objectForKey:UNLOCK_TYPE] integerValue] == EmotionDiaryUnlockTypeSelfie ? 0 : 1;
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -55,6 +63,14 @@
             break;
     }
     [_lineChart reloadGraph];
+}
+
+- (IBAction)autoUploadChanged:(UISwitch *)sender {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:sender.isOn] forKey:AUTO_UPLOAD];
+}
+
+- (IBAction)unlockTypeChanged:(UISegmentedControl *)sender {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:sender.selectedSegmentIndex == 0 ? EmotionDiaryUnlockTypeSelfie : EmotionDiaryUnlockTypeTouchID] forKey:UNLOCK_TYPE];
 }
 
 @end
