@@ -183,7 +183,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="上传进度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hC9-YP-aR9">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="上传管理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hC9-YP-aR9">
                                             <rect key="frame" x="15" y="12" width="64" height="19.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -870,7 +870,7 @@
             </objects>
             <point key="canvasLocation" x="2679" y="310"/>
         </scene>
-        <!--上传进度-->
+        <!--上传管理-->
         <scene sceneID="1hE-y2-qmE">
             <objects>
                 <tableViewController storyboardIdentifier="Upload" useStoryboardIdentifierAsRestorationIdentifier="YES" id="P31-ck-0Cq" customClass="UploadTableViewController" sceneMemberID="viewController">
@@ -1038,7 +1038,7 @@
                             <outlet property="delegate" destination="P31-ck-0Cq" id="6XX-TD-BjR"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="上传进度" id="137-lP-5Wt">
+                    <navigationItem key="navigationItem" title="上传管理" id="137-lP-5Wt">
                         <rightBarButtonItems>
                             <barButtonItem systemItem="refresh" id="VrZ-ip-S1g">
                                 <connections>
