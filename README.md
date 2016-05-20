@@ -45,6 +45,7 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 * 2016/05/09 完成注册和登录功能
 * 2016/05/14 完成日记上传和同步功能
 * 2016/05/15 使用 CocoaPods 1.0.0 新版本
+* 2016/05/20 完成日记的分享和自动上传功能
 
 ## 重要类说明
 
