@@ -39,8 +39,8 @@
     request[@"version"] = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     request[@"platform"] = @"iOS";
     if ([ActionPerformer hasLoggedIn]) {
-        request[@"userid"] = [[NSUserDefaults standardUserDefaults] objectForKey:USER_ID];
-        request[@"token"] = [[NSUserDefaults standardUserDefaults] objectForKey:TOKEN];
+        request[@"userid"] = [USER_DEFAULT objectForKey:USER_ID];
+        request[@"token"] = [USER_DEFAULT objectForKey:TOKEN];
     }
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
@@ -109,12 +109,12 @@
 }
 
 + (void)editIconWithPassword:(NSString *)password icon:(NSString *)icon andBlock:(ActionPerformerResultBlock)block {
-    NSDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:USER_INFO];
-    [ActionPerformer editUserWithName:dict[@"name"] password:password newPassword:nil sex:dict[@"sex"] email:dict[@"email"] icon:icon personID:[[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID] andBlock:block];
+    NSDictionary *dict = [USER_DEFAULT objectForKey:USER_INFO];
+    [ActionPerformer editUserWithName:dict[@"name"] password:password newPassword:nil sex:dict[@"sex"] email:dict[@"email"] icon:icon personID:[USER_DEFAULT objectForKey:PERSON_ID] andBlock:block];
 }
 
 + (void)editPersonIDWithPassword:(NSString *)password personID:(NSString *)personID andBlock:(ActionPerformerResultBlock)block {
-    NSDictionary *dict = [[NSUserDefaults standardUserDefaults] objectForKey:USER_INFO];
+    NSDictionary *dict = [USER_DEFAULT objectForKey:USER_INFO];
     [ActionPerformer editUserWithName:dict[@"name"] password:password newPassword:nil sex:dict[@"sex"] email:dict[@"email"] icon:dict[@"icon"] personID:personID andBlock:block];
 }
 
@@ -273,10 +273,10 @@
                     return;
                 }
                 NSString *personID = data[@"person_id"];
-                [[NSUserDefaults standardUserDefaults] setObject:personID forKey:PERSON_ID]; // Sace faceID in local storage
+                [USER_DEFAULT setObject:personID forKey:PERSON_ID]; // Sace faceID in local storage
                 [ActionPerformer addFace:faceID WithBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
                     if (!success) {
-                        [[NSUserDefaults standardUserDefaults] removeObjectForKey:PERSON_ID]; // Remove faceID for unsuccessful training
+                        [USER_DEFAULT removeObjectForKey:PERSON_ID]; // Remove faceID for unsuccessful training
                         block(NO, message, nil);
                         return;
                     }
@@ -289,7 +289,7 @@
 
 + (void)verifyFaceWithImage:(UIImage *)image andBlock:(ActionPerformerResultBlock)block {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *personID = [[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID];
+        NSString *personID = [USER_DEFAULT objectForKey:PERSON_ID];
         if (personID.length == 0) {
             block(NO, @"您还未注册人脸", nil);
             return;
@@ -330,7 +330,7 @@
 
 + (void)addFace:(NSString *)faceID WithBlock:(ActionPerformerResultBlock)block {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *personID = [[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID];
+        NSString *personID = [USER_DEFAULT objectForKey:PERSON_ID];
         if (personID.length == 0) {
             block(NO, @"您还未注册人脸", nil);
             return;
@@ -363,7 +363,7 @@
 #pragma mark - Local functions
 
 + (BOOL)hasLoggedIn {
-    return ([[[NSUserDefaults standardUserDefaults] objectForKey:USER_ID] length] > 0 && [[[NSUserDefaults standardUserDefaults] objectForKey:TOKEN] length] > 0);
+    return ([[USER_DEFAULT objectForKey:USER_ID] length] > 0 && [[USER_DEFAULT objectForKey:TOKEN] length] > 0);
 }
 
 + (UIImage *)getFaceImageByEmotion:(int)smile {

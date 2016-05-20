@@ -98,8 +98,8 @@
         if ([ActionPerformer hasLoggedIn]) {
             if (indexPath.row == 0) {
                 UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"user"];
-                cell.labelName.text = [[NSUserDefaults standardUserDefaults] objectForKey:USER_NAME];
-                NSString *iconName = [[[NSUserDefaults standardUserDefaults] objectForKey:USER_INFO] objectForKey:@"icon"];
+                cell.labelName.text = [USER_DEFAULT objectForKey:USER_NAME];
+                NSString *iconName = [[USER_DEFAULT objectForKey:USER_INFO] objectForKey:@"icon"];
                 [cell.imageIcon sd_setImageWithURL:[ActionPerformer getImageURLWithName:iconName type:EmotionDiaryImageTypeIcon] placeholderImage:PLACEHOLDER_IMAGE options:SDWebImageProgressiveDownload];
                 return cell;
             }else if (indexPath.row == 1) {
@@ -177,11 +177,11 @@
 
 - (void)reloadUserInfo {
     if ([ActionPerformer hasLoggedIn]) {
-        [ActionPerformer viewUserWithName:[[NSUserDefaults standardUserDefaults] objectForKey:USER_NAME] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable dataUserInfo) {
+        [ActionPerformer viewUserWithName:[USER_DEFAULT objectForKey:USER_NAME] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable dataUserInfo) {
             if (!success) {
                 return;
             }
-            [[NSUserDefaults standardUserDefaults] setValuesForKeysWithDictionary:@{USER_INFO: dataUserInfo}];
+            [USER_DEFAULT setValuesForKeysWithDictionary:@{USER_INFO: dataUserInfo}];
             [[NSNotificationCenter defaultCenter] postNotificationName:USER_CHANGED_NOTIFICATION object:nil];
         }];
     }

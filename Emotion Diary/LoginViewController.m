@@ -83,22 +83,22 @@
             [KVNProgress showErrorWithStatus:message];
             return;
         }
-        [[NSUserDefaults standardUserDefaults] setValuesForKeysWithDictionary:@{USER_ID : dataLogin[@"userid"], TOKEN: dataLogin[@"token"]}];
+        [USER_DEFAULT setValuesForKeysWithDictionary:@{USER_ID : dataLogin[@"userid"], TOKEN: dataLogin[@"token"]}];
         [ActionPerformer viewUserWithName:dataLogin[@"name"] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable dataUserInfo) {
             if (!success) {
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_ID];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:TOKEN];
+                [USER_DEFAULT removeObjectForKey:USER_ID];
+                [USER_DEFAULT removeObjectForKey:TOKEN];
                 [KVNProgress showErrorWithStatus:message];
                 return;
             }
-            [[NSUserDefaults standardUserDefaults] setValuesForKeysWithDictionary:@{USER_ID : dataLogin[@"userid"], TOKEN: dataLogin[@"token"], USER_NAME: dataLogin[@"name"], USER_INFO: dataUserInfo}];
-            NSString *personID = [[NSUserDefaults standardUserDefaults] objectForKey:PERSON_ID];
+            [USER_DEFAULT setValuesForKeysWithDictionary:@{USER_ID : dataLogin[@"userid"], TOKEN: dataLogin[@"token"], USER_NAME: dataLogin[@"name"], USER_INFO: dataUserInfo}];
+            NSString *personID = [USER_DEFAULT objectForKey:PERSON_ID];
             if (personID.length == 0) {
-                [[NSUserDefaults standardUserDefaults] setObject:dataUserInfo[@"person_id"] forKey:PERSON_ID];
+                [USER_DEFAULT setObject:dataUserInfo[@"person_id"] forKey:PERSON_ID];
             }
             // TODO: PersonID 与本地不一致时的处理
             [[NSNotificationCenter defaultCenter] postNotificationName:USER_CHANGED_NOTIFICATION object:nil];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:SYNC_INFO];
+            [USER_DEFAULT removeObjectForKey:SYNC_INFO];
             [[NSNotificationCenter defaultCenter] postNotificationName:SHOULD_SYNC_NOTIFOCATION object:nil];
             [KVNProgress showSuccessWithStatus:@"登陆成功" completion:^{
                 [self dismissViewControllerAnimated:YES completion:nil];

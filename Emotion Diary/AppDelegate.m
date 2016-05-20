@@ -32,6 +32,11 @@
     [FaceppAPI setDebugMode:YES];
 #endif
     
+    KVNProgressConfiguration *configuration = [KVNProgressConfiguration new];
+    configuration.minimumSuccessDisplayTime = 1.0;
+    configuration.minimumErrorDisplayTime = 1.5;
+    [KVNProgress setConfiguration:configuration];
+    
     return YES;
 }
 

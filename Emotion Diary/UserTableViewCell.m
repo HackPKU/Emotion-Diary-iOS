@@ -25,11 +25,11 @@
     }
     
     if (_switchAutoUpload) {
-        [_switchAutoUpload setOn:[[[NSUserDefaults standardUserDefaults] objectForKey:AUTO_UPLOAD] boolValue]];
+        [_switchAutoUpload setOn:[[USER_DEFAULT objectForKey:AUTO_UPLOAD] boolValue]];
     }
     
     if (_segmentUnlockType) {
-        _segmentUnlockType.selectedSegmentIndex = [[[NSUserDefaults standardUserDefaults] objectForKey:UNLOCK_TYPE] integerValue] == EmotionDiaryUnlockTypeSelfie ? 0 : 1;
+        _segmentUnlockType.selectedSegmentIndex = [[USER_DEFAULT objectForKey:UNLOCK_TYPE] integerValue] == EmotionDiaryUnlockTypeSelfie ? 0 : 1;
     }
 }
 
@@ -66,11 +66,11 @@
 }
 
 - (IBAction)autoUploadChanged:(UISwitch *)sender {
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:sender.isOn] forKey:AUTO_UPLOAD];
+    [USER_DEFAULT setObject:[NSNumber numberWithBool:sender.isOn] forKey:AUTO_UPLOAD];
 }
 
 - (IBAction)unlockTypeChanged:(UISegmentedControl *)sender {
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:sender.selectedSegmentIndex == 0 ? EmotionDiaryUnlockTypeSelfie : EmotionDiaryUnlockTypeTouchID] forKey:UNLOCK_TYPE];
+    [USER_DEFAULT setObject:[NSNumber numberWithInteger:sender.selectedSegmentIndex == 0 ? EmotionDiaryUnlockTypeSelfie : EmotionDiaryUnlockTypeTouchID] forKey:UNLOCK_TYPE];
 }
 
 @end

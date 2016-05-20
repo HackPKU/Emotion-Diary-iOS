@@ -24,7 +24,7 @@ static EmotionDiaryManager *sharedManager;
 - (instancetype)init {
     self = [super init];
     if (self) {
-        diaries = [[[NSUserDefaults standardUserDefaults] objectForKey:@"diaries"] mutableCopy];
+        diaries = [[USER_DEFAULT objectForKey:@"diaries"] mutableCopy];
         if (!diaries) {
             diaries = [NSMutableArray new];
         }
@@ -106,8 +106,8 @@ static EmotionDiaryManager *sharedManager;
             return [obj2[CREATE_TIME] compare:obj1[CREATE_TIME]];
         }];
     }
-    [[NSUserDefaults standardUserDefaults] setObject:diaries forKey:@"diaries"];
-    return [[NSUserDefaults standardUserDefaults] synchronize];
+    [USER_DEFAULT setObject:diaries forKey:@"diaries"];
+    return [USER_DEFAULT synchronize];
 }
 
 + (EmotionDiary *)createEmotionDiaryFromLocalDictionary:(NSDictionary *)dict {
@@ -380,7 +380,7 @@ static EmotionDiaryManager *sharedManager;
 }
 
 - (BOOL)shouldSyncWithYear:(NSInteger)year month:(NSInteger)month forced:(BOOL)forced {
-    NSMutableDictionary *syncInfo = [[[NSUserDefaults standardUserDefaults] objectForKey:SYNC_INFO] mutableCopy];
+    NSMutableDictionary *syncInfo = [[USER_DEFAULT objectForKey:SYNC_INFO] mutableCopy];
     if (!syncInfo) {
         syncInfo = [NSMutableDictionary new];
     }
@@ -393,7 +393,7 @@ static EmotionDiaryManager *sharedManager;
     }
     
     syncInfo[key] = [NSDate date];
-    [[NSUserDefaults standardUserDefaults] setObject:syncInfo forKey:SYNC_INFO];
+    [USER_DEFAULT setObject:syncInfo forKey:SYNC_INFO];
     return YES;
 }
 
