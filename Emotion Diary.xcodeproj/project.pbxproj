@@ -16,6 +16,7 @@
 		015324F01CD8CF4D00272D03 /* UserCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 015324EE1CD8CF4D00272D03 /* UserCenter.storyboard */; };
 		015324FE1CD9066E00272D03 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 015325001CD9066E00272D03 /* InfoPlist.strings */; };
 		015334DF1CB8B2DF00E3D2F1 /* DiaryDetailedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 015334DE1CB8B2DF00E3D2F1 /* DiaryDetailedTableViewCell.m */; };
+		0167BA7B1CEF0364007EB020 /* MailViewController+LightContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 0167BA7A1CEF0364007EB020 /* MailViewController+LightContent.m */; };
 		0169FDFB1CDE4D4C00201130 /* RegisterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169FDFA1CDE4D4C00201130 /* RegisterTableViewCell.m */; };
 		017DB3AB1CDB80D4005AB1D3 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017DB3AA1CDB80D4005AB1D3 /* LoginViewController.m */; };
 		017DB3B61CDC6208005AB1D3 /* TranslucentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017DB3B51CDC6208005AB1D3 /* TranslucentViewController.m */; };
@@ -82,6 +83,8 @@
 		015334DD1CB8B2DF00E3D2F1 /* DiaryDetailedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiaryDetailedTableViewCell.h; sourceTree = "<group>"; };
 		015334DE1CB8B2DF00E3D2F1 /* DiaryDetailedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiaryDetailedTableViewCell.m; sourceTree = "<group>"; };
 		015AFD6A1CCBE09800389C7A /* Emotion Diary-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Emotion Diary-Prefix.pch"; sourceTree = "<group>"; };
+		0167BA791CEF0364007EB020 /* MailViewController+LightContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MailViewController+LightContent.h"; sourceTree = "<group>"; };
+		0167BA7A1CEF0364007EB020 /* MailViewController+LightContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MailViewController+LightContent.m"; sourceTree = "<group>"; };
 		0169FDF91CDE4D4C00201130 /* RegisterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterTableViewCell.h; sourceTree = "<group>"; };
 		0169FDFA1CDE4D4C00201130 /* RegisterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterTableViewCell.m; sourceTree = "<group>"; };
 		017DB3A91CDB80D4005AB1D3 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -226,6 +229,8 @@
 				01CB83D21CDC6C59003BC716 /* DonateViewController.m */,
 				01CB83D41CDC6EC8003BC716 /* AboutViewController.h */,
 				01CB83D51CDC6EC8003BC716 /* AboutViewController.m */,
+				0167BA791CEF0364007EB020 /* MailViewController+LightContent.h */,
+				0167BA7A1CEF0364007EB020 /* MailViewController+LightContent.m */,
 			);
 			name = UserCenter;
 			sourceTree = "<group>";
@@ -550,6 +555,7 @@
 				018EF4611CC761EE00E712BC /* FaceppTrainer.m in Sources */,
 				017DB3B91CDC653B005AB1D3 /* RegisterViewController.m in Sources */,
 				0148B0A71CB97D0A00E8FC08 /* Utilities.m in Sources */,
+				0167BA7B1CEF0364007EB020 /* MailViewController+LightContent.m in Sources */,
 				018EF4581CC761EE00E712BC /* FaceppAPI.m in Sources */,
 				01B406131CB7FF7500B242D6 /* main.m in Sources */,
 				01DF6FEF1CD3CEE100584CE9 /* RecordCollectionViewCell.m in Sources */,

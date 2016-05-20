@@ -228,7 +228,6 @@
             [mail setSubject:@"情绪日记 iOS客户端反馈"];
             [mail setToRecipients:FEEDBACK_EMAIL];
             [mail setMessageBody:[NSString stringWithFormat:@"设备：%@\n系统：iOS %@\n客户端版本：%@", platform, [[UIDevice currentDevice] systemVersion], [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]] isHTML:NO];
-            // TODO: Status Bar 颜色不对
             [self presentViewController:mail animated:YES completion:nil];
         }
     }
