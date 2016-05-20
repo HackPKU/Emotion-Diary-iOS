@@ -576,7 +576,7 @@
                                 <connections>
                                     <outlet property="labelText" destination="80q-yo-mIU" id="mg7-s4-qJe"/>
                                     <outlet property="labelTime" destination="WMJ-s0-olR" id="Uhm-66-tDz"/>
-                                    <segue destination="pqm-4X-NfW" kind="show" identifier="diary" id="luQ-qu-rz5">
+                                    <segue destination="pqm-4X-NfW" kind="presentation" identifier="diary" modalPresentationStyle="formSheet" modalTransitionStyle="crossDissolve" id="luQ-qu-rz5">
                                         <segue key="commit" inheritsFrom="parent" id="279-Or-dWj"/>
                                         <segue key="preview" inheritsFrom="commit" id="bhq-ke-dpe"/>
                                     </segue>
@@ -611,10 +611,10 @@
             </objects>
             <point key="canvasLocation" x="4303" y="310"/>
         </scene>
-        <!--Diary-->
+        <!--DiaryNavigationController-->
         <scene sceneID="UNw-9P-O8U">
             <objects>
-                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="Diary" id="pqm-4X-NfW" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="DiaryNavigationController" id="pqm-4X-NfW" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="11l-KZ-vGz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4904.5" y="24"/>
@@ -1350,13 +1350,13 @@ Cg
         <image name="日记本" width="100" height="111"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qPa-4Z-Neu"/>
-        <segue reference="H9q-g8-KM9"/>
-        <segue reference="9Ud-nh-1Hy"/>
-        <segue reference="HJi-Bx-tL0"/>
         <segue reference="g5Z-lL-Z4q"/>
+        <segue reference="HJi-Bx-tL0"/>
+        <segue reference="9Ud-nh-1Hy"/>
+        <segue reference="H9q-g8-KM9"/>
         <segue reference="s67-z5-sht"/>
-        <segue reference="luQ-qu-rz5"/>
+        <segue reference="qPa-4Z-Neu"/>
         <segue reference="Sm7-Ng-W7U"/>
+        <segue reference="luQ-qu-rz5"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -170,6 +170,11 @@
 }
 */
 
+- (void)refreshSyncData {
+    UserTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    [cell reloadStatData];
+}
+
 - (void)reloadUserInfo {
     if ([ActionPerformer hasLoggedIn]) {
         [ActionPerformer viewUserWithName:[[NSUserDefaults standardUserDefaults] objectForKey:USER_NAME] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable dataUserInfo) {
@@ -185,15 +190,7 @@
 - (void)refreshUserView {
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
     [self refreshSyncData];
-}
-
-- (void)refreshUploadData {
-    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
-}
-
-- (void)refreshSyncData {
-    UserTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    [cell reloadStatData];
+    [self refreshShareData];
 }
 
 - (void)refreshShareData {
@@ -203,9 +200,13 @@
         }
         shareData = (NSMutableArray *)data;
         dispatch_sync(dispatch_get_main_queue(), ^{
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:2 inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
         });
     }];
+}
+
+- (void)refreshUploadData {
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:2 inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark - Table view delegate
