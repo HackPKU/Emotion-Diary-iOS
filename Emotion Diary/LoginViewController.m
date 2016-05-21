@@ -108,7 +108,7 @@
 }
 
 - (IBAction)forgetPassword:(id)sender {
-    // TODO: Forget password function
+    // TODO: 忘记密码功能
 }
 
 - (IBAction)cancel:(id)sender {

@@ -133,10 +133,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
         case 3:
-            NSLog(@"Place"); // TODO: Add place
+            NSLog(@"Place"); // TODO: 定位
             break;
         case 4:
-            NSLog(@"Weather"); // TODO: Add weather
+            NSLog(@"Weather"); // TODO: 天气
             break;
         default:
             break;

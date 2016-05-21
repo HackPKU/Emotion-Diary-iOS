@@ -32,8 +32,6 @@
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUser) name:USER_CHANGED_NOTIFICATION object:nil];
     
-    // TODO: 编辑用户信息
-
     [self refreshUser];
     
     // Uncomment the following line to preserve selection between presentations.
