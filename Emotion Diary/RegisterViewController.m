@@ -11,9 +11,12 @@
 
 #define USER_NAME_INDEX 0
 #define PASSWORD_INDEX 1
-#define PASSWORD_SURE_INDEX 2
-#define EMAIL_INDEX 3
-#define SEX_INDEX 4
+#define NEW_PASSWORD_INDEX 2
+#define PASSWORD_SURE_INDEX 3
+#define EMAIL_INDEX 4
+#define SEX_INDEX 5
+
+#define SEX_SEGMENT_INFO @[@"secret", @"male", @"female"]
 
 @interface RegisterViewController ()
 
@@ -24,6 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [_tableRegister addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTableView:)]];
+    self.title = _isEdit ? @"修改个人信息" : @"注册";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChange:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
@@ -65,11 +69,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 6;
+    return 7;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60.0;
+    return (!_isEdit && indexPath.row == NEW_PASSWORD_INDEX) ? 0.0 : 60.0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -77,32 +81,42 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == USER_NAME_INDEX || indexPath.row == PASSWORD_INDEX || indexPath.row == PASSWORD_SURE_INDEX || indexPath.row == EMAIL_INDEX) {
-        RegisterTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"text" forIndexPath:indexPath];
+    RegisterTableViewCell *cell;
+    if (indexPath.row == USER_NAME_INDEX || indexPath.row == PASSWORD_INDEX || indexPath.row == NEW_PASSWORD_INDEX || indexPath.row == PASSWORD_SURE_INDEX || indexPath.row == EMAIL_INDEX) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"text" forIndexPath:indexPath];
         cell.textContent.delegate = self;
-        if (indexPath.row == USER_NAME_INDEX){
+        if (indexPath.row == USER_NAME_INDEX) {
+            cell.textContent.text = _isEdit ? [USER_DEFAULT objectForKey:USER_NAME] : nil;
             cell.textContent.placeholder = @"用户名，中英文均可";
             cell.textContent.secureTextEntry = NO;
             cell.textContent.keyboardType = UIKeyboardTypeDefault;
         }else if (indexPath.row == PASSWORD_INDEX) {
-            cell.textContent.placeholder = @"密码，至少6位";
+            cell.textContent.placeholder = _isEdit ? @"输入账号密码以验证身份" : @"密码，至少6位";
+            cell.textContent.secureTextEntry = YES;
+            cell.textContent.keyboardType = UIKeyboardTypeASCIICapable;
+        }else if (indexPath.row == NEW_PASSWORD_INDEX) {
+            cell.textContent.placeholder = @"新密码，不修改则不填写";
             cell.textContent.secureTextEntry = YES;
             cell.textContent.keyboardType = UIKeyboardTypeASCIICapable;
         }else if (indexPath.row == PASSWORD_SURE_INDEX) {
-            cell.textContent.placeholder = @"重新输入密码";
+            cell.textContent.placeholder = _isEdit ? @"重新输入新密码" : @"重新输入密码";
             cell.textContent.secureTextEntry = YES;
             cell.textContent.keyboardType = UIKeyboardTypeASCIICapable;
         }else if (indexPath.row == EMAIL_INDEX) {
+            cell.textContent.text = _isEdit ? [[USER_DEFAULT objectForKey:USER_INFO] objectForKey:@"email"] : nil;
             cell.textContent.placeholder = @"邮箱，选填，找回密码时使用";
             cell.textContent.secureTextEntry = NO;
             cell.textContent.keyboardType = UIKeyboardTypeEmailAddress;
         }
-        return cell;
     }else if (indexPath.row == SEX_INDEX) {
-        return [tableView dequeueReusableCellWithIdentifier:@"sex" forIndexPath:indexPath];
+        cell = [tableView dequeueReusableCellWithIdentifier:@"sex" forIndexPath:indexPath];
+        NSInteger index = [SEX_SEGMENT_INFO indexOfObject:[[USER_DEFAULT objectForKey:USER_INFO] objectForKey:@"sex"]];
+        cell.segmentSex.selectedSegmentIndex = _isEdit ? (index == NSNotFound ? 0 : index): 0;
     }else {
-        return [tableView dequeueReusableCellWithIdentifier:@"register" forIndexPath:indexPath];
+        cell = [tableView dequeueReusableCellWithIdentifier:@"register" forIndexPath:indexPath];
+        [cell.buttonRegister setTitle:_isEdit ? @"修改" : @"注册" forState:UIControlStateNormal];
     }
+    return cell;
 }
 
 - (id _Nullable)getContentAtIndex:(NSInteger)index {
@@ -120,18 +134,25 @@
     if (sender == [self getContentAtIndex:USER_NAME_INDEX]) {
         [[self getContentAtIndex:PASSWORD_INDEX] becomeFirstResponder];
     }else if (sender == [self getContentAtIndex:PASSWORD_INDEX]) {
+        if (_isEdit) {
+            [[self getContentAtIndex:NEW_PASSWORD_INDEX] becomeFirstResponder];
+        }else {
+            [[self getContentAtIndex:PASSWORD_SURE_INDEX] becomeFirstResponder];
+        }
+    }else if (sender == [self getContentAtIndex:NEW_PASSWORD_INDEX]) {
         [[self getContentAtIndex:PASSWORD_SURE_INDEX] becomeFirstResponder];
     }else if (sender == [self getContentAtIndex:PASSWORD_SURE_INDEX]) {
         [[self getContentAtIndex:EMAIL_INDEX] becomeFirstResponder];
     }
 }
 
-- (IBAction)register:(id)sender {
+- (IBAction)action:(id)sender {
     NSString *name = ((UITextField *)[self getContentAtIndex:USER_NAME_INDEX]).text;
     NSString *password = ((UITextField *)[self getContentAtIndex:PASSWORD_INDEX]).text;
+    NSString *newPassword = ((UITextField *)[self getContentAtIndex:NEW_PASSWORD_INDEX]).text;
     NSString *passwordSure = ((UITextField *)[self getContentAtIndex:PASSWORD_SURE_INDEX]).text;
     NSString *email = ((UITextField *)[self getContentAtIndex:EMAIL_INDEX]).text;
-    NSString *sex = ((UISegmentedControl *)[self getContentAtIndex:SEX_INDEX]).selectedSegmentIndex == 0 ? nil : ((UISegmentedControl *)[self getContentAtIndex:SEX_INDEX]).selectedSegmentIndex == 1 ? @"male" : @"female";
+    NSString *sex = SEX_SEGMENT_INFO[((UISegmentedControl *)[self getContentAtIndex:SEX_INDEX]).selectedSegmentIndex];
     
     NSString *errorMessage = nil;
     UIView *firstResponder = nil;
@@ -141,10 +162,16 @@
     }else if (password.length == 0) {
         errorMessage = @"没有填写密码";
         firstResponder = [self getContentAtIndex:PASSWORD_INDEX];
-    }else if (password.length < 6) {
+    }else if (!_isEdit && password.length < 6) {
         errorMessage = @"密码长度过短";
         firstResponder = [self getContentAtIndex:PASSWORD_INDEX];
-    }else if (![passwordSure isEqualToString:password]) {
+    }else if (_isEdit && newPassword.length > 0 && newPassword.length < 6) {
+        errorMessage = @"新密码长度过短";
+        firstResponder = [self getContentAtIndex:NEW_PASSWORD_INDEX];
+    }else if (!_isEdit && ![passwordSure isEqualToString:password]) {
+        errorMessage = @"两次密码填写不一致";
+        firstResponder = [self getContentAtIndex:PASSWORD_SURE_INDEX];
+    }else if (_isEdit && newPassword.length > 0 && ![passwordSure isEqualToString:newPassword]) {
         errorMessage = @"两次密码填写不一致";
         firstResponder = [self getContentAtIndex:PASSWORD_SURE_INDEX];
     }else if (email.length > 0 && ![Utilities isValidateEmail:email]) {
@@ -160,30 +187,51 @@
         return;
     }
     [self.view endEditing:YES];
-    [KVNProgress showWithStatus:@"注册中"];
-    [ActionPerformer registerWithName:name password:password sex:sex email:email icon:nil personID:[USER_DEFAULT objectForKey:PERSON_ID] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
-        if (!success) {
-            [KVNProgress showErrorWithStatus:message];
-            return;
-        }
-        [USER_DEFAULT setValuesForKeysWithDictionary:@{USER_ID: data[@"userid"], TOKEN: data[@"token"], USER_NAME: name, USER_INFO:@{@"sex": sex, @"email": email}}];
-        [KVNProgress showSuccessWithStatus:@"注册成功" completion:^{
-            [self dismissViewControllerAnimated:YES completion:^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:REGISTER_COMPLETED_NOTIFOCATION object:nil];
-                [[NSNotificationCenter defaultCenter] postNotificationName:USER_CHANGED_NOTIFICATION object:nil];
+    if (!_isEdit) {
+        [KVNProgress showWithStatus:@"注册中"];
+        [ActionPerformer registerWithName:name password:password sex:sex email:email icon:nil personID:[USER_DEFAULT objectForKey:PERSON_ID] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+            if (!success) {
+                [KVNProgress showErrorWithStatus:message];
+                return;
+            }
+            [USER_DEFAULT setValuesForKeysWithDictionary:@{USER_ID: data[@"userid"], TOKEN: data[@"token"], USER_NAME: name, USER_INFO: @{@"sex": sex, @"email": email}}];
+            [KVNProgress showSuccessWithStatus:@"注册成功" completion:^{
+                [self dismissViewControllerAnimated:YES completion:^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:REGISTER_COMPLETED_NOTIFOCATION object:nil];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:USER_CHANGED_NOTIFICATION object:nil];
+                }];
             }];
         }];
-    }];
+    }else {
+        [KVNProgress showWithStatus:@"修改中"];
+        [ActionPerformer editUserWithName:name password:password newPassword:newPassword sex:sex email:email andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+            if (!success) {
+                [KVNProgress showErrorWithStatus:message];
+                return;
+            }
+            NSMutableDictionary *dict = [[USER_DEFAULT objectForKey:USER_INFO] mutableCopy];
+            dict[@"sex"] = sex;
+            dict[@"email"] = email;
+            [USER_DEFAULT setValuesForKeysWithDictionary:@{USER_NAME: name, USER_INFO: dict}];
+            [KVNProgress showSuccessWithStatus:@"修改成功" completion:^{
+                [self dismissViewControllerAnimated:YES completion:^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:USER_CHANGED_NOTIFICATION object:nil];
+                }];
+            }];
+        }];
+    }
 }
 
-/*
 #pragma mark - Navigation
+
+- (IBAction)cancel:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-*/
 
 @end

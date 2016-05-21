@@ -34,7 +34,7 @@
     diary = newDiary;
     if (diary.selfie.length > 0) {
         if (diary.hasOnlineVersion) {
-            [_imageSelfie sd_setImageWithURL:[ActionPerformer getImageURLWithName:diary.selfie type:EmotionDiaryImageTypeSelfie] placeholderImage:PLACEHOLDER_IMAGE options:SDWebImageProgressiveDownload];
+            [_imageSelfie sd_setImageWithURL:[ActionPerformer getImageURLWithName:diary.selfie type:EmotionDiaryImageTypeSelfie] placeholderImage:PLACEHOLDER_IMAGE];
         }else {
             // 后台读取文件 否则 cell 滚动流畅度低下
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

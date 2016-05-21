@@ -46,6 +46,7 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
+    // Lock the app
     UIViewController *view = [Utilities getCurrentViewControllerWhileClass:[WelcomeViewController class] appearsWithTime:1 andCanBeTop:NO];
     if (view) {
         WelcomeViewController *dest = [view.storyboard instantiateViewControllerWithIdentifier:@"Welcome"];
@@ -54,6 +55,9 @@
             [view presentViewController:dest animated:NO completion:nil];
         }
     }
+    
+    // Stop uploading
+    [[EmotionDiaryManager sharedManager] stopUploading];
     
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.

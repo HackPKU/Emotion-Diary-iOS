@@ -107,6 +107,10 @@
     }];
 }
 
+- (IBAction)forgetPassword:(id)sender {
+    // TODO: Forget password function
+}
+
 - (IBAction)cancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -120,9 +124,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-- (IBAction)unwindToLoginView:(UIStoryboardSegue *)segue {
-    
-}
 
 @end

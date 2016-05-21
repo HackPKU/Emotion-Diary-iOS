@@ -8,6 +8,7 @@
 
 #import "InfoTableViewController.h"
 #import "WelcomeViewController.h"
+#import "RegisterViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
 #define NO_STATE 0
@@ -26,7 +27,7 @@
     _imageIcon.layer.cornerRadius = _imageIcon.frame.size.width / 2;
     _imageIcon.layer.borderColor = [UIColor whiteColor].CGColor;
     _imageIcon.layer.borderWidth = 1.0;
-    for (UIButton *button in @[_buttonResetFace, _buttonLogout]) {
+    for (UIButton *button in @[_buttonEdit, _buttonResetFace, _buttonLogout]) {
         button.layer.cornerRadius = 5.0;
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUser) name:USER_CHANGED_NOTIFICATION object:nil];
@@ -111,7 +112,7 @@
     NSString *iconName = [[USER_DEFAULT objectForKey:USER_INFO] objectForKey:@"icon"];
     NSURL *iconURL = [ActionPerformer getImageURLWithName:iconName type:EmotionDiaryImageTypeIcon];
     for (UIImageView *imageView in @[_imageIcon, _imageIconBlurred]) {
-        [imageView sd_setImageWithURL:iconURL placeholderImage:PLACEHOLDER_IMAGE options:SDWebImageProgressiveDownload];
+        [imageView sd_setImageWithURL:iconURL placeholderImage:PLACEHOLDER_IMAGE];
     }
     _labelUserName.text = [USER_DEFAULT objectForKey:USER_NAME];
 }
@@ -310,14 +311,17 @@
     [self presentViewController:action animated:YES completion:nil];
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"edit"]) {
+        RegisterViewController *dest = [[[segue destinationViewController] viewControllers] firstObject];
+        dest.isEdit = YES;
+    }
 }
-*/
 
 @end

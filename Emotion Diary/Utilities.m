@@ -14,7 +14,7 @@
 @implementation Utilities
 
 + (NSString * _Nullable)MD5:(NSString * _Nullable)string {
-    if (!string) {
+    if (!string || string.length == 0) {
         return nil;
     }
     const char* cStr = [string UTF8String];

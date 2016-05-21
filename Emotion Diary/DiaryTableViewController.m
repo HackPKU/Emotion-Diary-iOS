@@ -99,7 +99,7 @@
 - (void)updateDiaryView {
     if (_diary.selfie.length > 0) {
         if (_diary.hasOnlineVersion) {
-            [_imageSelfie sd_setImageWithURL:[ActionPerformer getImageURLWithName:_diary.selfie type:EmotionDiaryImageTypeSelfie] placeholderImage:PLACEHOLDER_IMAGE options:SDWebImageProgressiveDownload];
+            [_imageSelfie sd_setImageWithURL:[ActionPerformer getImageURLWithName:_diary.selfie type:EmotionDiaryImageTypeSelfie] placeholderImage:PLACEHOLDER_IMAGE];
         }else {
             _imageSelfie.image = _diary.imageSelfie;
         }
@@ -206,7 +206,7 @@
     
     UIImageView *imageView = imageViews[index];
     if (_diary.hasOnlineVersion) {
-        [imageView sd_setImageWithURL:[ActionPerformer getImageURLWithName:_diary.images[index] type:EmotionDiaryImageTypeImage] placeholderImage:PLACEHOLDER_IMAGE options:SDWebImageProgressiveDownload];
+        [imageView sd_setImageWithURL:[ActionPerformer getImageURLWithName:_diary.images[index] type:EmotionDiaryImageTypeImage] placeholderImage:PLACEHOLDER_IMAGE];
     }else {
         imageView.image = _diary.imageImages[index];
     }

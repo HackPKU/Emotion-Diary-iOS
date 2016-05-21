@@ -108,6 +108,10 @@
     [ActionPerformer postWithDictionary:request toUrl:@"/api/edit_user.php" andBlock:block];
 }
 
++ (void)editUserWithName:(NSString *)name password:(NSString *)password newPassword:(NSString * _Nullable)newPassword sex:(NSString * _Nullable)sex email:(NSString * _Nullable)email andBlock:(ActionPerformerResultBlock)block {
+    [ActionPerformer editUserWithName:name password:password newPassword:newPassword sex:sex email:email icon:[[USER_DEFAULT objectForKey:USER_INFO] objectForKey:@"icon"] personID:[USER_DEFAULT objectForKey:PERSON_ID] andBlock:block];
+}
+
 + (void)editIconWithPassword:(NSString *)password icon:(NSString *)icon andBlock:(ActionPerformerResultBlock)block {
     NSDictionary *dict = [USER_DEFAULT objectForKey:USER_INFO];
     [ActionPerformer editUserWithName:dict[@"name"] password:password newPassword:nil sex:dict[@"sex"] email:dict[@"email"] icon:icon personID:[USER_DEFAULT objectForKey:PERSON_ID] andBlock:block];

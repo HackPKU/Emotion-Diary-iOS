@@ -100,7 +100,7 @@
                 UserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"user"];
                 cell.labelName.text = [USER_DEFAULT objectForKey:USER_NAME];
                 NSString *iconName = [[USER_DEFAULT objectForKey:USER_INFO] objectForKey:@"icon"];
-                [cell.imageIcon sd_setImageWithURL:[ActionPerformer getImageURLWithName:iconName type:EmotionDiaryImageTypeIcon] placeholderImage:PLACEHOLDER_IMAGE options:SDWebImageProgressiveDownload];
+                [cell.imageIcon sd_setImageWithURL:[ActionPerformer getImageURLWithName:iconName type:EmotionDiaryImageTypeIcon] placeholderImage:PLACEHOLDER_IMAGE];
                 return cell;
             }else if (indexPath.row == 1) {
                 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"share"];

@@ -52,7 +52,7 @@ typedef void (^ActionPerformerResultBlock)(BOOL success, NSString * _Nullable me
 
 + (void)viewUserWithName:(NSString *)name andBlock:(ActionPerformerResultBlock)block;
 
-+ (void)editUserWithName:(NSString *)name password:(NSString *)password newPassword:(NSString * _Nullable)newPassword sex:(NSString * _Nullable)sex email:(NSString * _Nullable)email icon:(NSString * _Nullable)icon personID:(NSString *)personID andBlock:(ActionPerformerResultBlock)block;
++ (void)editUserWithName:(NSString *)name password:(NSString *)password newPassword:(NSString * _Nullable)newPassword sex:(NSString * _Nullable)sex email:(NSString * _Nullable)email andBlock:(ActionPerformerResultBlock)block;
 
 + (void)editIconWithPassword:(NSString *)password icon:(NSString *)icon andBlock:(ActionPerformerResultBlock)block;
 
