@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imageIcon;
 @property (strong, nonatomic) IBOutlet UILabel *labelUserName;
 
+@property (strong, nonatomic) IBOutlet UIButton *buttonEdit;
 @property (strong, nonatomic) IBOutlet UIButton *buttonResetFace;
 @property (strong, nonatomic) IBOutlet UIButton *buttonLogout;
 

@@ -425,6 +425,9 @@
                                                     <state key="normal" title="忘记密码">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="forgetPassword:" destination="WGS-lW-y9x" eventType="touchUpInside" id="g5G-IJ-JF8"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3y-FJ-8ti">
                                                     <rect key="frame" x="165" y="174" width="80" height="30"/>
@@ -706,15 +709,15 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="150" id="oG0-hU-qOR">
-                                        <rect key="frame" x="0.0" y="264" width="600" height="150"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="220" id="oG0-hU-qOR">
+                                        <rect key="frame" x="0.0" y="264" width="600" height="220"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oG0-hU-qOR" id="pVW-MF-jUE">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="220"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nZr-vu-dLw">
-                                                    <rect key="frame" x="175" y="88" width="250" height="40"/>
+                                                    <rect key="frame" x="175" y="148" width="250" height="40"/>
                                                     <color key="backgroundColor" red="0.98431372549999996" green="0.36470588240000001" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="250" id="KJB-yF-k1W"/>
@@ -728,8 +731,26 @@
                                                         <action selector="logout:" destination="36w-LO-aYy" eventType="touchUpInside" id="WIH-D6-dLI"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edt-UT-YPN">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OLO-C3-Ok3">
                                                     <rect key="frame" x="175" y="28" width="250" height="40"/>
+                                                    <color key="backgroundColor" red="0.19215686269999999" green="0.67843137249999996" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="250" id="6I1-hm-a6O"/>
+                                                        <constraint firstAttribute="height" constant="40" id="RZr-Ig-kGg"/>
+                                                    </constraints>
+                                                    <state key="normal" title="修改个人信息">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="login:" destination="WGS-lW-y9x" eventType="touchUpInside" id="sF7-Gf-j4q"/>
+                                                        <segue destination="m7g-ss-XhX" kind="presentation" identifier="edit" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="oGr-Yk-Trc">
+                                                            <segue key="commit" inheritsFrom="parent" id="1Z4-7T-LDz"/>
+                                                            <segue key="preview" inheritsFrom="commit" id="X1f-qo-1of"/>
+                                                        </segue>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edt-UT-YPN">
+                                                    <rect key="frame" x="175" y="88" width="250" height="40"/>
                                                     <color key="backgroundColor" red="0.058823529411764705" green="0.55079435145768829" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="250" id="0Ew-Ds-HR6"/>
@@ -745,11 +766,19 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="edt-UT-YPN" firstAttribute="top" secondItem="OLO-C3-Ok3" secondAttribute="bottom" constant="20" id="BWe-By-rih"/>
                                                 <constraint firstItem="nZr-vu-dLw" firstAttribute="top" secondItem="edt-UT-YPN" secondAttribute="bottom" constant="20" id="CM8-p1-gYT"/>
                                                 <constraint firstItem="nZr-vu-dLw" firstAttribute="centerX" secondItem="pVW-MF-jUE" secondAttribute="centerX" id="KjB-YC-Td8"/>
                                                 <constraint firstItem="edt-UT-YPN" firstAttribute="top" secondItem="pVW-MF-jUE" secondAttribute="topMargin" constant="20" id="TP4-5u-QK4"/>
+                                                <constraint firstItem="OLO-C3-Ok3" firstAttribute="top" secondItem="pVW-MF-jUE" secondAttribute="topMargin" constant="20" id="bs1-b7-zLL"/>
                                                 <constraint firstItem="edt-UT-YPN" firstAttribute="centerX" secondItem="pVW-MF-jUE" secondAttribute="centerX" id="cwf-rS-nJJ"/>
+                                                <constraint firstItem="OLO-C3-Ok3" firstAttribute="centerX" secondItem="pVW-MF-jUE" secondAttribute="centerX" id="k4S-QH-KoI"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="TP4-5u-QK4"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -762,6 +791,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="个人信息" id="zKd-Rg-aur"/>
                     <connections>
+                        <outlet property="buttonEdit" destination="OLO-C3-Ok3" id="3ru-wa-VNH"/>
                         <outlet property="buttonLogout" destination="nZr-vu-dLw" id="yZ9-Ll-Kb0"/>
                         <outlet property="buttonResetFace" destination="edt-UT-YPN" id="obt-yJ-VcD"/>
                         <outlet property="imageIcon" destination="u90-eY-eQ2" id="fAU-jz-nB6"/>
@@ -1162,7 +1192,7 @@
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </state>
                                                                 <connections>
-                                                                    <action selector="register:" destination="X5L-kl-Ocw" eventType="touchUpInside" id="Bye-v9-IiN"/>
+                                                                    <action selector="action:" destination="X5L-kl-Ocw" eventType="touchUpInside" id="k3d-V2-UgE"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -1205,7 +1235,7 @@
                     <navigationItem key="navigationItem" title="注册" id="evm-ob-pfE">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="JqA-Oo-PPl">
                             <connections>
-                                <segue destination="jcB-VL-tXT" kind="unwind" unwindAction="unwindToLoginView:" id="Blc-Zv-7FB"/>
+                                <action selector="cancel:" destination="X5L-kl-Ocw" id="JZk-Nr-faH"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1215,7 +1245,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bWV-Ca-hM4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="jcB-VL-tXT" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="5934" y="-525"/>
         </scene>
@@ -1235,7 +1264,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jg1-q7-VoB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5122" y="-525"/>
+            <point key="canvasLocation" x="5109" y="-525"/>
         </scene>
         <!--关于-->
         <scene sceneID="uPn-t7-DVs">
@@ -1350,13 +1379,13 @@ Cg
         <image name="日记本" width="100" height="111"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="g5Z-lL-Z4q"/>
-        <segue reference="HJi-Bx-tL0"/>
         <segue reference="9Ud-nh-1Hy"/>
-        <segue reference="H9q-g8-KM9"/>
         <segue reference="s67-z5-sht"/>
         <segue reference="qPa-4Z-Neu"/>
-        <segue reference="Sm7-Ng-W7U"/>
+        <segue reference="HJi-Bx-tL0"/>
+        <segue reference="H9q-g8-KM9"/>
+        <segue reference="g5Z-lL-Z4q"/>
+        <segue reference="oGr-Yk-Trc"/>
         <segue reference="luQ-qu-rz5"/>
     </inferredMetricsTieBreakers>
 </document>
