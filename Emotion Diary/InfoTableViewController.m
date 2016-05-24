@@ -32,8 +32,6 @@
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUser) name:USER_CHANGED_NOTIFICATION object:nil];
     
-    // TODO: 编辑用户信息
-
     [self refreshUser];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -294,6 +292,7 @@
             [USER_DEFAULT removeObjectForKey:TOKEN];
             [USER_DEFAULT removeObjectForKey:USER_NAME];
             [USER_DEFAULT removeObjectForKey:USER_INFO];
+            [USER_DEFAULT removeObjectForKey:SYNC_INFO];
             [[NSNotificationCenter defaultCenter] postNotificationName:USER_CHANGED_NOTIFICATION object:nil];
             // TODO: 本地日记的存留处理
             if (!success) {

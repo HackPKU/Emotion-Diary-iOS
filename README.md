@@ -35,17 +35,18 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 
 * 模拟器经常会输出 `KVNProgress` 的警告，是因为提示状态变化太快，前一个状态的显示时间未到默认的最短时间，该警告可忽略
 * 发邮件反馈在模拟器上可能无法打开并提示 `MailCompositionService` 意外退出，这是模拟器的 Bug，真机上不会出现
-* 日记正文如果有电话、网站、邮件等，在 iOS9 系统下长按不会跳出对话框，并且模拟器会输出警告，回到 RootViewController 后对话框才出现，这是 iOS9 系统的 Bug
+* 日记正文如果有电话、网站、邮件等，在 iOS9 系统下长按不会跳出对话框，并且模拟器会输出警告，回到 RootViewController 后对话框才出现，这是 iOS9 系统的 Bug，目前没有较好的解决方案
 
 ## 主要进度记录
 
 * 2016/04/25 完成功能构思和UI、图标概念设计
-* 2016/04/29 完成服务器 API 的编写
+* 2016/04/29 完成服务器基本 API 的编写
 * 2016/05/03 完成本地日记 App 的功能
 * 2016/05/09 完成注册和登录功能
 * 2016/05/14 完成日记上传和同步功能
 * 2016/05/15 使用 CocoaPods 1.0.0 新版本
 * 2016/05/20 完成日记的分享和自动上传功能
+* 2016/05/22 完成编辑用户信息功能
 
 ## 重要类说明
 
@@ -77,7 +78,7 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 * `KVNProgress` 进度指示器库，用于用户交互的提示
 * `FSCalendar` 日历库，用于主界面的日历显示
 * `BEMSimpleLineGraph` 图表库，用于统计界面的统计图
-* `SDWebImage` 网络图片库，用于日记的头像和图片的加载和显示
+* `SDWebImage` 网络图片库，用于头像和图片的加载和显示
 * `CTAssetsPickerController` 照片选择库，用于记录日记界面选择图片
 * `MWPhotoBrowser` 照片浏览库，用于多个界面的图片浏览
 * `ZYBannerView` 照片轮播器，用于查看日记界面的图片轮播
