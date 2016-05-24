@@ -18,11 +18,11 @@
         return nil;
     }
     const char* cStr = [string UTF8String];
-    unsigned char digist[CC_MD5_DIGEST_LENGTH]; // CC_MD5_DIGEST_LENGTH = 16
-    CC_MD5(cStr, (unsigned int)strlen(cStr), digist);
+    unsigned char digest[CC_MD5_DIGEST_LENGTH];
+    CC_MD5(cStr, (unsigned int)strlen(cStr), digest);
     NSMutableString *outPutStr = [NSMutableString stringWithCapacity:10];
     for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++) {
-        [outPutStr appendFormat:@"%02X", digist[i]];// 小写 x 表示输出的是小写 MD5 ，大写 X 表示输出的是大写 MD5
+        [outPutStr appendFormat:@"%02X", digest[i]];// 小写 x 表示输出的是小写 MD5 ，大写 X 表示输出的是大写 MD5
     }
     return outPutStr;
 }
