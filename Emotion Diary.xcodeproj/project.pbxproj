@@ -322,6 +322,7 @@
 				0148B0A61CB97D0A00E8FC08 /* Utilities.m */,
 				01B4061F1CB7FF7500B242D6 /* LaunchScreen.storyboard */,
 				01B4061D1CB7FF7500B242D6 /* Assets.xcassets */,
+				015AFD6A1CCBE09800389C7A /* Emotion Diary-Prefix.pch */,
 				01B406111CB7FF7500B242D6 /* Supporting Files */,
 				018EF43D1CC761EE00E712BC /* FaceppSDK_ARC */,
 			);
@@ -332,7 +333,6 @@
 			isa = PBXGroup;
 			children = (
 				01B406121CB7FF7500B242D6 /* main.m */,
-				015AFD6A1CCBE09800389C7A /* Emotion Diary-Prefix.pch */,
 				01B406221CB7FF7500B242D6 /* Info.plist */,
 				015325001CD9066E00272D03 /* InfoPlist.strings */,
 			);
