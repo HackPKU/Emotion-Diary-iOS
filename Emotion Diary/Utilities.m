@@ -117,8 +117,12 @@
     return imageData;
 }
 
++ (NSString *)getFullPathWithPath:(NSString *)path andName:(NSString *)name {
+    return [NSString stringWithFormat:@"%@/%@/%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0], path, name];
+}
+
 + (BOOL)checkAndCreatePath:(NSString *)path {
-    NSString *fullPath = [NSString stringWithFormat:@"%@/%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0], path];
+    NSString *fullPath = [[Utilities getFullPathWithPath:path andName:@"null"] stringByDeletingLastPathComponent];
     BOOL isDirectory;
     if (![FILE_MANAGER fileExistsAtPath:fullPath isDirectory:&isDirectory]) {
         return [FILE_MANAGER createDirectoryAtPath:fullPath withIntermediateDirectories:NO attributes:nil error:nil];
@@ -128,12 +132,12 @@
 }
 
 + (BOOL)fileExistsAtPath:(NSString *)path withName:(NSString *)name {
-    NSString *fullPath = [NSString stringWithFormat:@"%@/%@/%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0], path, name];
+    NSString *fullPath = [Utilities getFullPathWithPath:path andName:name];
     return [FILE_MANAGER fileExistsAtPath:fullPath];
 }
 
 + (BOOL)createFile:(NSData *)data atPath:(NSString *)path withName:(NSString *)name {
-    NSString *fullPath = [NSString stringWithFormat:@"%@/%@/%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0], path, name];
+    NSString *fullPath = [Utilities getFullPathWithPath:path andName:name];
     if ([FILE_MANAGER fileExistsAtPath:fullPath]) {
         return NO;
     }
@@ -141,7 +145,7 @@
 }
 
 + (BOOL)deleteFileAtPath:(NSString *)path withName:(NSString *)name {
-    NSString *fullPath = [NSString stringWithFormat:@"%@/%@/%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0], path, name];
+    NSString *fullPath = [Utilities getFullPathWithPath:path andName:name];
     if (![FILE_MANAGER fileExistsAtPath:fullPath]) {
         return YES;
     }
@@ -149,7 +153,7 @@
 }
 
 + (NSData * _Nullable)getFileAtPath:(NSString *)path withName:(NSString *)name {
-    NSString *fullPath = [NSString stringWithFormat:@"%@/%@/%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0], path, name];
+    NSString *fullPath = [Utilities getFullPathWithPath:path andName:name];
     return [FILE_MANAGER contentsAtPath:fullPath];
 }
 
