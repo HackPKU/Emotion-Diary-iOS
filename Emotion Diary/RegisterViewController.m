@@ -86,7 +86,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"text" forIndexPath:indexPath];
         cell.textContent.delegate = self;
         if (indexPath.row == USER_NAME_INDEX) {
-            cell.textContent.text = _isEdit ? [USER_DEFAULT objectForKey:USER_NAME] : nil;
+            cell.textContent.text = _isEdit ? [USER_DEFAULTS objectForKey:USER_NAME] : nil;
             cell.textContent.placeholder = @"用户名，中英文均可";
             cell.textContent.secureTextEntry = NO;
             cell.textContent.keyboardType = UIKeyboardTypeDefault;
@@ -103,14 +103,14 @@
             cell.textContent.secureTextEntry = YES;
             cell.textContent.keyboardType = UIKeyboardTypeASCIICapable;
         }else if (indexPath.row == EMAIL_INDEX) {
-            cell.textContent.text = _isEdit ? [[USER_DEFAULT objectForKey:USER_INFO] objectForKey:@"email"] : nil;
+            cell.textContent.text = _isEdit ? [[USER_DEFAULTS objectForKey:USER_INFO] objectForKey:@"email"] : nil;
             cell.textContent.placeholder = @"邮箱，选填，找回密码时使用";
             cell.textContent.secureTextEntry = NO;
             cell.textContent.keyboardType = UIKeyboardTypeEmailAddress;
         }
     }else if (indexPath.row == SEX_INDEX) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"sex" forIndexPath:indexPath];
-        NSInteger index = [SEX_SEGMENT_INFO indexOfObject:[[USER_DEFAULT objectForKey:USER_INFO] objectForKey:@"sex"]];
+        NSInteger index = [SEX_SEGMENT_INFO indexOfObject:[[USER_DEFAULTS objectForKey:USER_INFO] objectForKey:@"sex"]];
         cell.segmentSex.selectedSegmentIndex = _isEdit ? (index == NSNotFound ? 0 : index): 0;
     }else {
         cell = [tableView dequeueReusableCellWithIdentifier:@"register" forIndexPath:indexPath];
@@ -189,12 +189,12 @@
     [self.view endEditing:YES];
     if (!_isEdit) {
         [KVNProgress showWithStatus:@"注册中"];
-        [ActionPerformer registerWithName:name password:password sex:sex email:email icon:nil personID:[USER_DEFAULT objectForKey:PERSON_ID] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+        [ActionPerformer registerWithName:name password:password sex:sex email:email icon:nil personID:[USER_DEFAULTS objectForKey:PERSON_ID] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
             if (!success) {
                 [KVNProgress showErrorWithStatus:message];
                 return;
             }
-            [USER_DEFAULT setValuesForKeysWithDictionary:@{USER_ID: data[@"userid"], TOKEN: data[@"token"], USER_NAME: name, USER_INFO: @{@"sex": sex, @"email": email}}];
+            [USER_DEFAULTS setValuesForKeysWithDictionary:@{USER_ID: data[@"userid"], TOKEN: data[@"token"], USER_NAME: name, USER_INFO: @{@"sex": sex, @"email": email}}];
             [KVNProgress showSuccessWithStatus:@"注册成功" completion:^{
                 [self dismissViewControllerAnimated:YES completion:^{
                     [[NSNotificationCenter defaultCenter] postNotificationName:REGISTER_COMPLETED_NOTIFOCATION object:nil];
@@ -209,10 +209,10 @@
                 [KVNProgress showErrorWithStatus:message];
                 return;
             }
-            NSMutableDictionary *dict = [[USER_DEFAULT objectForKey:USER_INFO] mutableCopy];
+            NSMutableDictionary *dict = [[USER_DEFAULTS objectForKey:USER_INFO] mutableCopy];
             dict[@"sex"] = sex;
             dict[@"email"] = email;
-            [USER_DEFAULT setValuesForKeysWithDictionary:@{USER_NAME: name, USER_INFO: dict}];
+            [USER_DEFAULTS setValuesForKeysWithDictionary:@{USER_NAME: name, USER_INFO: dict}];
             [KVNProgress showSuccessWithStatus:@"修改成功" completion:^{
                 [self dismissViewControllerAnimated:YES completion:^{
                     [[NSNotificationCenter defaultCenter] postNotificationName:USER_CHANGED_NOTIFICATION object:nil];

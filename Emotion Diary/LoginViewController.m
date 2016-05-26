@@ -83,22 +83,22 @@
             [KVNProgress showErrorWithStatus:message];
             return;
         }
-        [USER_DEFAULT setValuesForKeysWithDictionary:@{USER_ID : dataLogin[@"userid"], TOKEN: dataLogin[@"token"]}];
+        [USER_DEFAULTS setValuesForKeysWithDictionary:@{USER_ID : dataLogin[@"userid"], TOKEN: dataLogin[@"token"]}];
         [ActionPerformer viewUserWithName:dataLogin[@"name"] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable dataUserInfo) {
             if (!success) {
-                [USER_DEFAULT removeObjectForKey:USER_ID];
-                [USER_DEFAULT removeObjectForKey:TOKEN];
+                [USER_DEFAULTS removeObjectForKey:USER_ID];
+                [USER_DEFAULTS removeObjectForKey:TOKEN];
                 [KVNProgress showErrorWithStatus:message];
                 return;
             }
-            [USER_DEFAULT setValuesForKeysWithDictionary:@{USER_ID : dataLogin[@"userid"], TOKEN: dataLogin[@"token"], USER_NAME: dataLogin[@"name"], USER_INFO: dataUserInfo}];
-            NSString *personID = [USER_DEFAULT objectForKey:PERSON_ID];
+            [USER_DEFAULTS setValuesForKeysWithDictionary:@{USER_ID : dataLogin[@"userid"], TOKEN: dataLogin[@"token"], USER_NAME: dataLogin[@"name"], USER_INFO: dataUserInfo}];
+            NSString *personID = [USER_DEFAULTS objectForKey:PERSON_ID];
             if (personID.length == 0) {
-                [USER_DEFAULT setObject:dataUserInfo[@"person_id"] forKey:PERSON_ID];
+                [USER_DEFAULTS setObject:dataUserInfo[@"person_id"] forKey:PERSON_ID];
             }
             // TODO: PersonID 与本地不一致时的处理
             [[NSNotificationCenter defaultCenter] postNotificationName:USER_CHANGED_NOTIFICATION object:nil];
-            [USER_DEFAULT removeObjectForKey:SYNC_INFO];
+            [USER_DEFAULTS removeObjectForKey:SYNC_INFO];
             [[NSNotificationCenter defaultCenter] postNotificationName:SHOULD_SYNC_NOTIFOCATION object:nil];
             [KVNProgress showSuccessWithStatus:@"登陆成功" completion:^{
                 [self dismissViewControllerAnimated:YES completion:nil];
