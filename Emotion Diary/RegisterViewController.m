@@ -28,6 +28,7 @@
     [super viewDidLoad];
     [_tableRegister addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTableView:)]];
     self.title = _isEdit ? @"修改个人信息" : @"注册";
+    cells = [NSMutableArray new];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChange:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
@@ -81,6 +82,9 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row < cells.count) {
+        return cells[indexPath.row];
+    }
     RegisterTableViewCell *cell;
     if (indexPath.row == USER_NAME_INDEX || indexPath.row == PASSWORD_INDEX || indexPath.row == NEW_PASSWORD_INDEX || indexPath.row == PASSWORD_SURE_INDEX || indexPath.row == EMAIL_INDEX) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"text" forIndexPath:indexPath];
@@ -116,11 +120,15 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"register" forIndexPath:indexPath];
         [cell.buttonRegister setTitle:_isEdit ? @"修改" : @"注册" forState:UIControlStateNormal];
     }
+    cells[indexPath.row] = cell;
     return cell;
 }
 
 - (id _Nullable)getContentAtIndex:(NSInteger)index {
-    RegisterTableViewCell *cell = [_tableRegister cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    if (index >= cells.count) {
+        return nil;
+    }
+    RegisterTableViewCell *cell = cells[index];
     if (cell.textContent != nil) {
         return cell.textContent;
     }
@@ -131,18 +139,27 @@
 }
 
 - (IBAction)didEndOnExit:(id)sender {
+    NSInteger nextIndex;
     if (sender == [self getContentAtIndex:USER_NAME_INDEX]) {
-        [[self getContentAtIndex:PASSWORD_INDEX] becomeFirstResponder];
+        nextIndex = PASSWORD_INDEX;
     }else if (sender == [self getContentAtIndex:PASSWORD_INDEX]) {
         if (_isEdit) {
-            [[self getContentAtIndex:NEW_PASSWORD_INDEX] becomeFirstResponder];
+            nextIndex = NEW_PASSWORD_INDEX;
         }else {
-            [[self getContentAtIndex:PASSWORD_SURE_INDEX] becomeFirstResponder];
+            nextIndex = PASSWORD_SURE_INDEX;
         }
     }else if (sender == [self getContentAtIndex:NEW_PASSWORD_INDEX]) {
-        [[self getContentAtIndex:PASSWORD_SURE_INDEX] becomeFirstResponder];
+        nextIndex = PASSWORD_SURE_INDEX;
     }else if (sender == [self getContentAtIndex:PASSWORD_SURE_INDEX]) {
-        [[self getContentAtIndex:EMAIL_INDEX] becomeFirstResponder];
+        nextIndex = EMAIL_INDEX;
+    }else {
+        return;
+    }
+    
+    [[self getContentAtIndex:nextIndex] becomeFirstResponder];
+    if (![[self.tableRegister indexPathsForVisibleRows] containsObject:[NSIndexPath indexPathForRow:nextIndex inSection:0]]) {
+        [self.tableRegister scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:nextIndex inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [[self getContentAtIndex:nextIndex] performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.5];
     }
 }
 
