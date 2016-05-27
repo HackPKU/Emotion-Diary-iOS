@@ -157,8 +157,8 @@
     }
     
     [[self getContentAtIndex:nextIndex] becomeFirstResponder];
-    if (![[self.tableRegister indexPathsForVisibleRows] containsObject:[NSIndexPath indexPathForRow:nextIndex inSection:0]]) {
-        [self.tableRegister scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:nextIndex inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    if (![[_tableRegister indexPathsForVisibleRows] containsObject:[NSIndexPath indexPathForRow:nextIndex inSection:0]]) {
+        [_tableRegister scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:nextIndex inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         [[self getContentAtIndex:nextIndex] performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.5];
     }
 }
