@@ -57,8 +57,8 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 #### `EmotionDiaryManager`
 
 * 考虑到用户使用后日记数量可能很多，每次都从磁盘读取日记数据会导致极低的效率，因此建立一个专门的管理类用于大量日记数据的处理
-* 使用单例模式 `sharedManager`
-* 完成获取心情的统计数据功能，单例有一个内存中的 `diaries` 变量，与 `NSUserDefaults` 保持同步，可以极大地提高查询的效率
+* 使用单例模式 `sharedManager`，该单例有一个内存中的 `diaries` 变量，与 `NSUserDefaults` 保持同步，可以极大地提高查询的效率
+* 完成获取心情的统计数据功能
 * 完成对本地和在线日记的记录
 * 完成日记的同步功能
 
