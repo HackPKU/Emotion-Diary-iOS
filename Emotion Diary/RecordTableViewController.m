@@ -352,7 +352,7 @@
             }else {
                 [KVNProgress showErrorWithStatus:message];
             }
-            if ([ActionPerformer hasLoggedIn] && [[USER_DEFAULT objectForKey:AUTO_UPLOAD] boolValue]) {
+            if ([ActionPerformer hasLoggedIn] && [[USER_DEFAULTS objectForKey:AUTO_UPLOAD] boolValue]) {
                 [[EmotionDiaryManager sharedManager] startUploading];
             }
             [self.navigationController dismissViewControllerAnimated:YES completion:^{

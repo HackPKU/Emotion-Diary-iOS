@@ -28,6 +28,7 @@
     [super viewDidLoad];
     [_tableRegister addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTableView:)]];
     self.title = _isEdit ? @"修改个人信息" : @"注册";
+    cells = [NSMutableArray new];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChange:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
@@ -81,12 +82,15 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row < cells.count) {
+        return cells[indexPath.row];
+    }
     RegisterTableViewCell *cell;
     if (indexPath.row == USER_NAME_INDEX || indexPath.row == PASSWORD_INDEX || indexPath.row == NEW_PASSWORD_INDEX || indexPath.row == PASSWORD_SURE_INDEX || indexPath.row == EMAIL_INDEX) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"text" forIndexPath:indexPath];
         cell.textContent.delegate = self;
         if (indexPath.row == USER_NAME_INDEX) {
-            cell.textContent.text = _isEdit ? [USER_DEFAULT objectForKey:USER_NAME] : nil;
+            cell.textContent.text = _isEdit ? [USER_DEFAULTS objectForKey:USER_NAME] : nil;
             cell.textContent.placeholder = @"用户名，中英文均可";
             cell.textContent.secureTextEntry = NO;
             cell.textContent.keyboardType = UIKeyboardTypeDefault;
@@ -103,24 +107,28 @@
             cell.textContent.secureTextEntry = YES;
             cell.textContent.keyboardType = UIKeyboardTypeASCIICapable;
         }else if (indexPath.row == EMAIL_INDEX) {
-            cell.textContent.text = _isEdit ? [[USER_DEFAULT objectForKey:USER_INFO] objectForKey:@"email"] : nil;
+            cell.textContent.text = _isEdit ? [[USER_DEFAULTS objectForKey:USER_INFO] objectForKey:@"email"] : nil;
             cell.textContent.placeholder = @"邮箱，选填，找回密码时使用";
             cell.textContent.secureTextEntry = NO;
             cell.textContent.keyboardType = UIKeyboardTypeEmailAddress;
         }
     }else if (indexPath.row == SEX_INDEX) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"sex" forIndexPath:indexPath];
-        NSInteger index = [SEX_SEGMENT_INFO indexOfObject:[[USER_DEFAULT objectForKey:USER_INFO] objectForKey:@"sex"]];
+        NSInteger index = [SEX_SEGMENT_INFO indexOfObject:[[USER_DEFAULTS objectForKey:USER_INFO] objectForKey:@"sex"]];
         cell.segmentSex.selectedSegmentIndex = _isEdit ? (index == NSNotFound ? 0 : index): 0;
     }else {
         cell = [tableView dequeueReusableCellWithIdentifier:@"register" forIndexPath:indexPath];
         [cell.buttonRegister setTitle:_isEdit ? @"修改" : @"注册" forState:UIControlStateNormal];
     }
+    cells[indexPath.row] = cell;
     return cell;
 }
 
 - (id _Nullable)getContentAtIndex:(NSInteger)index {
-    RegisterTableViewCell *cell = [_tableRegister cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    if (index >= cells.count) {
+        return nil;
+    }
+    RegisterTableViewCell *cell = cells[index];
     if (cell.textContent != nil) {
         return cell.textContent;
     }
@@ -131,18 +139,27 @@
 }
 
 - (IBAction)didEndOnExit:(id)sender {
+    NSInteger nextIndex;
     if (sender == [self getContentAtIndex:USER_NAME_INDEX]) {
-        [[self getContentAtIndex:PASSWORD_INDEX] becomeFirstResponder];
+        nextIndex = PASSWORD_INDEX;
     }else if (sender == [self getContentAtIndex:PASSWORD_INDEX]) {
         if (_isEdit) {
-            [[self getContentAtIndex:NEW_PASSWORD_INDEX] becomeFirstResponder];
+            nextIndex = NEW_PASSWORD_INDEX;
         }else {
-            [[self getContentAtIndex:PASSWORD_SURE_INDEX] becomeFirstResponder];
+            nextIndex = PASSWORD_SURE_INDEX;
         }
     }else if (sender == [self getContentAtIndex:NEW_PASSWORD_INDEX]) {
-        [[self getContentAtIndex:PASSWORD_SURE_INDEX] becomeFirstResponder];
+        nextIndex = PASSWORD_SURE_INDEX;
     }else if (sender == [self getContentAtIndex:PASSWORD_SURE_INDEX]) {
-        [[self getContentAtIndex:EMAIL_INDEX] becomeFirstResponder];
+        nextIndex = EMAIL_INDEX;
+    }else {
+        return;
+    }
+    
+    [[self getContentAtIndex:nextIndex] becomeFirstResponder];
+    if (![[_tableRegister indexPathsForVisibleRows] containsObject:[NSIndexPath indexPathForRow:nextIndex inSection:0]]) {
+        [_tableRegister scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:nextIndex inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [[self getContentAtIndex:nextIndex] performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.5];
     }
 }
 
@@ -189,12 +206,12 @@
     [self.view endEditing:YES];
     if (!_isEdit) {
         [KVNProgress showWithStatus:@"注册中"];
-        [ActionPerformer registerWithName:name password:password sex:sex email:email icon:nil personID:[USER_DEFAULT objectForKey:PERSON_ID] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+        [ActionPerformer registerWithName:name password:password sex:sex email:email icon:nil personID:[USER_DEFAULTS objectForKey:PERSON_ID] andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
             if (!success) {
                 [KVNProgress showErrorWithStatus:message];
                 return;
             }
-            [USER_DEFAULT setValuesForKeysWithDictionary:@{USER_ID: data[@"userid"], TOKEN: data[@"token"], USER_NAME: name, USER_INFO: @{@"sex": sex, @"email": email}}];
+            [USER_DEFAULTS setValuesForKeysWithDictionary:@{USER_ID: data[@"userid"], TOKEN: data[@"token"], USER_NAME: name, USER_INFO: @{@"sex": sex, @"email": email}}];
             [KVNProgress showSuccessWithStatus:@"注册成功" completion:^{
                 [self dismissViewControllerAnimated:YES completion:^{
                     [[NSNotificationCenter defaultCenter] postNotificationName:REGISTER_COMPLETED_NOTIFOCATION object:nil];
@@ -209,10 +226,10 @@
                 [KVNProgress showErrorWithStatus:message];
                 return;
             }
-            NSMutableDictionary *dict = [[USER_DEFAULT objectForKey:USER_INFO] mutableCopy];
+            NSMutableDictionary *dict = [[USER_DEFAULTS objectForKey:USER_INFO] mutableCopy];
             dict[@"sex"] = sex;
             dict[@"email"] = email;
-            [USER_DEFAULT setValuesForKeysWithDictionary:@{USER_NAME: name, USER_INFO: dict}];
+            [USER_DEFAULTS setValuesForKeysWithDictionary:@{USER_NAME: name, USER_INFO: dict}];
             [KVNProgress showSuccessWithStatus:@"修改成功" completion:^{
                 [self dismissViewControllerAnimated:YES completion:^{
                     [[NSNotificationCenter defaultCenter] postNotificationName:USER_CHANGED_NOTIFICATION object:nil];

@@ -61,7 +61,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if ([[USER_DEFAULT objectForKey:PERSON_ID] length] == 0 && ![ActionPerformer hasLoggedIn]) {
+    if ([[USER_DEFAULTS objectForKey:PERSON_ID] length] == 0 && ![ActionPerformer hasLoggedIn]) {
         // TODO: 引导界面
         
     }
@@ -108,7 +108,7 @@
 }
 
 - (IBAction)unlock:(id)sender {
-    switch ([[USER_DEFAULT objectForKey:UNLOCK_TYPE] integerValue]) {
+    switch ([[USER_DEFAULTS objectForKey:UNLOCK_TYPE] integerValue]) {
         case EmotionDiaryUnlockTypeSelfie:
             [self unlockWithSelfie];
             break;
@@ -175,7 +175,7 @@
 
 - (void)analyzeSelfie:(UIImage *)image {
     [KVNProgress showWithStatus:@"面部识别中"];
-    BOOL isRegister = ([[USER_DEFAULT objectForKey:PERSON_ID] length] == 0);
+    BOOL isRegister = ([[USER_DEFAULTS objectForKey:PERSON_ID] length] == 0);
     ActionPerformerResultBlock block = ^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
         if (!success) {
             [KVNProgress showErrorWithStatus:message completion:^{
@@ -196,7 +196,7 @@
             [KVNProgress showSuccessWithStatus:@"人脸解锁成功"];
         }
     };
-    if ([[USER_DEFAULT objectForKey:PERSON_ID] length] == 0) {
+    if ([[USER_DEFAULTS objectForKey:PERSON_ID] length] == 0) {
         [ActionPerformer registerFaceWithImage:image andBlock:block];
     }else {
         [ActionPerformer verifyFaceWithImage:image andBlock:block];
@@ -234,7 +234,7 @@
     }];
     [alert addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [KVNProgress showWithStatus:@"验证中"];
-        [ActionPerformer loginWithName:[USER_DEFAULT objectForKey:USER_NAME] password:alert.textFields[0].text andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
+        [ActionPerformer loginWithName:[USER_DEFAULTS objectForKey:USER_NAME] password:alert.textFields[0].text andBlock:^(BOOL success, NSString * _Nullable message, NSDictionary * _Nullable data) {
             if (success) {
                 [KVNProgress showSuccessWithStatus:@"密码验证成功"];
                 [self setUnlocked:YES];

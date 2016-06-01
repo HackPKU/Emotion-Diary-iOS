@@ -220,7 +220,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jj7-jA-Wr7">
-                                            <rect key="frame" x="543" y="6" width="51" height="31"/>
+                                            <rect key="frame" x="535" y="6" width="51" height="31"/>
                                             <color key="onTintColor" red="1" green="0.74509803919999995" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <action selector="autoUploadChanged:" destination="hii-Dw-5Pf" eventType="valueChanged" id="hqV-mt-Ip0"/>
@@ -231,7 +231,7 @@
                                         <constraint firstItem="DBa-Vm-fML" firstAttribute="leading" secondItem="aoR-2U-08h" secondAttribute="leadingMargin" constant="8" id="9DG-Is-sJM"/>
                                         <constraint firstItem="jj7-jA-Wr7" firstAttribute="centerY" secondItem="aoR-2U-08h" secondAttribute="centerY" id="B2Z-dV-ZKn"/>
                                         <constraint firstItem="jj7-jA-Wr7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DBa-Vm-fML" secondAttribute="trailing" constant="8" id="YRz-QF-7dh"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="jj7-jA-Wr7" secondAttribute="trailing" id="cmG-AD-h1g"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="jj7-jA-Wr7" secondAttribute="trailing" constant="8" id="cmG-AD-h1g"/>
                                         <constraint firstItem="DBa-Vm-fML" firstAttribute="centerY" secondItem="aoR-2U-08h" secondAttribute="centerY" id="eur-If-wFp"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -247,7 +247,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3E1-S9-wiT">
-                                            <rect key="frame" x="472" y="7" width="120" height="29"/>
+                                            <rect key="frame" x="464" y="7" width="120" height="29"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="120" id="h3n-uf-la5"/>
                                             </constraints>
@@ -272,7 +272,7 @@
                                         <constraint firstItem="3E1-S9-wiT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="P3l-dB-bzn" secondAttribute="trailing" id="BkG-XQ-dbj"/>
                                         <constraint firstItem="3E1-S9-wiT" firstAttribute="centerY" secondItem="eUZ-uK-IXA" secondAttribute="centerY" id="U3K-NM-l8p"/>
                                         <constraint firstItem="P3l-dB-bzn" firstAttribute="leading" secondItem="eUZ-uK-IXA" secondAttribute="leadingMargin" constant="8" id="WsJ-aN-H2o"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="3E1-S9-wiT" secondAttribute="trailing" id="cvt-Mq-kRA"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="3E1-S9-wiT" secondAttribute="trailing" constant="8" id="cvt-Mq-kRA"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -1379,13 +1379,13 @@ Cg
         <image name="日记本" width="100" height="111"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9Ud-nh-1Hy"/>
-        <segue reference="s67-z5-sht"/>
+        <segue reference="opN-Bt-aal"/>
         <segue reference="qPa-4Z-Neu"/>
-        <segue reference="HJi-Bx-tL0"/>
-        <segue reference="H9q-g8-KM9"/>
+        <segue reference="9Ud-nh-1Hy"/>
         <segue reference="g5Z-lL-Z4q"/>
-        <segue reference="oGr-Yk-Trc"/>
+        <segue reference="H9q-g8-KM9"/>
+        <segue reference="s67-z5-sht"/>
+        <segue reference="HJi-Bx-tL0"/>
         <segue reference="luQ-qu-rz5"/>
     </inferredMetricsTieBreakers>
 </document>

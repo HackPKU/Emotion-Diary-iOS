@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "TranslucentViewController.h"
 
-@interface RegisterViewController : TranslucentViewController <UITableViewDelegate, UITableViewDataSource>
+@interface RegisterViewController : TranslucentViewController <UITableViewDelegate, UITableViewDataSource> {
+    NSMutableArray *cells;
+}
 
 @property BOOL isEdit;
 @property (strong, nonatomic) IBOutlet UITableView *tableRegister;
