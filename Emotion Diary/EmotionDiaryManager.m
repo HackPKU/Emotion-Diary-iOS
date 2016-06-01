@@ -163,7 +163,7 @@ static EmotionDiaryManager *sharedManager;
 - (NSArray<NSNumber *> *)getStatOfLastDays:(int)dayNumber {
     NSMutableArray *stat = [NSMutableArray new];
     for (int i = 0; i < dayNumber; i++) {
-        [stat addObject:[(diaries.count > 0 ? @[] : @[@50]) mutableCopy]];
+        [stat addObject:[@[] mutableCopy]];
     }
     
     for (NSDictionary *dict in diaries) {
@@ -179,6 +179,7 @@ static EmotionDiaryManager *sharedManager;
         }
     }
     
+    BOOL hasData = NO;
     NSMutableArray *result = [NSMutableArray new];
     for (int i = 0; i < dayNumber; i++) {
         NSDictionary *dict = stat[dayNumber - i - 1];
@@ -188,10 +189,18 @@ static EmotionDiaryManager *sharedManager;
                 emotionAverage += [num intValue];
             }
             emotionAverage /= dict.count;
+            hasData = YES;
         }else {
             emotionAverage = NO_EMOTION;
         }
         result[i] = [NSNumber numberWithFloat:emotionAverage];
+    }
+    
+    if (!hasData) {
+        for (int i = 0; i < dayNumber; i++) {
+            result[i] = [NSNumber numberWithInt:50];
+        }
+        return result;
     }
     
     if ([result[0] doubleValue] == NO_EMOTION) {
