@@ -13,6 +13,7 @@
     int emotion;
     BOOL shouldStopAnimate;
     BOOL hasUnkocked;
+    BOOL hasShownGuide;
 }
 
 @property (strong, nonatomic) IBOutlet UIButton *buttonUnlock;
