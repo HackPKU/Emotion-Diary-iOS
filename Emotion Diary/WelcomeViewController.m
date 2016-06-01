@@ -32,6 +32,7 @@
         button.hidden = _shouldDismissAfterUnlock;
     }
     shouldStopAnimate = NO;
+    hasShownGuide = NO;
     emotion = NO_EMOTION;
         
 #ifdef DEBUG_IMAGE
@@ -61,9 +62,9 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if ([[USER_DEFAULTS objectForKey:PERSON_ID] length] == 0 && ![ActionPerformer hasLoggedIn]) {
-        // TODO: 引导界面
-        
+    if ([self shouldShowGuide] && !hasShownGuide) {
+        [self showWarning];
+        hasShownGuide = YES;
     }
 }
 
@@ -122,7 +123,22 @@
     shouldStopAnimate = YES;
 }
 
+- (BOOL)shouldShowGuide {
+    return [[USER_DEFAULTS objectForKey:PERSON_ID] length] == 0 && ![ActionPerformer hasLoggedIn];
+}
+
 - (void)showWarning {
+    if ([self shouldShowGuide]) {
+        UIAlertController *action = [UIAlertController alertControllerWithTitle:@"欢迎使用情绪日记" message:@"情绪日记是一款私密的日记应用，只有您本人的自拍才能解锁app" preferredStyle:UIAlertControllerStyleAlert];
+        [action addAction:[UIAlertAction actionWithTitle:@"登录账号" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self performSegueWithIdentifier:@"login" sender:nil];
+        }]];
+        [action addAction:[UIAlertAction actionWithTitle:@"自拍注册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self unlockWithSelfie];
+        }]];
+        [self presentViewController:action animated:YES completion:nil];
+        return;
+    }
     UIAlertController *action = [UIAlertController alertControllerWithTitle:@"抱歉" message:@"您必须通过认证才能解锁日记" preferredStyle:UIAlertControllerStyleAlert];
     [action addAction:[UIAlertAction actionWithTitle:@"自拍解锁" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self unlockWithSelfie];
