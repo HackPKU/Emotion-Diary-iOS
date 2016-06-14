@@ -2,14 +2,32 @@
 
 Emotion Diary is a lightweight personal diary APP focused on privacy and convenience. Based on the technology of face identification, users can use their face as the key to open the APP. At the same time the smile on your face can also be detected and used as the realtime emotional information, which will be part of their diary notes. After days of recording, you can review your statistics of your emotions, as well as your meaningful life.
 
-## 功能与特点
-
-* 自拍解锁，App 进入后台后自动锁定
-* 可以本地使用或者在线使用，两者功能独立，也可互通数据
-
 ## 开发者
 
 * 范志康
+
+## 功能与特点
+
+* 自拍或者 Touch ID 解锁，App 进入后台后自动锁定
+* 人脸识别得出心情指数，日记可附带图片
+* 可以本地使用或者在线使用，两者功能独立，也可互通数据
+* 以日历方式或者时间线方式查看日记
+* 支持用户注册、登录、登出、修改个人信息
+* 登录后，无网络情况下也可查看日记的本地缓存版本
+* 支持分享日记，分享后将创建公开链接
+
+## 创新之处
+
+* 人脸识别，自拍解锁 App
+* 可分别作为本地 App 和在线 App 使用
+
+## 尚未实现的功能
+
+* 搜索日记功能
+* 日记中附带地点、天气、标签信息
+* 用户切换管理
+* 忘记密码功能（服务器尚未实现）
+* 更好的分享网页（服务器尚未实现）
 
 ## 配置与运行
 
@@ -19,7 +37,7 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 * 向开发者索取 `API_KEY` 和 `API_SECRET` 填入 `APIKey+APISecret.h`
 * 编译并运行程序
 
-> `DEBUG` 模式下，日志和错误会被详细地输出，可在 `Emotion Diary-Prefix.pch` 中取消定义 `DEBUG` 模式
+> `DEBUG` 模式下，日志和网络错误会被详细地输出，可在 `Emotion Diary-Prefix.pch` 中取消定义 `DEBUG` 模式
 
 > 在 `DEBUG` 模式以及宏定义了 `DEBUG_IMAGE` 的情况下，进入 App 无需自拍自动解锁以方便测试，进入后台恢复后会自动退出验证界面，任意选择照片后会被替换为 `DEBUG_IMAGE`，该宏定义可在 `WelcomeViewController.m` 中修改或去除
 
