@@ -11,6 +11,7 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 * 支持用户注册、登录、登出、修改个人信息
 * 登录后，无网络情况下也可查看日记的本地缓存版本
 * 支持分享日记，分享后将创建公开链接
+* 用户体验完善，支持 3D Touch
 
 ## 创新之处
 
