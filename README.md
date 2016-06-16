@@ -49,7 +49,7 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 * 心情统计界面
  * 查看一周或一月的心情统计
  * 账户管理：注册、登录、登出、修改个人信息
- * 分享管理（需要登陆）：取消或者删除分享
+ * 分享管理（需要登陆）：删除或者取消分享
  * 上传管理（需要登陆）：开始或停止上传
  * 软件设置
  * 查看软件信息
@@ -82,9 +82,9 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 ## 已测试平台
 
 * 环境：
- * OS X El Capitan 10.11.4+
- * Xcode 7.3+
- * CocoaPods 1.0.0+
+ * OS X El Capitan 10.11.4 +
+ * Xcode 7.3 +
+ * CocoaPods 1.0.0 +
 * 运行：
  * iOS 8.4 模拟器（iPhone + iPad）
  * iOS 9.0 模拟器（iPhone + iPad）
