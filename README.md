@@ -24,16 +24,28 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 
 ## 使用说明
 
-![流程](流程.png)
+<img src="Docs/流程.png" alt="流程" width='500'>
 
-* 打开 App，自拍解锁
-* 记录日记或者直接进入主界面
+* 打开 App，点击 Logo 自拍解锁
+* 记录日记（或者直接进入主界面）
+ * 人脸识别出心情值（可手动调整）
+ * 键入正文，选择图片
 * 主界面可以在日历上查看每天的日记
+
+<img src="Docs/解锁.png" alt="解锁" width='200'>
+<img src="Docs/记录心情.png" alt="记录心情" width='200'>
+<img src="Docs/主界面.png" alt="主界面" width='200'>
+
 * 日记详情界面
  * 可以查看正文和图片等
  * 删除和分享日记
 * 时间线界面
  * 按时间顺序查看所有日记
+
+<img src="Docs/日记详情.png" alt="日记详情" width='200'>
+<img src="Docs/时间线.png" alt="时间线" width='200'>
+<img src="Docs/心情统计.png" alt="心情统计" width='200'>
+
 * 心情统计界面
  * 查看一周或一月的心情统计
  * 账户管理：注册、登录、登出、修改个人信息
@@ -42,13 +54,16 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
  * 软件设置
  * 查看软件信息
 
+<img src="Docs/账户.png" alt="账户" width='200'>
+<img src="Docs/分享管理.png" alt="分享管理" width='200'>
+<img src="Docs/上传管理.png" alt="上传管理" width='200'>
+
 ## 尚未实现的功能
 
 * 搜索日记功能
 * 日记中附带地点、天气、标签信息
-* 用户切换管理
 * 忘记密码功能（服务器尚未实现）
-* 更好的分享网页（服务器尚未实现）
+* 更优美的分享网页（服务器尚未实现）
 
 ## 配置与运行
 
@@ -127,3 +142,7 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 
 * [GitHub链接及服务器配置文档](https://github.com/HackPKU/Emotion-Diary-Web)
 * [API文档](https://github.com/HackPKU/Emotion-Diary-Web/tree/master/api)
+
+## 感谢支持开发者！
+
+<img src="Docs/捐助.jpg" alt="捐助" width='200'>
