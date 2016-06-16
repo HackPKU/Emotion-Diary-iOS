@@ -21,7 +21,7 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 
 ## 使用说明
 
-<img src="Docs/流程.png" alt="流程" width="500">
+<img src="Docs/流程.png" alt="流程" width="400">
 
 * 打开 App，点击 Logo 自拍解锁
 * 记录日记（或者直接进入主界面）
@@ -29,9 +29,9 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
  * 键入正文，选择图片
 * 主界面可以在日历上查看每天的日记
 
-<img src="Docs/解锁.PNG" alt="解锁" width="250">
-<img src="Docs/记录心情.PNG" alt="记录心情" width="250">
-<img src="Docs/主界面.PNG" alt="主界面" width="250">
+<img src="Docs/解锁.PNG" alt="解锁" width="200">
+<img src="Docs/记录心情.PNG" alt="记录心情" width="200">
+<img src="Docs/主界面.PNG" alt="主界面" width="200">
 
 * 日记详情界面
  * 可以查看正文和图片等
@@ -39,9 +39,9 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 * 时间线界面
  * 按时间顺序查看所有日记
 
-<img src="Docs/日记详情.PNG" alt="日记详情" width="250">
-<img src="Docs/时间线.PNG" alt="时间线" width="250">
-<img src="Docs/心情统计.PNG" alt="心情统计" width="250">
+<img src="Docs/日记详情.PNG" alt="日记详情" width="200">
+<img src="Docs/时间线.PNG" alt="时间线" width="200">
+<img src="Docs/心情统计.PNG" alt="心情统计" width="200">
 
 * 心情统计界面
  * 查看一周或一月的心情统计
@@ -51,9 +51,9 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
  * 软件设置
  * 查看软件信息
 
-<img src="Docs/账户.PNG" alt="账户" width="250">
-<img src="Docs/分享管理.PNG" alt="分享管理" width="250">
-<img src="Docs/上传管理.PNG" alt="上传管理" width="250">
+<img src="Docs/账户.PNG" alt="账户" width="200">
+<img src="Docs/分享管理.PNG" alt="分享管理" width="200">
+<img src="Docs/上传管理.PNG" alt="上传管理" width="200">
 
 ## 尚未实现的功能
 
@@ -148,4 +148,4 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 
 ## 感谢支持开发者！
 
-<img src="Docs/捐助.JPG" alt="捐助" width="250">
+<img src="Docs/捐助.JPG" alt="捐助" width="200">
