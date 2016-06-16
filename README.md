@@ -2,10 +2,6 @@
 
 Emotion Diary is a lightweight personal diary APP focused on privacy and convenience. Based on the technology of face identification, users can use their face as the key to open the APP. At the same time the smile on your face can also be detected and used as the realtime emotional information, which will be part of their diary notes. After days of recording, you can review your statistics of your emotions, as well as your meaningful life.
 
-## 开发者
-
-* 范志康
-
 ## 功能与特点
 
 * 自拍或者 Touch ID 解锁，App 进入后台后自动锁定
@@ -49,8 +45,8 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 * 心情统计界面
  * 查看一周或一月的心情统计
  * 账户管理：注册、登录、登出、修改个人信息
- * 分享管理（需要登陆）：删除或者取消分享
- * 上传管理（需要登陆）：开始或停止上传
+ * 分享管理（需要登录）：删除或者取消分享
+ * 上传管理（需要登录）：开始或停止上传
  * 软件设置
  * 查看软件信息
 
@@ -107,6 +103,7 @@ Emotion Diary is a lightweight personal diary APP focused on privacy and conveni
 * 2016/05/20 完成日记的分享和自动上传功能
 * 2016/05/22 完成编辑用户信息功能
 * 2016/06/01 完成用户引导提示界面
+* 2016/06/14 修复一系列 Bug，提升程序稳定性
 
 ## 重要类说明
 
